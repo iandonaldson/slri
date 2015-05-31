@@ -1,0 +1,62 @@
+$Id: PreBIND_README,v 1.1 2004/12/22 22:06:26 kzheng Exp $
+
+README for SeqHound PreBIND module
+(See The_SeqHound_Manual.doc prebind section for more detail.)
+
+1)CREATE AND LOAD PORTABLE TABLES
+run prebind_create.sh
+
+2)CONFIGURE PREBIND.INI
+- configure db2 medline connection
+- configure seqhound database connection
+- configure prebind database connection(development database, will merge into seqhound)
+- taxid list 
+- email address
+
+3)RUN UPDATE PROGRAM PREBIND_SEARCHER.PL
+
+You can get a list of options simply by typing
+
+prebind_searcher.pl -
+
+
+All of the options available to searcher are listed and descibed here:
+
+-t
+Taxon-specific search (enter taxid). 
+0 is the default. 
+4932 is for yeast only searches.
+Currently searched orgrnisms:
+yeast, mouse, human, rats, drosophila, worm(C. elegans)
+
+-r
+Redo of previously peformed searches (T/F(default)).
+
+-u
+Update target table only (all(default))
+
+3) SETTING UP SEARCHER AS A CRON JOB
+0 21 * * * {$PREBINDDIR}/prebind_updatecron.sh >>update.log 2>&1
+
+
+4) IMPORT SVM INTERACTION SCORES
+The list of scores PMID|SVM_SCORE|PRED must first be obtained from Joel.
+Files can be downloaded from http://ii200.iit.nrc.ca/~martinj/
+Merge all file into a single text file in with the form:
+
+pmid|score|pred
+762342|1.3|1
+234243|-0.5|-1
+etc...
+
+load data into DOCSCORE table
+
+
+5) RUN NAME SEARCH ONLY
+run prebind_searcher.pl -u rngresult
+or run prebind_mymed.pl (has more print information)
+
+6) SCORE POTENTIAL INTERACTION TABLE ONLY
+run prebind_searcher.pl -u interactresult
+or prebind_regex.pl (has more print information)
+

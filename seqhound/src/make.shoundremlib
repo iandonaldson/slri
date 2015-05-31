@@ -1,0 +1,42 @@
+#######################################################################
+#
+# SeqHound Remote library makefile
+#
+#######################################################################
+include ../seqhound.mk
+
+
+## Default thing to make will be "all"
+
+all : $(SEQH_LIB_CB_REM)
+cb : dep_cb $(SEQH_LIB_CB_REM)
+odbc : dep_odbc $(SEQH_LIB_ODBC_REM)
+
+## make individual applications and components
+##
+
+$(SEQH_LIB_CB_REM): $(SEQH_OBJ_REM)
+	ar r $(SEQH_LIB_CB_REM) $(SEQH_OBJ_REM)
+	ranlib $(SEQH_LIB_CB_REM) || true
+	-mkdir -p $(SEQH_LIB)
+	cp $(SEQH_LIB_CB_REM) $(SEQH_LIB)/
+
+$(SEQH_LIB_ODBC_REM): $(SEQH_OBJ_REM_ODBC)
+	ar r $(SEQH_LIB_ODBC_REM) $(SEQH_OBJ_REM_ODBC)
+	ranlib $(SEQH_LIB_ODBC_REM) || true
+	-mkdir -p $(SEQH_LIB)
+	cp $(SEQH_LIB_ODBC_REM) $(SEQH_LIB)/
+
+dep_cb :
+	cd $(SLRIDIR);make -f $(SLRILIBMAKE_CB)
+
+dep_odbc :
+#	cd $(SLRIDIR);make -f $(SLRILIBMAKE_ODBC)
+
+clean:
+	rm -f $(SEQH_OBJ_REM)
+	rm -f $(SEQH_OBJ_REM_ODBC)
+	rm -f $(SEQH_LIB_CB_REM)
+	rm -f $(SEQH_LIB_ODBC_REM)
+	rm -f $(SEQH_LIB)/$(SEQH_LIB_CB_REM)
+	rm -f $(SEQH_LIB)/$(SEQH_LIB_ODBC_REM)

@@ -1,0 +1,55 @@
+; all pathes must end with '/'
+
+[datab]
+;seqhound database that you are connecting
+username=root
+password=mypassword
+dsn=mydsn 
+database=seqhound
+pathcdd = ./
+local=yes
+
+[config]
+;the executable the cgi runs off of.
+CGI=wwwseekgi
+
+[precompute]
+;precomputed taxonomy queries
+MaxQueries = 100
+MaxQueryTime = 10
+QueryCount = 50
+path = ./
+indexfile = ./
+
+[sections]
+;indicated what modules are available in SeqHound 
+;1 for available, 0 for not available
+;gene ontology hierarchy
+godb = 1
+;locus link functional annotations
+lldb = 1
+;taxonomy hierarchy
+taxdb = 1
+;protein sequence neighbours
+neigdb = 1
+;structural databases
+strucdb = 1
+;complete genomes tracking
+gendb = 1
+;redundant protein sequences
+redundb = 1
+;open reading frame database
+cddb = 1
+;RPS-BLAST domains
+rpsdb = 1
+;DBXref Database Cross-Reference
+dbxref = 1
+
+[crons]
+;customizable variables in cron jobs
+;NOTE: all paths must end in '/'
+pathupdates=/seqhound/updates/
+pathinputfiles=/seqhound/updates/inputfiles/
+mail=myemail@host.org
+defaultrelease=142
+pathflags=/seqhound/updates/flags/

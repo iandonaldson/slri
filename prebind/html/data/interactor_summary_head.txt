@@ -1,0 +1,29 @@
+<br><br>
+
+<table border=0 width=100%%  cellspacing=2 cellpadding=2 cols=4>
+
+	<tr bgcolor="lightsteelblue">
+
+		<td height = "20">
+
+			<h1><font color="black">Summary of all potential interactors</font></h1>
+
+		</td>
+
+	</tr>
+
+	<tr>
+
+		<td height = "20">
+
+			<p>The list below shows all other proteins that co-occur in the literature with your query protein. The number of co-occurence papers
+are listed under the column "View supporting papers".  Clicking on this number will take you to a more detailed view of these co-occurences.  
+			</p>
+
+		</td>
+
+	</tr>
+
+</table>
+
+<br><br>

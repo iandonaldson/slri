@@ -1,0 +1,12 @@
+<p>
+
+<hr>
+ 
+<address>Comments and suggestions to: 
+< <a href="mailto:seqhound@blueprint.org">seqhound@blueprint.org</a> >
+</address>
+
+<a href="http://bind.ca" target="_top" OnMouseOver="window.status='Biomolecular Interaction Network Database'; return true" OnMouseOut="window.status=''">Biomolecular Interaction Network Database</a>
+
+<p>
+</html>

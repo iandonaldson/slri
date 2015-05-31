@@ -1,0 +1,25 @@
+########################################################################
+# SLRI library makefile
+#######################################################################
+include slri.mk
+
+#LIB     = libslri.a
+
+all : $(LIB)
+
+odbc: $(LIB_ODBC)
+
+$(LIB): $(SLRILIB_OBJ_COM)
+	ar $(ARFLAGS) r $(LIB) $(SLRILIB_OBJ_COM)
+	ranlib $(LIB) || true
+
+$(LIB_ODBC): $(SLRILIB_OBJ_ODBC)
+	ar $(ARFLAGS) r $(LIB_ODBC) $(SLRILIB_OBJ_ODBC)
+	ranlib $(LIB_ODBC) || true
+
+clean:
+	rm -f $(SLRILIB_OBJ_COM)
+	rm -f $(LIB)
+	rm -f $(LIB_ODBC)
+	rm -f $(SLRILIB_OBJ_ODBC)
+

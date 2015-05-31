@@ -1,0 +1,181 @@
+Revision history for Perl extension Bio::SeqHound::SeqHound.
+
+4.0
+	April 21, 2005
+          
+	  - Modified pod documentation in SeqHound.pm to correct the return value.
+	  
+	  - Modified mergeValues() and getValues() in SeqHoundTextOb.pm SeqHoundLOB.pm
+	    SeqHoundGB.pm to better handle the error or null return cases.
+	    
+	  - Added new functions adapt to  new comgen module
+	   SHoundRNAFromChromosome -retieve rna identifiers from NCBI chromosome
+	                            identifier
+	   SHoundRNAFromUnknownChromosome -retrieves all rna identifiers which 
+	                            have not been assigned to a specific
+				    chromosome
+	   SHoundRNAFromOrganism   -retrieves rna from a genome
+	   SHoundDNAFromUnknownChromosome -retrieve all dna identifiers which
+	                            have not been assigned to a specific
+				    chromosome
+	   SHoundProteinsFromUnknownChromosome -retrieve all proteins
+	    			    identifiers which have not been assigned to
+				    a specific chromosome
+	   [bug 4914]            
+
+           - LWP::UserAgent replace LWP::Simple to have a better control of
+	   HTTP::Request and HTTP::Response objects. 
+	   
+	   - Changed the return value from "0" to "undef" if SeqHound function
+	   calls fail as "SeqHound_ERROR"" or "SeqHound_NULL" or no result returned.
+
+      March 11, 2005
+          - SHoundGetTaxIDFromMergedTaxID -retrieve a valid taxid from a possible
+	                                  merged taxid. bug [3474]
+
+      August 31, 2004
+          - Our server response time is about 90 seconds, following functions
+	    might fail due to server time out, but they might succeed on
+	    certain test cases: 
+	    SHoundNeighboursFromTaxID 
+	    SHoundGetGisByNumberOfDomains
+	    SHoundGiFromGOIDList
+	    SHound3DNeighboursFromTaxID fails
+	    
+	  - Added functions: bug [2785]
+            SHoundAllGenomesWithScientificNames   -retrieves all genomes with
+	                                           their scientific names in 
+						   SeqHound system
+	    SHoundAllGenomesWithNumProteins       -retrieves all genomes with
+	                                           their number of proteins in
+						   SeqHound system
+						   
+	  - Added missing test functions on test.pl: bug [3099] 
+
+3.0   This is the first official release of the SeqHound Bioperl module. Note
+      that this package is distributed and maintained by the Blueprint
+      Initiative. It is not an official part of the Bioperl release. In future,
+      functionality contained in this package could be included as part of
+      Bioperl. Contact seqhound@blueprint.org for more details.
+     
+      July 27, 2004
+	  - SHoundNeighboursFromTaxID, SHound3DNeighboursFromTaxID 
+	    and SHoundGetGisByNumberOfDomains as known bugs, this might be
+	    from server side not API itself.
+      July 19, 2004
+          - Add and update all documentation  [bug 2533]
+            POD documentation for all API functions in SeqHound.pm
+            Remove README_API file as no longer required
+	    README.pod - README text file now generated from POD file
+
+      July 14, 2004
+	  - Disable function SHoundAllGODBGetHierarchyLevel - logic incorrect
+
+      
+      June 29, 2004
+          - Major refactor to be consistant with BioPerl modules [bug 2533]:
+	    removed Bio::SeqHound::_SeqHoundParser;
+	    removed Bio::SeqHound::SeqHoundFasta;
+	    removed Bio::SeqHound::SeqHoundASN;
+	    removed Bio::SeqHound::GB2Seq;
+	    removed Bio::SeqHound::SeqHoundOb;
+	    added function parse_FastaHash to SeqHound.pm in order to parse Keyed 
+	    list into hash table, this function is original located in 
+	    Bio::SeqHound::SeqHoundFasta;
+	    removed objects for Fasta, ASN, GB2Seq, replaced with Bio::Seq objects
+
+      May 31, 2004
+	    - add new locus link functions [bug 2093]:
+	  SHoundGOIDFromLLID           -retrieves goid from locus link id
+	  SHoundOMIMFromLLID           -retrieves Online Mendelian Inheritance id
+	                                from locus link id
+	  SHoundCDDIDFromLLID          -retrieves conserved domain id from llid
+	  SHoundLLIDFromGOIDAndECode   -retrieves all the locus link ids with
+	                                the given goid and evidence code
+	  SHoundLLIDFromOMIM           -retrieves locus link id from OMIM id
+	  SHoundLLIDFromCDDID          -retrieves locus link id from Conserved
+	                                Domain id
+					
+      May 28, 2004
+        - modified test functions for testing all the list functions
+	- bug fix in functions:
+	  SHoundGiFrom3DList 
+	  SHoundProteinsFromOrganismList
+	  SHoundChromosomeFromGenomeList
+	  SHoundNeighboursFromGiList
+	  SHound3DNeighboursFromGiList
+	  SHoundGetReferenceIDFromGiList
+	  SHoundGiFromReferenceList
+	  
+
+      May 13, 2004
+        - added new functions [bug 1773]:
+	  SHoundGetFastaFromRedundantGroupID           -retrieves fasta structure
+	                                                from a redundant group id
+	  SHoundGetFastaFromRedundantGroupIDKeyedList  -gets fasta structures
+	                                                associated with the query
+						        groupids,result is stored
+						        in a hashtable
+
+
+2.5   April 27, 2004
+        - added keyed list functions:
+	  SHoundGetFastaKeyedList                     -gets fasta structures
+	                                               associated with the query
+						       gis,result is stored in a
+						       hashtable
+	  SHoundRedundantGroupKeyedList                -gets a list of redundant
+	                                               group gis associated with
+						       the query gi, result is 
+						       stored in a hashtable
+	  _ProcessContentKeyedList           - process the result from the server
+        - expanded functionality of test.pl to comprehensively test SeqHound.pm.
+	  test.pl are grouped into differenct functional units. biop_test.log is
+	  the log file for test.pl.
+	- sample.pl provides more details of how each function is called
+	- Bugs fixed in functions to allow parameters to pass in the functions correctly
+	  SHoundGiFrom3D(list)
+	  SHoundGiFromPDBchain
+	  SHoundProteinsFromOrganism(List)
+	  SHoundChromsomeFromGenome(List)
+	  SHoundDNAFromOrganism(List)
+	  SHoundNeighboursFromGiList
+	  SHoundNeighboursFromTaxID
+	  SHound3DNeighboursFromGi(List)
+	  SHound3DNeighboursFromTaxID
+	- more thorough documentation in README_API
+	- added VERSION file, includes the version number and timestamp
+	- move licence into separate file
+	- new subroutines:
+	    SHoundSequenceLength             - fetch the length of a sequence 
+	    SHoundMoleculeType               - fetch a molecule type (DNA, RNA
+	                                       protein) for a sequence
+            SHoundGetReferenceIDFromGi       - fetches the PMID or MUID for a 
+                                               given gi input 
+            SHoundGetReferenceIDFromGiList   - fetches the PMID or MUID for a 
+                                               list of gi inputs
+	    SHoundGiFromReferenceID          - fetches a list of gis given a 
+	                                       PMID or MUID				       
+            SHoundGiFromReferenceList        - fetches a list of gis given a 
+                                               list of PMID or MUID
+            SHoundGetAccFromRetiredGi        - fetches an accessionf for a 
+                                               retired gi
+            SHoundGiFromGOIDAndECode         - fetches a gi from given gene 
+                                               ontology and evidence code pair
+            SHoundGiFromGOIDListAndECode     - fetches a list of gi for a 
+                                               given list of gene ontology 
+                                               and evidence code
+            SHoundGOPMIDFromGiAndGOID        - fetches a PMID for a given gi 
+                                               and gene ontology id (uses gene 
+                                               ontology data)
+            SHoundGOECodeFromGiAndGOID       - fetches an evidence code for a 
+                                               gi and gene ontology id 
+            SHoundGetLargestMMDBID           - retrieves the largest mmdb id
+            SHoundGetNameByGi                - retrieves a PDB code for a gi
+	- added SHoundGetTaxLineageFromTaxID to EXPORT array
+	- disabled SHoundGetHierarchyLevel
+
+0.01  Tue Sep 24 19:34:41 2002
+	- original version; created by h2xs 1.21 with options
+		-X -n Bio::SeqHound::SeqHound
+

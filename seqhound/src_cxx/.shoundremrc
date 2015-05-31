@@ -1,0 +1,6 @@
+[remote]
+server1 = seqhound.mshri.on.ca
+server2 = ookpik.mshri.on.ca
+CGI = /cgi-bin/seqhound/seqrem
+
+

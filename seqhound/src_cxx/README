@@ -1,0 +1,113 @@
+Title   : README
+Contents: Instructions on how to build the seqhoundrem_cxx library 
+Author  : Hao Lieu
+Date    : July 2, 2002
+
+Building the C++ version of the remote SeqHound API
+
+You will need the following libraries:
+
+1. NCBI C++ toolkit found at http://www.ncbi.nlm.nih.gov/IEB/.
+2. SLRI C++ library &
+3. SeqHound C++ remote library, both found at http://sourceforge.net/projects/slritools/.
+
+Building the NCBI C++ toolkit
+
+You will need just over 1GB of hard drive space for the NCBI C++ toolkit (on Linux/Unix platform).
+Find an appropriate space for the toolkit and download the current copy of the toolkit as above.
+
+For Unix/Linux platforms, download the 'ncbi_xxx_unix.tar.gz' file into the appropriate directory.
+Unzip and un-tar the file by running the command:
+
+gunzip -c ncbi_cxx_unix.tar.gz | tar xvf - i
+Run the configure script using the command:
+
+./configure --with-objects --without-suffix
+Follow the instructions displayed after configure finishes executing. It is something of the nature,
+
+cd /home/ncbi_cxx/GCC/build; make all_r
+Building the SLRI and SeqHound libraries
+
+You will need to download the slri and seqhound libraries. The easiest way
+to do this is to go to the above address, and download the SeqHound release package.
+Unzip and un-tar the file by running the command:
+
+gunzip -c seqhound-200xxxxx.tar.gz | tar xvf -
+Next, you will need to create 2 environment variables:
+NCBICXX to point to the ncbi_cxx toolkit and
+SLRI to point to the slri directory.
+
+The best way to do this is to have your operating system automatically create them each time you log in.
+The exact way to do this will depend on the shell you are using. Go you your home directory and run the command:
+
+echo $SHELL
+If the response is /bin/tcsh, then add the following lines to the end of the file .cshrc:
+setenv NCBICXX /your/path/to/the/ncbi_cxx/directory/
+setenv SLRI /your/path/to/the/slri/directory/
+
+If the response is /bin/bash, then add the following lines to the end of the file .bashrc:
+export NCBICXX=/your/path/to/the/ncbi_cxx/directory/
+export SLRI=/your/path/to/the/slri/directory/
+
+(For other shell types, consult a Unix help book).
+
+Save the changes and then open a new console window to allow the additions to be loaded up.
+
+In the directory slri/lib_cxx/scripts you will find two files called generate_XXX.sh.
+You may need to edit the 2 files. Change the contents of the 2 files to say:
+TOOLDIR=$NCBICXX/GCC/bin/datatool
+D=$NCBICXX/src/objects
+INTERNAL=$SLRI/lib/asn
+
+(leave the rest of the file as is).
+
+Now run the 2 scripts by typing the commands:
+./generate_slrilibstruc.sh
+./generate_slrilinkset.sh
+
+Next, in the director slri/lib_cxx/src, you will find a file slri_cxx.mk
+Make sure that BASEDIR is set as:
+BASEDIR= -I$(NCBICXX)/include
+
+In the file Makefile.slri_cxx in the same directory, make sure that:
+builddir = $(NCBICXX)/GCC/build/
+
+You can now build the slri library:
+make -f Makefile.slri_cxx
+
+In the directory slri/seqhound/asn/ are 2 files:
+generate_nblastasn.sh
+generate_slristruc.sh
+
+Make sure that in both files:
+TOOLDIR=$NCBICXX/GCC/bin/datatool
+D=$NCBICXX/src/objects
+INTERNAL=$SLRI/seqhound/asn
+
+Then run both scripts by executing:
+./generate_nblastasn.sh
+./generate_slristruc.sh
+
+In the directory slri/seqhound/src_cxx there is a file seqhoundrem_cxx.mk. Make sure that:
+BASEDIR = -I$(NCBICXX)/include
+
+In the same directory, edit the file Makefile.seqhoundrem_cxx so that:
+builddir = $(NCBICXX)/GCC/build/
+
+Then make the seqhound library by executing:
+make -f Makefile.seqhoundrem_cxx
+
+Building a test application that uses the C++ API
+
+To build a test application that uses the C++ API:
+1) edit 'Makefile.mytest' in slri/seqhound/src_cxx directory, making sure that:
+builddir = $(NCBICXX)/GCC/build
+CXXINDIR = -I$(NCBICXX)/include -I$(NCBICXX)/GCC/inc
+INCOBJDIR = -I$(NCBICXX)/include/objects
+
+Then create the applicaton by:
+make -f Makefile.mytest
+
+
+
+

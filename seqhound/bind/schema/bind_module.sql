@@ -1,0 +1,30 @@
+CREATE DATABASE bind_module;
+USE bind_module;
+
+/*bmd_source, bmd_record_types, bmd_dbases*/
+CREATE TABLE bmd_source (uid INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, intcompid INTEGER NOT NULL, db SMALLINT NOT NULL, acc VARCHAR(10), id INTEGER, type SMALLINT NOT NULL, descr TEXT, data_blob LONGBLOB, data_clob LONGTEXT); 
+CREATE TABLE bmd_obj_labels (uid INTEGER NOT NULL, objid INTEGER NOT NULL,label TEXT);
+CREATE TABLE bmd_record_types (type SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT, type_name VARCHAR(20) NOT NULL);
+CREATE TABLE bmd_dbases (db SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT, db_name VARCHAR(30) NOT NULL);
+
+/*bmd_ints*/
+CREATE TABLE bmd_ints (intid INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, objAid INTEGER NOT NULL, objBid INTEGER NOT NULL, rig INTEGER NOT NULL);
+
+/*bmd_objects, bmd_mol_type, bmd_obj_dbases*/
+CREATE TABLE bmd_objects (objid INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, type SMALLINT NOT NULL, db SMALLINT NOT NULL, id INTEGER, tax INTEGER, acc VARCHAR(20), rog INTEGER NOT NULL);
+CREATE TABLE bmd_mol_type (type SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT, type_name VARCHAR(15) NOT NULL);
+CREATE TABLE bmd_obj_dbases (db SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT, db_name VARCHAR(30) NOT NULL);
+
+/*bmd_refs, bmd_exp_methods, bmd_refs_db*/
+CREATE TABLE bmd_refs (uid INTEGER NOT NULL, db SMALLINT NOT NULL, acc VARCHAR(15), id INTEGER, method SMALLINT NOT NULL);
+CREATE TABLE bmd_exp_methods (method SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT, method_descr VARCHAR(40));
+CREATE TABLE bmd_refs_db (db SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT, db_name VARCHAR(15));
+
+/*bmd_complexes, bmd_complex2ints, bmd_complex2subunits*/
+CREATE TABLE bmd_complexes (compid INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT, numsubunits INTEGER NOT NULL);
+CREATE TABLE bmd_complex2ints (compid INTEGER NOT NULL, intid INTEGER NOT NULL);
+CREATE TABLE bmd_complex2subunits (compid INTEGER NOT NULL, objid INTEGER NOT NULL);
+
+
+
+

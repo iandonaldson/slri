@@ -1,0 +1,297 @@
+# $Id: text_patterns.txt,v 1.1 2005/02/16 22:26:49 kzheng Exp $
+#*******************************************************************************
+#  Copyright (C) 2000 Mount Sinai Hospital (MSH)
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as
+#  published by the Free Software Foundation; either version 2 of
+#  the License, or any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+#  See the GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the
+#         Free Software Foundation, Inc.,
+#         59 Temple Place, Suite 330, Boston, MA
+#         02111-1307  USA
+#  or visit http://www.gnu.org/copyleft/gpl.html
+#
+#  SPECIAL EXCEPTIONS
+#
+#  As a special exception, Mount Sinai Hospital gives permission to
+#  link this program with the following non-GPL programs or libraries,
+#  and distribute the resulting executable, without including the source
+#  code for these in the source distribution:
+#
+#  a) CodeBase 6.5 or greater from Sequiter Software Inc.
+#
+#  b) The C or C++ interface to Oracle 8.x or greater, from
+#     Oracle Corporation or IBM DB2 UDB.
+#
+#
+#  PROGRAM: interaction-patterns.txt
+#
+#  AUTHORS: Kai Zheng (kzheng@mshri.on.ca)
+#           Ian Donaldson (ian.donaldson@mshri.on.ca)
+#           and Christopher W.V. Hogue (hogue@mshri.on.ca)
+#
+#  REVISION/CONTRIBUTION NOTES:
+#
+#   July 1, 2003  Original MSH Revision.
+#                Hogue Lab - University of Toronto Biochemistry
+#                Department and the Samuel Lunenfeld Research
+#                Institute, Mount Sinai Hospital
+#                http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+#                ftp://ftp.mshri.on.ca/
+#
+#
+#  PUBLICATION TO CITE:
+#
+#
+#  DESCRIPTION:    Pre Biomolecular Interaction Network Database (PreBIND)
+#                  PreBIND regular expression patterns
+#
+#*******************************************************************************
+#
+#===============================================================================
+#               Documentaion
+#===============================================================================
+# pattern format : "class","id","score","sentence-style","regex-opts","regex"
+#   - class: four categories(-1/0/1/2) indicating protein interaction info in a sentence
+#   - id : pattern id 
+#   - score: confidence score of this regex pattern based on trained precision
+#   - sentence style: input format of sentence(original/parsed/tagged) 
+#   - regex-opts: options based on perl pattern match modifiers
+#   - regex: regex pattern
+#
+# A list of protein interaction key words:
+#
+#"interact,complex.v,complex.n,bind,associate,phosphorylate,precipitate,-"
+#"activate,regulate,encode,funtion.v/"
+#"hybrid,mutant,pathway,subunit,heterodimer,component,link"
+#"prevent,inhibit,contain,attach,modify,code,mediate,suppress"
+#"(in|de|-)activat(e|es|ed|ion|or|ing)"
+#"(\S*\s+){0,6}\S*" #===============================================================================
+
+#-1|00|0.021|0.993|0|0|"A.*B"
+0|00|0.541|0|0|"A.*B"
+# 2|00|0.115|0.993|0|0|"A.*B"
+# 1|00|0.323|0.993|0|0|"A.*B"
+
+-1|9901|0.91|0|0|"A.*(fail|unable).*to.*(interact|associate|bind|bound|complex|precipitat|phosphorylat).*B"
+-1|9902|0.9|0|0|"(neither|nor).*A.*(interact|associate|bind|bound|complex|precipitat|phosphorylat).*B"
+-1|11010201|0.9|0|0|"A(\S*\s+){0,3}\S*(n't|not)(\S*\s+){0,3}interact(\S*\s+){0,3}with(\S*\s+){0,3}B"
+-1|11010102|0.9|0|0|"A(\S*\s+){0,4}\S*interact(\S*\s+){0,3}\S*with.*but not with(\S*\s+){0,3}\S*B"
+-1|110204|0.9|0|0|"no .*interaction (between|among) \w*A(\S*\s+){0,6}\S*B"
+-1|11030201|0.8|0|0|"no (\S*\s+){0,3}\S*A(\S*\s+){0,6}\S*B.*interaction"
+-1|120102|0.9|0|0|"A.*(n't|not).{0,18}complex.*B"
+-1|120108|0.9|0|0|"A.*(n't|not)(\S*\s+){0,6}\S*complex.*B"
+-1|140109|0.9|0|0|"A.*(n't|not)(\S*\s+){0,6}\S*associat.*with.*B"
+-1|140110|0.8|0|0|"A.*(n't|not) \S*associat.* with \S*sB"
+-1|130109|0.9|0|0|"A.*(n't|not).*(bind|bound).*B"
+-1|130110|0.9|0|0|"A.*(n't|not)(\S*\s+){0,6}(bind|bound).*B"
+-1|130111|0.9|0|0|"A(\S*\s+){0,6}(bind|bound)\S* to.*but not(\S*\s+){0,3}to(\S*\s+){0,4}\S*B"
+
+
+0|9911|0.8|0|0|"via.{0,9}A.*and.*B"
+0|9912|0.8|0|0|"A.{0,9}a.{0,9}B.{0,9}homologue"
+0|9913|0.8|0|0|"A\S* mutant.*B"
+0|9914|0.8|0|0|"require(\S*\s+){0,4}\S*A.*and.*B(\S*\s+){0,3}in"
+0|9915|0.8|0|0|"(neither|nor) (\S*\s+){0,3}\S*A(\S*\s+){0,5} nor (\S*\s+){0,3}\S*B"
+
+1|9920|0.85|0|0|"A(\S*\s+){0,4}\S*B(\S*\s+){0,4}\S*heterodimer"
+1|9921|0.85|0|0|"heterodimer(\S*\s+){0,4}\S*A(\S*\s+){0,4}\S*B"
+1|9922|0.6|0|0|"link.{0,24}A.{0,24}to.{0,24}B"
+1|9923|0.6|0|0|"A.{0,24}attach.*to.* B"
+1|9924|0.6|0|0|"A.*dock.*with.*B"
+1|9925|0.6|0|0|"A(\S*\s+){0,4}B(\S*\s+){0,6}\S*are(\S*\s+){0,3}\S*component"
+1|9926|0.6|0|0|"A(\S*\s+){0,6}B(\S*\s+){0,6}two(\S*\s+){0,6}\S*component"
+1|9927|0.6|0|0|"A(\S*\s+){0,6}target of B"
+1|9928|0.6|0|0|"A(\S*\s+){0,3}B(\S*\s+){0,4}\S*subunit"
+1|9929|0.7|0|0|"A(\S*\s+){0,6}proteolysis(\S*\s+){0,6}\S*B"
+1|9930|0.9|0|0|"A(\S*\s+){0,6}required for the proteolysis of(\S*\s+){0,6}\S*B"
+1|9937|0.7|0|0|"A(\S*\s+){0,4}regulatory subunit\S* of(\S*\s+){0,4}\S*B"
+
+2|9931|0.7|0|0|"A.*recruit.*B.*for.*pathway"
+2|9932|0.5|0|0|"A(\S*\s+){0,6} regulate(\S*\s+){0,6} B"
+2|9933|0.7|0|0|"A(\S*\s+){0,3}encode(\S*\s+){0,6}\S*B"
+2|9934|0.7|0|0|"A(\S*\s+){0,3}inhibit(\S*\s+){0,6}\S*B"
+2|9935|0.7|0|0|"A(\S*\s+){0,3}\S*B(\S*\s+){0,6}components of"
+2|9936|0.7|0|0|"components of (\S*\s+){0,5}A(\S*\s+){0,3}\S*B"
+
+#,"0.-/"
+1|1001|0.63|0|0|"A\S*-\S*B"
+1|1002|0.963|0|0|"A\S*-\S*B(\S*\s+){0,4}\S*complex"
+1|1003|0.963|0|0|"complex(\S*\s+){0,4}\S*A\S*-\S*B"
+
+
+#-- 1|1003|0.6|0|0|"\b\w*A\w*-\w*B\w*-\w*"
+#-- 2|1004|0.7|0|0|"A\w*-\w*B\w*-"
+#-- 2|1005|0.7|0|0|"-\w*A\w*-\w*B"
+
+2|1006|0.455|0|0|"A\w*/\w*B"
+2|1007|0.417|0|0|"A\w*/\S*B"
+1|1008|0.61|0|0|"\b\w*A\w*/\w*B\w*\b"
+1|1009|0.83|0|0|"A\S*/\S*B(\S*\s+){0,4}\S*complex"
+1|1010|0.83|0|0|"Complex(\S*\s+){0,4}\S*A\S*/\S*B"
+
+
+#,"1.interact"
+1|1101|0.667|0|0|"A.*interact.*B"
+	1|110102|0.676|0|0|"A.*interact.*with.*B"
+		0|11010202|0.8|0|0|"A\S* mutant.*interact.*with.*B"
+		0|11010203|0.8|0|0|"A.*interact.*with.*(whereas|while|but).*B.*not"
+		1|11010204|0.69|0|0|"A interact(|s|ed) with B"
+		1|11010205|0.95|0|0|"A.*cannot.*only.*interact.*with.*B"
+	1|110103|0.45|0|0|"A.*interacting.*B"
+		1|11010301|0.8|0|0|"A\S*interacting.{0,24}B"
+	1|110104|0.9|0|0|"A.*interacting(\S*\s+){0,6}\S*B"  
+	1|110105|0.727|0|0|"A(\S*\s+){0,9}\S*interact(\S*\s+){0,9}\S*B"
+	1|110106|0.765|0|0|"A.*interaction.*B"
+
+1|1102|0.333|0|0|"interact.*A.*B"
+	1|110201|0.5|0|0|"interaction.*A.*B"
+	1|110202|0.6|0|0|"interaction.*of.*A.*(with|and).*B"
+		1|11020201|0.7|0|0|"interaction of A(,| with| and) B"
+	1|110203|0.78|0|0|"interaction(\S*\s+){0,3}(between|among) A and B"
+	1|110205|0.91|0|0|"interaction (between|among) A and B"
+	0|110206|0.9|0|0|"interact(\S*\s+){0,3} both with \S*A\S* and \S*B"
+
+1|1103|0.508|0|0|"A.*B.*interact"
+	1|110301|0.625|0|0|"A.*B.*interaction"
+	1|110302|0.450|0|0|"A.*B.*interact(?!ion)"
+	1|110303|0.6|0|0|"A(\S*\s+){0,9}\S*B(\S*\s+){0,6}\S*interaction"
+	1|110304|0.8|0|0|"A(\S*\s+){0,3}and(\S*\s+){0,6}\S*B(\S*\s+){0,6}\S*interact(?!ion)"
+		1|11030401|0.92|0|0|"A\S* and B\S* interact(?!(\S*\s+){0,4}with)"
+	0|110305|0.8|0|0|"A.*B.*interact.*in.*complex.*with"
+	0|110306|0.8|0|0|"interact.*with.*A.*with B"
+	2|110307|0.8|0|0|"protein.*interact.*with.*A.*B"
+
+#,"2.complex"
+1|1201|0.609|0|0|"A.*complex.*B"
+	1|120103|0.8|0|0|"A.{0,24}complex(|es) with.* \w*B"
+		1|120104|0.92|0|0|"A\w* complex(|es) with \w*B"
+	1|120105|0.8|0|0|"A.* form.* complex.* with.* B"
+	1|120106|0.8|0|0|"A complex.*contain.*B"
+	2|120107|0.9|0|0|"A.*(has|have).*activity.*in.*complex.*contain.*B"
+	
+
+1|1202|0.403|0|0|"A.*B.*complex" 	
+	0|120202|0.8|0|0|"neither.*A.*nor.*B.*complex.*formation"
+	1|120201|0.500|0|0|"A(\S*\s+){0,9}\S*B(\S*\s+){0,9}\S*complex"
+	1|120203|0.800|0|0|"A(\S*\s+){0,3}\S*B(\S*\s+){0,3}\S*complex"
+		1|120204|0.9|0|0|"A(\S*\s+){0,6}\S*B \S*complex"
+	1|120205|0.6|0|0|"A.*B.* form.* \w*complex"
+		0|120206|0.9|0|0|"A.*B.*each.*form.*complex.*with"
+	2|120207|0.6|0|0|"A.*component.*of.*B.*complex"
+	2|120208|0.7|0|0|"A.*and.*B.*part.*of.*complex"
+	2|120209|0.7|0|0|"A.*B.*subunit.*of.*complex"
+	2|120210|0.7|0|0|"A.*B.*reconstitute.*complex"
+	2|120211|0.7|0|0|"A.*B.*comprise.*complex"
+	2|120212|0.7|0|0|"A.*function.*with.*B.*in.*complex"
+	2|120213|0.7|0|0|"A(\S*\s+){0,4}require(\S*\s+){0,5}\S*B.*complex"
+	1|120214|0.72|0|0|"A.{0,12}B.{0,12}complex"
+
+1|1203|0.351|0|0|"complex.*A.*B"
+	0|120301|0.8|0|0|"complex(\S*\s+){0,4}contain(?!ing)(\S*\s+){0,3}A(\S*\s+){0,3}B"
+	0|120302|0.8|0|0|"form.*complex with.*A.*B"
+	1|120303|0.625|0|0|"complex.*A .*and .*B"
+	1|120304|0.8|0|0|"complex.* form.* between \w*A and .*B"
+	1|120305|0.8|0|0|"complex.*contain.*A.*B"
+	1|120306|0.8|0|0|"complex A.*B"
+	1|120307|0.8|0|0|"complex.*in.*which.*A.*B"
+	2|120308|0.8|0|0|"complexes.*containing.*A.*B"
+	1|120309|0.7|0|0|"complex of.*A\w*/\S*B"
+	1|120310|0.72|0|0|"complex.{0,12}A\w*/\S*B"
+	1|120311|0.79|0|0|"complex with(\S*\s+){0,3}A(\S*\s+){0,6}by(\S*\s+){0,3}B"
+	2|120312|0.77|0|0|"complex of (\S*\s+){0,3}proteins(\S*\s+){0,3}\S*A(\S*\s+){0,4}\S*B"
+	2|120313|0.7|0|0|"complex(\S*\s+){0,4}A(\S*\s+){0,4}\S*B"
+
+#,"3.bind"
+1|1301|0.536|0|0|"A.*(bind|bound).*B"
+	1|130101|0.6|0|0|"A\S* bind(|s) B"		
+	1|130102|0.6|0|0|"A.*bind.*both.*B"
+	1|130103|0.8|0|0|"A\S* bind(|s) to (\S*\s+){0,4}B"
+	1|130104|0.9|0|0|"A\S* (\w* |)bind(|s) (\S*\s+){0,4}B"
+
+1|1302|0.345|0|0|"(bind|bound).*A.*B"
+	1|130201|0.6|0|0|"binding .* of A to .*B"
+		1|13020101|0.95|0|0|"binding of A to B"
+	1|130202|0.7|0|0|"(bind|bound)(\S*\s+){0,3}\S*A(\S*\s+){0,3}\S*B"
+
+1|1303|0.6|0|0|"A.*B.*(bind|bound)"
+	1|130301|0.6|0|0|"A.*B (bind|bound)"
+	1|130302|0.95|0|0|"A and B bind"
+	1|130303|0.8|0|0|"(bind|bound).* between \w*A.*B"
+	1|130304|0.8|0|0|"A.{0,18}(bind|binds|bound).{0,18}B"		
+	1|130305|0.8|0|0|"A(\S*\s+){0,3}(bound|bind)(\S*\s+){0,3}\S*to(\S*\s+){0,3}\S*B"
+	2|130306|0.8|0|0|"A.*binding.*to.*(-\w*B|B\w*-).*complex"
+
+#,"4.associat"
+1|1401|0.731|0|0|"A.*associat.*B"
+	1|140101|0.769|0|0|"A.* associat\w* with .*B"
+	1|140102|0.8|0|0|"A associate\w* with .*B"
+		1|14010201|0.9|0|0|"A associate\w* with B"
+	1|140104|0.8|0|0|"A.* is .*associated.* with .*B"
+
+1|1402|0.281|0|0|"associat.*A.*B"
+	1|140201|0.82|0|0|"association(\S*\s+){0,3}(between|among|of)(\S*\s+){0,3}\S*A(\S*\s+){0,3}B"
+	1|140202|0.82|0|0|"association between A and .*B"
+		1|14020201|0.8|0|0|"association between(\S*\s+){0,3}\S*A\S* and \S*B"
+	1|140203|0.6|0|0|"association of(\S*\s+){0,3}\S*A\S* with .*B"
+	1|140204|0.6|0|0|"association of(\S*\s+){0,3}\S*A\S* and .*B"
+
+1|1403|0.500|0|0|"A.*B.*associat"
+	1|140301|0.6|0|0|"A(\S*\s+){0,6}\S*B(\S*\s+){0,6}\S*association"
+	1|140302|0.92|0|0|"A(\S*\s+){0,3}\S*B\w*-associated protein"
+	1|140403|0.6|0|0|"A .*B association"
+		1|14040301|0.8|0|0|"A.{0,24}B association"
+	1|140405|0.6|0|0|"A.* its.* association .*with .*B"
+	1|140406|0.6|0|0|"A.* and .*associated .*B"
+
+#,"5.activat"
+2|1501|0.500|0|0|"A.*activat(?!ion).*B"
+	2|150101|0.473|0|0|"A.*activation.*B"
+		2|15010101|0.8|0|0|"A\w*-dependent.*activation.*of.*B"
+		2|15010102|0.5|0|0|"A.*for.*activation.*of.*B"
+		2|15010103|0.8|0|0|"A.*is(\S*\s+){0,3}for activation of(\S*\s+){0,3}\S*B"
+		2|15010104|0.889|0|0|"A(\S*\s+){0,6}\S*activat(?!ion)(\S*\s+){0,6}B"
+2|1502|0.352|0|0|"activat.*A.*B"
+	2|15020201|0.563|0|0|"activation of.*A.*by.*B"
+2|1503|0.308|0|0|"A.*B.*activat"
+	1|150301|0.8|0|0|"A (\S*\s+){0,6}as (\S*\s+){0,3}B activator"
+
+#,"6.phosphorylat"
+1|1601|0.538|0|0|"A.*phosphorylat.*B"
+	1|160101|0.6|0|0|"A\S*(\S*\s+){0,6}(|de|de-)phosphorylat(e|ion|es|ed) .*B"
+	1|160102|0.8|0|0|"A\S* (|de|de-)phosphorylate(|s|d) \S*B"
+	1|160103|0.6|0|0|"A.*modulat.*B.*phosphorylation"
+	2|160104|0.8|0|0|"A\w*-dependent.*phosphorylation.*of.*B"
+1|1602|0.545|0|0|"phosphorylat.*A.*B"
+	1|160201|0.6|0|0|"phosphorylation.*of \S*A.* by .*B"
+	1|160202|0.6|0|0|"phosphorylation\S*(\S*\s+){0,4}A.*convert.*B.*into"
+1|1603|0.571|0|0|"A.*B.*phosphorylat"
+
+#,"7.precipitat"
+1|1701|0.526|0|0|"(co|)(|-)(|immuno)(|-)precipitat.*A.*B"
+	1|170101|0.526|0|0|"precipitation.*A.*B"
+	1|170102|0.526|0|0|"precipitat(?!ion).*A.*B"
+1|1702|0.6|0|0|"A.*(co|)(|-)(|immuno)(|-)precipitat\w* with.*B"
+1|1703|0.55|0|0|"A.*(co|)(|-)(|immuno)(|-)precipitat\w*.*B"
+1|1704|0.6|0|0|"A.*B.*(co|)(|-)(|immuno)(|-)precipitat"
+
+
+#,"8.conjugat"
+1|1801|0.5|0|0|"A.*conjugat.*B"
+	1|180101|0.8|0|0|"A(\S*\s+){0,3}conjugate.*with.*B"
+	1|180102|0.8|0|0|"A(\S*\s+){0,6}conjugate(\S*\s+){0,6}\S*B"
+1|1802|0.5|0|0|"conjugat.*A.*B"
+	1|180201|0.8|0|0|"conjugat(\S*\s+){0,6}A(\S*\s+){0,6}\S*B"
+1|1803|0.5|0|0|"A.*B.*conjugat"
+	1|180301|0.85|0|0|"A\w*-B\w* conjugat"
+
+# $log$

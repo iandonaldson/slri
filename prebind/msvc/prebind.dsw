@@ -1,0 +1,197 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "TaskAPI"=..\..\mobidick\build\taskapi\taskapi.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name deslib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name rsareflib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "bindlib"=..\..\bind\lib\msvc\bindlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "deslib"=..\..\..\deslib\deslib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "prebindcgi"=..\CGI\MSVC\prebindcgi.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name prebindlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name TaskAPI
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "prebindlib"=..\LIB\MSVC\prebindlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "prebindparser"=..\PARSER\MSVC\prebindparser.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name prebindlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "prebindsearcher"=..\SEARCHER\MSVC\prebindsearcher.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name prebindlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "rsareflib"=..\..\..\rsaref\rsareflib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "shoundremlib"=..\..\seqhound\src\msvc\shoundremlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "slricblib"=..\..\lib\msvc\slricblib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "slrilib"=..\..\lib\msvc\slrilib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

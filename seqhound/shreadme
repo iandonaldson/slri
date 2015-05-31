@@ -1,0 +1,443 @@
+Building SeqHound
+* before you start, make a directory and place the following files in there:
+.intrezrc
+asnftp.pl
+seqhound_build.sh
+mother
+genff
+chrom
+nrftp.pl
+redund
+taxftp.pl
+importtaxdb
+llftp.pl
+llparser
+goftp.pl
+goparser
+addgoid
+comgen
+genftp.pl
+humoasn.pl
+humouse_build.sh
+mmdbftp.pl
+cbmmdb
+vastblst
+pdbrep
+
+
+* edit configuration file .intrezrc; the path, pathsen, pathnbr and
+pathmm paths indicate where the database tables will be placed; THE 
+PATHS HAVE TO EXIST; allocate about 250 GB of disk space
+example:
+[datab]
+; this where most of the sequence data goes; takes about 100GB (February 2002)
+path=./datab/
+; supplementary sequnce data directory; takes about 10GB (February 2002)
+pathsen=./sendatab/
+; needed for the strucdb module; the structural data live here; takes about 1GB (February 2002)
+pathmm=./mmdb
+; needed for the neigdb module, this where the neighbours live (nr is the name
+of the neighbours database and has to be present); takes about 15GB (February 2002)
+pathnbr=./neighbours/nr
+; needed for the rpsdb module, this where the RPS-BLAST precomputed tables live
+pathrps=./rps/
+
+
+* proceed to build SeqHound tables; you have to build the core, the
+rest of the modules are optional if there is a need to spare resources
+or administrative efforts; note that the some API functionality will be
+compromised if you do not include all modules
+
+SeqHound core
+* asnftp.pl downloads all ASN.1 files from NCBI
+  ftp://ftp.ncbi.nih.gov/ncbi-asn1/*aso.gz and
+  ftp://ftp.ncbi.nih.gov/refseq/cumulative/rscu.bna.Z
+  - note takes overnight
+* seqhound_build.sh  (./seqhound_build.sh version#) executes mother parser
+over all source files and makes PARTI, ASNDBs, NUCPROT, ACCDB, PUBSEQ, TAXGI,
+TAXSP, SENDBs and SENGI - note takes about two days
+
+Redunddb module
+* nrftp.pl downloads FASTA nr database of proteins
+  (ftp://ftp.ncbi.nih.gov/blast/db)
+* redund makes a REDUND table of identical protein sequences (redund -i nr -n T)
+
+Taxdb module
+* taxftp.pl downloads taxonomy info from NCBI
+  (ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz)
+* importtaxdb makes five taxonomy databases DEL, DIV, GCODE, MERGE, TAX;
+  place the untared files from taxdump.tax.gz in the same directory
+
+Godb module
+* goftp.pl downloads the gene ontology files (
+  ftp://ftp.geneontology.org/pub/go/gene-associations/ and /pub/go/ontology)
+* goparser creates hierarchical gene ontology database GO_NAME,
+  GO_PARENT, GO_REF, GO_SYN; place the input files - component.ontology,
+  function.ontology, process.
+
+Lldb module
+* llftp.pl downloads the locus link template file LL_tmpl which is a source
+  for function annotation tables (ftp://ftp.ncbi.nih.gov/refseq/LocusLink/LL_tmpl.gz)
+* llparser creates functional annotation set of tables LL_CDD, LL_GO,
+  LL_LLINK, LL_OMIM; place the input file LL_tmpl in the same directory
+* addgoid (addgoid -i gene_association.compugen.GenBank and
+  addgoid -i gene_association.compugen.Swissprot) processes Compugen's annotation
+  of GenBank and  SwissProt and enriches GO annotation in LL_GO database
+  (the LL_tmpl source includes only higher eukaryotes) The program has to be executed
+  after all databases are built. The program is dependent on ASNDBs, PARTI, ACCDB,
+  NUCPROT, writes into LL_GO.
+
+Gendb module
+* add new genomes in hand to genff flat file; use ftp://ftp.ncbi.nih.gov/genomes directory listings
+   as a template; to speed things up use ncbi.bacteria.pl script to compare contents of genff to
+   FTP listings automatically
+*  genff format
+   each line of genff file represent one "DNA unit" (chromosome, plasmid, extrachromosomal element etc.)
+   belonging to a complete genome
+   the first column of genff represents taxonomy identifier for the genome,
+   the second column is a unique integer identifier for a given chromosome (hint: find the biggest
+   one in that column and increment it by one),
+   the third column represents a type of molecule (1 for chromosome, 8 for plasmid etc.),
+   the fourth column is the FTP file name for the genome (without the .asn extention) and
+   the last column is the full name of the chromosome, plasmid etc. (hint: keep the name of the
+   organism exactly the same as on the FTP site, it makes ncbi.bacteria.pl work)
+* chrom makes a CHROM table from the list of complete genomes genff (chrom -i genff -n T)
+* genftp.pl downloads and processes complete genome files from ftp://ftp.ncbi.nih.gov/genomes/*
+  and prepares them for use (rna.asn and protein.asn files need processing with humoasn.pl)
+* run humouse_build.sh since the human and mouse sequences from this source are not a part of GenBank
+  release and mother parser has to be used on all chromosome, rna and protein files; the parser makes
+  a new division gbchm and touches all core module tables
+* comgen (comgen -l T) uses the files downloaded by genftp.pl and marks the complete genomes in TAXGI
+  and adds loci names into ACCDB (if they are not present),  dependent on CHROM, writes into ACCDB, TAXGI.
+  The program has to be executed after all databases are built.
+
+Strucdb module
+* add .ncbirc and .mmdbrc to build directory
+* mmdbftp.pl will download mmdb ASN.1 files
+  ftp://ftp.ncbi.nih.gov/mmdb/data - note takes over night
+* cbmmdb (cbmmdb -d MMDB -n T -a MMGI -m T) makes MMDB and MMGI
+* vastblst (vastblst -n T) makes database of domains DOMDB from the new MMDB, depends
+  on IntrezInit (all databases), makes FASTA database mmdbdom.fas
+* get most recent nrpdb.*  file from ncbi ftp site (/mmdb/nrtable/nrpdb.*) in hand
+* pdbrep (pdbrep -i nrpdb.*) labels representatives of nr chain sets in
+  DOMDB, writes in DOMDB.
+
+Neigdb module
+*current build of neighbours is not exported but neighbour tables are available for download
+ at ftp://ftp.mshri.on.ca/pub/NBlast/ as a CodeBase database tables
+*place the tables into "pathnbr" directory from your config
+
+Rpsdb module
+*current build of RPS-BLAST tables is not exported but the tables are available for download
+ at ftp://ftp.mshri.on.ca/pub/RPS/ as a CodeBase database tables
+*place the tables into "pathrps" directory from your config
+
+* you are done building SeqHound; as a last step update the module info
+  in .intrezrc configuration file
+example:
+[sections]
+;indicate what modules are available in SeqHound
+;1 for available, 0 for not available
+;gene ontology hierarchy (did you run goparser?)
+godb = 1
+;locus link functional annotations (did you run llparser and addgoid?)
+lldb = 1
+;taxonomy hierarchy (did you run importtaxdb?)
+taxdb = 1
+;protein sequence neighbours (did you download neighbours tables?)
+neigdb = 1
+;structural databases (did you run cbmmdb, vastblst and pdbrep?)
+strucdb = 1
+;complete genomes tracking (did you run chrom and comgen?)
+gendb = 1
+;redundant protein sequences (did you run redund?)
+redundb = 1
+;open reading frame database (currently not exported at all)
+cddb = 0
+;RPS-BLAST tables (did you download RPS-BLAST tables?)
+rpsdb = 1
+
+
+Daily updates
+* make a separate directory for update processes and place the following files in it:
+redundcron.pl
+dupdcron.pl
+backupcron.pl
+precomcron.pl
+isshoundoncron.pl
+llcron.pl
+comgencron.pl
+redund
+mother
+update
+precompute
+isshoundon
+llparser
+addgoid
+comgen
+
+* make three subdirectories in the update process directory for storing datafiles and logs:
+  logs, asofiles, genfiles
+
+* place the .intrezrc configuration file to the current directory or your
+  home directory, depending on which directory is considered current by the
+  cron daemon, the configuration file points to the backup version of the
+  database the copy gets updated and backed up over the production version later.
+  All scripts below report success or failure via e-mail (the e-mail address is
+  set up inside the PERL scripts).  Each script has to be customized inside the file
+  so it looks for update executables and databases in appropriate places.
+* customize dupdcron.pl at the top of the script (all commented) and set it up to
+  run daily; it downloads an update files with today's date (ftp://ftp.ncbi.nih.gov/ncbi-asn1/daily-nc and
+  ftp://ftp.ncbi.nih.gov/refseq/daily/rsnc*.bna.Z) and runs update (update -i nc*.aso.gz)
+  and mother (mother -i nc*.aso.gz -r version# -n F (use -n T on very first update file) -m F -u T).
+  If you miss a few updates before setting up the cron job you have to run update
+  and mother in hand using the above commands.
+* customize the redundcron.pl script at the top of the file and set it up to run daily;
+  it uses redund executable to recreate REDUND table from a fresh nr database
+* customize the backupcron.pl script at the top of the file and set it up to run daily;
+  it makes a copy of the databases when all updates are done.   First, it temporarily makes
+  the backup version the active serving version so there is a continuous SeqHound service,
+  second, it copies over all files from backup to production directories;
+  third it erases the link to backup version which returns things back to normal.
+* customize the precomcron.pl script at the top and set it up to run daily after the
+  backup is done; it uses precompute (precompute -a update) to update the large
+  precomputed taxonomy searches; if the precompute executable never run before use
+  precompute -a redo just once; before you proceed make sure that the configuration file
+  is set up to point to the directory containing the precomputed files and the index file
+[precompute]
+;precomputed taxonomy queries
+MaxQueries = 0
+MaxQueryTime = 10
+QueryCount = 0
+#path to precomputed searches has to have "/" at the end !!
+path = ./precomputed/
+indexfile = ./precomputed/index
+
+* customize congencron.pl at the top of the script and set it up to run daily;
+  it updates complete genomes records using comgen executable
+* customize isshoundon.pl at the top of the file and set it up to run daily as the last
+  cron job; it checks if SeqHound is up and running
+* customize llcron.pl at the top of the file and set it up to run weekly;
+  the script will refresh the Locus Link tables in SeqHound
+
+
+Setting up SeqHound servers
+There are two servers used by SeqHound system.  The wwwseekgi server produces WWW pages
+  for SeqHound and seqrem processes requests to SeqHound remote API.
+* place the following files under your WWW server'ss cgi-bin tree:
+wwwseekgi
+seekhead.txt
+seektail.txt
+.intrezrc
+.ncbirc
+pics/jezevcik4.gif
+seqrem
+* edit .ncbirc configuration file to point to data directory within NCBI toolkit
+example of a .ncbirc file:
+[NCBI]
+Data=/home/ncbi/data
+
+* edit .intrezrc configuration file to point to datab, sendatab, pathmm,
+  precomputed, pathnbr directories (see above in Building SeqHound)
+* place index.html file in your WWW server's document tree and edit it so the form
+  action points to the wwwseekgi server
+* use SeqHound WWW interface via the index.html file
+
+
+
+SeqHound code on Sourceforge
+All code for SeqHound lives on Sourceforge open source development site 
+  (http://sourceforge.net/).  It means that you can download the code or contribute 
+  to its development in C programming language.
+  SeqHound is a member of a group of project developed in Samuel Lunenfeld Research Institute
+  at Mount Sinai Hospital in Toronto.  The project called slritools can be found at 
+  http://sourceforge.net/projects/slritools.  To use SeqHound you will need to incorporate 
+  slri library file.  
+  To see what is inside of SeqHound you can browse 
+    http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/slritools/slri/seqhound.  
+  The following is a brief description of the directory structure for the whole system.
+* asn directory contains data types definition in ASN.1 data description language; the
+  objects were processed by the NCBI toolkit program called asntool to produce C code 
+* cgi directory contains code for two SeqHound servers
+* config directory contains configuration files
+* domains directory holds code which operates on structural domains
+* examples directory should be quite useful to see what one can do with SeqHound and how;
+  a couple of additional libraries lives there too
+* genomes directory contains code which tracks complete genomes and large taxonomy searches
+* go directory holds a parser which uploads gene ontology information to SeqHound
+* html directory accommodates variety of html and PERL files to take care of WWW pages 
+  related to SeqHound
+* include directory obviously has majority of includes in it
+* locuslink directory holds a parser which uploads locus link information to SeqHound
+* parsers directory contains majority of parsers for SeqHound other than the ones for
+  taxonomy, gene ontology and Locus Link
+* perl directory holds PERL module to query SeqHound
+* rps directory holds code to build RPS-BLAST tables on a cluster of computers
+* scripts directory contains all PERL and shell scripts used to build, test and update
+  SeqHound; it also holds shtest.c program which is a useful template for development
+* src directory has all files needed to build SeqHound local and remote library
+* taxon directory contains taxonomy information parser for SeqHound
+* tindex directory holds implementation of text indexer for SeqHound
+* updates directory contains update code
+* seqhound.mk file is needed to set up compilations with local API
+* seqhound_cb.mk file is needed by seqhound.mk
+* seqhound_db2.mk file is needed by seqhound.mk
+* shreadme file is this file
+
+Compiling SeqHound on UNIX
+--------------------------
+To compile SeqHound libraries and applications you can choose to set up SeqHound
+  locally or use it via remote API.  SeqHound for local use can also be distributed
+  in the form of binaries for various platforms upon demand.
+
+- Local version of SeqHound -
+You will need following libraries:
+1. NCBI C toolkit (http://ncbi.nlm.nih.gov/IEB  - freely available)
+2. CodeBase database system (http://www.sequiter.com/  - proprietary but cheap)
+   or DB2 RDBMS (http://ibm.com - free for academics)
+3. bzip library (http://sourceforge.net/projects/slritools - GPL)
+4. SLRI library (http://sourceforge.net/projects/slritools - GPL)
+5. SLRI database specific library (http://sourceforge.net/projects/slritools - GPL)
+6. SeqHound local library (http://sourceforge.net/projects/slritools - GPL)
+
+* download and compile NCBI toolkit using ncbi/make/makedish.csh; please refer
+  to the toolkit documentation
+* set up an environmental variable $NCBI which points to the toolkit ncbi directory (e.g. /home/ncbi)
+* set ncbi.mk file within $NCBI directory by copying a file appropriate for
+  your platform from $NCBI/platform to $NCBI directory and naming it ncbi.mk
+* edit NCBI_INCDIR and NCBI_LIBDIR within ncbi.mk to contain absolute paths to
+  $NCBI/lib and $NCBI/include directories
+* set up your database system according to manufacturers documentation
+* for CodeBase; set up an environmental variable $CBDIR pointing to the "source"
+  directory of CodeBase system
+* for DB2, edit slri/seqhound/seqhound_db2.mk file to include paths to library and includes
+* check out slritools/bzip2 directory from sourceforge cvs and compile bzip library (make -f make.bzlib)
+* check out slritools/lib directory from sourceforge cvs and compile slri library (make -f make.slrilib)
+* make the database specific support library for either CodeBase (make -f make.slrilib_cb)
+  or DB2 (make -f make.slrilib_db2)
+* check out slritools/seqhound directory from sourceforge cvs and compile SeqHound local
+  library in slritools/seqhound/src  (make -f make.shoundlocllib cb for CodeBase
+  or make -f make.shoundlocllib db2 for DB2)
+* write SeqHound application; use examples from slritools/slri/seqhound/examples and
+  http://zaphod.mshri.on.ca/seqhound web site as a tutorial
+* prepare your makefile; use makefile slri/seqhound/scripts/make.shtest as a template;
+  rename the file and replace SRC and EXE macros inside
+example:
+if your program is called myprog.c replace shtest.c in SRC with myprog.c and shtest
+  in EXE with myprog and call the makefile -f make.myprog
+* for the local API, the makefile has to include ../seqhound.mk
+* the makefile will place the executable to ../build directory
+
+
+Remote version of SeqHound
+You will need following libraries:
+1. NCBI C toolkit (http://ncbi.nlm.nih.gov/IEB  - public domain)
+2. SLRI library (http://sourceforge.net/projects/slritools - GPL)
+3. SeqHound remote library (http://sourceforge.net/projects/slritools - GPL)
+
+* download and compile NCBI toolkit using ncbi/make/makedish.csh; please refer
+  to the toolkit documentation
+* set up an environmental variable $NCBI which points to the toolkit ncbi directory
+  (e.g. /home/ncbi)
+* set ncbi.mk file within $NCBI directory by copying a file appropriate for your
+  platform from $NCBI/platform to $NCBI directory and naming it ncbi.mk
+* edit NCBI_INCDIR and NCBI_LIBDIR within ncbi.mk to contain absolute paths to
+  $NCBI/lib and $NCBI/include directories
+* check out slritools/lib directory from sourceforge cvs and compile slri library
+  (make -f make.slrilib)
+* check out slritools/seqhound directory from sourceforge cvs and compile SeqHound
+  remote library in slritools/seqhound/src  (make -f make.shoundremlib)
+* write SeqHound application; use examples from slritools/slri/seqhound/examples and
+  http://zaphod.mshri.on.ca/seqhound web site as a tutorial
+* prepare your makefile; use makefile slri/seqhound/scripts/make.shtest as a template;
+  rename the file and replace SRC and EXE macros inside
+example:
+if your program is called myprog.c replace shtest.c in SRC with myprog.c and shtest
+  in EXE with myprog and call the makefile -f make.myprog
+* for the remote API, the makefile has to include ../seqhoundrem.mk
+* the makefile will place the executable to ../build directory
+* when you run myprog place .shoundremrc config file from slri/seqhound/config
+  into the current directory
+
+
+Compiling SeqHound on WINDOWS with MSVC
+To compile SeqHound libraries and applications you can choose to set up SeqHound
+ locally or use it via remote API.  SeqHound for local use can also be distributed
+ in the form of binaries for various platforms upon demand.
+
+Local version of SeqHound
+You will need following libraries:
+1. NCBI C toolkit (http://ncbi.nlm.nih.gov/IEB  - public domain)
+2. CodeBase database system (http://www.sequiter.com/  - proprietary but cheap)
+  or DB2 RDBMS (http://ibm.com - free for academics)
+3. bzip library (http://sourceforge.net/projects/slritools - GPL)
+4. SLRI library (http://sourceforge.net/projects/slritools - GPL)
+5. SLRI database specific library (http://sourceforge.net/projects/slritools - GPL)
+6. SeqHound local library (http://sourceforge.net/projects/slritools - GPL)
+
+* download and compile NCBI; please refer to the toolkit documentation
+* edit the file ncbi.ini from ncbi/config/win to contain proper paths and place it
+  to your windows directory
+* set up your database system according to manufacturers documentation
+* the msvc project files for the remaining libraries are available in sourceforge cvs;
+  you will have to modify the paths to your version of NCBI toolkit and RDBMS
+* check out slritools/bzip2 directory from sourceforge cvs and compile bzip library
+  using bzip.dsp project file
+* check out slritools/lib directory from sourceforge cvs and compile slri library
+  using slritools/lib/msvc/slrilib.dsp.
+* compile the database dependent library slritools/lib/msvc/slricblib.dsp or
+  slritools/lib/msvc/slridb2lib.dsp
+* check out slritools/seqhound directory from sourceforge cvs and compile SeqHound
+  local library in slritools/seqhound/src using slritools/seqhound/src/msvc/shoundlocllib.dsp
+* write SeqHound application; use examples from slritools/slri/seqhound/examples and
+  http://zaphod.mshri.on.ca/seqhound web site as a tutorial
+* use slritools/seqhound/src/msvc/seqrem.dsp as a template for project files for your applications
+
+
+Remote version of SeqHound
+You will need following libraries:
+1. NCBI C toolkit (http://ncbi.nlm.nih.gov/IEB  - public domain)
+2. SLRI library (http://sourceforge.net/projects/slritools - GPL)
+3. SeqHound remote library (http://sourceforge.net/projects/slritools - GPL)
+
+* download and compile NCBI; please refer to the toolkit documentation
+* edit the file ncbi.ini from ncbi/config/win to contain proper paths and place it
+  to your windows directory
+* the msvc project files for the remaining libraries are available in sourceforge cvs;
+  you will have to modify the paths to your own version of NCBI toolkit
+* check out slritools/lib directory from sourceforge cvs and compile slri library using
+  slritools/lib/msvc/slrilib.dsp
+* check out slritools/seqhound directory from sourceforge cvs and compile SeqHound
+  remote library in slritools/seqhound/src using slritools/seqhound/src/msvc/shoundremlib.dsp
+* write SeqHound application; use examples from slritools/slri/seqhound/examples and
+  http://zaphod.mshri.on.ca/seqhound web site as a tutorial
+* use slritools/seqhound/src/msvc/seqrem.dsp as a template for project files for your
+  applications; just switch shoundlocllib.lib to shoundremlib.lib in projects settings
+
+$Log: shreadme,v $
+Revision 1.1.1.9  2003/05/28 08:37:58  root
+Automated import from Sourceforge.net
+
+Revision 1.10  2003/05/28 00:22:25  kaca
+removed bzip from remote builds
+
+Revision 1.9  2002/10/30 22:03:05  kaca
+changed description of complete genome build
+
+Revision 1.8  2002/09/26 15:50:39  kaca
+changed description of precompute searches
+
+Revision 1.7  2002/07/04 15:12:28  kaca
+modified update process info
+
+Revision 1.6  2002/06/25 14:27:28  kaca
+fixed arguments for pdbrep executable
+
+Revision 1.5  2002/06/13 20:00:19  kaca
+added RPS-BLAST documentation
+
+Revision 1.4  2002/03/05 19:57:32  micheld
+added line feeds, and updated make procedure
+
+
+

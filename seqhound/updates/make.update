@@ -1,0 +1,78 @@
+#######################################################################
+#
+# update 
+#
+#######################################################################
+include ../seqhound.mk
+
+DEF =
+SRC = update.c
+EXE = update
+EXE_CB = $(EXE)_cb
+EXE_DB2 = $(EXE)_db2
+EXE_ODBC = $(EXE)_odbc
+EXE_DB2_TXT = $(EXE)_db2_txt
+EXE_CB_TXT = $(EXE)_cb_txt
+EXE_ODBC_TXT = $(EXE)_odbc_txt
+
+#############################
+# Database specific Targets #
+#############################
+all : $(EXE_CB)
+cb  : dep_sh_cb  $(EXE_CB)
+db2 : dep_sh_db2 $(EXE_DB2)
+odbc : dep_sh_odbc $(EXE_ODBC)
+cbtxt : $(EXE_CB_TXT)
+db2txt : $(EXE_DB2_TXT)
+odbctxt : $(EXE_ODBC_TXT)
+
+$(EXE_CB) : $(SRC)
+	$(CC) -o $(EXE_CB) -DX11 $(LDFLAGS_CB) $(SRC) \
+	$(SEQH_LOCL_LIBS_CB)
+	-mkdir -p $(BUILDDIR_CB)
+	mv $(EXE_CB) $(BUILDDIR_CB)/$(EXE)
+
+$(EXE_DB2) : $(SRC)
+	$(CC) -o $(EXE_DB2) -DX11 $(LDFLAGS_DB2) $(LIBDIR_DB2) $(SRC) \
+	$(SEQH_LOCL_LIBS_DB2)
+	-mkdir -p $(BUILDDIR_DB2)
+	mv $(EXE_DB2) $(BUILDDIR_DB2)/$(EXE)
+
+$(EXE_ODBC) : $(SRC)
+	$(CC) -o $(EXE_ODBC) -DX11 $(LDFLAGS_ODBC) $(LIBDIR_ODBC) $(SRC) \
+	$(SEQH_LOCL_LIBS_ODBC)
+	-mkdir -p $(BUILDDIR_ODBC)
+	mv $(EXE_ODBC) $(BUILDDIR_ODBC)/$(EXE)
+
+$(EXE_CB_TXT) : $(SRC)
+	$(CC) -o $(EXE_CB) -DX11 -DASNFORMAT=1 $(LDFLAGS_CB) $(SRC) \
+	$(SEQH_LOCL_LIBS_CB) 
+	-mkdir -p $(BUILDDIR_CB)
+	mv $(EXE_CB_TXT) $(BUILDDIR_CB)/$(EXE)_txt
+
+$(EXE_DB2_TXT) : $(SRC)
+	$(CC) -o $(EXE_DB2) -DX11 -DASNFORMAT=1 $(LDFLAGS_DB2) $(LIBDIR_DB2) $(SRC) \
+	$(SEQH_LOCL_LIBS_DB2)
+	-mkdir -p $(BUILDDIR_DB2)
+	mv $(EXE_DB2_TXT) $(BUILDDIR_DB2)/$(EXE)_txt
+
+$(EXE_ODBC_TXT) : $(SRC)
+	$(CC) -o $(EXE_ODBC) -DX11 -DASNFORMAT=1 $(LDFLAGS_ODBC) $(LIBDIR_ODBC) $(SRC) \
+	$(SEQH_LOCL_LIBS_ODBC)
+	-mkdir -p $(BUILDDIR_ODBC)
+	mv $(EXE_ODBC_TXT) $(BUILDDIR_ODBC)/$(EXE)_txt
+
+dep_sh_cb :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) cb
+
+dep_sh_db2 :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) db2
+
+dep_sh_odbc :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) odbc
+
+clean:
+	rm -f $(BUILDDIR_CB)/$(EXE)
+	rm -f $(BUILDDIR_DB2)/$(EXE)
+	rm -f $(BUILDDIR_ODBC)/$(EXE)
+

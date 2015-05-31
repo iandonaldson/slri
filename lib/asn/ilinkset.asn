@@ -1,0 +1,42 @@
+--$Id $
+--*********************************************************************
+--
+--  ilinkset.asn
+--  Alternative to NCBI's INTEGER Link-Set
+--  ILink-set allows Integer storage in array
+--  and nested sets
+--  ***** DO NOT GENERATE WITH ASNTOOL ****
+--  The LinkSet has been hard-coded
+--
+--*********************************************************************
+--  NOTE:  This specification is in a variant of ASN.1 1990 that may not
+--         be compatible with newer ASN.1 tools.  This specification also
+--         depends on public domain specifications available from the
+--         U.S. National Center for Biotechnology Information (NCBI)
+--         ftp://ncbi.nlm.nih.gov/toolbox/ncbi_tools/
+--         http://www.ncbi.nlm.nih.gov/Toolbox/
+--
+
+SLRI-ILink-set DEFINITIONS ::=
+BEGIN
+
+EXPORTS ILink-set, ILink-set-List, ILink-set-List2, ILink-set-List3;
+
+ILink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF INTEGER OPTIONAL }
+
+ILink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF ILink-set ,
+    id INTEGER }
+
+ILink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF ILink-set-List ,
+    id INTEGER }
+
+ILink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF ILink-set-List2 ,
+    id INTEGER }
+
+END

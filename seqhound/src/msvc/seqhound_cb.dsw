@@ -1,0 +1,716 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "all"=.\all_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name cbmmdb
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name clustmask
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name clustmasklist
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name csanlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name fastadom
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name gen2fasta
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name gen2struc
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name mother
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name pdbrep
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name readseqslib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name redund
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name redundlist
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name seqrem
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shtest
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name vastblst
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name wwwseekgi
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name comgen
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "bzlib"=..\..\..\..\bzip2\bzlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "c4lib"=..\..\..\..\codebase\windows\C\MSC60\C4LIB.DSP - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "cbmmdb"=.\cbmmdb_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "clustmask"=.\clustmask_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name csanlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "clustmasklist"=.\clustmasklist_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name csanlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "comgen"=.\comgen_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "csanlib"=.\csanlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "doc"=.\doc.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "fastadom"=.\fastadom_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "fseqrem"=.\fseqrem_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "fwwwseekgi"=.\fwwwseekgi_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "gen2fasta"=.\gen2fasta_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name readseqslib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "gen2struc"=.\gen2struc_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "mother"=.\mother_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "pdbrep"=.\pdbrep_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "perl"=.\perl.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "readseqslib"=.\readseqslib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "redund"=.\redund_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "redundlist"=.\redundlist_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "rpsdb"=.\rpsdb_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundremlib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "seqrem"=.\seqrem_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "shoundlocllib"=.\shoundlocllib_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "shoundremlib"=.\shoundremlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "shtest"=.\shtest_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "slricblib"=..\..\..\lib\msvc\slricblib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "slrilib"=..\..\..\lib\msvc\slrilib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "vastblst"=.\vastblst_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "wwwseekgi"=.\wwwseekgi_cb.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slricblib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name bzlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name c4lib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

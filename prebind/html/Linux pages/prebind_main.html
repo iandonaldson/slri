@@ -1,0 +1,92 @@
+ <html>
+
+<head>
+	<title> PreBIND Main Page</title>
+</head>
+
+<body bgcolor="#FFFFFF"> 
+<br>
+<br>
+<h1 align="center">Search PreBIND</h1>
+<br>
+<br>
+<!--what prebind does-->
+<div align="center">
+<table border="0" width="50%" cellpadding="0" height="107">
+  <tr bgcolor="lightgoldenrodyellow">
+    	<td 
+		<p><b>Show me a list of all of the papers in PubMed that are about my protein of interest.  Then classify all of these papers and tell me which ones are likely to contain interaction information.  Finally, identify all of the other proteins mentioned in these papers and indicate whether these proteins might interact with my protein of interest.</b> 
+	</td>
+  </tr>
+
+<tr><td>
+<!--protein name and organism search input-->
+<form method="POST" action="/cgi-bin/prebind/PreBIND">
+<table border="0" width="100%" cellpadding="2" height="107">
+  <tr>
+    	<td width="100%" height="22"><strong><br>Search by protein name and organism:</strong>
+	  	<br>Enter the name of a protein (one word) and the organism it comes from
+		(only Saccharomyces cerevisiae is available right now).
+	</td>
+  </tr>
+  <tr>
+    <td width="100%" height="26">
+	<input type="text" name="name" size=15 maxlength=40>
+	<select name="taxid" size="1">
+        	<option selected value="0">Any organism</option>
+        	<option value="4932">Saccharomyces cerevisiae</option>
+      	</select>
+	<input type=hidden name=search_type value=nametax>
+	<input type="submit" value="Submit" name="B1">
+	<input type="reset" value="Reset" name="B2">
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" height="36">
+	For example, type "Ras1p" and select Saccharomyces cerevisiae.<br> 
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="100%" height="36">
+	<br><b>OR</b> 
+    </td>
+  </tr>
+</table>
+</div>
+<p>
+</form>
+</td></tr>
+
+<tr><td>
+<!--accession search input-->
+<form method="POST" action="/cgi-bin/prebind/PreBIND">
+<div align="center">
+<table border="0" width="100%" cellpadding="2" height="93">
+  <tr>
+    	<td width="100%" height="20">
+		<strong>Search by accession:</strong>
+		<br>Enter the REFSEQ accession number of a protein.
+	</td>
+  </tr>
+  <tr>
+    <td width="100%" height="24">
+      		<input type="text" name="accession" size=25 maxlength=40>
+		<input type=hidden name=search_type value=accession>
+		<input type="submit" value="Submit">
+		<input type="reset" value="Reset">
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" height="25">
+	For example, type "NP_014744" to find interaction papers about Ras1p of yeast.  Look for REFSEQ accession numbers <a 		href = "http://www.ncbi.nlm.nih.gov/">here.</a><br>
+  </tr>
+</table>
+</form>
+</div>
+</td></tr>
+
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+#######################################################################
+#
+# make file for compiling a local binary of shunittest
+# January 28 2004, Victor Gu
+#######################################################################
+CC=gcc -pipe -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE
+
+SEQHLIB=-L$(SEQHOUND_HOME)/install/lib
+SEQHINC=-I$(SEQHOUND_HOME)/install/include
+NCBIINC=-I$(SEQHOUND_HOME)/install/include/ncbiinc
+LOCALLIB= -lshoundlocllib_odbc
+REMLIB= -lshoundremlib_odbc
+LIBDIR = -lslri_odbc -lslri -lbz -lodbc -lncbimmdb -lncbitool -lncbiNacc -lnetentr -lnetcli -lncbicdr -lncbiobj -lncbi -lm 
+
+DEF =
+SRC = example.c
+# EXE is the binary for remote API calls
+EXE = example
+EXE_LOCAL=$(EXE)_localapi
+EXE_REM=$(EXE)_remapi 
+EXTRALIB =
+MAKE_LIB =
+
+# default will be the test driver for remote APIs  
+all :  $(EXE_REM)
+
+local : $(EXE_LOCAL)
+rem   : $(EXE_REM)
+
+# If cb is specified, a local binary will be built in the /build/cb
+# directory
+$(EXE_LOCAL) : $(SRC)
+	$(CC) -o $(EXE_LOCAL) -DX11 $(SRC) $(SEQHLIB) $(SEQHINC) $(NCBIINC) $(LOCALLIB) $(LIBDIR)
+
+$(EXE_REM) : $(SRC)
+	$(CC) -o $(EXE_REM) -DX11 $(SRC) $(SEQHLIB) $(SEQHINC) $(NCBIINC) $(REMLIB) $(LIBDIR)
+
+clean:
+	rm -f $(EXE_LOCAL) $(EXE_REM)  

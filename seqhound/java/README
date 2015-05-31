@@ -1,0 +1,257 @@
+README for SeqHound Java
+
+This README is organized into the following topics:
+1) CONTENTS OF ARCHIVE
+2) SYSTEM REQUIREMENTS
+3) COMPILE/BUILD/INSTALL SeqHound Java
+4) TESTING AND VERIFYING YOUR SEQHOUND INSTALLATION
+5) RUNNING A SAMPLE APPLICATION
+6) DOCUMENTATION
+7) CHANGES WITH THIS RELEASE
+8) KNOWN BUGS
+
+
+
+1) CONTENTS:
+------------
+
+The contents of the binary tarball distribution are:
+   a)README ( this file )
+   b)docs directory ( javadoc generated documentation )
+   c)lib - jar file dependancies:
+	blueprint-commons-db-0.2.jar
+	commons-collections-3.1.jar
+	commons-dbcp-1.2.1.jar
+	commons-httpclient-2.0.2.jar
+	commons-logging.jar
+	commons-pool-1.2.jar
+	junit.jar
+	log4j-1.2.8.jar
+	mysql-connector-java-3.0.14-production-bin.jar
+
+   d.)seqhound-java-x.xx.jar ( seqhound binary jar library )
+   e.)seqhound-java-test-x.xx.jar ( contains junit test classes for the seqhound binary library)
+	Many of the included test classes are for testing internals of the seqhound-java library
+	The main test classes for the API are: org.blueprint.seqhound.SeqhoundAPITest and org.blueprint.seqhound.SeqHoundTest
+   f.)bin directory       ( unjarred SeqHound binary class files)	
+
+The source tarball contains the seqhound source tree in the form of an Eclipse(Trademark) project directory.  This may be imported 
+directly into an Eclipse workspace and developed with.  Alternatively, users can use the included ant build.xml and it's associated targets 
+(described below) to perform the tasks of building the library and running the tests.  
+   
+
+   a.)java/src directory       ( the source code tree for the seqhound library classes )
+   b.)java/test directory      ( the source code tree for the test classes )
+   c.)doc/ directory           ( the javadoc documentation for the source code tree )
+   d.)dist/ directory          ( where compiled jar libraries are placed )
+   e.)bin directory       ( where compiled binary class files are placed )	   
+   f.)conf/ directory          ( configuration files used in building of different ant targets )
+   g.)lib/ directory           ( third party jar libraries which seqhound is dependant upon ) 
+   h.).classpath file          ( Eclipse project classpath file )
+   i.).project file            ( Eclipse project file )
+   j.)shconfig.properties file ( sample seqhound client configuration file.  The seqhound client library uses this to configure logging, database connection and/or remote seqhound connections.  See the manual for more details )
+   k.)build.xml file
+	This is an ant build file containing targets for various seqhound development tasks, such as compiling the source, building library jars and creating javadocumentation.  The available targets are:
+		compile - compile all source files and place them in the /bin directory, preserving classpath/directory structure
+		dist-remote - builds a jar of the seqhound class files required for running a remote Seqhound client, placing it in dist/lib/
+		dist-local - builds a jar containing all seqhound class files, placing it in dist/lib/
+		dist-war - builds a Web Application aRchive (WAR) file for the jseqrem seqhound remote servlet, which can be loaded into a java web application server (eg Apache's Jakarta-Tomcat ), placing it in dist/war/
+		tomcat-deploy - deploys the (WAR) file built by the dist-war target to a running tomcat server, as specified in the conf/tomcat.properties file
+		tomcat-undeploy - undeploys the web application deployed by the tomcat-deploy target
+		tomcat-redeploy - undeploys and redeploys the jseqrem servlet web application; synonymous with calling 'tomcat-undeploy' and 'tomcat-deploy' in sequence.
+		clean - cleans the project by erasing any compiled binaries,jars and documentation
+		test - runs the junit tests for org.blueprnt.seqhound.SeqhoundAPITest and org.blueprint.seqhound.SeqHoundTest
+		
+Note that to use the tomcat related tasks, you will need to have the tomcat jar catalina-ant.jar, which defines those tasks, in your classpath.   
+
+2) REQUIREMENTS:
+----------------
+
+In order to build and use SeqHound Java on your computer you will
+need the Java 2 Runtime Environment installed, version 1.4 or later.   See
+http://www.java.sun.com/j2se for further details.
+
+SeqHound comes with Ant build scripts to ease the task of compiling and building 
+libraries from the source code distribution, so it is recommended 
+that you also have Ant installed.
+Additionally, the source code tree doubles as a project directory for the Eclipse 
+IDE, so developers may also wish to use Eclipse for java development.
+Ant is available at http://ant.apache.org. Eclipse is available at 
+http://www.eclipse.org
+
+
+
+3) COMPILE/BUILD/INSTALL SeqHound Java:
+---------------------------------------
+
+You can download the seqhound remote and local binary jars and use 
+them immediately in your program. 
+
+Alternatively SeqHound Java comes distributed in a binary tar archive 
+seqhound-java-X.X-bin.tar.gz.
+There is no need to compile/build the source code just 
+unzip the tarball into a directory.
+
+From binary tarball distribution:
+Here's an example set up:
+
+  tar xvf seqhound-java-X.X-bin.tar.gz 
+  cd seqhound-java-X.X
+  cp seqhound-java-X.X.jar /my/jar/lib/directory 
+
+If you wish to compile seqhound yourself, download the source tar 
+archive seqhound-java-X.X-src.tar.gz, and follow these steps:
+
+  tar xvf seqhound-java-X.X-src.tar.gz
+  cd seqhound-java-X.X
+  ant compile  #to compile the source code
+  ant dist-local #to create a jar containing the all the seqhound local and remote client library class files
+	or
+  ant dist-remote #to create a jar containing only those class files required for the seqhound remote distribution.
+
+Configuration
+
+In previous releases, the seqhound client library depended upon the configuration file .shoundremrc .  In this release, 
+the configuration file which seqhound client depends upon is the shconfig.properties file, which must be in the current working 
+directory of the application using the library. This file is used to configure options such as what log4j logging level to use, 
+what datasources to rely upon(such as direct database access and/or remote seqrem servers) and how to access those data sources.
+To learn more about the format of this configuration file, see the seqhound manual version 3.2.  Example shconfig.properties files 
+can be found in the root directory of the binary and source tarball distributions.
+
+It is  recommended that you copy the configuration file 'shconfig.properties' to 
+your applications current working directory and modify it to suit your needs. (see recent changes below)
+
+Now you are ready to build client applications.
+
+4.) TESTING AND VERIFYING YOUR SEQHOUND INSTALLATION
+
+Included with the seqhound library are several classes for verifying that you're seqhound build is working properly.  
+These test classes were built with the junit framework and iterate through nearly all seqhound API functions to veryfy 
+that they are working correctly in your configuration.  These classes are org.blueprint.seqhound.SeqhoundAPITest and 
+org.blueprint.seqhound.SeqHoundTest .  Each performs tests on a separate subset of the seqhound API, so they are complementary 
+and should both be run to verify your configuration.  To execute them simply run them as normal java programs:
+
+	java org.blueprint.seqhound.SeqhoundAPITest
+	java org.blueprint.seqhound.SeqhoundTest
+
+Alternatively, you may run these tests using the build.xml script included with the tarball distributions with the command:
+
+	ant test
+
+You may also run them using the junit frameworks graphical interface:
+
+	java junit.swingui.TestRunner org.blueprint.seqhound.SeqhoundAPITest 
+	java junit.swingui.TestRunner org.blueprint.seqhound.SeqhoundTest
+
+Note that the junit library jar, which is included with the tarball distributions of seqhound-java, must be on your classpath.
+
+ 
+
+4) USING SEQHOUND JAVA
+-----------------------
+
+A sample application is included with the seqhound distribution.  This application takes GenBank GeneInfo identifier (GI) 
+and retrieves the GenBank flat file summary of the protein or nucleic acid which corresponds to that GI.
+
+Example invokation:
+
+	java org.blueprint.seqhound.GetGenBankff 333
+
+
+    
+5) DOCUMENTATION
+----------------
+
+The source code is documented using Javadoc tags and documentation
+comments. The html output is available in the docs/api directory.
+Open the file index.html in your favourite browser to view the
+documentation. The package of interest is
+org.blueprint.seqhound.SeqHound. You can also access the source code
+directly in src.
+
+
+6) CHANGES WITH THIS RELEASE
+--------------------------------
+
+This release involved an almost complete refactoring of the seqhound-java 
+libraries architecture, coinciding with the development of a local (direct-
+database access) java API.  For the most part, we attempted to keep the API 
+definition the same, but several changes were made which we considered significant 
+and necessary, and as such will cause backwards incompatibitilities.  We apologize 
+for any problems this may cause, but we felt the changes were required for the long 
+term development of seqhound.  The major changes are described here:
+
+-Retirement of class org.blueprint.seqhound.SeqHound.  This class was the Seqhound 
+remote API client in previous releases.  This class has been moved to the location 
+org.blueprint.seqhound.queries.seqrem.SeqHound, and can be accessed there directly if 
+absolutely necessary, though it is recommended that users migrate to using the new 
+framework.  This class has been replaced with the interface org.blueprint.seqhound.Seqhound, 
+and objects which implement that interface.
+
+-API definition changes.  The seqhound java API is now defined by the interface class 
+org.blueprint.seqhound.Seqhound.  This interface contains definitions for the 
+methods defined by the Seqhound java API of previous releases, with the following changes:
+	1.)All methods throw exceptions of types SeqhoundException and SeqhoundLogicException,
+		and no other exceptions.  This is to better conform with the Convert Exceptions 
+		design pattern, which specifies that methods should only throw exceptions 
+		belonging to the problem domain which they belong to.  Any lower level exception 
+		thrown by interface method implementations, such as network, file or db access 
+		exceptions, will be wrapped with seqhound exceptions before being thrown to 
+		clients.
+	2.)The return types of methods SHoundGetFastaFromRedundantGroupIDKeyedList 
+		and SHoundGetFastaKeyedList have been changed from HashTable to 
+		ShRIDFastaTable and ShGiFastaTable, respectively.  This change was made 
+		in order to more strongly type the return types, so that they would 
+		be more compatible with the new remote API framework developed for 
+		this release.  These new return types are subtypes of HashTable, so 
+		this change should not, in general, break backwards compatibility
+	3.)The method SHoundGetFastaList(int[] giList, Writer out) has been renamed 
+		SHoundGetFastaListToWriter
+
+-Seqhound client object construction.  The creation of Objects implementing the 
+Seqhound API interface has been abstracted behind an interface provided by the class
+org.blueprint.seqhound.SeqhoundFactory.  This change was neccesitated by design 
+elements of the new framework which allows the mixing of local and remote implementations of 
+methods within the same Seqhound interface implementation.  The complexity of creating 
+objects with such mixed implementation, which involve Dynamic Proxy Objects, was 
+deemed to be better hidden behind the interface of a Factory class.  The SeqhoundFactory 
+class provides various createSeqhound methods for creating implementations of the 
+Seqhound interface which implement methods using either the remote or local interfaces,
+as defined in a configuration file.  Classes implementing the Seqhound interface 
+cannot be directly instantiated.  To create an instance of the Seqhound object, one 
+would do the following:
+
+	SeqhoundFactory shf = new SeqhoundFactory()
+	Seqhound sh = shf.createSeqhound();
+
+-.shoundremrc configuration file replaced with shconfig.properties configuration file.
+See the Seqhound Manual, version 3.2, for description of the shconfig.properties file 
+format.
+
+-Local DB access through API.  The new Seqhound API functions in this release are available 
+with both local and remote access implementations.  ie implentations for these functions 
+are available which query a remote seqhound server or which can query a seqhound database
+directly.  To learn how to configure a seqhound client to access a local seqhound database 
+instance, see the seqhound manual, version 3.2 or higher.
+
+-Release of the jseqrem web application servlet.  This web application is a java complement of the 
+C seqrem CGI which serves most remote API clients.  All new remote API functions are 
+served by jseqrem.  This application's main servlet is org.blueprint.seqhound.jseqrem.Jseqrem 
+The URL of the public jseqrem is http://seqhound.blueprint.org/seqhound/jseqrem
+#NOTE
+  
+
+
+
+7) KNOWN BUGS
+-----------------
+ -[bug 2522]
+  SHound3DNeighboursFromTaxID -  fails because server times out in the http
+                                 call.
+ -[bug 2926]
+ SHoundGetAllTaxProgeny       -  may fail for taxid's located near the top
+                                 of NCBI taxonomy tree because they return
+                                 a large amount of data and the server times
+                                 out in the http call. 
+
+

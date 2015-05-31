@@ -1,0 +1,17 @@
+<html>
+
+<head>
+
+	<title> prebind_head.txt </title>
+
+	<meta NAME="keywords"CONTENT="SLRI, PreBIND, BIND, Interaction database, PubMed, MEDLINE,Bioinformatics, data mining">
+
+	<meta NAME="description" CONTENT="PreBIND is an information mining tool designed for BIND to locate biomolecular interaction information in the scientific literature.  BIND is the Biomolecular Interaction Network Database">
+
+</head>
+
+
+
+<body bgcolor="white" leftmargin="5">
+
+<basefont face="arial, verdana">

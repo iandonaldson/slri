@@ -1,0 +1,23 @@
+########################################################################
+# SLRI DB2 library makefile
+#######################################################################
+include slri.mk
+
+#LIB_DB2 = libslri_db2.a
+
+all : $(LIB_DB2)
+
+db2 : dep_db2 $(LIB_DB2)
+
+$(LIB_DB2): $(SLRILIB_OBJ_ODB2)
+	ar $(ARFLAGS) r $(LIB_DB2) $(SLRILIB_OBJ_ODB2)
+	ranlib $(LIB_DB2) || true
+
+dep_db2 :
+	cd $(BZDIR);make -f $(BZMAKE)
+
+clean:
+	rm -f $(SLRILIB_OBJ_ODB2)
+	rm -f $(LIB_DB2)
+
+

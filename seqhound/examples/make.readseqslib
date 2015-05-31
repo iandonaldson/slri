@@ -1,0 +1,28 @@
+#######################################################################
+#
+# SeqHound Remote library makefile
+#
+#######################################################################
+include ../seqhound.mk
+
+DEF =
+SRC = readseqs.c
+OBJ = readseqs.o
+LIB = libreadseqs.a  
+SRC = readseqs.c
+OBJ = readseqs.o
+LIB = libreadseqs.a
+
+
+all : $(LIB)
+
+$(LIB): $(OBJ)
+	ar $(ARFLAGS) r $(LIB) $(OBJ)
+	ranlib $(LIB) || true
+	-mkdir -p $(SEQH_LIB)
+	cp $(LIB) $(SEQH_LIB)/$(LIB)
+
+clean:	
+	rm  -f $(OBJ)
+	rm  -f $(LIB)
+	rm  -f $(SEQH_LIB)/$(LIB)

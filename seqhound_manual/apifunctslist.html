@@ -1,0 +1,470 @@
+
+<p><br><br><h1>SYSTEM INITIALIZATION, FINISHING AND TESTING</h1><br>Functions in this group will be used by all SeqHound API programs to open a connection
+to SeqHound at the beginning of the program and to close the connection at the end of the program.<br><br>
+
+
+
+
+<a href=apifunctsdet.html#SHoundFini>SHoundFini</a><br>
+
+<a href=apifunctsdet.html#SHoundInit>SHoundInit</a><br>
+<a href=apifunctsdet.html#SHoundIsInited>SHoundIsInited</a><br>
+<a href=apifunctsdet.html#SHoundIsNetEntrezOn>SHoundIsNetEntrezOn</a><br>
+
+<a href=apifunctsdet.html#SHoundNetEntrezInit>SHoundNetEntrezInit</a><br>
+<p><br><br><h1>GENBANK ID CONVERSIONS</h1><br>GenBank sequence records are associated with three types of identifiers; Gene Info identifiers (GI), GenBank
+accessions and other identifiers kept in the record's "seq-id".  These functions may be used to convert between these three types of identifiers.  While
+most people are familiar with the Genbank accession and GI identifiers,  GenBank may also keep identifiers that denote the source database and identifier
+used by GenBank to construct the record (for example embl or pir specific accessions or Blattner identifiers (BLATT)).  These identifiers are usually not
+displayed in the GenBank flat-file but are present in the underlying ASN.1 of the record in the seq-id structure.  You can read more about this structure
+by going to http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SB/hbr.html and entering "seq-id" in the query box or by searching for "seq { id {" in the ASN.1 format
+ of a GenBank record.  A complete list of the dbnames and example identifiers that may be used with these functions is listed in the API supplementary
+information page.
+It should be noted that there is a conceptual difference between functions in this section and those in the DBXref module.  Conversion between GI's,
+Accessions and "other" database identifiers are conversions between identifiers that point to exactly the same sequence record.  In contrast, database
+cross-references found in source records (see DbXref module) may refer to other things (for example, annotations on or records related to the source
+record).<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href=apifunctsdet.html#SHoundDbNameAndIdListFromGBAcc>SHoundDbNameAndIdListFromGBAcc</a><br>
+<a href=apifunctsdet.html#SHoundDbNameAndIdListFromGBAccKeyedList>SHoundDbNameAndIdListFromGBAccKeyedList</a><br>
+
+<a href=apifunctsdet.html#SHoundDbNameAndIdListFromGi>SHoundDbNameAndIdListFromGi</a><br>
+<a href=apifunctsdet.html#SHoundDbNameAndIdListFromGiKeyedList>SHoundDbNameAndIdListFromGiKeyedList</a><br>
+<a href=apifunctsdet.html#SHoundGBAccFromDbNameAndId>SHoundGBAccFromDbNameAndId</a><br>
+
+<a href=apifunctsdet.html#SHoundGBAccFromDbNameAndIdKeyedList>SHoundGBAccFromDbNameAndIdKeyedList</a><br>
+<a href=apifunctsdet.html#SHoundGBAccFromGi>SHoundGBAccFromGi</a><br>
+<a href=apifunctsdet.html#SHoundGBAccFromGiKeyedList>SHoundGBAccFromGiKeyedList</a><br>
+
+<a href=apifunctsdet.html#SHoundGetAccFromRetiredGi>SHoundGetAccFromRetiredGi</a><br>
+<a href=apifunctsdet.html#SHoundGiFromDbNameAndId>SHoundGiFromDbNameAndId</a><br>
+<a href=apifunctsdet.html#SHoundGiFromDbNameAndIdKeyedList>SHoundGiFromDbNameAndIdKeyedList</a><br>
+
+<a href=apifunctsdet.html#SHoundGiFromGBAcc>SHoundGiFromGBAcc</a><br>
+<a href=apifunctsdet.html#SHoundGiFromGBAccKeyedList>SHoundGiFromGBAccKeyedList</a><br>
+<a href=apifunctsdet.html#SHoundSeqIdFromGi>SHoundSeqIdFromGi</a><br>
+
+<a href=apifunctsdet.html#SHoundSeqIdFromGiList>SHoundSeqIdFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundTitleFromGi>SHoundTitleFromGi</a><br>
+
+
+
+
+
+
+
+
+<p><br><br><h1>DATABASE CROSS-REFERENCE CONVERSIONS (DBXREF)</h1><br>The DBXref API allows programmers to find cross-references that are embedded in a
+given source record.  Conversely, given a cross-reference, a programmer can find the source records in which it is embedded.  Source records and
+cross-references are both specified by some database name and an identifier for a record in that database.  For example, a Swiss-Prot source record can be
+specified by the database name 'SP' and the identifier 'P38903'.  The database cross-references found in this source record include GenBank 'GB' U06630 and
+ 'Interpro' IPR001757 and the Saccharomyces cerevisiae database 'SGD' record S0005540.  The returned data structure (ShDxList of ShDx) that describes the
+cross-references also contains information that specifies where the cross-reference was found in the source record (field) and the meaning of the
+cross-reference with respect to the source record (cv).
+The DBXref module and its contents are described in further detail in section 5 of the SeqHound Manual.  A number of helper functions are also included in
+this module:  SHoundGetDxDbNames will return a list of database names that can be used with this API.  SHoundDxFieldNameListFromDbName and
+SHoundGetDxCvTermList will return field names and Controlled Vocabulary terms (cv) used to describe cross-references.  The DBXref data set is also
+available from the SeqHound ftp site.<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href=apifunctsdet.html#SHoundDxFieldNameListFromDbName>SHoundDxFieldNameListFromDbName</a><br>
+<a href=apifunctsdet.html#SHoundDxListFromGi>SHoundDxListFromGi</a><br>
+<a href=apifunctsdet.html#SHoundDxListFromSource>SHoundDxListFromSource</a><br>
+
+<a href=apifunctsdet.html#SHoundGetDxCvTermList>SHoundGetDxCvTermList</a><br>
+<a href=apifunctsdet.html#SHoundGetDxDbNames>SHoundGetDxDbNames</a><br>
+<a href=apifunctsdet.html#SHoundSourceListFromDx>SHoundSourceListFromDx</a><br>
+
+<p><br><br><h1>SEQUENCE AND STRUCTURE CHECKS</h1><br>These functions may be used to do things like tell whether a given GenInfo identifier (GI) refers to a
+ protein sequence record or whether it exists in the SeqHound database.<br><br>
+
+
+
+<a href=apifunctsdet.html#SHound3DbWhat>SHound3DbWhat</a><br>
+<a href=apifunctsdet.html#SHound3DExists>SHound3DExists</a><br>
+<a href=apifunctsdet.html#SHoundExists>SHoundExists</a><br>
+
+<a href=apifunctsdet.html#SHoundGetLargestMMDBID>SHoundGetLargestMMDBID</a><br>
+<a href=apifunctsdet.html#SHoundIsNRFirst>SHoundIsNRFirst</a><br>
+<a href=apifunctsdet.html#SHoundIsProtein>SHoundIsProtein</a><br>
+
+<a href=apifunctsdet.html#SHoundMoleculeType>SHoundMoleculeType</a><br>
+<a href=apifunctsdet.html#SHoundSequenceLength>SHoundSequenceLength</a><br>
+
+<p><br><br><h1>SEQUENCE FETCH ASN.1 BIOSEQ</h1><br>These functions return a sequence record as a "Bioseq".  A "Bioseq" is an NCBI data structure used to
+store sequence data.  To see a complete description of a Bioseq in ASN.1 format, go to http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SB/hbr.html , type in the
+query "Bioseq" check the box beside "asns" and hit the "Submit query button".<br><br>
+
+
+
+
+
+<a href=apifunctsdet.html#SHoundGetBioseq>SHoundGetBioseq</a><br>
+<a href=apifunctsdet.html#SHoundGetBioseqList>SHoundGetBioseqList</a><br>
+<a href=apifunctsdet.html#SHoundGetXMLBioseq>SHoundGetXMLBioseq</a><br>
+
+<p><br><br><h1>SEQUENCE FETCH ASN.1 BIOSEQSET</h1><br>These functions return a set of sequence records as a bioseqset (also see functions under "SEQUENCE
+FETCH  ASN.1 BIOSEQ").<br><br>
+
+
+
+<a href=apifunctsdet.html#SHoundGetBioseqSet>SHoundGetBioseqSet</a><br>
+<a href=apifunctsdet.html#SHoundGetBioseqSetList>SHoundGetBioseqSetList</a><br>
+
+
+<p><br><br><h1>SEQUENCE FETCH ASN.1 SEQENTRY</h1><br>A Seq-entry is an NCBI data structure used to hold Bioseqs and Bioseq-sets (see above).  To see a
+complete description of a bioseq in ASN.1 format, go to http://www.ncbi.nlm.nih.gov/IEB/ToolBox/SB/hbr.html, type in the query "Seq-entry", check the box
+beside "asns" and hit the "Submit query button".<br><br>
+
+
+
+
+
+<a href=apifunctsdet.html#SHoundGetSeqEntry>SHoundGetSeqEntry</a><br>
+<a href=apifunctsdet.html#SHoundGetSeqEntryList>SHoundGetSeqEntryList</a><br>
+
+<a href=apifunctsdet.html#SHoundGetXMLSeqEntry>SHoundGetXMLSeqEntry</a><br>
+<p><br><br><h1>SEQUENCE FETCH FASTA</h1><br>These functions return a sequence record(s) in FASTA format given a GenBank GenInfo identifier (GI).<br><br>
+
+
+
+<a href=apifunctsdet.html#SHoundGetFasta>SHoundGetFasta</a><br>
+<a href=apifunctsdet.html#SHoundGetFastaFromRedundantGroupID>SHoundGetFastaFromRedundantGroupID</a><br>
+<a href=apifunctsdet.html#SHoundGetFastaFromRedundantGroupIDKeyedList>SHoundGetFastaFromRedundantGroupIDKeyedList</a><br>
+
+<a href=apifunctsdet.html#SHoundGetFastaKeyedList>SHoundGetFastaKeyedList</a><br>
+<a href=apifunctsdet.html#SHoundGetFastaList>SHoundGetFastaList</a><br>
+
+<p><br><br><h1>DEFLINE FETCH</h1><br>These functions return a definition line for a sequence record(s) given a GenBank GenInfo identifier (GI).<br><br>
+
+
+<a href=apifunctsdet.html#SHoundGetDefline>SHoundGetDefline</a><br>
+<a href=apifunctsdet.html#SHoundGetDeflineList>SHoundGetDeflineList</a><br>
+
+<p><br><br><h1>SEQUENCE FETCH GENBANK FLAT FILE</h1><br>These functions return a sequence record(s) in GenBank flat file format given a GenBank GenInfo
+identifier (GI).<br><br>
+
+
+
+<a href=apifunctsdet.html#SHoundGetGenBankff>SHoundGetGenBankff</a><br>
+<a href=apifunctsdet.html#SHoundGetGenBankffList>SHoundGetGenBankffList</a><br>
+<a href=apifunctsdet.html#SHoundGetSeqFromGenBank>SHoundGetSeqFromGenBank</a><br>
+
+<p><br><br><h1>STRUCTURE FETCH</h1><br>These functions return a biological structure record in either the Molecular Modeling Database (MMDB) format or the
+Protein Database (PDB) format.<br><br>
+
+
+
+<a href=apifunctsdet.html#SHoundGet3D>SHoundGet3D</a><br>
+<a href=apifunctsdet.html#SHoundGet3DEx>SHoundGet3DEx</a><br>
+<a href=apifunctsdet.html#SHoundGet3DfromPdbId>SHoundGet3DfromPdbId</a><br>
+
+<a href=apifunctsdet.html#SHoundGet3DfromPdbIdEx>SHoundGet3DfromPdbIdEx</a><br>
+<a href=apifunctsdet.html#SHoundGetPDB3D>SHoundGetPDB3D</a><br>
+<a href=apifunctsdet.html#SHoundGetXML3D>SHoundGetXML3D</a><br>
+
+<p><br><br><h1>SEQHOUND LINKS</h1><br>These functions return links to other databases found in a sequence or structure record.  For instance, given the GI
+of a protein sequence record, you can retrieve links to the nucleic acid record that encodes that protein or the organism that the protein belongs
+to.<br><br>
+
+
+
+<a href=apifunctsdet.html#SHound3DFromGi>SHound3DFromGi</a><br>
+
+<a href=apifunctsdet.html#SHound3DFromGiList>SHound3DFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundDNAFromProtein>SHoundDNAFromProtein</a><br>
+<a href=apifunctsdet.html#SHoundDNAFromProteinList>SHoundDNAFromProteinList</a><br>
+
+<a href=apifunctsdet.html#SHoundDNAFromTaxID>SHoundDNAFromTaxID</a><br>
+<a href=apifunctsdet.html#SHoundDNAFromTaxIDIII>SHoundDNAFromTaxIDIII</a><br>
+<a href=apifunctsdet.html#SHoundDNAFromTaxIDList>SHoundDNAFromTaxIDList</a><br>
+
+<a href=apifunctsdet.html#SHoundGetReferenceIDFromGi>SHoundGetReferenceIDFromGi</a><br>
+<a href=apifunctsdet.html#SHoundGetReferenceIDFromGiList>SHoundGetReferenceIDFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundGiFrom3D>SHoundGiFrom3D</a><br>
+
+<a href=apifunctsdet.html#SHoundGiFrom3DList>SHoundGiFrom3DList</a><br>
+
+<a href=apifunctsdet.html#SHoundGiFromPDBchain>SHoundGiFromPDBchain</a><br>
+<a href=apifunctsdet.html#SHoundGiFromReferenceID>SHoundGiFromReferenceID</a><br>
+
+<a href=apifunctsdet.html#SHoundGiFromReferenceList>SHoundGiFromReferenceList</a><br>
+<a href=apifunctsdet.html#SHoundMuidFrom3D>SHoundMuidFrom3D</a><br>
+<a href=apifunctsdet.html#SHoundMuidFrom3DList>SHoundMuidFrom3DList</a><br>
+
+<a href=apifunctsdet.html#SHoundMuidFromGi>SHoundMuidFromGi</a><br>
+<a href=apifunctsdet.html#SHoundMuidFromGiList>SHoundMuidFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundProteinFromDNA>SHoundProteinFromDNA</a><br>
+
+<a href=apifunctsdet.html#SHoundProteinFromDNAList>SHoundProteinFromDNAList</a><br>
+<a href=apifunctsdet.html#SHoundProteinsFromTaxID>SHoundProteinsFromTaxID</a><br>
+<a href=apifunctsdet.html#SHoundProteinsFromTaxIDIII>SHoundProteinsFromTaxIDIII</a><br>
+
+<a href=apifunctsdet.html#SHoundProteinsFromTaxIDList>SHoundProteinsFromTaxIDList</a><br>
+<a href=apifunctsdet.html#SHoundTaxIDFrom3D>SHoundTaxIDFrom3D</a><br>
+<a href=apifunctsdet.html#SHoundTaxIDFrom3DList>SHoundTaxIDFrom3DList</a><br>
+
+<a href=apifunctsdet.html#SHoundTaxIDFromGi>SHoundTaxIDFromGi</a><br>
+<a href=apifunctsdet.html#SHoundTaxIDFromGiList>SHoundTaxIDFromGiList</a><br>
+
+<p><br><br><h1>COMPLETE GENOME ITERATORS</h1><br>These functions returns lists of things that pertain to completely sequenced genomes.  For example, given
+a taxon identifier, these functions can retrieve a complete list of protein, nucleic acid or chromosome records associated with the completely sequenced
+genome for that organism.<br><br>
+
+
+
+
+<a href=apifunctsdet.html#SHoundAllGenomes>SHoundAllGenomes</a><br>
+
+<a href=apifunctsdet.html#SHoundChromosomeFromGenome>SHoundChromosomeFromGenome</a><br>
+<a href=apifunctsdet.html#SHoundChromosomeFromGenomeList>SHoundChromosomeFromGenomeList</a><br>
+<a href=apifunctsdet.html#SHoundDNAFromChromosome>SHoundDNAFromChromosome</a><br>
+
+<a href=apifunctsdet.html#SHoundDNAFromChromosomeList>SHoundDNAFromChromosomeList</a><br>
+<a href=apifunctsdet.html#SHoundDNAFromOrganism>SHoundDNAFromOrganism</a><br>
+<a href=apifunctsdet.html#SHoundDNAFromOrganismList>SHoundDNAFromOrganismList</a><br>
+
+<a href=apifunctsdet.html#SHoundProteinsFromChromosome>SHoundProteinsFromChromosome</a><br>
+<a href=apifunctsdet.html#SHoundProteinsFromChromosomeList>SHoundProteinsFromChromosomeList</a><br>
+<a href=apifunctsdet.html#SHoundProteinsFromOrganism>SHoundProteinsFromOrganism</a><br>
+
+<a href=apifunctsdet.html#SHoundProteinsFromOrganismList>SHoundProteinsFromOrganismList</a><br>
+<p><br><br><h1>REDUNDANT (EQUIVALENT) SEQUENCES</h1><br>Sequence records in GenBank are redundant.  For example, two different sets of authors may submit
+the same sequence to GenBank.  Both groups will be given different sequence record identifiers (GI's).  SeqHound, groups sequences that are exactly the
+same under a single identifier (Redundant Group Identifier).  These functions allow the programmer to find the Redundant Group that a sequence record (GI)
+belongs to and then retrieve all of the other sequences that belong to the same group.  This set of functions is useful when trying to collect all of the
+annotation that applies to a biological sequence but may be scattered across several sequence records.<br><br>
+
+
+
+
+
+
+
+
+
+<a href=apifunctsdet.html#SHoundFirstOfRedundantGroupFromID>SHoundFirstOfRedundantGroupFromID</a><br>
+
+<a href=apifunctsdet.html#SHoundFirstOfRedundantGroupFromIDList>SHoundFirstOfRedundantGroupFromIDList</a><br>
+<a href=apifunctsdet.html#SHoundRedundantGroup>SHoundRedundantGroup</a><br>
+<a href=apifunctsdet.html#SHoundRedundantGroupFromID>SHoundRedundantGroupFromID</a><br>
+
+<a href=apifunctsdet.html#SHoundRedundantGroupFromIDList>SHoundRedundantGroupFromIDList</a><br>
+<a href=apifunctsdet.html#SHoundRedundantGroupIDFromGI>SHoundRedundantGroupIDFromGI</a><br>
+<a href=apifunctsdet.html#SHoundRedundantGroupIDFromGIList>SHoundRedundantGroupIDFromGIList</a><br>
+
+<a href=apifunctsdet.html#SHoundRedundantGroupKeyedList>SHoundRedundantGroupKeyedList</a><br>
+<a href=apifunctsdet.html#SHoundRedundantGroupList>SHoundRedundantGroupList</a><br>
+
+
+
+<p><br><br><h1>TAXONOMY</h1><br>This set of functions allows the programmer to traverse the NCBI taxonomy tree.<br><br>
+
+
+<a href=apifunctsdet.html#SHoundGetAllTaxAncestors>SHoundGetAllTaxAncestors</a><br>
+
+<a href=apifunctsdet.html#SHoundGetAllTaxProgeny>SHoundGetAllTaxProgeny</a><br>
+<a href=apifunctsdet.html#SHoundGetTaxChildNodes>SHoundGetTaxChildNodes</a><br>
+<a href=apifunctsdet.html#SHoundGetTaxChildNodesList>SHoundGetTaxChildNodesList</a><br>
+
+<a href=apifunctsdet.html#SHoundGetTaxLineageFromTaxID>SHoundGetTaxLineageFromTaxID</a><br>
+<a href=apifunctsdet.html#SHoundGetTaxNameFromTaxID>SHoundGetTaxNameFromTaxID</a><br>
+<a href=apifunctsdet.html#SHoundGetTaxNameFromTaxIDByClass>SHoundGetTaxNameFromTaxIDByClass</a><br>
+
+<a href=apifunctsdet.html#SHoundGetTaxParent>SHoundGetTaxParent</a><br>
+<a href=apifunctsdet.html#SHoundIsTaxDeleted>SHoundIsTaxDeleted</a><br>
+<a href=apifunctsdet.html#SHoundIsTaxMerged>SHoundIsTaxMerged</a><br>
+
+<p><br><br><h1>SEQUENCE NEIGHBOURS</h1><br>This set of functions retrieves sequence neighbours and sequence alignments given a GenInfo (GI) identifier of a
+ protein.  The non-redundant set of protein sequence records in SeqHound are used to precompute neighbours and alignments that are stored by SeqHound.
+This process is described in the NBLAST paper available in BioMed Central.<br><br>
+
+
+
+
+
+<a href=apifunctsdet.html#SHound3DNeighboursFromGi>SHound3DNeighboursFromGi</a><br>
+<a href=apifunctsdet.html#SHound3DNeighboursFromGiEx>SHound3DNeighboursFromGiEx</a><br>
+
+<a href=apifunctsdet.html#SHound3DNeighboursFromGiList>SHound3DNeighboursFromGiList</a><br>
+<a href=apifunctsdet.html#SHound3DNeighboursFromTaxID>SHound3DNeighboursFromTaxID</a><br>
+<a href=apifunctsdet.html#SHoundGetBlastResult>SHoundGetBlastResult</a><br>
+
+<a href=apifunctsdet.html#SHoundGetBlastSeqAlign>SHoundGetBlastSeqAlign</a><br>
+<a href=apifunctsdet.html#SHoundGiAndNumNeighboursList>SHoundGiAndNumNeighboursList</a><br>
+<a href=apifunctsdet.html#SHoundNeighboursFromGi>SHoundNeighboursFromGi</a><br>
+
+<a href=apifunctsdet.html#SHoundNeighboursFromGiEx>SHoundNeighboursFromGiEx</a><br>
+<a href=apifunctsdet.html#SHoundNeighboursFromGiList>SHoundNeighboursFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundNeighboursFromTaxID>SHoundNeighboursFromTaxID</a><br>
+
+<a href=apifunctsdet.html#SHoundNeighboursOfNeighbours>SHoundNeighboursOfNeighbours</a><br>
+<a href=apifunctsdet.html#SHoundNeighboursOfNeighboursList>SHoundNeighboursOfNeighboursList</a><br>
+<a href=apifunctsdet.html#SHoundNumNeighboursInDB>SHoundNumNeighboursInDB</a><br>
+
+<p><br><br><h1>COMPLETE GENOME ANALYSIS</h1><br>These functions return information concerning completely sequenced genomes that are present in
+SeqHound.<br><br>
+
+<a href=apifunctsdet.html#SHound3DListFromTaxID>SHound3DListFromTaxID</a><br>
+<a href=apifunctsdet.html#SHoundAllGenomesWithNumProteins>SHoundAllGenomesWithNumProteins</a><br>
+
+<a href=apifunctsdet.html#SHoundAllGenomesWithScientificNames>SHoundAllGenomesWithScientificNames</a><br>
+<p><br><br><h1>FUNCTIONAL ANNOTATION</h1><br>These functions retrieve functional annotation related to sequence records in SeqHound.  This annotation
+includes associated  identifiers from the Gene Ontology (GO), Online Inheritance in Man (OMIM), NCBI's Conserved Domain Database (CDD) and
+LocusLink.<br><br>
+
+
+
+
+<a href=apifunctsdet.html#SHoundCDDIDFromGi>SHoundCDDIDFromGi</a><br>
+<a href=apifunctsdet.html#SHoundCDDIDFromGiList>SHoundCDDIDFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundCDDIDFromLLID>SHoundCDDIDFromLLID</a><br>
+
+<a href=apifunctsdet.html#SHoundCDDScoreFromGi>SHoundCDDScoreFromGi</a><br>
+<a href=apifunctsdet.html#SHoundGiFromCDDID>SHoundGiFromCDDID</a><br>
+<a href=apifunctsdet.html#SHoundGiFromCDDIDList>SHoundGiFromCDDIDList</a><br>
+
+<a href=apifunctsdet.html#SHoundGiFromGOID>SHoundGiFromGOID</a><br>
+<a href=apifunctsdet.html#SHoundGiFromGOIDAndECode>SHoundGiFromGOIDAndECode</a><br>
+<a href=apifunctsdet.html#SHoundGiFromGOIDList>SHoundGiFromGOIDList</a><br>
+
+<a href=apifunctsdet.html#SHoundGiFromGOIDListAndECode>SHoundGiFromGOIDListAndECode</a><br>
+
+
+<a href=apifunctsdet.html#SHoundGiFromLLID>SHoundGiFromLLID</a><br>
+<a href=apifunctsdet.html#SHoundGiFromLLIDList>SHoundGiFromLLIDList</a><br>
+
+<a href=apifunctsdet.html#SHoundGiFromOMIM>SHoundGiFromOMIM</a><br>
+<a href=apifunctsdet.html#SHoundGiFromOMIMList>SHoundGiFromOMIMList</a><br>
+<a href=apifunctsdet.html#SHoundGOECodeFromGiAndGOID>SHoundGOECodeFromGiAndGOID</a><br>
+
+<a href=apifunctsdet.html#SHoundGOIDFromGi>SHoundGOIDFromGi</a><br>
+<a href=apifunctsdet.html#SHoundGOIDFromGiList>SHoundGOIDFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundGOIDFromLLID>SHoundGOIDFromLLID</a><br>
+
+<a href=apifunctsdet.html#SHoundGOIDFromRedundantGi>SHoundGOIDFromRedundantGi</a><br>
+<a href=apifunctsdet.html#SHoundGOIDFromRedundantGiList>SHoundGOIDFromRedundantGiList</a><br>
+<a href=apifunctsdet.html#SHoundGOPMIDFromGiAndGOID>SHoundGOPMIDFromGiAndGOID</a><br>
+
+<a href=apifunctsdet.html#SHoundLLIDFromCDDID>SHoundLLIDFromCDDID</a><br>
+<a href=apifunctsdet.html#SHoundLLIDFromGi>SHoundLLIDFromGi</a><br>
+<a href=apifunctsdet.html#SHoundLLIDFromGiList>SHoundLLIDFromGiList</a><br>
+
+<a href=apifunctsdet.html#SHoundLLIDFromGOIDAndECode>SHoundLLIDFromGOIDAndECode</a><br>
+<a href=apifunctsdet.html#SHoundLLIDFromOMIM>SHoundLLIDFromOMIM</a><br>
+<a href=apifunctsdet.html#SHoundLocusFromGi>SHoundLocusFromGi</a><br>
+
+<a href=apifunctsdet.html#SHoundOMIMFromGi>SHoundOMIMFromGi</a><br>
+<a href=apifunctsdet.html#SHoundOMIMFromGiList>SHoundOMIMFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundOMIMFromLLID>SHoundOMIMFromLLID</a><br>
+
+<a href=apifunctsdet.html#SHoundProteinReportSetDescription>SHoundProteinReportSetDescription</a><br>
+<p><br><br><h1>GO HIERARCHY</h1><br>These functions allow the programmer to traverse the Gene Ontology directed acyclic graph.  See
+http://www.geneontology.org/ for more information on this data structure.<br><br>
+
+
+
+<a href=apifunctsdet.html#SHoundGODBGetAllAncestors>SHoundGODBGetAllAncestors</a><br>
+<a href=apifunctsdet.html#SHoundGODBGetAllChildren>SHoundGODBGetAllChildren</a><br>
+
+<a href=apifunctsdet.html#SHoundGODBGetChildrenOf>SHoundGODBGetChildrenOf</a><br>
+<a href=apifunctsdet.html#SHoundGODBGetClassification>SHoundGODBGetClassification</a><br>
+<a href=apifunctsdet.html#SHoundGODBGetNameByID>SHoundGODBGetNameByID</a><br>
+
+<a href=apifunctsdet.html#SHoundGODBGetParentOf>SHoundGODBGetParentOf</a><br>
+<a href=apifunctsdet.html#SHoundGODBGetRecordByReference>SHoundGODBGetRecordByReference</a><br>
+
+<p><br><br><h1>RPS BLAST DOMAINS</h1><br>This group of functions is used to correlate conserved domains with protein sequence records.  Conserved domains
+are precomputed for a non-redundant set of proteins in SeqHound using RPS BLAST and the Conserved Domain Database (CDD) from the NCBI.<br><br>
+
+
+
+
+<a href=apifunctsdet.html#SHoundGetDomainIdFromLabel>SHoundGetDomainIdFromLabel</a><br>
+<a href=apifunctsdet.html#SHoundGetDomainLabelFromDomainId>SHoundGetDomainLabelFromDomainId</a><br>
+
+<a href=apifunctsdet.html#SHoundGetDomainsFromGi>SHoundGetDomainsFromGi</a><br>
+<a href=apifunctsdet.html#SHoundGetDomainsFromGiListWithEvalue>SHoundGetDomainsFromGiListWithEvalue</a><br>
+<a href=apifunctsdet.html#SHoundGetDomainsFromGiWithEvalue>SHoundGetDomainsFromGiWithEvalue</a><br>
+
+<a href=apifunctsdet.html#SHoundGetFilteredDomainsFromGiWithEvalue>SHoundGetFilteredDomainsFromGiWithEvalue</a><br>
+<a href=apifunctsdet.html#SHoundGetGisByDomainId>SHoundGetGisByDomainId</a><br>
+<a href=apifunctsdet.html#SHoundGetGisByDomainIdAndEvalue>SHoundGetGisByDomainIdAndEvalue</a><br>
+
+<a href=apifunctsdet.html#SHoundGetGisByNumberOfDomains>SHoundGetGisByNumberOfDomains</a><br>
+
+
+
+
+
+
+
+
+
+
+
+
+<p><br><br><h1>DEPRECATED FUNCTIONS</h1><br>The functions  listed in this section have been deprecated and may be replaced by new functions that may have
+different parameters and/or return types.   Functions are listed here for historical purposes only.  The description of each function may list a comparable
+ new function that can be used instead.  While deprecated functions will be supported, developers should use the new function  listed going forward if at
+all possible.  If the function has not been written for your language of choice (see the function tracker at
+http://www.blueprint.org/seqhound/apifunctsstatus.html), you may request that the function be written by sending an email to seqhound@blueprint.org.  This
+will help us to direct our development efforts.  Once the versions of the new function (that replaces a deprecated function) have been written into the
+remote Java, Perl, C and C++ remote API's we may consider removing support for these calls (with ample warning and in consideration of feedback).  At this
+time, these functions would be moved to a section entitled Unsupported Functions.<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href=apifunctsdet.html#SHoundAccFromGi>SHoundAccFromGi</a><br>
+<a href=apifunctsdet.html#SHoundAccFromGiList>SHoundAccFromGiList</a><br>
+<a href=apifunctsdet.html#SHoundFindAcc>SHoundFindAcc</a><br>
+
+<a href=apifunctsdet.html#SHoundFindAccList>SHoundFindAccList</a><br>
+<a href=apifunctsdet.html#SHoundFindName>SHoundFindName</a><br>
+<a href=apifunctsdet.html#SHoundFindNameList>SHoundFindNameList</a><br>
+
+<a href=apifunctsdet.html#SHoundGetNameByGi>SHoundGetNameByGi</a><br>

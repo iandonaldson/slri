@@ -1,0 +1,39 @@
+# prebindlib makefile
+
+
+include prebind.mk
+
+CFLAGS = $(CFLAGS1) $(OPTFLAG) -I$(INCPATH) $(DEF)
+LDFLAGS = -I$(INCPATH) $(OPTFLAG) -L$(LIBPATH)
+
+# OPTFLAG = -g
+
+LIB_OBJ = $(PREBINDLIB)/prebind_db.o $(PREBINDLIB)/prebind_lib.o $(PREBINDOBJS)/objprebind.o
+
+LIB_PREBIND = $(PREBINDLIB)/libprebind.a
+DEF =
+
+
+## Implicit actions
+##
+## If need a .o, then compile the .c
+##
+.c.o :  
+	$(CC) $(CFLAGS) $< -o $@
+
+
+## Default thing to make will be "all"
+##
+all : $(LIB_PREBIND)
+
+## make individual applications and components
+##
+$(LIB_PREBIND) : $(LIB_OBJ) 
+	ar r $(LIB_PREBIND) $(LIB_OBJ)
+	ranlib $(LIB_PREBIND) || true
+
+clean :
+	rm -f $(LIB_PREBIND)
+	rm -f $(LIB_OBJ)
+
+

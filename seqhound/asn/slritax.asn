@@ -1,0 +1,242 @@
+--$Revision: 1.1.1.1 $
+-- ***************************************************************************
+--
+--  Describes the NCBI Taxonomy Database.
+--  This ASN.1 describes record objects retrieved using Taxonomy IDs as the
+--  primary key.  It is meant to at least represent all information in the
+--  NCBI Taxonomy Database as it is dumped daily in a table format at
+--             ftp.ncbi.nlm.nih.gov/pub/taxonomy
+--
+--  Author: Gary D. Bader,
+--          bader@mshri.on.ca
+--
+--  Hogue Lab - University of Toronto Biochemistry Department and the
+--  Samuel Lunenfeld Research Institute, Mount Sinai Hospital
+--  http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+--
+--  Copyright Notice:
+--
+--  Copyright ©2000. Mount Sinai Hospital, Toronto, Canada. All Rights
+--  Reserved.
+--
+--  Disclaimer:
+--
+--  Permission to use, copy, modify, and distribute this software and its
+--  documentation for educational, research, and not-for-profit purposes,
+--  without fee and without a signed licensing agreement, is hereby granted,
+--  provided that the above copyright notice, this paragraph and the
+--  following two paragraphs appear in all copies, modifications, and
+--  distributions.
+--
+--  Contact Terry Donaghue, The Office of Technology Transfer & Industrial
+--  Liaison, Mount Sinai Hospital, 600 University Avenue, Toronto, Canada,
+--  (416) 586-8225, for commercial licensing opportunities. 
+--  donaghue@mshri.on.ca
+--  
+--  IN NO EVENT SHALL MOUNT SINAI HOSPITAL BE LIABLE TO ANY PARTY FOR
+--  DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,
+--  INCLUDING LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS
+--  DOCUMENTATION, EVEN IF MOUNT SINAI HOSPITAL HAS BEEN ADVISED OF THE
+--  POSSIBILITY OF SUCH DAMAGE.
+--
+--  MOUNT SINAI HOSPITAL SPECIFICALLY DISCLAIMS ANY IMPLIED WARRANTIES OF
+--  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE AND
+--  ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED "AS
+--  IS". MOUNT SINAI  HOSPITAL  HAS NO OBLIGATION TO PROVIDE MAINTENANCE,
+--  SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+--
+-- ***************************************************************************
+
+SLRI-TAXDB DEFINITIONS ::=
+BEGIN
+
+EXPORTS SLRI-taxon,
+	SLRI-division-id, SLRI-genetic-code-id,
+	SLRI-taxon-div, SLRI-taxon-gencode;
+
+-- ***************************************************************************
+-- Taxonomy description
+--
+-- SLRI-taxon is an ASN.1 object in a taxon database
+--
+-- Field description for SLRI-taxon
+-- ********************************
+-- taxID = node id in GenBank taxonomy database
+-- parent-taxID = parent node id in GenBank taxonomy database
+-- children-taxID = children node ids in GenBank taxonomy database
+-- names = names for this taxonomy object
+-- rank = rank of this node (superkingdom, kingdom, ...)
+-- embl-code = locus-name prefix; not unique
+-- division = Taxonomy database division id for tax-division database
+-- inherited-div = 1 if node inherits division from parent
+-- gencode = Genetic code id for tax-genetic code database
+-- inherited-gencode = 1 if node inherits genetic code from parent
+-- mito-gencode = Mitochondrial genetic code id for tax-genetic code database
+-- inherited-mito-gencode = 1 if node inherits mitochondrial genetic code from
+--                          parent
+-- genbank-hidden = 1 if name is suppressed in GenBank entry lineage
+-- hidden-subtree-root = 1 if this subtree has no sequence data yet
+-- comments = free-text comments and citations
+-- ***************************************************************************
+
+SLRI-taxon ::= SEQUENCE {
+	taxId INTEGER,
+	parent-taxId INTEGER,
+	children-taxId SEQUENCE OF INTEGER OPTIONAL,
+	names SEQUENCE OF SLRI-taxon-name,
+	rank SLRI-taxon-rank,
+	embl-code VisibleString OPTIONAL,
+	division SLRI-division-id,
+	inherited-div BOOLEAN,
+	gencode SLRI-genetic-code-id,
+	inherited-gencode BOOLEAN,
+	mito-gencode SLRI-genetic-code-id,
+	inherited-mito-gencode BOOLEAN,
+	genbank-hidden BOOLEAN,
+	hidden-subtree-root BOOLEAN,
+	comments VisibleString OPTIONAL
+	}
+
+
+-- ***************************************************************************
+-- SLRI-division-id - primary unique identifier in taxonomy division database
+-- ***************************************************************************
+
+SLRI-division-id ::= INTEGER
+
+-- ***************************************************************************
+-- SLRI-division-id - primary unique identifier in genetic code database
+-- ***************************************************************************
+
+SLRI-genetic-code-id ::= INTEGER
+
+-- ***************************************************************************
+-- Taxonomy name
+--
+-- Field description for SLRI-taxon-name
+-- *************************************
+-- name = the taxonomy name
+-- unique-name = the unique variant of this name if name not unique
+-- class = class of name (synonym, common name, ...)
+-- other-class = other class if 'other' is chosen for class
+-- ***************************************************************************
+
+SLRI-taxon-name ::= SEQUENCE {
+	name VisibleString,
+	unique-name VisibleString OPTIONAL,
+	name-class ENUMERATED {
+		none (0),
+		acronym (1),
+		anamorph (2),
+		blast-name (3),
+		common-name (4),
+		equivalent-name (5),
+		includes (6),
+		in-part (7),
+		misnomer (8),
+		misspelling (9),
+		preferred-acronym (10),
+		preferred-common-name (11),
+		scientific-name (12),
+		synonym (13),
+		teleomorph (14),
+		other (255)
+		},
+	other-class VisibleString OPTIONAL
+	}
+
+-- ***************************************************************************
+-- Taxonomy rank
+--
+-- Field description for SLRI-taxon-rank
+-- *************************************
+-- rank = the taxonomic rank
+-- other-rank = rank if 'other' is chosen for rank
+-- premod = prefix modifier on rank
+-- other-premod = prefix if 'other' is chosen for premod
+-- postmod = postfix modifier on rank
+-- other-postmod = postfix if 'other' is chosen for postmod
+-- ***************************************************************************
+
+SLRI-taxon-rank ::= SEQUENCE {
+	rank ENUMERATED {
+		none (0),
+		kingdom (1),
+		phylum (2),
+		class (3),
+		cohort (4),
+		order (5),
+		family (6),
+		tribe (7),
+		genus (8),
+		section (9),
+		series (10),
+		species (11),
+		varietas (12),
+		forma (13),
+		other (255)
+		},
+	other-rank VisibleString OPTIONAL,
+	premod ENUMERATED {
+		none (0),
+		super (1),
+		sub (2),
+		infra (3),
+		parv (4),
+		other (255)
+		} DEFAULT none,
+	other-premod VisibleString OPTIONAL,
+	postmod ENUMERATED {
+		none (0),
+		subgroup (1),
+		group (2),
+		other (255)
+		} DEFAULT none,
+	other-postmod VisibleString OPTIONAL
+	}
+
+
+-- ***************************************************************************
+-- Taxonomy division
+--
+-- This object describes a record in a taxonomy division database
+--
+-- Field description for SLRI-taxon-div
+-- ************************************
+-- div-id = taxonomy database division id
+-- div-code = GenBank division code (three characters)
+-- div-name = e.g. BCT, PLN, VRT, MAM, PRI...
+-- comments = free-text comments and citations
+-- ***************************************************************************
+
+SLRI-taxon-div ::= SEQUENCE {
+	div-id INTEGER,
+	div-code VisibleString,
+	div-name VisibleString,
+	comments VisibleString OPTIONAL
+	}
+
+
+-- ***************************************************************************
+-- Genetic code
+--
+-- This object describes a record in a genetic code database
+--
+-- Field description for SLRI-taxon-gencode
+-- ****************************************
+-- gencode-id = GenBank genetic code id
+-- abbrev = genetic code name abbreviation
+-- name = genetic code name
+-- trans-table = translation table for this genetic code
+-- start-codons = start codons for this genetic code
+-- ***************************************************************************
+
+SLRI-taxon-gencode ::= SEQUENCE {
+	gencode-id INTEGER,
+	abbrev VisibleString OPTIONAL,
+	name VisibleString,
+	trans-table VisibleString OPTIONAL,
+	start-codons VisibleString OPTIONAL
+	}
+
+END

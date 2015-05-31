@@ -1,0 +1,13 @@
+nrmmdb is list of PDB protein chains created by BLAST using E-value cutoff 10e-7
+the list is subsequently filtered by several criteria using filternrset (see below); 
+three chains (1CBN, 1DIN, 1CRA) were removed since they caused crashes of countsscpot 
+secondary structure count potential program
+
+
+the file was created on February 19, 2002  using:
+1. nrfilter(/slri/mmdbnrset/nrfilter.c) on nrpdb.110701 file
+2. the output from nrfilter was filtered using 
+(filternrset/slri/trades/misc/filternrset.c)
+the command line for filternrset.c:
+filternrset nrpdb.110701.filtered filtmmdblist -l 40 -q 20 -u 0 -i 5 -m 5 -s 5 -r 3
+

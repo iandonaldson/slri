@@ -1,0 +1,57 @@
+
+# set these variables
+ASNBIN=$NCBI/bin
+SLRI=../../
+
+# copy the necessary files to working directory 
+cp $NCBI/biostruc/mmdb1.asn .
+cp $NCBI/biostruc/mmdb2.asn .
+cp $NCBI/biostruc/mmdb3.asn .
+cp $NCBI/asn/asn.all .
+cp $NCBI/biostruc/cdd/cdd.asn .
+cp $SLRI/lib/asn/slrilinkset.asn .
+
+# generate slristruc.h and .c files 
+$ASNBIN/asntool -m slristruc.asn -o slristruc.h -w 120 -b 10000
+$ASNBIN/asntool -m slristruc.asn -G t -M asn.all,mmdb2.asn,mmdb3.asn,mmdb1.asn,cdd.asn,../../lib/asn/slrilibstruc.asn,slrilinkset.asn -B objslristruc -w 100 -b 10000
+
+# generate NBlastasn.h and .c files
+$ASNBIN/asntool -m NBlastasn.asn -o NBlastasn.h -w 120 -b 10000
+$ASNBIN/asntool -m NBlastasn.asn -G t -M asn.all,mmdb2.asn,mmdb3.asn,mmdb1.asn -B objNBlastasn -w 100 -b 10000
+
+# generate slritax.h and .c files
+$ASNBIN/asntool -m slritax.asn -o slritax.h -w 120 -b 10000
+$ASNBIN/asntool -m slritax.asn -G t -M asn.all,mmdb2.asn,mmdb3.asn,mmdb1.asn -B objslritax -w 100 -b 10000
+
+echo "#include <objsset.h>" > temp1
+echo "#include <mmdbapi.h>" >> temp1
+echo "#include <objslrilibstruc.h>" >> temp1
+echo "#include <objslrilinkset.h>" >> temp1
+echo "#include <objcdd.h>" >> temp1
+mv objslristruc.c temp3
+cat temp1 temp3 > objslristruc.c
+echo "#define NLM_GENERATED_CODE_PROTO" > temp2
+mv objslristruc.h temp4
+cat temp2 temp4 > objslristruc.h
+echo "#define struct_Bioseq bioseq" > temp5
+mv objslristruc.h temp6
+cat temp5 temp6 > objslristruc.h
+rm -f temp*
+
+rm -f asn.all
+rm -f mmdb1.asn
+rm -f mmdb2.asn
+rm -f mmdb3.asn
+rm -f cdd.asn
+
+
+# mv the .h into ../include, and .c to ../src
+mv objslristruc.c ../src
+mv objslristruc.h ../include
+mv slristruc.h ../include
+mv objNBlastasn.c ../src
+mv objNBlastasn.h ../include
+mv NBlastasn.h ../include
+mv objslritax.c ../src
+mv objslritax.h ../include
+mv slritax.h ../include

@@ -1,0 +1,87 @@
+#######################################################################
+#
+# make file for compiling a local binary of shunittest
+# January 28 2004, Victor Gu
+#######################################################################
+include ../seqhound.mk
+
+EXTRA_MTHRD=-lpthread
+DEF =
+SRC = shunittest.c
+# EXE is the binary for remote API calls
+EXE = shunittest
+# EXE_CB is the codebase binary for local API calls
+EXE_CB  = $(EXE)_cb
+# EXE_DB2 is the DB2 binary for local API calls
+EXE_DB2 = $(EXE)_db2
+# EXE_ODBC_REM is the mySQL  binary for remote API calls
+EXE_ODBC_REM = $(EXE)_odbc_rem
+# EXE_ODBC_LOC is the mySQL  binary for local API calls
+EXE_ODBC_LOC = $(EXE)_odbc_local
+OBJ = 
+
+EXTRALIB =
+MAKE_LIB =
+
+# default will be the codebase version test driver for remote APIs  
+all : $(EXE)
+
+# If cb is specified, a local binary will be built in the /build/cb
+# directory
+cb  : dep_sh_cb  $(EXE_CB)
+db2 : dep_sh_db2 $(EXE_DB2)
+odbc_rem : dep_sh_odbc_rem $(EXE_ODBC_REM)
+odbc_local : dep_sh_odbc_local $(EXE_ODBC_LOC)
+
+$(EXE) : $(SRC)
+	$(CC) -o $(EXE) -DX11 $(LDFLAGS) $(SRC) \
+	$(EXTRALIB) $(SEQH_REM_LIBS_CB)
+	-mkdir -p $(BUILDDIR_REM)
+	mv $(EXE) $(BUILDDIR_REM)/$(EXE)
+
+$(EXE_CB) : $(SRC)
+	$(CC) -o $(EXE_CB) -DX11 $(LDFLAGS_CB) $(SRC) \
+	$(EXTRALIB) $(SEQH_LOCL_LIBS_CB)
+	-mkdir -p $(BUILDDIR_CB)
+	mv $(EXE_CB) $(BUILDDIR_CB)/$(EXE_CB)
+
+$(EXE_DB2) : $(SRC)
+	$(CC) -o $(EXE_DB2) -DX11 $(LDFLAGS_DB2) $(SRC) \
+	$(EXTRALIB) $(SEQH_LOCL_LIBS_DB2)
+	-mkdir -p $(BUILDDIR_DB2)
+	mv $(EXE_DB2) $(BUILDDIR_DB2)/$(EXE_DB2)
+
+$(EXE_ODBC_REM) : $(SRC)
+	$(CC) -o $(EXE_ODBC_REM) -DX11 $(LDFLAGS_ODBC) $(SRC) \
+	$(EXTRALIB) $(SEQH_REM_LIBS_ODBC) $(EXTRA_MTHRD)
+	-mkdir -p $(BUILDDIR_ODBC)
+	mv $(EXE_ODBC_REM) $(BUILDDIR_ODBC)/$(EXE_ODBC_REM)
+
+$(EXE_ODBC_LOC) : $(SRC)
+	$(CC) -o $(EXE_ODBC_LOC) -DX11 $(LDFLAGS_ODBC) $(SRC) \
+	$(EXTRALIB) $(SEQH_LOCL_LIBS_ODBC)
+	-mkdir -p $(BUILDDIR_ODBC)
+	mv $(EXE_ODBC_LOC) $(BUILDDIR_ODBC)/$(EXE_ODBC_LOC)
+
+dep_sh_cb :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) cb
+
+dep_sh_db2 :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) db2
+
+dep_sh_local :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) locl 
+
+dep_sh_odbc_local :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) odbc
+
+dep_sh_odbc_rem :
+	cd $(SEQH_SRC);make -f $(SEQH_REM_MAKE) odbc
+
+clean:	
+	rm  -f $(BUILDDIR)/$(EXE)
+	rm  -f $(BUILDDIR_CB)/$(EXE_CB)
+	rm  -f $(BUILDDIR_DB2)/$(EXE_DB2)
+	rm  -f $(BUILDDIR_ODBC)/$(EXE_ODBC_LOC)
+	rm  -f $(BUILDDIR_ODBC)/$(EXE_ODBC_REM)
+

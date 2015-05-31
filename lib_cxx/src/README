@@ -1,0 +1,35 @@
+Title   : README
+Contents: Instructions on how to build the slri_cxx library 
+Author  : Hao Lieu
+Date    : July 2, 2002
+
+1) declare an environment variable called NCBICXX that points to the
+   ncbi_cxx directory by adding the following line to your startup
+   shell configuration file:
+   setenv NCBICXX /your/path/to/ncbi_cxx
+ 
+2) declar an environment variable called SLRI to point to the slri directory
+   by adding the following line to your shell configuration file:
+   setenv NCBICXX /your/path/to/slri
+
+3) change directory into slri/lib_cxx by typing the command:
+   $>cd $SLRI/lib_cxx/scripts
+
+4) Open the file 'generate_slrilibbstruc.sh' in a text editor and make
+   the changes as directed in the file.
+
+4) Open the file 'generate_slrilinkset.sh' in a text editor and make
+   the changes as directed in the file.
+
+5) run 'generate_slrilinkset.sh' by typing the command:
+   $> ./generate_slrilinkset.sh
+
+6) run 'generate_slrilibstruc.sh' by typing the command:
+   $> ./generate_slrilibstruc.sh
+   
+7) go to slri/lib_cxx/src by typing the command:
+   $> cd $SLRI/lib_cxx/src
+
+8) run the makefile by typing:
+   $> make -f Makefile.slri_cxx
+

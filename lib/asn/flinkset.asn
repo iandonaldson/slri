@@ -1,0 +1,41 @@
+--$Id $
+--*********************************************************************
+--
+--  flinkset.asn
+--  Alternative to NCBI's INTEGER Link-Set
+--  flink-set allows Floating Point storage
+--  ***** DO NOT GENERATE WITH ASNTOOL ****
+--  The LinkSet has been hard-coded
+--
+--*********************************************************************
+--  NOTE:  This specification is in a variant of ASN.1 1990 that may not
+--         be compatible with newer ASN.1 tools.  This specification also
+--         depends on public domain specifications available from the
+--         U.S. National Center for Biotechnology Information (NCBI)
+--         ftp://ncbi.nlm.nih.gov/toolbox/ncbi_tools/
+--         http://www.ncbi.nlm.nih.gov/Toolbox/
+--
+
+SLRI-FLink-set DEFINITIONS ::=
+BEGIN
+
+EXPORTS FLink-set, FLink-set-List, FLink-set-List2, FLink-set-List3;
+
+FLink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF REAL OPTIONAL }
+
+FLink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF FLink-set ,
+    id INTEGER }
+
+FLink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF FLink-set-List ,
+    id INTEGER }
+
+FLink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF FLink-set-List2 ,
+    id INTEGER }
+
+END

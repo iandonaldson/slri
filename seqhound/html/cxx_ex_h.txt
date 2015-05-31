@@ -1,0 +1,103 @@
+/****************************************************************************
+Mount Sinai Hospital (MSH)
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License as
+  published by the Free Software Foundation; either version 2 of
+  the License, or any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+  See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the
+         Free Software Foundation, Inc.,
+         59 Temple Place, Suite 330, Boston, MA
+         02111-1307  USA
+  or visit http://www.gnu.org/copyleft/gpl.html
+
+  SPECIAL EXCEPTIONS
+
+  As a special exception, Mount Sinai Hospital gives permission to
+  link this program with the following non-GPL programs or libraries,
+  and distribute the resulting executable, without including the source
+  code for these in the source distribution:
+
+  a) CodeBase 6.5 or greater from Sequiter Software Inc.
+
+  b) The C or C++ interface to Oracle 8.x or greater, from
+     Oracle Corporation or IBM DB2 UDB.
+
+
+  PROGRAM:
+
+
+  AUTHORS:
+           Hao Lieu and Christopher W.V. Hogue
+           hogue@mshri.on.ca
+
+
+  REVISION/CONTRIBUTION NOTES:
+
+  June 1, 2000  Original MSH Revision.
+                Hogue Lab - University of Toronto Biochemistry
+                Department and the Samuel Lunenfeld Research
+                Institute, Mount Sinai Hospital
+                http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+                ftp://ftp.mshri.on.ca/
+
+
+  PUBLICATION TO CITE:
+
+
+  DESCRIPTION
+  prints out FASTA protein database for a complete genome;
+  input value is a taxonomy ID for the genome
+
+*****************************************************************************/
+#include <corelib/ncbiapp.hpp>
+#include <corelib/ncbienv.hpp>
+#include <corelib/ncbiargs.hpp>
+#include <Seqhound.hpp>
+
+#include <serial/serial.hpp>
+
+#include <objects/mmdb1/Biostruc.hpp>
+#include <objects/seqalign/Seq_align.hpp>
+#include <objects/seq/Bioseq.hpp>
+#include <objects/seqset/Bioseq_set.hpp>
+#include <objects/seqset/Seq_entry.hpp>
+
+#include <NBlast_Result_Set.hpp>
+#include <FLink_set.hpp>
+#include <FLink_set_List.hpp>
+#include <FLink_set_List2.hpp>
+#include <FLink_set_List3.hpp>
+#include <CLink_set.hpp>
+#include <ILink_set.hpp>
+#include <ILink_set_List2.hpp>
+#include <ILink_set_List.hpp>
+
+#include <StRpsdb.hpp>
+#include <SLRIFasta.hpp>
+#include <SLRISeq_id.hpp>
+#include <SLRIValNode.hpp>
+#include <slri_misc.hpp>
+
+#ifndef GEN2FASTA_HPP
+#define GEN2FASTA_HPP
+
+USING_NCBI_SCOPE;
+
+class gen2fasta : public CNcbiApplication {
+
+public:
+  void Init();
+  int Run();
+
+};
+
+#endif

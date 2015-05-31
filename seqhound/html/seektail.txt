@@ -1,0 +1,7 @@
+<hr>
+<a href="http://www.blueprint.org/seqhound/">SeqHound home page</a> |
+<a href="http://www.blueprint.org/seqhound/api_help/seqhound_help_web.html">Seqhound WEB interface help</a> |
+<a href="http://www.blueprint.org/seqhound/api_help/seqhound_help_guides.html">SeqHound for programmers</a> |
+<a href="http://www.blueprint.org/"> Blueprint home page</a>
+</BODY>
+</HTML>

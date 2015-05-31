@@ -1,0 +1,497 @@
+*****************************************************************
+*****************************************************************
+Release 2.4 summary notes
+*****************************************************************
+*****************************************************************
+
+
+These notes summarize important changes that are inclusive to 
+SeqHound code version 2.4 (February 16th, 2004) since version 
+2.3 (December 18th, 2003).  
+
+These summary notes are divided into the following sections:
+1. Global changes
+2. Web interface
+3. Perl remote API
+4. Bioperl remote API
+5. Java remote API
+6. C++ remote API
+7. C remote API
+8. C local API
+9. Parsers and scripts
+10. Code in progress
+11. Documentation
+
+
+
+-----------------------------------------------------------------
+1. Global changes
+-----------------------------------------------------------------
+Code audit has been done sucessfully.
+A code audit was successfully completed to eliminate all possible
+NULL pointer issues.
+
+
+-----------------------------------------------------------------
+2. Web interface
+-----------------------------------------------------------------
+
+
+
+The web-interface (wwwseekgi) will now accept version numbers
+and convert them to accessions when searching for an accession
+(see bug 1243).
+
+
+-----------------------------------------------------------------
+3. Perl remote API
+-----------------------------------------------------------------
+
+SeqHound.pm
+
+The following function have been added modified in the Perl module.
+
+SHoundGetNameByGi was added.
+SHoundGetLargestMMDBID was added.
+SHoundGOECodeFromGi was removed and replaced by SHoundGOECodeFromGiAndGOID (bug 1564)
+SHoundGOPMIDFromGi was removed and replaced by SHoundGOPMIDFromGiAndGOID (bug 1564)
+SHoundGetXMLBioseq replaces SHoundXMLBioseq (for naming consistency)
+SHoundXMLBioseq still exists but calls SHoundGetXMLBioseq
+
+
+A number of files have been added to clean up the Perl module and make it
+easier to use:
+
+README_API - 	The "README_details" file has been renamed to 
+		"README_API" and has been completely reformatted and updated.
+
+LICENSE - 	The standard GNU license under which the Perl module is
+		distributed.
+
+VERSION -	This new file lists the version of the Perl module release 
+		along with its date of release.
+
+release.pl -	This is a script that assembles files from the code tree 
+		to make the perl package that is distributed on the 
+		seqhound and sourceforge ftp sites.
+
+test.pl -	This script contains tests for each of the Perl module 
+		SeqHound functions.
+
+input -		this is the input file for the testdriver.pl
+
+
+
+
+-----------------------------------------------------------------
+4. Bioperl remote API
+-----------------------------------------------------------------
+
+
+The following function have been added modified in the Bioperl module.
+SHoundGOECodeFromGi was removed and replaced by SHoundGOECodeFromGiAndGOID (bug 1564)
+SHoundGOPMIDFromGi was removed and replaced by SHoundGOPMIDFromGiAndGOID (bug 1564)
+SHoundGetXMLBioseq replaces SHoundXMLBioseq (for naming consistency)
+SHoundXMLBioseq still exists but calls SHoundGetXMLBioseq
+SHoundIsInited replaces SHoundIsInit (for naming consistency)
+SHoundGetLargestMMDBID was added
+
+
+
+-----------------------------------------------------------------
+5. Java remote API
+-----------------------------------------------------------------
+
+
+
+SeqHound.java
+
+SHoundGOECodeFromGi was removed and replaced by SHoundGOECodeFromGiAndGOID (bug 1564)
+SHoundGOPMIDFromGi was removed and replaced by SHoundGOPMIDFromGiAndGOID (bug 1564)
+SHoundGODBGetRecordByReference replaces SHoundGetRecordByReference (for naming consistency).
+SHoundGetXMLBioseq replaces SHoundXMLBioseq (for naming consistency)
+SHoundXMLBioseq still exists but calls SHoundGetXMLBioseq
+SHoundGetLargestMMDBID was added.
+
+Comments were changed for the following functions:
+SHoundFindName and SHoundFindNameList per bug 1197
+SHoundMuidFromGi[List] deprecation comment
+SHoundFindName[List] to better reflect functionality
+
+
+
+
+
+-----------------------------------------------------------------
+6. C++ remote API
+-----------------------------------------------------------------
+
+
+Seqhound.cpp
+
+SHoundGOECodeFromGi was removed and replaced by SHoundGOECodeFromGiAndGOID (bug 1564)
+SHoundGOPMIDFromGi was removed and replaced by SHoundGOPMIDFromGiAndGOID (bug 1564)
+SHoundGetLargestMMDBID was added.
+
+
+
+-----------------------------------------------------------------
+7. C remote API
+-----------------------------------------------------------------
+
+
+SHoundGetLargestMMDBID was added.
+
+
+-----------------------------------------------------------------
+8. C local API
+-----------------------------------------------------------------
+
+
+
+
+Fixed bug in SHoundIsTaxDeleted and SHoundIsTaxMerged. See bug #1663
+
+SHoundGetGenBankffList: check is input list is NULL.
+
+SHoundFindName: check if input as an empty string, fix bug 1483
+
+SHoundMoleculeType: fixed bug in string comparisons.
+
+SHoundGetLargestMMDBID: reinitialize to mmdbid=0.
+
+SHoundGetLargestMMDBID was added.
+
+Removed 'getline' with 'gets' (compatibility issue with Solaris OS) in intrez.c.
+
+SHoundGiFromCDDID: checks if input cddid is empty string
+
+SHoundGODBGetRecordByReference: checks if input reference is empty string.
+
+
+
+-----------------------------------------------------------------
+9. Parsers and scripts
+-----------------------------------------------------------------
+
+
+
+
+comgen parser
+-----------------------------------------------------------------
+Major changes to comgen parser to support data format changes for Drosophila, C. elegans and Arabidopsis
+
+
+
+complete genomes 
+-----------------------------------------------------------------
+
+The complete fenomes flat file (genff) was upated in hand.
+A program called genff_cxx was added that rebuilds the genff file.
+Associated new/modified scripts are pregen.pl, gen.pl, comff and ncbi.bacteria.pl
+This process will be tested and documented by the next release.
+
+
+
+precompute.c
+-----------------------------------------------------------------
+Check the length of bytestore at the beginning of function Print_to_file. It fixes bug #1208 in bugzilla.
+
+
+
+
+goparser
+-----------------------------------------------------------------
+
+The goparser was fixed (see bug 1114).
+
+
+
+
+addgoid parser
+-----------------------------------------------------------------
+to avoid name is a NULL pointer if it does not start with 'GI'
+The addgoid parser was adapted to deal with input file format changes
+made by compugen. Checks if the third column read in starts with 'GI', if it does, chop off 'GI'. 
+See bug 1533.
+
+See also code bug 420.
+
+
+
+
+cbmmdb parser
+-----------------------------------------------------------------
+
+
+File support and code were added for saving the largest mmdb id
+and supporting the API function "SHoundGetLargestMMDBID"
+
+
+redund parser
+-----------------------------------------------------------------
+
+Fixed bug with lines, that may be more than 40Kb:
+1. added check for limits of static buffers.
+2. added check for '\0'
+3. changed pcBuf from stack buffer to buffer on memory heap
+   and increased buffer size from 40000 to 16Mb.
+
+
+
+
+MergeRpsTables.cpp
+-----------------------------------------------------------------
+
+Fixes erroneous switching of the values in the Missing_n and Missing_c fields 
+between source and target databases.  Also, fixes rounding of bitscore and evalue 
+fields from 8 to 6 decimal points(they are no longer rounded).  See bug 1579 for details.
+
+
+Nblast Parser
+-----------------------------------------------------------------
+
+Numerous fixes to correct major errors in the parallel mode update algorithms
+
+Plug memory leak in WriteBlastResultsFromSeqalign during update mode
+
+Corrected an error in AddNumNeighboursToDB function which caused 
+nblastcleanup to quit early when a record contained an 
+NBlastGiAndEvalSet with an empty GI & Eval list
+
+
+rpsdb.c
+-----------------------------------------------------------------
+
+Minor changes in order of shutting down codebase files.
+
+Changed RPSDBSHoundRedundResultsCallback to get the domain id from the cdd->cddid 
+field instead of attempting to parse if from the definition field.  
+This accomodates a change in NCBI's CDD asn.1 format
+
+Increment variable "data" when AddResultsToTable fails in RPSDBResultsCallback 
+to prevent infinite looping.  Also, SHoundInitReadOnly instead of SHoundInit
+
+Changed calls to InitCodeBase and CloseCodeBase functions to calls to
+RPS_InitCodeBase and RPS_CloseCodeBase.  This is necessary in order to make
+these functions visible when compiling in ODBC mode.  This is being checked in
+for Zhe.
+
+This fixes several important bugs which are detailed in bugzilla reports
+ 1091, 1096 and 1074.  Briefly, this fixes: domain ID parsing errors due to
+changes in the asn.1 structure for cdd records, errors when running in FASTA
+mode which resulted in incorrect GIs being recorded in the rpsdb, and several
+implicit function declarations which caused solaris executables to crash.
+
+
+
+
+all_update.sh and all_update_rs.sh
+-----------------------------------------------------------------
+
+These scripts facilitate incorporating genbank and refseq  updates
+into SeqHound.  New compression file formats (.gz) are taken into account.
+
+
+dupdcron.pl
+-----------------------------------------------------------------
+
+Updated to work with new compression format being released 2004
+
+
+goftp.pl
+-----------------------------------------------------------------
+
+Change file names based on the change on ftp.geneontology.org
+Change log name to goftp.log
+
+
+
+shunittest
+-----------------------------------------------------------------
+
+This program will test the local or remote C API.  See make.shunittest_local
+and make.shunittest.
+
+
+
+
+mmdbftp.pl
+-----------------------------------------------------------------
+
+Improved copying to build directory
+
+
+nrftp.pl
+-----------------------------------------------------------------
+
+Accounts for change to NCBI's compression format change from .Z to .gz
+
+
+
+redundcron.pl
+-----------------------------------------------------------------
+
+Accounts for change to NCBI's compression format change from .Z to .gz
+
+
+seqsync.pl
+-----------------------------------------------------------------
+
+This is a new script to facilitate processing multiple GenBank and RefSeq 
+update files.
+
+
+
+
+
+-----------------------------------------------------------------
+10. Code in progress
+-----------------------------------------------------------------
+
+
+ODBC support is now available for the following modules:
+
+dbxref_odbc.c
+go_odbc.c
+hist_odbc.c 
+nblast_odbc.c
+intrez_odbc.c
+nbr_odbc.c 
+rpsdb_odbc.c
+taxdb_odbc.c
+ll_odbc.c
+
+A beta version of SeqHound ODBC (allowing use of a MySQL/DB2/Oracle
+database engine) will be made available in a future release.
+
+Includes DBXref Module functions that will not be available until 
+completion of the ODBC layer project.
+
+
+-----------------------------------------------------------------
+11. Documentation
+-----------------------------------------------------------------
+
+The following highlight   changes to the The_SeqHound_Manual
+
+1.    Section 4 has been completely updated
+
+For the rest of the changes the following sections have been updated 
+unless specified: 
+"Section 3. Using the SeqHound remote API", "Language 
+support for API functions", 
+
+"Section 5. 
+Description of the SeqHound 
+parsers and data tables by module" plus the apifunctsdet.html, 
+apifunctslist.html and httpcalls.html web pages
+A Bugzilla bug ID is included where relevant.
+
+2.    Functions are sorted alphabetically within their modules/sections
+
+3.    The following functions are new.  All functions tested by vgu on C 
+remote.
+Bug 1154
+SHoundGetAccFromRetiredGi
+SHoundGetReferenceIDFromGi
+SHoundGetReferenceIDFromGiList
+SHoundGiFromGOIDAndECode
+SHoundGiFromGOIDListAndECode
+SHoundGiFromReferenceID
+SHoundGiFromReferenceList
+SHoundGOECodeFromGiAndGOID
+SHoundGOPMIDFromGiAndGOID
+SHoundMoleculeType
+SHoundSequenceLength
+
+4.    With the addition of the functions
+SHoundGetReferenceIDFromGi, SHoundGetReferenceIDFromGiList and 
+SHoundMoleculeType the following functions have been marked as 
+deprecated and will be removed in future releases:
+SHoundMuidFromGi SHoundGetReferenceIDFromGi
+SHoundMuidFromGiList    SHoundGetReferenceIDFromGiList
+SHoundIsProtein    SHoundMoleculeType
+
+5.    SHoundXMLBioseq/ SHoundGetXMLBioseq
+Bug 1229
+All functions now have SHoundGetXMLBioseq - this happened after the code 
+freeze but is included in this revision of the manual except in the 
+Language support for API
+
+6.    SHoundGetRecordByReference
+Bug 1231
+Has been changed in java to SHoundGODBGetRecordByReference to reflect 
+function name in other languages.  There is no documentation for this 
+function
+
+7.    SHoundNeighboursOfNeighboursFromTaxID
+Bug 803,1125
+Has been omitted from Section 3. Using the SeqHound remote API and 
+Language support for API functions but is still listed in Section 5. 
+Description of the SeqHound parsers and data tables by module.  It no 
+longer appears on the website.
+Omitted because it returns a large data set and will likely time out 
+when called remotely.
+
+8.    SHoundGetBioseq
+Appears to be new in perl according to the data language table but may 
+have been an error in the old version of the table as this function has 
+been available since the first revision.
+
+9.    Minor revisions in the rest of the manual such as reformatting, 
+spelling, checking all ftp and urls, website addresses changed from 
+mshri.on.ca to blueprint.org
+
+
+ToDo
+
+1.    All Bioperl docs
+
+2.    The following functions are new or have no documentation and 
+should appear in the next release.
+SHoundGetLargestMMDBID
+Bug 1294
+
+SHoundGetNameByGi
+Bug1241
+
+SHoundGODBGetRecordByReference
+This function has no documentation
+
+SHoundGet3DEx    (Revision 1.7  2003/10/24 17:53:11  feldman
+Added SHoundGet3DEx function to allow user to choose model level and num 
+models when fetching biostruc)
+This function replaces SHoundGet3D in the http calls but because this Ex 
+function is not documented then neither function appears in the http calls
+
+SHoundGet3DfromPdbIdEx     also added by feldman but no CVS log
+This function replaces SHoundGet3DfromPdbId in the http calls but 
+because this Ex function is not documented then neither function appears 
+in the http calls
+
+SHoundGetDomainsFromGiListWithEvalue
+This function has no documentation
+(seqhoundapi.c: Revision 1.22  2002/07/29 22:30:46  betel
+Added GetDomainsFromGiListWithEvalue for local&remote C api)
+
+3.    Readmes for each language may be out of synch with the manual and 
+need to be resolved for next release.
+
+4.    SHoundSequenceLength - the return values need to be revised
+Bug 372
+
+5.    email addresses in example files are old and need to be updated
+
+6.    when converting to PDF from MSWord using Adobe, hyperlinks with 
+bookmarks such as 
+http://www.blueprint.org/seqhound/api_help/apifunctsdet.html#SHoundGetXMLSeqEntry 
+do not get translated and instead only 
+http://www.blueprint.org/seqhound/api_help/apifunctsdet.html appears in 
+the PDF.  So far no bug fix located from Adobe.
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+END OF RELEASE 2.4 NOTES
+-----------------------------------------------------------------
+-----------------------------------------------------------------

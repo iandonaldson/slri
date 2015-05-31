@@ -1,0 +1,233 @@
+--$Id: slrilinkset.asn,v 1.5 2004/02/19 23:47:26 mjdumont Exp $
+--*********************************************************************
+--
+--  slrilinkset.asn
+--  Alternative to NCBI's INTEGER Link-Set
+--  SLRI-Link-set allows arrays of various types (CharPtr, FloatHi and Int4)
+--  ***** DO NOT GENERATE WITH ASNTOOL ****
+--  The LinkSet has been hard-coded
+--
+--*********************************************************************
+--  NOTE:  This specification is in a variant of ASN.1 1990 that may not
+--         be compatible with newer ASN.1 tools.  This specification also
+--         depends on public domain specifications available from the
+--         U.S. National Center for Biotechnology Information (NCBI)
+--         ftp://ncbi.nlm.nih.gov/toolbox/ncbi_tools/
+--         http://www.ncbi.nlm.nih.gov/Toolbox/
+--
+
+SLRI-Link-set DEFINITIONS ::=
+BEGIN
+
+EXPORTS YLink-set, YLink-set-List, YLink-set-List2, YLink-set-List3,
+	LLink-set, LLink-set-List, LLink-set-List2, LLink-set-List3,
+	BLink-set, BLink-set-List, BLink-set-List2, BLink-set-List3,
+	CLink-set, CLink-set-List, CLink-set-List2, CLink-set-List3, 
+	FLink-set, FLink-set-List, FLink-set-List2, FLink-set-List3,
+	ILink-set, ILink-set-List, ILink-set-List2, ILink-set-List3,
+	IVector, IVectorList, IMatrix, IMatrixList,
+	FHiVector, FHiVectorList, FHiMatrix, FHiMatrixList,
+	FLoVector, FLoVectorList,
+	CVector, CVectorList;
+
+-- YLinkset has an byte array on its weights
+YLink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF VisibleString OPTIONAL }
+
+YLink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF YLink-set ,
+    id INTEGER }
+
+YLink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF YLink-set-List ,
+    id INTEGER }
+
+YLink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF YLink-set-List2 ,
+    id INTEGER }
+
+
+-- LLinkset has an int8 array on its weights
+LLink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF VisibleString OPTIONAL }
+
+LLink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF LLink-set ,
+    id INTEGER }
+
+LLink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF LLink-set-List ,
+    id INTEGER }
+
+LLink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF LLink-set-List2 ,
+    id INTEGER }
+
+
+-- BLinkset has an boolean array on its weights
+BLink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF VisibleString OPTIONAL }
+
+BLink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF BLink-set ,
+    id INTEGER }
+
+BLink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF BLink-set-List ,
+    id INTEGER }
+
+BLink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF BLink-set-List2 ,
+    id INTEGER }
+
+
+-- CLinkset has an charptr array on its weights
+CLink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF VisibleString OPTIONAL }
+
+CLink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF CLink-set ,
+    id INTEGER }
+
+CLink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF CLink-set-List ,
+    id INTEGER }
+
+CLink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF CLink-set-List2 ,
+    id INTEGER }
+
+-- FLinkset has an floathi array on its weights
+FLink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF REAL OPTIONAL }
+
+FLink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF FLink-set ,
+    id INTEGER }
+
+FLink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF FLink-set-List ,
+    id INTEGER }
+
+FLink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF FLink-set-List2 ,
+    id INTEGER }
+
+-- ILinkset has an integer array on its weights
+ILink-set ::= SEQUENCE {
+    num INTEGER ,
+    uids SEQUENCE OF INTEGER OPTIONAL ,
+    weights SEQUENCE OF INTEGER OPTIONAL }
+
+ILink-set-List ::= SEQUENCE {
+    set1 SEQUENCE OF ILink-set ,
+    id INTEGER }
+
+ILink-set-List2 ::= SEQUENCE {
+    set2 SEQUENCE OF ILink-set-List ,
+    id INTEGER }
+
+ILink-set-List3 ::= SEQUENCE {
+    set3 SEQUENCE OF ILink-set-List2 ,
+    id INTEGER }
+
+
+-- IVector comprises of an integer array v of size i
+IVector ::= SEQUENCE {
+	i INTEGER,
+	v SEQUENCE OF INTEGER OPTIONAL
+}
+
+-- IVectorList comprises of a list of IVectors identified by id
+IVectorList ::= SEQUENCE {
+	id INTEGER,
+	iV SEQUENCE OF IVector
+}
+
+-- IMatrix comprises of an integer matrix[i][j] of size ixj
+IMatrix ::= SEQUENCE {
+	i INTEGER,
+	j INTEGER,
+	m SEQUENCE OF INTEGER OPTIONAL
+}
+
+-- IMatrixList comprises of a list of IMatrix optionally identified by id
+IMatrixList ::= SEQUENCE {
+	id INTEGER,
+	iM SEQUENCE OF IMatrix
+}
+
+-- IMatrixListSet encapsulates IMatrixList in order to read/write a list of IMatrixLists.
+IMatrixListSet ::= SEQUENCE {
+	id INTEGER,
+	iML SEQUENCE OF IMatrixList
+}
+
+
+-- FHiVector comprises of an FloatHi array v of size i
+FHiVector ::= SEQUENCE {
+	i INTEGER,
+	v SEQUENCE OF REAL OPTIONAL
+}
+
+-- FHiVectorList comprises of a list of FVectors identified by id
+FHiVectorList ::= SEQUENCE {
+	id INTEGER,
+	iV SEQUENCE OF FHiVector
+}
+
+-- FHiMatrix comprises of an float hi matrix[i][j] of size ixj
+FHiMatrix ::= SEQUENCE {
+	i INTEGER,
+	j INTEGER,
+	m SEQUENCE OF REAL OPTIONAL
+}
+
+-- FHiMatrixList comprises of a list of FHiMatrix optionally identified by id
+FHiMatrixList ::= SEQUENCE {
+	id INTEGER,
+	iM SEQUENCE OF FHiMatrix
+}
+
+-- FHiMatrixListSet encapsulates FHiMatrixList in order to read/write a list of FHiMatrixLists.
+FHiMatrixListSet ::= SEQUENCE {
+	id INTEGER,
+	iML SEQUENCE OF FHiMatrixList
+}
+
+-- FLoVector comprises of an FloatLo array v of size i
+FLoVector ::= SEQUENCE {
+	i INTEGER,
+	v SEQUENCE OF REAL OPTIONAL
+}
+
+-- FLoVectorList comprises of a list of FLoVectors identified by id
+FLoVectorList ::= SEQUENCE {
+	id INTEGER,
+	iV SEQUENCE OF FLoVector
+}
+
+
+-- CVector comprises of an charptr array v of size i
+CVector ::= SEQUENCE {
+	i INTEGER,
+	v SEQUENCE OF VisibleString OPTIONAL
+}
+
+-- CVectorList comprises of a list of CVectors identified by id
+CVectorList ::= SEQUENCE {
+	id INTEGER,
+	iV SEQUENCE OF CVector
+}
+
+END

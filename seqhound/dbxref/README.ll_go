@@ -1,0 +1,6 @@
+1. dump old LL_GO.dbf to gigo_cb.txt use prebind_dump.pl : about 10 minutes
+2. export gigo* table in dbxrefnew to gigo*.txt 
+3. load all text files into temp database useing ll_go.sql
+4. export non-redund records to text file gigo_new.txt	: ABOUT 30 MINUTES
+5. import gigo_new.txt using gi_go to LL_GO.dbf table	:	about 10 minutes
+6. check the new LL_GO.dbf and LL_GO.cdx, put them into production server

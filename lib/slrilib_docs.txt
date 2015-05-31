@@ -1,0 +1,40 @@
+SLRI lib docs
+Creation date: Tuesday, May 14, 2002
+Author: Gary Bader
+
+SLRI lib provides general and useful functions above and beyond the NCBI C toolkit.  If you are using the NCBI C toolkit, you should familiarize yourself with what is available in the SLRI lib so that you know where to look for certain types of functions instead of writing your own function from scratch.  The purpose of this document is to give an overview of the library.  If you need details about any specific function, please read the comments in the header.
+
+slri.h - global include file.  You can include this file for convenience if you are using a lot of slrilib.  If you are not using many files in slrilib, you should only include the header for the modules that you need.  Including unnecessary headers increases compile time and makes your executables larger.
+
+slri_asn.h - General ASN.1 functions.  Read ASN.1 from a file, from a bytestore.  Functions to unique and copy SEQUENCE OF lists in memory.
+
+slri_cookie.h - Get, set and delete web cookies from a CGI.
+
+slri_endec.h - Base64 and UU encode and decode.
+
+slri_mail.h - send e-mail from your program.
+
+slri_math.h - some extra math functions beyond what's available in C and NCBI libs
+
+slri_misc.h - set of very useful functions for many different operations.  It is a very good idea to familiarize yourself with what is in here.
+-Functions to deal with ValNode linked lists (copy, coversion, searching, adding, removing, sorting, filter, partition, randomize)
+-Functions to deal with strings - type checking (e.g. is numeric?, is a good e-mail address or phone number).
+-Interval lists - allows specification of number lists by e.g. 1-50,67-1000
+-Generic linked list functions (e.g. add, remove, count).  These will work on any linked list whose objects have their next pointer at the top of the struct.  This applies to all ASN.1 generated code.
+-Bytestores - print, error logging, get line from file.
+-File parsing - Good 'getLineFromFile' and stringTokenizer functions.  Set of functions to parse columnar text files, such as what would be saved by Excel.
+-Compute checksum functions.
+
+slri_prime.h - Compute random prime numbers
+
+slri_rbtree.h - Red-Black tree implementation for creating and maintaining indexes in memory.
+slri_set.h - functions for sets.  This is currently unstable, so don't use it.
+
+slri_sstack.h - a stack for strings
+
+slri_stat.h - various powerful statistics functions e.g. log-linear regression, likelyhood ratios, chisquared test, z-score
+
+slri_www.h - useful functions for CGIs to get arguments, supports binary file upload, HTML error printing, string escaping, HTMLprintf that should be used for all printf statements in CGIs that print user input data (prevents cross-site scripting problems), print out XML as HTML.
+
+
+

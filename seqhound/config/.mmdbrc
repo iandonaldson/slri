@@ -1,0 +1,9 @@
+[MMDB]
+;Database and Index required when local MMDB database is used
+Database = ./
+Index = mmdb.idx
+Gunzip = /bin/gunzip
+
+; [VAST]
+;Database required for local VAST fetches.
+; Database = .

@@ -1,0 +1,242 @@
+
+Part 1: How to set up the prebind cgi application on a local WINNT/WIN2000 machine for development.
+
+
+
+1.Set up the prebind.ini configuration file in the WINNT directory.
+d
+It should look something like this:
+
+==beginning of prebind.ini file
+
+;settings for prebind
+
+[databases]
+;enter the path to the directory for datafiles
+;this is where PreBIND parser will place created datafiles and where it will look for them later
+;PreBIND searcher and the PreBIND cgi also look for datafiles in this directory
+;eg. for innie: path = /home3/people/janicek/databases/
+path = C:\prebind\datafiles\
+
+[parser_input_files]
+;enter the complete path to the RefSeq  binary file to be parsed by PreBIND_parser
+refseq_binary = C:\prebind\parser_input_files\rscu.bna
+;enter the complete path to the text file of yeast names created by YeastNames.pl
+yeast_names = C:\prebind\parser_input_files\yeast_names.txt
+
+[searcher_input_files]
+;enter the complete path to the text file of POtential INTeraction scores
+point_scores = C:\prebind\datafiles\searcher_input_files\point_scores.txt
+
+[prebind_cgi]
+;enter the path to the prebind cgi executable
+;example for innie use path = /cgi-bin/prebind/PreBIND
+path = prebindcgi.exe
+;enter the paths of the executables for the instance of BIND to which 
+;records will be submitted from prebind
+dataget_location = http://localhost/bind_for_prebind/dataget.exe
+dataentry_location = http://localhost/bind_for_prebind/dataentry.exe
+;dont forget to specify the location of seqhound in the shoundrem.ini configuration file
+blueprint_location = http://www.bind.ca/
+seqhound_location = http://zaphod.mshri.on.ca/seqhound
+
+[log_files]
+;enter the path to log files
+parser_path = C:\prebind\datafiles\parser_log2.txt
+search_results_path = C:\prebind\datafiles\search_results_log.txt
+search_errors_path = C:\prebind\datafiles\search_errors_log.txt
+
+[data]
+org_name_list = taxlist.txt
+
+==end of prebind.ini file
+
+The only parameters above used by the PreBIND cgi are 
+i) the path to the databases
+Make sure that 'path' under [databases] points to the set of databases that you want to use.
+For example, "path = C:\prebind\datafiles\"
+
+ii) the path to the prebind cgi executable.  For example, "path = prebind.exe"
+
+iii) the path to the bind executables for direct submission of records to a local bind database. For example,
+dataget_location = http://localhost/bind_for_prebind/dataget.exe
+dataentry_location = http://localhost/bind_for_prebind/dataentry.exe
+
+This means that a directory called "bind_for_prebind" should contain the executables and datafiles required by a normal local_bind setup. You have to create a user account in this local instance of bind for 
+a) people who want to enter genetic interactions
+b) anonymous submitters
+the user id's for these accounts are defined in prebind_cgi.h:
+#define ANON_USER_ID 2
+#define GENETIC_INTERACTION_USER_ID 3
+
+Refer to the readme "BIND_build_on_Windows.doc" and "BIND_SETUP_README.doc" to compile and set up BIND execs for Windows2000.
+You must also create the user accounts once you have finshed setting up the BIND instance:
+first name = Anonymous, last name = user, user id = 2
+first name = g, last name = i, user id = 3
+
+***Note: when setting up the bind.ini file, you ***MUST*** specify an absolute path to the directory where the BIND data tables are kept; i.e.,
+
+[Database]
+binddb=C:\bind_for_prebind\binddb
+
+
+
+
+
+2. IIS (Internet Information Service) set up.
+
+Refer to the readme called “IIS SETUP ON WINDOWS.doc” and ensure that you have an Internet Information Service running on your machine.
+
+
+3. Set up a folder called prebind on your C: drive.  Right click on the folder.  Select Sharing/Web sharing.  Click on the "Share this folder" radio button.  Give the folder the alias "prebind".  Under "Access permissions" select "Read.  Under "Applications permissions" select "Execute".  Press on the "Apply" or "Ok" button. 
+
+
+4. Compile the debug version of the prebind cgi (the "prebind" project.  The executable will be placed in the prebind directory.
+
+
+5. Place the datafiles folder in the prebind directory. Allow web-sharing and allow reading and writing to the directory.
+
+
+6. Place the html directory (found in cvs under slri/prebind/) in the prebind directory.  Right click on the folder and allow web-sharing and make an alias called html.
+
+
+7. Open the prebind_main.html page using  WordPad and edit the following lines:
+
+<!--protein name and organism search input-->
+<form method="POST" action="http://localhost/prebind/prebindcgi.exe">
+
+and further down the page the lines
+
+<!--accession search input-->
+<form method="POST" action="http://localhost/prebind/prebindcgi.exe">
+
+Change "prebind/prebindcgi.exe" to the location of the prebindcgi.exe cgi.  If you have followed the above instructions then these lines do not have to be changed.
+
+
+8. copy the data folder (found under cvs in the folder slri/prebin/html) into the prebind directory.  The cgi looks for html-formatted text in this folder that it uses to print out column headings and page footers for the cgi's output.
+
+9. type the following in a web browser:
+
+localhost/prebind/html/pb_frontpage.html
+
+
+
+How to set up the prebind cgi application on a local WINNT/WIN2000 machine for development.
+
+
+
+Part 2.Set up the .prebindrc configuration file in the Unix enviroment
+
+It should look something like this:
+
+==beginning of prebind.ini file
+
+;settings for prebind
+
+[databases]
+;enter the path to the directory for datafiles
+;this is where PreBIND parser will place created datafiles and where it will look for them later
+;PreBIND searcher and the PreBIND cgi also look for datafiles in this directory
+;eg. for innie: path = /home3/people/janicek/databases/
+path = C:\prebind\datafiles\
+
+[parser_input_files]
+;enter the complete path to the RefSeq  binary file to be parsed by PreBIND_parser
+refseq_binary = C:\prebind\parser_input_files\rscu.bna
+;enter the complete path to the text file of yeast names created by YeastNames.pl
+yeast_names = C:\prebind\parser_input_files\yeast_names.txt
+
+[searcher_input_files]
+;enter the complete path to the text file of POtential INTeraction scores
+point_scores = C:\prebind\datafiles\searcher_input_files\point_scores.txt
+
+[prebind_cgi]
+;enter the path to the prebind cgi executable
+;example for innie use path = /cgi-bin/prebind/PreBIND
+path = prebindcgi.exe
+;enter the paths of the executables for the instance of BIND to which 
+;records will be submitted from prebind
+dataget_location = http://localhost/bind_for_prebind/dataget.exe
+dataentry_location = http://localhost/bind_for_prebind/dataentry.exe
+;dont forget to specify the location of seqhound in the shoundrem.ini configuration file
+blueprint_location = http://www.bind.ca/
+seqhound_location = http://zaphod.mshri.on.ca/seqhound
+
+[log_files]
+;enter the path to log files
+parser_path = C:\prebind\datafiles\parser_log2.txt
+search_results_path = C:\prebind\datafiles\search_results_log.txt
+search_errors_path = C:\prebind\datafiles\search_errors_log.txt
+
+[data]
+org_name_list = taxlist.txt
+
+==end of prebind.ini file
+
+The only parameters above used by the PreBIND cgi are 
+i) the path to the databases
+Make sure that 'path' under [databases] points to the set of databases that you want to use.
+For example, "path = C:\prebind\datafiles\"
+
+ii) the path to the prebind cgi executable.  For example, "path = prebind.exe"
+
+iii) the path to the bind executables for direct submission of records to a local bind database. For example,
+dataget_location = http://localhost/bind_for_prebind/dataget.exe
+dataentry_location = http://localhost/bind_for_prebind/dataentry.exe
+
+This means that a directory called "bind_for_prebind" should contain the executables and datafiles required by a normal local_bind setup. You have to create a user account in this local instance of bind for 
+a) people who want to enter genetic interactions
+b) anonymous submitters
+the user id's for these accounts are defined in prebind_cgi.h:
+#define ANON_USER_ID 2
+#define GENETIC_INTERACTION_USER_ID 3
+
+Refer to the readme "BIND_build_on_Windows.doc" and "BIND_SETUP_README.doc" to compile and set up BIND execs for Windows2000.
+You must also create the user accounts once you have finshed setting up the BIND instance:
+first name = Anonymous, last name = user, user id = 2
+first name = g, last name = i, user id = 3
+
+***Note: when setting up the bind.ini file, you ***MUST*** specify an absolute path to the directory where the BIND data tables are kept; i.e.,
+
+[Database]
+binddb=C:\bind_for_prebind\binddb
+
+
+
+
+
+2. IIS (Internet Information Service) set up.
+
+Refer to the readme called “IIS SETUP ON WINDOWS.doc” and ensure that you have an Internet Information Service running on your machine.
+
+
+3. Set up a folder called prebind on your C: drive.  Right click on the folder.  Select Sharing/Web sharing.  Click on the "Share this folder" radio button.  Give the folder the alias "prebind".  Under "Access permissions" select "Read.  Under "Applications permissions" select "Execute".  Press on the "Apply" or "Ok" button. 
+
+
+4. Compile the debug version of the prebind cgi (the "prebind" project.  The executable will be placed in the prebind directory.
+
+
+5. Place the datafiles folder in the prebind directory. Allow web-sharing and allow reading and writing to the directory.
+
+
+6. Place the html directory (found in cvs under slri/prebind/) in the prebind directory.  Right click on the folder and allow web-sharing and make an alias called html.
+
+
+7. Open the prebind_main.html page using  WordPad and edit the following lines:
+
+<!--protein name and organism search input-->
+<form method="POST" action="http://localhost/prebind/prebindcgi.exe">
+
+and further down the page the lines
+
+<!--accession search input-->
+<form method="POST" action="http://localhost/prebind/prebindcgi.exe">
+
+Change "prebind/prebindcgi.exe" to the location of the prebindcgi.exe cgi.  If you have followed the above instructions then these lines do not have to be changed.
+
+
+8. copy the data folder (found under cvs in the folder slri/prebin/html) into the prebind directory.  The cgi looks for html-formatted text in this folder that it uses to print out column headings and page footers for the cgi's output.
+
+9. type the following in a web browser:
+
+localhost/prebind/html/pb_frontpage.html

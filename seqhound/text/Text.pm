@@ -1,0 +1,762 @@
+#/*$Id$*/
+#*******************************************************************************
+#  Copyright (C) 2005 Mount Sinai Hospital (MSH)
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as
+#  published by the Free Software Foundation; either version 2 of
+#  the License, or any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+#  See the GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the
+#         Free Software Foundation, Inc.,
+#         59 Temple Place, Suite 330, Boston, MA
+#         02111-1307  USA
+#  or visit http://www.gnu.org/copyleft/gpl.html
+#
+#
+#  PROGRAM: Text.pm 
+#
+#  AUTHORS: Kai Zheng                   (seqhound@gmail.com)
+#           Ian Donaldson               (ian.donaldson@utoronto.ca)
+#           and Christopher W.V. Hogue  (hogue@mshri.on.ca)
+#
+#  REVISION/CONTRIBUTION NOTES:
+#
+#  July 1, 2004  Original MSH Revision.
+#                Hogue Lab - University of Toronto Biochemistry
+#                Department and the Samuel Lunenfeld Research
+#                Institute, Mount Sinai Hospital
+#                http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+#                ftp://ftp.mshri.on.ca/
+#                http://www..blueprint.org/
+#
+#
+#  PUBLICATION TO CITE:
+#       PreBIND and Textomy - mining the biomedical literature for
+#       protein-protein interactions using a support vector machine.
+#       Donaldson I. et al. 2003 BMC Bioinformatics. 4(1):11
+#       PMID:12689350
+#       http://www.biomedcentral.com/1471-2105/4/11
+#
+#  DESCRIPTION:    SeqHound Text Mining Perl Module
+#
+#******************************************************************************
+
+package Text;
+
+use strict;
+use Pattern;
+use Tee;
+use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
+
+use Exporter;
+@ISA = qw(Exporter);
+# Items to export into the callers space
+# Public functions: get, set, insert, delete, updates
+# Private functions: ProcessNamelist
+@EXPORT = qw(
+    TextSetPropertyFile
+    TextGetProperty
+    TextSetLogFile
+    TextSetTeeoutput
+    TextCreateTaxmeshHashTable
+    TextGetAbstract
+    TextGetPatterns
+    TextGetMeshFromTaxid
+    TextGetMymedHandler
+    TextGetSeqhoundHandler
+    TextGetTexthandler
+    TextUpdateDoc
+    TextUpdateDocscore
+    TextUpdateSearch
+    TextUpdateRng
+    TextUpdateRngresult
+    TextUpdateSearchscore
+    TextUpdateDoctax
+    TextUpdateResult
+    TextUpdateResultscore
+    TextUpdateEvidence
+    TextUpdatePoint
+    TextUpdateNamepair
+    TextUpdateNamepairresult
+    TextUpdateNamepairscore
+    TextUpdateEvidencescore
+    TextUpdatePointscore
+   );
+
+my $ini="text.ini"; #default property file
+sub TextSetPropertyFile{
+    $ini=$_[0];
+}
+
+*LOG=*STDOUT;
+sub TextSetLogFile{
+    my $fh=shift;
+    *LOG=$fh;
+}
+
+*TEE=*STDOUT;
+sub TextSetTeeoutput{
+    my $fh=shift;
+    *TEE=$fh;
+}
+#================================================================
+#  Get functions
+#================================================================
+
+# Read a tag from a proterty file. If more than one value,
+# Return all values concated by semi-column
+# @param:
+#     $_[0] FileName: Property File.
+#     $_[1] Tag:      Tag to read from the property file.
+# @Return: Value of that tag.
+#         0 if tag not found.
+sub TextGetProperty{
+    open (INI, $ini) or
+        die "ERR:TextGetProperty:CAN NOT OPEN INI FILE: $_[0] \n";
+    my $line;
+    my $value=();
+    my $tag=$_[0];
+    my $found=0;
+    while($line = <INI>){
+        chomp($line);
+        if($line=~/^\s*$tag\s*=\s*(\S+).*$/){
+            if($found==0){
+                $value=$1;
+                $found=1;
+            }else{
+                $value=$value.";".$1;
+            }
+        }
+    }
+   close(INI);
+   if($found==0){
+        print TEE  "ERR:TextGetProperty: [$tag] value not found\n";
+    }else {
+        $value=~s/\"//g;
+#print TEE "$tag=$value\n";
+    }
+    return $value;
+}
+
+sub TextGetAbstract{
+    my ($sth_db2, $pmid)=@_;
+    my $abstitle="";
+    # print LOG "PMID: $pmid\n";
+    $sth_db2->execute($pmid);
+    while(my ($title_match, $abs_match)=$sth_db2->fetchrow_array) {
+        # The abstract is a clob and comes back with tags on it - this removes them
+        if($abs_match){
+            $abs_match=~s/(.*)<AbstractText>(.*?)<\/AbstractText>(.*)/$2/;
+        }
+        $abstitle.="$title_match.\n$abs_match";
+    }
+    return $abstitle;
+}
+
+sub TextGetPatterns{
+    my $dbh_text=$_[0];
+    my @patterns;
+    my $sth_select_pattern=$dbh_text->prepare("select patternid,class,score,regex from text_pattern");
+    $sth_select_pattern->execute;
+    my ($style, $option)=(0,0);
+    while(my ($id,$class,$score,$regex)= $sth_select_pattern->fetchrow_array){
+        my $newpattern = PatternNew($class, $id, $score, $style, $option, $regex);
+        push  @patterns, $newpattern;
+    }
+    $sth_select_pattern->finish;
+    #PrintPatterns();
+    return \@patterns;
+}
+
+sub TextGetMeshFromTaxid{
+    my $dbh_text=$_[0];
+    my $taxid=$_[1];
+    my $mesh;
+    my $sth_text = $dbh_text->prepare("SELECT mesh from text_organism where taxid=$taxid");
+    $sth_text->execute;
+    while(my @row = $sth_text->fetchrow_array)
+    {
+         $mesh=$row[0];
+    }
+    $sth_text->finish;
+    return $mesh;
+}
+
+#====================== database handler ==========================
+sub TextGetMymedHandler{
+    my $db2_user=TextGetProperty( "db2_user");
+    my $db2_password=TextGetProperty( "db2_password");
+    my $db2_database=TextGetProperty( "db2_database");
+    my $db2_dsn = "DBI:DB2:$db2_database";
+    my $dbh_db2 = DBI->connect($db2_dsn,$db2_user,$db2_password,
+        {RaiseError => 1,  AutoCommit => 1 })
+       or die "ERR:TextInitMyMED:$DBI::errstr\n";
+    $dbh_db2->{LongReadLen}=20*1024;
+    $dbh_db2->{LongTruncOk}=1;
+    print TEE  "connect to db2 mymed successful\n";
+    return $dbh_db2;
+}
+
+sub TextGetSeqhoundHandler{
+    my $sh_host=TextGetProperty("sh_host");
+    my $sh_port=TextGetProperty("sh_port");
+    my $sh_user=TextGetProperty("sh_user");
+    my $sh_password=TextGetProperty( "sh_password");
+    my $sh_database=TextGetProperty("sh_database");
+    my $sh_dsn="DBI:mysql:$sh_database:$sh_host:$sh_port";
+    my $dbh_sh= DBI->connect ($sh_dsn, $sh_user, $sh_password,
+       {RaiseError => 1, AutoCommit => 1})
+       or die "ERR:TextInitSeqhound:$DBI::errstr\n";
+    print TEE "connect to mysql seqhound successful\n";
+    return $dbh_sh;
+}
+
+sub TextGetTexthandler{
+    my $text_host=TextGetProperty( "text_host");
+    my $text_port=TextGetProperty( "text_port");
+    my $text_user=TextGetProperty( "text_user");
+    my $text_password=TextGetProperty( "text_password");
+    my $text_database=TextGetProperty( "text_database");
+    my $text_dsn= "DBI:mysql:$text_database:$text_host:$text_port";
+    my $dbh_text= DBI->connect ($text_dsn, $text_user, $text_password,
+    {RaiseError => 1, AutoCommit => 1})
+    or die "ERR:TextInitText:$DBI::errstr\n";
+    print TEE  "connect to mysql text database successful\n";
+    return $dbh_text;
+}
+
+#================================================================
+#   UPDATE procedures
+#================================================================
+# update documents from mymed
+sub TextUpdateDoc{
+    my ($dbh_db2, $dbh_text)=@_;
+}
+
+# retrieve document scores from mymed
+sub TextUpdateDocscore{
+    my ($dbh_db2, $dbh_text)=@_;
+}
+
+# update search table from bioname table
+sub TextUpdateSearch{
+    my ($dbh_sh, $dbh_text)=@_;
+    # synchronize search with bioname, Trigger function is better
+    # check new bioname ids in bioname table
+    # OR use subquery( check any new bionameid not in search)
+    my $last_max_id=0; # last update bioname id
+    my @row_ary= $dbh_text->selectrow_array("select max(bionameid) from text_search");
+    if(@row_ary && $row_ary[0]>=1){
+        $last_max_id=$row_ary[0];
+    }
+    print TEE  "last_max_bionameid=$last_max_id\n";
+
+    my $query= "select a.id, a.bioentityid, a.name, c.taxid ".
+        " from bioname a,  bioentity b, taxgi c ".
+        " where  a.id>$last_max_id and a.action='1' and a.nametypeid=2 and b.access REGEXP 'P_' and ".
+        " a.bioentityid=b.id and b.identifier=c.gi";
+    # print TEE "QUERY=$query\n";
+    my $sth_get_names=$dbh_sh->prepare($query);
+    $sth_get_names->execute;
+
+    my $rows=0;
+    my $sth_insert_search=$dbh_text->prepare("INSERT INTO text_search(bionameid, bioentityid, name, taxid) VALUES(?,?,?,?)");
+    while(my ($bionameid, $bioentityid, $name, $taxid )=$sth_get_names->fetchrow_array) {
+        $sth_insert_search->execute($bionameid, $bioentityid, $name, $taxid);
+        $rows++;
+    }
+    $sth_get_names->finish;
+    $sth_insert_search->finish;
+    if($rows && $rows>0) { print TEE "$rows bionames have been inserted into text_search\n"; }
+}
+
+# update rng (redundant name group) table from search table
+sub TextUpdateRng{
+    my ($dbh_text)=@_;
+    my $rows=$dbh_text->do("Insert IGNORE into text_rng(name) ".
+                           " select distinctrow name from text_search  ".
+                           " where rngid is null"
+                           );
+    if($rows && $rows>0) { print TEE "$rows redunant name groups have been inserted\n"; }
+
+    my $filter1="and (name NOT REGEXP '[[:alpha:]]+' or name in (select word from text_stopword)) ";
+    $rows=$dbh_text->do("update text_rng set state=-1 where state is null $filter1");
+    if($rows && $rows>0) {print TEE "$rows rngid have been ignored(state=-1) for now\n"; }
+
+    my $filter2="and (length(name)<=2 or name not REGEXP '[[:alnum:]].*[[:alnum:]]') ";
+    $rows=$dbh_text->do("update text_rng set state=-1 where state is null $filter2");
+    if($rows && $rows>0) {print TEE "$rows rngid have been ignored(state=-1) for now\n";}
+    
+     my $filter3="and name regexp '^LOC[0-9]{3,}' ";
+    $rows=$dbh_text->do("update text_rng set state=-1 where state is null $filter3");
+    if($rows && $rows>0) {print TEE "$rows rngid have been ignored(state=-1) for now\n";}
+    
+    # update rngid in search table
+    $rows=$dbh_text->do("update text_search s, text_rng r set s.rngid=r.id where s.rngid is null and s.name=r.name");
+    if($rows && $rows>0) {print TEE "$rows rngid have been updated\n";}
+
+}
+
+# search db2 mymed (entrez search are available in another script)
+sub TextUpdateRngresult {
+    my ($dbh_db2, $dbh_text, $redo, $minid, $maxid)=($_[0],$_[1], $_[2], 0, 0);
+    if($_[3]){ $minid=$_[3]; }
+    if($_[4]){ $maxid=$_[4]; }
+    my $threshold=TextGetProperty("threshold");
+    my $total=0;
+    my $count=0;
+    my ($rangemin, $rangemax)=("", "");
+    if($minid>0){ $rangemin=" and id>=$minid "; }
+    if($maxid>0){ $rangemax=" and id<=$maxid "; }
+    my $range=$rangemin." ".$rangemax;
+
+    my $query_count_rng="select count(*) from text_rng where state is NULL $range";
+    if($redo eq "T"){   $query_count_rng="select count(*) from text_rng "; }
+    if(my @a=$dbh_text->selectrow_array($query_count_rng)){ $total = $a[0]; }
+    print TEE "----- TOTAL NAMES:$total -----\n";
+
+    my $query_select_rng="select id, name from text_rng where state is NULL  $range";
+    #-- if needs redo the search, only search names has matches, and search against medline.updates table
+    if ($redo eq "T"){  $query_select_rng="select id, name from text_rng where results>0"; }
+    my $sth_select_rng=$dbh_text->prepare($query_select_rng);
+    my $sth_search_medline;
+
+    $sth_select_rng->execute;
+    while (my ($rngid, $name)=$sth_select_rng->fetchrow_array){
+        $count++;
+        my $pname=ProcessNameForSearch($name);
+        print LOG "== [$pname] ==\n";
+        my $text="\'sections(\"abstracts\", \"titles\")\"$pname\"\'";
+        # search MyMed
+        my $query_count="SELECT count(pmid) FROM medline.citations WHERE contains(citation,$text)=1";
+        if(my @data=$dbh_db2->selectrow_array($query_count)){
+            my $results=$data[0];
+            $dbh_text->do("update text_rng set state=0, searched=NOW(), results=$results where id=$rngid");
+            print LOG "==[$count/$total]\t$name\t$results==\n";
+            if ($results>$threshold){
+                print LOG "== [stopword?] ==\n";
+                if(my @row=$dbh_text->selectrow_array("select word from text_englishdict where word='$name'") ){
+                    print LOG "ENGLISH\n";
+                    next;
+                }
+            }
+            next if length($name)<=2; # only check for numbers of results
+            next if ($results==0);
+        }
+
+        my $query = "SELECT pmid,numberofmatches(citation, $text) FROM medline.citations WHERE contains(citation,$text)=1 ";
+        #print TEE "$query\n";
+        $sth_search_medline=$dbh_db2->prepare($query);
+        $sth_search_medline->execute;
+        while(my ($pmid, $matches)=$sth_search_medline->fetchrow_array){
+            $dbh_text->do("insert into text_rngresult(rngid, docid, pmid, matches) values($rngid, $pmid, $pmid, $matches)");
+        }
+
+        $sth_search_medline->finish;
+    }
+    $sth_select_rng->finish;
+    if($count) {print TEE "$count new text_rng names are searched\n";}
+
+}
+
+sub TextUpdateSearchscore{
+    my ($dbh_text)=@_;
+    my $rows=0;
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select a.id,1, -1 from text_search a, text_englishdict b where state is null and a.name=b.word and b.status REGEXP '(single|compound|crossword|common)'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,2, -1 from text_search where state is null and name in (select word from text_stopword where source='pubmed')");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,3, -1 from text_search where state is null and name in (select word from text_stopword where source!='pubmed')");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select a.id,4, -1 from text_search a,text_englishdict b where state is null and a.name=b.word and b.status REGEXP 'acronym'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,5, -1 from text_search where state is null and name not REGEXP '[[:alpha:]]'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,6, -1 from text_search where state is null and length(name)=1");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,7, -1 from text_search where state is null and length(name)=2 and name REGEXP '[0-9]'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,8, -1 from text_search where state is null and length(name)=2");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,9, -1 from text_search where state is null and name REGEXP '[[:punct:]]'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,10,-1 from text_search where state is null and name REGEXP '[[:space:]]'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,11,-1 from text_search where state is null and name REGEXP '[[:alpha:]]' and name REGEXP '[[:digit:]]'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select a.id,12,-1 from text_search a, text_rng b where a.state is null and a.name=b.name and b.results>10000 ");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,13,-1 from text_search where state is null and name in (select word from text_stopword where source='aminoacid')");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,14,-1 from text_search where state is null and name REGEXP '^[A-Z]'");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,15,-1 from text_search where state is null and name REGEXP '.+[A-Z]' ");
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,16,-1 from text_search where state is null and name REGEXP '^[A-Z]\$' ");
+
+    # sum up
+    my $methodfilter="and ( methodid=2 or methodid=3 or methodid=5 or methodid=8 or methodid=12)";
+    $rows=$dbh_text->do("insert IGNORE into text_searchscore select   id,24,-1 from text_search where state is null and id in (select searchid from text_searchscore where score=-1 $methodfilter)");
+    if($rows && $rows>0) { print TEE "$rows names are ignored in text_searchscore table\n";}
+    # change searched from null(new) to 0
+    $rows=$dbh_text->do("update text_search set state=0 where state is null");
+    if($rows && $rows>0) { print TEE "$rows text_search.state has been updated to 0\n"; }
+}
+
+
+# search updates table for new organism related documents
+# note that there is a bug in the DB2 text extender that will timeout this function if the search is done against
+# medline.citation for 'human' (mesh terms for other organisms are ok).  For this reason, the search is done
+# against medline.updates (this table contains only citations added to the baseline MedLine) which is much smaller
+# and does not cause a timeout.
+sub TextUpdateDoctax{
+    my ($dbh_db2, $dbh_text, $taxid)=@_;
+    my $sth_insert_doctax=$dbh_text->prepare("insert IGNORE into text_doctax(taxid, docid) values($taxid, ?)");
+    my $sth_organism_info=$dbh_text->prepare("select mesh, searched from text_organism where taxid=$taxid");
+    $sth_organism_info->execute();
+    if(my ($mesh, $searched)=$sth_organism_info->fetchrow_array){
+        my $sth_mymed_count=$dbh_db2->prepare("select count(pmid) from medline.updates where contains(citation, 'section(\"mesh\")\"$mesh\"')=1 ");
+        $sth_mymed_count->execute;
+        if( my @array=$sth_mymed_count->fetchrow_array){
+            my $count=$array[0];
+            #dbh_text->do("update text_organism set results=$count where taxid=$taxid");
+            print TEE "=== $count new pmids ===\n"
+        }
+        $sth_mymed_count->finish;
+        my $sth_mymed=$dbh_db2->prepare("select pmid from medline.updates where contains(citation, 'section(\"mesh\")\"$mesh\"')=1 ");
+        $sth_mymed->execute;
+        while( my @arr=$sth_mymed->fetchrow_array){
+            my $pmid=$arr[0];
+            $sth_insert_doctax->execute($pmid);
+        }
+        $sth_mymed->finish;
+    }
+    $dbh_text->do("update text_organism set searched=NOW() where taxid=$taxid");
+    $sth_insert_doctax->finish;
+    $sth_organism_info->finish;
+    $sth_insert_doctax->finish;
+}
+
+sub TextUpdateResultOld{
+    my ($dbh_text)=@_;
+    my ($query, $rows);
+    $query="insert IGNORE into text_result(searchid, bioentityid, name,taxid, docid) ".
+        " select a.id, a.bioentityid, a.name, a.taxid, b.docid ".
+        " from text_search a, text_rngresult b , text_doctax c".
+        " where a.state=0 ".
+        " and a.id not in (select searchid from text_searchscore where methodid=24 and score=-1 ) ".
+        " and a.rngid=b.rngid and b.docid=c.docid and a.taxid=c.taxid ".
+        " b.docid in (select docid from text_doctax where taxid=and ".
+        " and b.docid=c.docid and b.docid=d.docid and c.methodid=25 and c.score>0.5";
+    $rows = $dbh_text->do($query);
+    if($rows && $rows>0) {print TEE "$rows results inserted into text_result \n";}
+
+    $query="update text_search a, text_rng b set a.searched=b.searched, a.results=b.results , a.state=1 ".
+            " where a.rngid=b.id and a.state=0";
+    $rows= $dbh_text->do($query);
+    if($rows && $rows>0) {print TEE "$rows updates for text_search:searched, results, state 0->1 \n";}
+}
+
+
+sub TextUpdateResult{
+    my ($dbh_text)=@_;
+    my $nrc_score=0.5;
+    my $sth_select_search=$dbh_text->prepare("select id, bioentityid,  name, taxid, rngid from text_search a ".
+            " where state= 0 and id not in (select searchid from text_searchscore where methodid=24 and score=-1 ) 
+            and taxid in (select taxid from text_organism ) order by taxid " );
+    my $sth_select_docid=$dbh_text->prepare("select docid, pmid from text_rngresult ".
+            " where rngid=? and docid in (select docid from text_doctax where taxid=?) ".
+            " and docid in (select docid from text_docscore where methodid=25 and score>=$nrc_score) ");
+    my $sth_insert_result=$dbh_text->prepare("insert IGNORE into text_result(searchid, bioentityid, name,taxid, docid) VALUES(?,?,?,?,?)");
+    my $sth_update_search=$dbh_text->prepare("update text_search a, text_rng b ".
+           " set a.searched=b.searched, a.results=b.results , a.state=1 where a.id=? and a.rngid=b.id");
+    my ($rows_result, $rows_search)=(0,0);
+    $sth_select_search->execute;
+    while(my ($searchid, $bioentityid, $name, $taxid, $rngid)=$sth_select_search->fetchrow_array){
+        $sth_select_docid->execute($rngid, $taxid);
+        while(my ($docid, $pmid)=$sth_select_docid->fetchrow_array){
+            print LOG ">>$searchid\t$bioentityid\t$name\t$taxid\t$docid\n";
+            $sth_insert_result->execute($searchid, $bioentityid, $name, $taxid,$docid);
+            $rows_result++;
+        }
+        $sth_update_search->execute($searchid);
+        $rows_search++;
+    }
+    if($rows_result) {print TEE "$rows_result inserts for text_result \n";}
+    if($rows_search) {print TEE "$rows_search updates for text_search:searched, results, state 0->1 \n";}
+}
+
+sub TextUpdateResultscore{
+    my ($dbh_db2, $dbh_text)=@_;
+} # new name disambiguation method # svm scoring # pick top 2 for evidence
+
+
+sub TextUpdateNamepair{
+    my $dbh_text=$_[0];
+    my ($query, $rows);
+
+    $query="insert IGNORE into text_namepair(docid,nama,namb) ".
+        " select distinctrow a.docid, a.name, b.name ".
+        " from text_result a, text_result b ".
+        " where a.name<b.name ".
+        " and a.docid=b.docid ";
+
+    $rows =$dbh_text->do($query." and a.state is null and b.state is null");
+    if($rows && $rows>0) {print TEE "$rows insert into text_namepair NULL:NULL  [", scalar localtime,"] \n";}
+    $rows =$dbh_text->do($query." and a.state is null and b.state is not  null");
+    if($rows && $rows>0) {print TEE "$rows insert into text_namepair NULL:NOTNULL  [", scalar localtime,"] \n";}
+
+}
+
+sub TextUpdateEvidence{
+    my ($dbh_text)=@_;
+    my ($query, $rows);
+
+    $query="insert IGNORE into text_evidence(resultida, bioentityida, nama, resultidb, bioentityidb, namb, docid) ".
+        " select distinctrow a.id, a.bioentityid, a.name, b.id, b.bioentityid,b.name, a.docid ".
+        " from text_result a, text_result b ".
+        " where a.id<b.id ".
+        " and a.taxid=b.taxid and a.docid=b.docid and a.name!=b.name and a.bioentityid != b.bioentityid ";
+
+    $rows =$dbh_text->do($query." and a.state is null and b.state is null");
+    if($rows && $rows>0) {print TEE "$rows insert into text_evidence NULL:NULL  [", scalar localtime,"] \n";}
+    $rows =$dbh_text->do($query." and a.state is null and b.state is not  null");
+    if($rows && $rows>0) {print TEE "$rows insert into text_evidence NULL:NOTNULL  [", scalar localtime,"] \n";}
+
+    $rows= $dbh_text->do("update text_evidence a, text_namepair b set a.namepairid=b.id where a.namepairid is null ".
+           " and a.docid=b.docid and ((a.nama=b.nama and a.namb=b.namb) or (a.nama=b.namb and a.namb=b.nama)) ");
+    if($rows && $rows>0) { print TEE "$rows updates for text_result.namepairid\n";}
+
+    $rows= $dbh_text->do("update text_result set state=1 where state is null ");
+    if($rows && $rows>0) { print TEE "$rows updates for text_result.state\n";}
+ }
+
+sub TextUpdatePoint{
+    my $dbh_text=$_[0];
+    my $rows;
+
+   $rows=$dbh_text->do("Insert IGNORE into text_point(bioentityida, bioentityidb) ".
+         " select distinctrow bioentityida, bioentityidb from text_evidence where pointid is null ".
+         " and bioentityida<bioentityidb ");
+    if($rows && $rows>0) { print TEE "$rows insert into text_point bioida<bioidb at [", scalar localtime,"]\n";}
+
+    $rows=$dbh_text->do("Insert IGNORE into text_point(bioentityidb, bioentityida) ".
+            " select distinctrow bioentityida, bioentityidb from text_evidence where pointid is null ".
+            " and bioentityida>bioentityidb");
+    if($rows && $rows>0) { print TEE "$rows insert into text_point bioida>bioidb at [", scalar localtime,"]\n";}
+
+    $rows=$dbh_text->do("update text_evidence a, text_point b set a.pointid=b.id where a.pointid is NULL ".
+            " and ((a.bioentityida=b.bioentityida and a.bioentityidb=b.bioentityidb) ".
+            "   or  (a.bioentityida=b.bioentityidb and a.bioentityidb=b.bioentityida) ) ");
+    if($rows && $rows>0) { print TEE "$rows pointid update into text_evidence bioida<bioidb at [", scalar localtime,"]\n";}
+}
+
+
+
+sub TextUpdateNamepairresult{
+    my ($dbh_db2, $dbh_text, $minid, $maxid)=($_[0], $_[1], 0, 0);
+    if($_[2]){$minid=$_[2];}
+    if($_[3]){$maxid=$_[3];}
+    my ($rangemin, $rangemax)=("", "");
+    if($minid>0){ $rangemin=" and id>=$minid "; }
+    if($maxid>0){ $rangemax=" and id<=$maxid "; }
+    my $range=$rangemin." ".$rangemax;
+
+    my @patterns;
+    my $sth_select_pattern=$dbh_text->prepare("select id,class,score,regex from text_pattern");
+    $sth_select_pattern->execute;
+    my ($style, $option)=(0,0);
+    while(my ($id,$class,$score,$regex)= $sth_select_pattern->fetchrow_array){
+        my $newpattern = PatternNew($class, $id, $score, $style, $option, $regex);
+        push  @patterns, $newpattern;
+    }
+    $sth_select_pattern->finish;
+
+    my ($abstract, @list, $A, $B);
+    my $numLine =   0;
+    my $prev_pmid=0;
+    my $sth_db2=$dbh_db2->prepare("CALL medline.get_abstitle_pmid(?)");
+    my @data=$dbh_text->selectrow_array("SELECT count(id),count(distinct docid) FROM text_namepair WHERE state is NULL $range");
+    my ($total, $docs)=(0,0);
+    if (@data) {
+        $total=$data[0];
+        $docs=$data[1];
+        print LOG "----- [ $total / $docs ] namepairs/documents to be parsed ----- \n";
+    }
+    my $query="SELECT id, docid, nama, namb FROM text_namepair WHERE state is null $range order by docid";
+    print LOG "$query\n";
+    my $sth_select_namepair=$dbh_text->prepare($query);
+    my $sth_insert_namepairresult=$dbh_text->prepare("insert IGNORE into text_namepairresult values(?,?,?)");
+    $sth_select_namepair->execute;
+    while(my ($namepairid, $pmid, $nama, $namb)=$sth_select_namepair->fetchrow_array){
+        $A=ProcessNamelist($nama);
+        $B=ProcessNamelist($namb);
+        my $line="<$namepairid>\t$pmid\t$nama\t$namb";
+        print LOG "[$numLine/$total]: $line\n";
+        $numLine++;
+        if($prev_pmid != $pmid){
+            $abstract= TextGetAbstract($sth_db2, $pmid); 
+            print LOG "PMID: $pmid\n";
+            # print LOG "ABSTITLE: $abstract\n";
+            $abstract =~ s/(\s|\n)+/ /gs;
+            # Prepare abstract - substitute all separators to comma
+            @list = split(/[.?!;]\s(?=[^a-z])/, $abstract);
+        } 
+        # if ($abstract =~(/((($A|$B)(\S*\s+){0,1}\S*(kinase|gene|rna|cell))|((cell|kinase|gene|rna)(\S*\s+){0,1}\S*($A|$B)))/i)  ){
+        if ($abstract =~(/([.;][^.;]*($A|$B)(\S*\s+){0,2}\S*(gene|rna|cell)(s|)\b[^.;]*[.;])/i)  ){
+                print LOG "!non-protein!: $1\n";
+                $dbh_text->do("update text_namepair set state=-1 where id=$namepairid");
+                next; 
+            }
+
+        ##  for each sentence in the abstract, do match
+        # print LOG "Do match \n";
+        my ($sent, $pattern, $class, $id, $score, $regex,  $regex1,  $regex2);
+        foreach $sent(@list){
+            next if($sent !~ /(\S*\s){5,}/); # skip if the sentence is less than 5 words
+            ##  given sentence and nameA and nameB, get piscore using regex
+            next if($sent!~/$A.*$B/i && $sent!~/$B.*$A/i); # skip if no co-occurance
+            foreach $pattern(@patterns){
+                $class=$pattern->{"class"};
+                $id  = $pattern->{"id"};
+                $score=$pattern->{"score"};
+                $regex=$pattern->{"regex"};
+
+                #substitude A,B by $A, $B
+                $regex1 = $regex;
+                $regex1=~s/(.*)A(.*)B(.*)/$1$A$2$B$3/;
+
+                $regex2 = $regex;
+                $regex2=~s/(.*)A(.*)B(.*)/$1$B$2$A$3/;
+
+                if($sent =~ /$regex1/i || $sent =~ /$regex2/i){
+                    print LOG "<<$pmid|$A|$B|$regex|$sent\n";
+                    PatternAddMatch($pattern);
+                }
+            } 
+        }
+        # print LOG "Check match \n";
+
+        foreach $pattern(@patterns){
+            my $matchs=$pattern->{"match"};
+            if($matchs>0){
+                my $patternid=$pattern->{"id"};
+                print LOG ">>$namepairid\t$patternid\t$matchs\n";
+                $sth_insert_namepairresult->execute($namepairid, $patternid,$matchs);
+                $pattern->{"match"}=0;
+            }
+        }
+
+        $dbh_text->do("update text_namepair set state=0 where id=$namepairid");
+        $prev_pmid = $pmid;
+    }
+
+    $sth_db2->finish;
+    $sth_select_namepair->finish;
+    $sth_insert_namepairresult->finish;
+}
+
+sub TextUpdateNamepairscore{
+    my $dbh_text=$_[0];
+    my $rows=$dbh_text->do("insert IGNORE into text_namepairscore select a.id,36,c.score ".
+            " from text_namepair a, text_namepairresult b, text_pattern c ".
+            " where a.id=b.namepairid and b.patternid=c.id and a.state=0 order by score desc");
+    if($rows && $rows>0) { print TEE "$rows namepair inserted into text_namepairscore at [", scalar localtime,"]\n";}
+    $rows=$dbh_text->do("update text_namepair set state=1 where state=0"); # result parsed to score
+    if($rows && $rows>0) { print TEE "$rows namepair state updated 0->1 at [", scalar localtime,"]\n";}
+}
+
+sub TextUpdateEvidencescore{
+    my $dbh_text=$_[0];
+    my ($rows_insert,$rows_update)=(0,0);
+    my $sth_select_evidence=$dbh_text->prepare("select id, namepairid from text_evidence where state is null");
+    my $sth_get_maxscore=$dbh_text->prepare("select max(score) from text_namepairresult a, text_pattern b where a.namepairid=? and a.patternid=b.id");
+    my $sth_insert_evidencescore=$dbh_text->prepare("insert ignore into text_evidencescore values (?, ?, ?)");
+    my $sth_update_evidencestate=$dbh_text->prepare("update text_evidence set state=0 where id=?");
+    my $methodid=36;
+    $sth_select_evidence->execute();
+    while(my ($evidenceid, $namepairid)= $sth_select_evidence->fetchrow_array){
+        $sth_get_maxscore->execute($namepairid);
+        if(my @ar=$sth_get_maxscore->fetchrow_array){
+            my $score=$ar[0];
+            if($score>0){
+                $sth_insert_evidencescore->execute($evidenceid,  $methodid, $score);
+                $rows_insert++;
+            }
+        }
+        $sth_update_evidencestate->execute($evidenceid);
+        $rows_update++;
+    }
+    if($rows_insert>0){  print TEE "$rows_insert evidenscore inserted into text_evidencescore at [", scalar localtime,"]\n";}
+    if($rows_update>0) { print TEE "$rows_update evidence state updated to 0 at [", scalar localtime,"]\n";}
+    $sth_select_evidence->finish;
+    $sth_get_maxscore->finish;
+    $sth_insert_evidencescore->finish;
+    $sth_update_evidencestate->finish;
+}
+
+sub TextUpdatePointscore{
+    my $dbh_text=$_[0];
+    my $sth_select_point=$dbh_text->prepare("select a.pointid, a.id,  b.score from text_evidence a, text_evidencescore b where a.state=0 and a.id=b.evidenceid and b.methodid=36");
+    my $sth_get_score=$dbh_text->prepare("select score from text_pointscore where pointid=? and methodid=?");
+    my $sth_insert_score=$dbh_text->prepare("REPLACE into text_pointscore values(?, ?, ?)");
+    my $sth_update_evidence_state=$dbh_text->prepare("update text_evidence set state=1 where id=?");
+    my $sth_update_point_state=$dbh_text->prepare("update text_point set state=0 where id=?");
+    my $methodid=41;
+
+    $sth_select_point->execute();
+    while (my ($pointid, $evidenceid, $newscore)= $sth_select_point->fetchrow_array){
+        $sth_get_score->execute($pointid,$methodid);
+        if(my @ar=$sth_get_score->fetchrow_array){
+            # there was a score for this bioentity pair
+            my $oldscore=$ar[0];
+            if ($newscore>$oldscore){
+                # there was not score for this bioentity pair
+                $sth_insert_score->execute($pointid, $methodid, $newscore);
+            }
+        }else{
+            $sth_insert_score->execute($pointid, $methodid, $newscore);
+        }
+        $sth_update_evidence_state->execute($evidenceid);
+        $sth_update_point_state->execute($pointid);
+    }
+    $sth_select_point->finish;
+    $sth_get_score->finish;
+    $sth_insert_score->finish;
+    $sth_update_evidence_state->finish;
+    $sth_update_point_state->finish;
+}
+
+
+
+
+#================================================================
+#  Private functions
+#================================================================
+sub ProcessNamelist{
+    my $namelist = shift;
+    $namelist =~ s/"\(([^\/]*)\)"/$1/gs; #remove outmost bracket
+    $namelist =~ s/"//gs;       #remove double quota (used if name contain \W+ )
+
+    # special characters []()+?.*^${}|\ must be escaped
+    $namelist =~ s/\[/\\\[/gs;    # replace [ by \[
+    $namelist =~ s/\]/\\\]/gs;    # replace ] by \]
+    $namelist =~ s/\(/\\\(/gs;    # replace ( by \(
+    $namelist =~ s/\)/\\\)/gs;    # replace ) by \)
+    $namelist =~ s/\+/\\\+/gs;    # replace + by \+
+    $namelist =~ s/\?/\\\?/gs;    # replace ? by \?
+    $namelist =~ s/\./\\\./gs;    # replace . by \.
+    $namelist =~ s/\*/\\\*/gs;    # replace * by \*
+    $namelist =~ s/\{/\\\{/gs;    # replace { by \{
+    $namelist =~ s/\}/\\\}/gs;    # replace } by \}
+
+    $namelist =~ s/\//\|/gs;      # replace / by |
+    # $namelist = "\\b(p|P)*(".$namelist.")(p|P)*\\b";
+    $namelist = "\\b(".$namelist.")\\b";
+    return $namelist;
+}
+
+# replace special character, 
+# may put name expansion rules here
+sub ProcessNameForSearch{
+    my $name = shift;
+    # special characters '\ must be escaped
+    $name =~ s/'/ /gs;    # replace ' by space
+    $name =~ s/"/ /gs;    # replace " by space
+    $name =~ s/\\/ /gs;    # replace \ by space
+    return $name;
+}
+#/*$Log$*/

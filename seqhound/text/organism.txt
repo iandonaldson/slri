@@ -1,0 +1,6 @@
+4932	Saccharomyces cerevisiae
+9606	humans
+10090	mice
+10116	rats
+7227	Drosophila melanogaster
+6239	Caenorhabditis elegans

@@ -1,0 +1,1048 @@
+-- $Id: _slristruc.asn,v 1.1 2005/05/02 15:33:06 eburgess Exp $
+--*******************************************************************************************
+--  Copyright (C) 2000 Mount Sinai Hospital (MSH)
+--
+--  This program is free software; you can redistribute it and/or
+--  modify it under the terms of the GNU General Public License as
+--  published by the Free Software Foundation; either version 2 of
+--  the License, or any later version.
+--
+--  This program is distributed in the hope that it will be useful,
+--  but WITHOUT ANY WARRANTY; without even the implied warranty of
+--  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+--
+--  See the GNU General Public License for more details.
+--
+--  You should have received a copy of the GNU General Public License
+--  along with this program; if not, write to the
+--         Free Software Foundation, Inc.,
+--         59 Temple Place, Suite 330, Boston, MA
+--         02111-1307  USA
+--  or visit http://www.gnu.org/copyleft/gpl.html
+--
+--  SPECIAL EXCEPTIONS
+--
+--  As a special exception, Mount Sinai Hospital gives permission to
+--  link this program with the following non-GPL programs or libraries,
+--  and distribute the resulting executable, without including the source
+--  code for these in the source distribution:
+--
+--  a) CodeBase 6.5 or greater from Sequiter Software Inc.
+--
+--  b) The C or C++ interface to Oracle 8.x or greater, from
+--     Oracle Corporation or IBM DB2 UDB.
+--
+--
+--  PROGRAM:
+--
+--
+--  AUTHORS:
+--           Katerina Michalickova and Christopher W.V. Hogue hogue@mshri.on.ca
+--
+--
+--  REVISION/CONTRIBUTION NOTES:
+--
+--  June 1, 2000  Original MSH Revision.
+--                Hogue Lab - University of Toronto Biochemistry
+--                Department and the Samuel Lunenfeld Research
+--                Institute, Mount Sinai Hospital
+--                http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+--                ftp://ftp.mshri.on.ca/
+--
+--
+--  PUBLICATION TO CITE:
+--
+--
+--******************************************************************************************
+
+--$Revision 0.0 $
+--**********************************************************************************
+--
+--
+-- SLRI domestic structures including
+-- ValNode Asn.1 read and write mock-up
+-- by Katerina Michalickova, November 1999
+--
+-- Version 0.1 - 1998
+--
+--
+--
+--**********************************************************************************
+INTREZ-databases DEFINITIONS ::=
+BEGIN
+
+EXPORTS StRpsdb, SHProteinReportSetDescription, SHProteinReportSet, SHProteinReport;
+IMPORTS Bioseq FROM NCBI-Sequence
+Biostruc FROM MMDB
+Seq-entry FROM NCBI-Seqset
+SLRIValNode, SLRIFasta FROM SLRILIB-struc
+FLink-set FROM SLRI-Link-set; 
+
+
+
+
+--******************************
+--    ASNDB
+--******************************
+StAsndbNode ::= SEQUENCE {
+   gi INTEGER,
+   asn1 Bioseq,
+   division VisibleString,
+   release VisibleString,
+   type VisibleString
+}
+
+StAsndb ::= SEQUENCE OF StAsndbNode
+
+
+--******************************
+--  PARTI
+--******************************
+StPartiNode ::= SEQUENCE {
+   gi INTEGER,
+   partition VisibleString
+}
+
+StParti ::= SEQUENCE OF StPartiNode
+
+
+--******************************
+--  NUCPROT
+--******************************
+StNucprotNode ::= SEQUENCE {
+   gin INTEGER,
+   gia INTEGER
+}
+
+StNucprot ::= SEQUENCE OF StNucprotNode
+
+--******************************
+--  ACCDB
+--******************************
+StAccdbNode ::= SEQUENCE {
+  gi INTEGER,
+  db VisibleString,
+  name VisibleString,
+  access VisibleString,
+  chain VisibleString,
+  release VisibleString,
+  version INTEGER,
+  title VisibleString,
+  namelow VisibleString
+}
+
+StAccdb ::= SEQUENCE OF StAccdbNode
+
+
+--*********************************
+--  PUBSEQ
+--*********************************
+StPubseqNode ::= SEQUENCE {
+   gi INTEGER,
+   muid INTEGER,
+   pmid INTEGER
+}
+
+StPubseq ::= SEQUENCE OF StPubseqNode
+
+
+--*********************************
+--  TAXGI structure
+--*********************************
+StTaxgiNode ::= SEQUENCE {
+   gi INTEGER,
+   taxid INTEGER,
+   kloodge INTEGER,
+   type VisibleString
+}
+
+StTaxgi ::= SEQUENCE OF StTaxgiNode
+
+
+--*********************************
+--  CHROM structure
+--*********************************
+StChromNode ::= SEQUENCE {
+   kloodge INTEGER,
+   taxid INTEGER,
+   chromid INTEGER,	
+   chromfl INTEGER,
+   access VisibleString,
+   name VisibleString,
+   projectid INTEGER,
+   chromnum VisibleString
+}
+
+StChrom ::= SEQUENCE OF StChromNode
+
+
+--*********************************
+--  SENDB structure
+--*********************************
+StSendbNode ::= SEQUENCE {
+   seid INTEGER,
+   asn1 Seq-entry
+}
+
+StSendb ::= SEQUENCE OF StSendbNode
+
+--*********************************
+--  SENGI structure
+--*********************************
+StSengiNode ::=  SEQUENCE {
+   seid INTEGER,
+   gi INTEGER,
+   division VisibleString
+}
+
+StSengi ::= SEQUENCE OF StSengiNode
+
+--*********************************
+--  MMDB structure
+--*********************************
+StMmdbNode ::= SEQUENCE {
+   mmdbid INTEGER,
+   pdbid VisibleString,
+   asn1 Biostruc,
+   bwhat INTEGER,
+   models INTEGER,
+   molecules INTEGER,
+   size INTEGER,
+   bzsize INTEGER
+}
+
+StMmdb ::= SEQUENCE OF StMmdbNode
+
+--*********************************
+--  MMGI structure
+--*********************************
+StMmgiNode ::= SEQUENCE {
+    mmdbid INTEGER,
+    gi INTEGER
+}
+
+StMmgi ::= SEQUENCE OF StMmgiNode
+
+--*********************************
+--  REDUND structure
+--*********************************
+StRedundNode ::= SEQUENCE {
+    gi INTEGER,
+    ordinal INTEGER,
+    group INTEGER
+}
+
+StRedund ::= SEQUENCE OF StRedundNode
+
+--*********************************
+--  DOMDB structure
+--*********************************
+StDomdbNode ::= SEQUENCE {
+   mmdbid INTEGER,
+   asn1 SLRIValNode,
+   pdbid VisibleString,
+   chain VisibleString,
+   gi INTEGER,
+   domno INTEGER,
+   domall INTEGER,
+   domid  INTEGER,
+   rep   INTEGER
+}
+
+
+StDomdb ::= SEQUENCE OF StDomdbNode
+
+--*************************************
+-- CDDB structure
+-- (March 2001, Doron)
+--*************************************
+StCddbNode ::= SEQUENCE {
+        gi INTEGER,
+        asn1 SLRIFasta
+
+}
+StCddb ::=SEQUENCE OF StCddbNode
+
+--**********************************************
+-- RPSDB structure
+-- Protein domain annotation table
+-- produced by RPS-BLAST
+-- DomId -Domain unique id from the parent
+--	database.
+-- CDDId - CDD ID assigned by NCBI
+-- Score - BLAST score
+-- Evalue- evalue from the RPS-BLAST
+-- BitScore = BLAST bit score
+-- [N/C]missing- how much is missing on each
+--	end of the alignment.
+-- Num-of-dom Number of domains for this protein
+--***********************************************
+StRpsNode ::= SEQUENCE {
+	gi INTEGER,
+	dom-id VisibleString,
+	cdd-id INTEGER OPTIONAL,
+	from INTEGER,
+	len INTEGER,
+	score INTEGER OPTIONAL,
+	evalue REAL,
+	bitscore REAL OPTIONAL,
+	n-missing INTEGER,
+	c-missing INTEGER,
+	num-of-dom INTEGER
+}
+StRpsdb ::=SEQUENCE OF StRpsNode
+
+--*************************************
+-- DOMNAME structure
+-- Domain information parsed from
+-- CDD files (cddid.tbl and *.acd files)
+-- pssmid - unique PSSM id 
+-- accession - unique domain id
+-- name - short label
+-- description - text desc. of domain
+-- length - number of columns in pssm 
+-- pdb-id - PDB structure link
+--**********************************
+StDomNameNode ::=SEQUENCE {
+	pssmid INTEGER,
+	accession VisibleString,
+	name VisibleString,
+	description VisibleString,
+	length INTEGER,
+	pdb-id VisibleString OPTIONAL
+}
+StDomNamedb ::=SEQUENCE OF StDomNameNode
+
+--******************************
+--    HISTDB
+--******************************
+StHistdbNode ::= SEQUENCE {
+   gi INTEGER,
+   oldgi INTEGER,
+   access VisibleString,
+   version INTEGER,
+   date VisibleString,
+   action INTEGER,
+   filename VisibleString
+}
+
+StHistdb ::= SEQUENCE OF StHistdbNode
+
+
+--*********************************
+--  VASTDB structure
+--*********************************
+--StVastdbNode ::= SEQUENCE {
+--   mmdbid   INTEGER,
+--   asn1  Biostruc-feature-set,
+--   pdbid VisibleString,
+--   chain VisibleString,
+--   vastid1  INTEGER,
+--   vastid2  INTEGER,
+--   score  INTEGER,
+--   pval  INTEGER,
+--   res  INTEGER,
+--   ident INTEGER,
+--   rmsd  INTEGER,
+--   scale  INTEGER
+--}
+
+--StVastdb ::= SEQUENCE OF StVastdbNode
+
+
+
+--******************************
+--    GODB
+--******************************
+StGOdbNode ::= SEQUENCE {
+   llid INTEGER,
+   goid INTEGER,
+   pmid INTEGER,
+   eviCode VisibleString
+}
+
+StGOdb ::= SEQUENCE OF StGOdbNode
+
+
+--******************************
+--    OMIMDB
+--******************************
+StOMIMdbNode ::= SEQUENCE {
+   llid INTEGER,
+   omimid INTEGER
+}
+
+StOMIMdb ::= SEQUENCE OF StOMIMdbNode
+
+--*****************************
+--    CDDDB
+--*****************************
+StCDDdbNode ::= SEQUENCE {
+   llid INTEGER,
+   cddid VisibleString,
+   eValue REAL
+}
+
+StCDDdb ::= SEQUENCE OF StCDDdbNode
+
+--*****************************
+--    LLDB
+--*****************************
+StLLdbNode ::= SEQUENCE {
+   llid INTEGER,
+   npid INTEGER,
+   map VisibleString
+}
+
+StLLdb ::= SEQUENCE OF StLLdbNode
+
+-- ***************************************************************************
+-- SHProteinReportSetDescription
+-- Description of a set of SeqHound Protein Reports
+--
+-- Field description for this struct
+-- **********************************
+-- title                  = title of set 
+-- total-reports	  = total number of reports
+-- query		  = gi of query protein
+-- redundant-set          = set of gi's redundant with query
+--				- filled by SHoundRedundantGroup
+-- neighbour-set          = set of neighbour gi's
+--				- see SHNeighbour
+-- cutoff		  = cutoff evalue defining neighbours
+-- query-report 	  = protein report for queried protein
+-- best-report  	  = best annotation for queried protein 
+-- redun-reports    	  = protein reports for the redundant set
+-- neighbour-report       = set of reports for neighbour proteins
+-- redund                 = redundant-set present in reports
+-- neighbours             = neighbour-set present in reports
+-- acc		          = accession numbers present in reports
+-- defline		  = deflines present in reports
+-- dna		          = dna gi's present in reports
+-- muid		          = muid's present in reports
+-- mmdb-ids		  = mmdb ids present in reports
+-- go			  = go information present in reports
+-- taxid                  = taxid information present in reports
+-- omim		          = omim id's present in reports
+-- llink		  = locus link information present in reports
+-- cdd		          = conserved domain information present in reports
+-- ***************************************************************************
+
+
+SHProteinReportSetDescription ::= SEQUENCE {
+	title VisibleString OPTIONAL,
+	total-reports INTEGER,
+	query	INTEGER,
+	query-report SHProteinReport OPTIONAL,
+	redundant-set SEQUENCE OF INTEGER OPTIONAL,
+	redun-reports SHProteinReportSet OPTIONAL,
+	neighbour-set FLink-set OPTIONAL,
+	best-report SHProteinReport OPTIONAL,
+	neighbour-reports SHProteinReportSet OPTIONAL, 
+	cutoff REAL OPTIONAL,
+	acc BOOLEAN,
+	defline BOOLEAN,
+	dna BOOLEAN,
+        taxid BOOLEAN,
+	omim BOOLEAN,
+	muid BOOLEAN,
+        pmid BOOLEAN,
+	mmdb-ids BOOLEAN,
+	go BOOLEAN,
+	llink BOOLEAN,
+        redund BOOLEAN, 
+        neighbours BOOLEAN
+--	cdd BOOLEAN
+	}
+
+
+-- ***************************************************************************
+-- SHProteinReportSet
+-- Description of a SHProteinReportSet
+--
+-- Field description for this struct
+-- **********************************
+-- number    = number of Protein Reports in set 
+-- reports   = set of SHProteinReports
+--***************************************************************************
+
+
+SHProteinReportSet ::= SEQUENCE {
+	number INTEGER,
+	reports SEQUENCE OF SHProteinReport
+	}
+
+-- ***************************************************************************
+-- SHProteinReport
+-- Description of a SeqHound Protein Report
+--
+-- Field description for this struct
+-- **********************************
+-- gi			= gi of protein for this report
+-- acc		= accession number
+--				- filled by SHoundAccFromGi
+-- defline		= defline for this protein sequence record
+--				- filled by SHoundGetDefline
+-- dna		= gi of dna encoding this protein sequence record
+--				- filled by SHoundDNAFromProtein
+-- muids		= muid's for this protein sequence record
+--				- filled by SHoundMuidFromGi
+-- mmdb-ids		= mmdb ids present in this protein sequence record
+--				- filled by SHound3DFromGi
+-- taxid		= taxid for this sequence record
+--				- filled by SHoundTaxIDFromGi
+-- go			= go annotation for this sequence record
+--				- see SHGoReport 
+-- omim		= omim id's for this protein sequence record
+--				- filled by SHoundOMIMFromGi
+-- llink		= locus link information present in reports
+--				- see SHLocusLinkReport
+-- cdd		= conserved domain information present in reports
+--				-api functions being written
+-- ***************************************************************************
+
+
+SHProteinReport ::= SEQUENCE {
+	gi INTEGER,
+ 	acc VisibleString OPTIONAL,
+	defline VisibleString OPTIONAL,
+ 	dna INTEGER OPTIONAL,
+	muids SEQUENCE OF INTEGER OPTIONAL,
+        pmids SEQUENCE OF INTEGER OPTIONAL,
+ 	mmdbid INTEGER OPTIONAL,
+ 	taxid INTEGER OPTIONAL,
+ 	go SEQUENCE OF SHGoReport OPTIONAL,
+	omim SEQUENCE OF INTEGER OPTIONAL,
+	llink SEQUENCE OF SHLocusLinkReport OPTIONAL
+--	cd SEQUENCE OF SHConservedDomainReport OPTIONAL	
+	}
+
+
+-- ***************************************************************************
+-- SHNeighbour
+-- Description of a SHNeighbour
+--
+-- Field description for this struct
+-- **********************************
+-- gi     = gi of neighbour
+-- evalue = evalue of neighbour with respect to query protein
+--***************************************************************************
+
+
+SHNeighbour ::= SEQUENCE {
+	gi INTEGER,
+	evalue REAL
+	}
+
+-- ***************************************************************************
+-- SHGoReport
+-- Description of a SHGoReport
+--
+-- Field description for this struct
+-- **********************************
+-- num-mol-fun	= number of molecular function annotations
+-- num-bio-pro	= number of biological processes annotations
+-- num-cell-com	= number of cell component annotations 
+-- mol-fun		= sequence of molecular function annotations
+-- bio-pro		= sequence of biological process annotations
+-- cell-com		= sequence of cellular location annotations
+--***************************************************************************
+
+
+SHGoReport ::= SEQUENCE {
+	num-mol-fun INTEGER,
+	num-bio-pro INTEGER,
+	num-cell-com INTEGER,
+	mol-fun SHGoAnnot OPTIONAL,
+	bio-pro SHGoAnnot OPTIONAL,
+	cell-com SHGoAnnot OPTIONAL
+	}
+
+-- ***************************************************************************
+-- SHGoAnnot
+-- Description of a SHGoAnnot
+--
+-- Field description for this struct
+-- **********************************
+-- goid = GO id
+--		-filled by SHoundGOIDFromGi
+-- godb = GO database (molecular function, biological process or cell component
+--		- filled by SHoundGODBGetClassification
+-- goname = GO name for this GO id
+--		- filled by SHoundGODBGetNameByID
+-- goecode = GO evidence code for this GO id assignment to this gi
+--		- filled by SHoundGOECodeFromGi
+--		- this must be rewritten to take the Gi AND the go id
+-- gopmid = pmid used to back up this assignment
+-- 		-SHoundGOPMIDFromGi
+--		- this must be rewritten to take the Gi AND the go id
+--***************************************************************************
+
+
+SHGoAnnotNode ::= SEQUENCE {
+	goid INTEGER,
+	ontology VisibleString,
+	goname VisibleString,
+	evidence-code SEQUENCE OF VisibleString,
+	pmid SEQUENCE OF INTEGER
+}
+
+SHGoAnnot ::= SEQUENCE OF SHGoAnnotNode
+
+
+
+-- ***************************************************************************
+-- SHLocusLinkReport
+-- Description of a SHLocusLinkReport
+--
+-- Field description for this struct
+-- **********************************
+-- llid = locus link id
+-- 		- filled by SHoundLLIDFromGi
+-- locus = locus for this protein sequence record
+--		- filled by SHoundLocusFromGi
+-- products = list of gi's mapping to this locus 
+--***************************************************************************
+
+
+SHLocusLinkReport ::= SEQUENCE {
+	llid INTEGER OPTIONAL,
+	locus VisibleString OPTIONAL,
+	products SEQUENCE OF SHLocusProduct OPTIONAL
+	}
+
+-- ***************************************************************************
+-- SHLocusProduct
+-- Description of a SHLocusProduct
+--
+-- Field description for this struct
+-- **********************************
+-- gi = gi of protein that maps to a locus
+-- 		- filled by SHoundGiFromLLID
+-- defline = definition line of gi
+--		- filled by SHoundGetDefline
+--***************************************************************************
+
+
+SHLocusProduct ::= SEQUENCE {
+	gi INTEGER, 
+	defline VisibleString OPTIONAL
+	}
+
+
+-- ***************************************************************************
+-- StDbXref
+-- Description of a set of Data Base SeqHound DBXREF
+--
+-- Field description for this struct
+-- **********************************
+-- id 			= Primary Key Identifier.ls
+-- source_id    = Source Database Identifier.
+-- source_db	= Source Database name.
+-- record_id    = Record Identifier.
+-- parent_id	= Parent Identifier for this Record.
+-- link         = Link for this record to a related Record.
+-- field		= Field name from the Flat File.
+-- cv			= Control Vocabulary.
+-- ***************************************************************************
+
+StDbXrefNode ::= SEQUENCE {
+    id INTEGER,
+	sourcedb VisibleString,
+	sourceid INTEGER,
+	recordid VisibleString,
+	parentid INTEGER,
+	link INTEGER,
+	field VisibleString,
+	cv INTEGER
+	}
+
+StDbXref ::= SEQUENCE OF StDbXrefNode
+
+
+-- ***************************************************************************
+-- SHDBXref
+-- Description of a set of Data Base SeqHound DBXref
+--
+-- Field description for this struct
+-- **********************************
+-- source_db	= Source Database name.
+-- record_id    = Record Identifier.
+-- field		= Field name from the Flat File.
+-- cv			= Control Vocabulary.
+-- ***************************************************************************
+
+SHDBXrefNode ::= SEQUENCE {
+	sourcedb VisibleString,
+	recordid VisibleString,
+	field VisibleString,
+	cv INTEGER
+	}
+
+SHDBXref ::= SEQUENCE OF SHDBXrefNode
+
+-- ***************************************************************************
+-- StBioentityNode
+-- Description of a set of Data Base SeqHound Bioentity
+--
+-- Field description for this struct
+-- **********************************
+-- id               = Unique primary key for this table
+-- bioentitytypeid  = Key to the bioentity type table. Describes types of
+--                    bioentities.
+-- SrcDb            = Name of the primary source database for this bioentity
+-- access           = Accession number for the primary database.
+-- identifier       = identifier (e.g. gi) for the primary database.
+-- srcField         = field in which info on this bioentity is found.
+--*************************************************************************
+
+StBioentityNode ::= SEQUENCE {
+     id INTEGER,
+     bioentitytypeid INTEGER,
+     db VisibleString,
+     access VisibleString,
+     identifier INTEGER,
+     field INTEGER
+     }
+
+StBioentity ::= SEQUENCE OF StBioentityNode
+
+-- ***************************************************************************
+-- StBionameNode
+-- Description of a set of Data Base SeqHound BioentityName
+--
+-- Field description for this struct
+-- **********************************
+-- id               = Unique primary key for this table
+-- BioentityNametypeid  = Key to the BioentityName type table. Describes types of
+--                    bioentities.
+-- SrcDb            = Name of the primary source database for this BioentityName
+-- access           = Accession number for the primary database.
+-- identifier       = identifier (e.g. gi) for the primary database.
+-- srcField         = field in which info on this BioentityName is found.
+--*************************************************************************
+StBionameNode ::= SEQUENCE {
+     id INTEGER,
+     bioentityid INTEGER,
+     name VisibleString,
+     nametypeid INTEGER,
+     db VisibleString,
+     access VisibleString,
+     identifier INTEGER,
+     field INTEGER,
+     official INTEGER,
+     deprecated INTEGER,
+     date VisibleString,
+     ruleid INTEGER,
+	 action INTEGER,
+	 actiondate VisibleString 
+     }
+
+StBioname ::= SEQUENCE OF StBionameNode
+
+-- ***************************************************************************
+-- StSecondrefsNode
+-- Description of a Secondrefs record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- Bionameid    = Key to the BioentityName type table to which this second reference
+--                refers
+-- dbb          = Name of the primary source database for this reference
+-- access       = Accession number for the primary database.
+-- field        = field in which info on this BioentityName is found.
+--*************************************************************************
+StSecondrefsNode ::= SEQUENCE {
+	id INTEGER,
+	bionameid INTEGER,
+	db VisibleString,
+	access VisibleString,
+	field INTEGER
+   }
+
+StSecondrefs ::= SEQUENCE OF StSecondrefsNode
+
+
+-- ***************************************************************************
+-- StGikloodge node
+-- Description of a gikloodge record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- gi           = The gi for this record
+-- contiggi     = The gi for the contig that contains this record.
+-- chromid      = The chromid for this gi.
+--*************************************************************************
+
+StGichromidNode ::= SEQUENCE {
+	id INTEGER,
+	gi INTEGER,
+	contiggi INTEGER,
+	chromid INTEGER
+   }
+
+StGichromid ::= SEQUENCE OF StGichromidNode
+
+-- ***************************************************************************
+-- StContigchromid node
+-- Description of a contigchromid record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- contiggi     = The gi for this record
+-- topgi        = The gi for the contig that contains this contig.
+-- chromid      = The chromid for this gi.
+--*************************************************************************
+
+StContigchromidNode ::= SEQUENCE {
+	id INTEGER,
+	contiggi INTEGER,
+	topgi INTEGER,
+	chromid INTEGER,
+	changed INTEGER
+   }
+
+StContigchromid ::= SEQUENCE OF StContigchromidNode
+
+-- ***************************************************************************
+-- StGichrom node
+-- Description of a gichromosome record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- contiggi     = The gi for this record.
+-- chromnum     = The chromosome number as a string.
+--*************************************************************************
+
+StGichromNode ::= SEQUENCE {
+	id INTEGER,
+	gi INTEGER,
+	chromnum VisibleString
+   }
+
+StGichrom ::= SEQUENCE OF StGichromNode
+
+
+-- ***************************************************************************
+-- StContigchrom node
+-- Description of a contigchromosome record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- contiggi     = The gi for this record.
+-- chromnum     = The chromosome number as a string.
+--*************************************************************************
+
+StContigchromNode ::= SEQUENCE {
+	id INTEGER,
+	contiggi INTEGER,
+	chromnum VisibleString
+   }
+
+StContigchrom ::= SEQUENCE OF StContigchromNode
+
+-- ***************************************************************************
+-- StSourcefile node
+-- Description of a sourcefile record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- gi           = The gi for this record
+-- filename     = The filename where this gi was found.
+-- date         = The date that this record was added.
+--*************************************************************************
+
+StSourcefileNode ::= SEQUENCE {
+	id INTEGER,
+	gi INTEGER,
+	filename VisibleString,
+	date VisibleString
+   }
+
+StSourcefile ::= SEQUENCE OF StSourcefileNode
+
+
+-- ***************************************************************************
+-- StGeneObject node
+-- Description of a gene_object record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- taxid        = The taxid for this gene
+-- geneid       = The geneid for this record
+-- status       = The status of the refseq record for this gene.
+--*************************************************************************
+StGeneObjectNode ::= SEQUENCE {
+	id INTEGER,
+	taxid INTEGER,
+	geneid INTEGER,
+	status VisibleString
+   }
+
+StGeneObject ::= SEQUENCE OF StGeneObjectNode
+
+-- ***************************************************************************
+-- StGeneGi node
+-- Description of a gene_object record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- geneobjectid = The geneobjectid for this record
+-- gi           = The gi associated with this geneobjectid.
+-- moleculetype = The type of molecule. Protein, rna or dna.
+--*************************************************************************
+StGeneGiNode ::= SEQUENCE {
+	id INTEGER,
+	geneobjectid INTEGER,
+	gi INTEGER,
+	moleculetype VisibleString
+   }
+
+StGeneGi ::= SEQUENCE OF StGeneGiNode
+
+-- ***************************************************************************
+-- StGeneDbxref node
+-- Description of a gene_object record
+--
+-- Field description for this struct
+-- **********************************
+-- id           = Unique primary key for this table
+-- geneobjectid = The geneobjectid for this record
+-- dbname       = The database name for this cross reference
+-- dbaccession  = The database accesssion.
+--*************************************************************************
+StGeneDbxrefNode ::= SEQUENCE {
+	id INTEGER,
+	geneobjectid INTEGER,
+	dbname VisibleString,
+	dbaccess VisibleString
+   }
+
+StGeneDbxref ::= SEQUENCE OF StGeneDbxrefNode
+
+END
+
+--
+-- $Log: _slristruc.asn,v $
+-- Revision 1.1  2005/05/02 15:33:06  eburgess
+-- Added a field for NCBI projectid to the chrom table. Bug 5438
+--
+-- Revision 1.17  2005/04/26 18:51:17  eburgess
+-- Added structures for gene tables and removed NCBI link to Cdd asn1.
+--
+-- Revision 1.16  2005/04/11 21:00:39  zwang
+-- Added field description to StDomNameNode.
+--
+-- Revision 1.15  2005/04/11 20:28:00  zwang
+-- Fixed typo
+--
+-- Revision 1.14  2005/04/08 20:49:51  zwang
+-- Adapt the change in source file. See Bug 3974 for change in table schema.
+--
+-- Revision 1.13  2005/03/09 16:56:36  eburgess
+-- Added oldgi and filename to histdb. Changed the field acc to access in
+-- histdb. Bug 5049
+--
+-- Revision 1.12  2005/02/01 16:36:06  eburgess
+-- Changed gikloodge and contigkloodge to gichromid and contigchromid as these
+-- names make more sense.
+--
+-- Revision 1.11  2005/01/10 19:05:18  eburgess
+-- Added contigchromosome for comgen.
+--
+-- Revision 1.10  2004/11/10 18:23:59  eburgess
+-- Added StSourcefileNode.
+--
+-- Revision 1.9  2004/10/15 19:49:25  eburgess
+-- Added a definition for contigkloodge and made changes to the chrom table.
+-- For bug 2952, complete genomes.
+--
+-- Revision 1.8  2004/09/17 15:22:49  eburgess
+-- Added structures for secondrefs in names and gikloodge in ComGen.
+--
+-- Revision 1.7  2004/07/09 15:26:47  eburgess
+-- Added action and actiondate fields to bioname. Changed some fields from
+-- strings to integers.
+--
+-- Revision 1.6  2004/06/11 15:22:05  hlieu
+-- changes for locuslink refactor
+--
+-- Revision 1.5  2004/05/03 16:20:27  eburgess
+-- Added definitions for the names module.
+--
+-- Revision 1.4  2003/11/13 16:00:42  renan
+-- Add field sourceid into structure StDbXrefNode
+--
+-- Revision 1.3  2003/10/02 15:26:09  renan
+-- DBXref Module new ASN.1 structures used by DBXref.
+--
+-- Revision 1.2  2003/09/29 21:30:46  haocl
+-- merged ll.asn shproteinreport.asn into slristruc.asn
+-- makeproteinreport no longer necessary
+--
+-- Revision 1.1.1.10  2003/08/21 08:48:07  root
+-- Automated import from Sourceforge.net
+--
+-- Revision 1.10  2003/08/20 20:58:20  micheld
+-- Added export for StRpsdb
+--
+-- Revision 1.9  2003/07/25 16:16:20  haocl
+-- added pmid filed to Pubseq
+--
+-- Revision 1.8  2002/10/25 00:03:37  betel
+-- Changed field in DOMNAME table
+--
+-- Revision 1.7  2002/10/17 20:13:14  kaca
+-- added two fields to CHROM table
+--
+-- Revision 1.6  2002/09/30 20:51:11  betel
+-- Added optional fields to RPSDB
+--
+-- Revision 1.5  2002/08/07 19:09:14  haocl
+-- added StHist
+--
+-- Revision 1.4  2002/07/02 19:54:37  haocl
+-- fixed minor scoping errors
+--
+-- Revision 1.3  2002/02/21 22:08:10  betel
+-- Addition of RPS results and Cdd tables
+--
+-- Revision 1.2  2002/02/11 19:35:37  micheld
+-- Moved SLRI asns from slristruc.asn to slrilib slrilibstruc.asn
+--
+-- Revision 1.1.1.1  2001/05/25 21:36:18  kaca
+-- initial import
+--
+-- Revision 1.7  2001/03/27 21:07:14  doron
+-- Addition of CDDB module
+--
+-- Revision 1.6  2001/03/27 15:29:29  kaca
+-- removed type from REDUND struc
+--
+-- Revision 1.5  2001/03/15 23:31:38  kaca
+-- removed an import type
+--
+-- Revision 1.4  2001/02/23 20:39:58  kaca
+-- license change
+--
+-- Revision 1.3  2001/02/09 21:43:55  kaca
+-- removed vastdb struc
+--
+-- Revision 1.2  2000/12/22 20:36:30  kaca
+-- new database structures
+--
+-- Revision 1.1.1.1  2000/09/18 17:41:55  kaca
+-- Initial import
+--
+-- Revision 1.1.1.1  2000/07/06 20:02:32  kaca
+-- Initial import
+--
+--

@@ -1,0 +1,17 @@
+<table border="0" width="100%%"  cellspacing="2" cellpadding=2 cols="4">
+
+  <tr bgcolor="lightgoldenrodyellow"><!--lightgoldenrodyellow--><!--lightsteelblue-->
+        <td colspan="1" height="20">
+		Search name
+        </td>
+        <td width=colspan="1" height="20">
+		PubMed abstract <br>
+		(* or ! = likely contains interaction info)
+        </td>
+        <td colspan="1" height="20">
+		An interaction paper? (score)
+        </td>
+        <td colspan="1" height="20">
+		Review this paper
+        </td>
+  </tr>

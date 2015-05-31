@@ -1,0 +1,382 @@
+9482871|1|Oxa1p pCoxII|Furthermore, Oxa1p interacts with nascent polypeptide chains synthesized in mitochondria, including the fully synthesized pCoxII and CoxIII species.
+9482871|1|Oxa1p CoxIII|Furthermore, Oxa1p interacts with nascent polypeptide chains synthesized in mitochondria, including the fully synthesized pCoxII and CoxIII species.
+9482871|0|pCoxII CoxIII|Furthermore, Oxa1p interacts with nascent polypeptide chains synthesized in mitochondria, including the fully synthesized pCoxII and CoxIII species.
+
+
+9314530|0|Chs4p Cdc10p|Two-hybrid analysis revealed no direct interaction between the septins and Chs4p but identified a novel gene, BNI4, whose product interacts both with Chs4p and Cdc10p and with one of the septins, Cdc10p; this analysis also revealed an interaction between Chs4p and Chs3p, the catalytic subunit of chitin synthase III.
+9314530|1|BNI4 Chs4p|Two-hybrid analysis revealed no direct interaction between the septins and Chs4p but identified a novel gene, BNI4, whose product interacts both with Chs4p and Cdc10p and with one of the septins, Cdc10p; this analysis also revealed an interaction between Chs4p and Chs3p, the catalytic subunit of chitin synthase III.
+9314530|1|BNI4 Cdc10p|Two-hybrid analysis revealed no direct interaction between the septins and Chs4p but identified a novel gene, BNI4, whose product interacts both with Chs4p and Cdc10p and with one of the septins, Cdc10p; this analysis also revealed an interaction between Chs4p and Chs3p, the catalytic subunit of chitin synthase III.
+9314530|1|Chs4p Chs3p|Two-hybrid analysis revealed no direct interaction between the septins and Chs4p but identified a novel gene, BNI4, whose product interacts both with Chs4p and Cdc10p and with one of the septins, Cdc10p; this analysis also revealed an interaction between Chs4p and Chs3p, the catalytic subunit of chitin synthase III.
+
+9314530|1|Chs3p Chs4p|Taken together, these results suggest that the normal localization of chitin synthase III activity is achieved by assembly of a complex in which Chs3p is linked to the septins via Chs4p and Bni4p.
+9314530|1|Chs3p Bni4p|Taken together, these results suggest that the normal localization of chitin synthase III activity is achieved by assembly of a complex in which Chs3p is linked to the septins via Chs4p and Bni4p.
+9314530|0|Chs4p Bni4p|Taken together, these results suggest that the normal localization of chitin synthase III activity is achieved by assembly of a complex in which Chs3p is linked to the septins via Chs4p and Bni4p.
+
+
+1316273|1|Cln3 Cdc28|Cln3 associates with Cdc28 to form an active kinase complex that phosphorylates Cln3 itself and a co-precipitated substrate of 45 kDa.
+
+
+2699737|1|CKS1 Cdc28|The third, CKS1, encodes an 18K (K = 10(3) Mr) protein that has been shown to be a component of the Cdc28 protein kinase complex and is a homolog of the suc1+ product of fission yeast. 
+
+
+8668180|0|Kss1 Fus3|When synthesized by in vitro translation, Kss1 and Fus3 could each form a tight complex (Kd of approximately 5 nM) with Ste7 in the absence of any additional yeast proteins. 
+8668180|1|Kss1 Ste7|When synthesized by in vitro translation, Kss1 and Fus3 could each form a tight complex (Kd of approximately 5 nM) with Ste7 in the absence of any additional yeast proteins.
+8668180|1|Fus3 Ste7|When synthesized by in vitro translation, Kss1 and Fus3 could each form a tight complex (Kd of approximately 5 nM) with Ste7 in the absence of any additional yeast proteins. 
+
+8668180|0|Hog1 Mpk1|These complexes were specific because neither Hog1 nor Mpk1 (two other yeast MAPKs), nor mammalian Erk2, was able to associate detectably with Ste7. 
+8668180|0|Hog1 Erk2|These complexes were specific because neither Hog1 nor Mpk1 (two other yeast MAPKs), nor mammalian Erk2, was able to associate detectably with Ste7. 
+8668180|0|Mpk1 Erk2|These complexes were specific because neither Hog1 nor Mpk1 (two other yeast MAPKs), nor mammalian Erk2, was able to associate detectably with Ste7. 
+8668180|-1|Hog1 Ste7|These complexes were specific because neither Hog1 nor Mpk1 (two other yeast MAPKs), nor mammalian Erk2, was able to associate detectably with Ste7.
+8668180|-1|Mpk1 Ste7|These complexes were specific because neither Hog1 nor Mpk1 (two other yeast MAPKs), nor mammalian Erk2, was able to associate detectably with Ste7.
+8668180|-1|Erk2 Ste7|These complexes were specific because neither Hog1 nor Mpk1 (two other yeast MAPKs), nor mammalian Erk2, was able to associate detectably with Ste7.
+
+8668180|0|Ste7 Kss1|Neither the kinase catalytic core of Ste7 nor the phosphoacceptor regions of Ste7 and Kss1 were necessary for complex formation. 
+
+8668180|1|Ste7 Kss1|Ste7-Kss1 (and Ste7-Fus3) complexes were present in yeast cell extracts and were undiminished in extracts prepared from a ste5delta-ste11delta double mutant strain. 
+8668180|1|Ste7 Fus3|Ste7-Kss1 (and Ste7-Fus3) complexes were present in yeast cell extracts and were undiminished in extracts prepared from a ste5delta-ste11delta double mutant strain. 
+
+8668180|1|Ste7 Kss1|In Ste7-Kss1 (or Ste7-Fus3) complexes isolated from naive or pheromone-treated cells, Ste7 phosphorylated Kss1 (or Fus3), and Kss1 (or Fus3) phosphorylated Ste7, in a pheromone-stimulated manner; dissociation of the high-affinity complex was shown to be required for either phosphorylation event. 
+8668180|1|Ste7 Fus3|In Ste7-Kss1 (or Ste7-Fus3) complexes isolated from naive or pheromone-treated cells, Ste7 phosphorylated Kss1 (or Fus3), and Kss1 (or Fus3) phosphorylated Ste7, in a pheromone-stimulated manner; dissociation of the high-affinity complex was shown to be required for either phosphorylation event. 
+8668180|0|Kss1 Fus3|In Ste7-Kss1 (or Ste7-Fus3) complexes isolated from naive or pheromone-treated cells, Ste7 phosphorylated Kss1 (or Fus3), and Kss1 (or Fus3) phosphorylated Ste7, in a pheromone-stimulated manner; dissociation of the high-affinity complex was shown to be required for either phosphorylation event. 
+
+8668180|1|Ste7 Kss1|Deletions of Ste7 in the region required for its stable association with Kss1 and Fus3 in vitro significantly decreased (but did not eliminate) signaling in vivo.
+8668180|1|Ste7 Fus3|Deletions of Ste7 in the region required for its stable association with Kss1 and Fus3 in vitro significantly decreased (but did not eliminate) signaling in vivo.
+8668180|0|Kss1 Fus3|Deletions of Ste7 in the region required for its stable association with Kss1 and Fus3 in vitro significantly decreased (but did not eliminate) signaling in vivo.
+
+
+9407029|1|Cdc7 Dbf4|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+9407029|1|Cdc7 Mcm2|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+9407029|1|Dbf4 Mcm2|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+
+
+9335587|1|Ste5 Ste11|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|1|Ste5 Ste7|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|1|Ste5 Ste4|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|1|Ste5 Fus3|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|0|Ste11 Ste7|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|0|Ste11 Ste4|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|0|Ste11 Fus3|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|0|Ste7 Ste4|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|0|Ste7 Ste3|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|0|Ste7 Fus3|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+9335587|0|Ste4 Fus3|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+
+
+10438536|1|Exo84p Sec5p|Exo84p interacts with both Sec5p and Sec10p in a two-hybrid assay. 
+10438536|1|Exo84p Sec10p|Exo84p interacts with both Sec5p and Sec10p in a two-hybrid assay. 
+10438536|0|Sec5p Sec10p|Exo84p interacts with both Sec5p and Sec10p in a two-hybrid assay. 
+
+
+9427746|1|Tlg1p Snc1p|Tlg1p also binds the plasma membrane v-SNARE Snc1p.
+
+
+7502048|1|Bem1p Ste20p|Immunochemical and two-hybrid protein interaction assays revealed that Bem1p interacts with two components of the pheromone-responsive mitogen-activated protein (MAP) kinase cascade, Ste20p and Ste5p, as well as with actin. 
+7502048|1|Bem1p Ste5p|Immunochemical and two-hybrid protein interaction assays revealed that Bem1p interacts with two components of the pheromone-responsive mitogen-activated protein (MAP) kinase cascade, Ste20p and Ste5p, as well as with actin. 
+7502048|0|Ste20p Ste5p|Immunochemical and two-hybrid protein interaction assays revealed that Bem1p interacts with two components of the pheromone-responsive mitogen-activated protein (MAP) kinase cascade, Ste20p and Ste5p, as well as with actin. 
+
+7502048|1|Bem1p Ste5p|Mutants of Bem1p that are associated with defective pheromone-induced polarized morphogenesis interacted with Ste5p and actin but not with Ste20p. 
+7502048|-1|Bem1p Ste20p|Mutants of Bem1p that are associated with defective pheromone-induced polarized morphogenesis interacted with Ste5p and actin but not with Ste20p. 
+7502048|0|Ste5p Ste20p|Mutants of Bem1p that are associated with defective pheromone-induced polarized morphogenesis interacted with Ste5p and actin but not with Ste20p. 
+
+7502048|1|Bem1p Ste20p|Thus, the association of Bem1p with Ste20p and Ste5p may contribute to the conveyance of spatial information that regulates polarized rearrangement of the actin cytoskeleton during yeast mating.
+7502048|1|Bem1p Ste5p|Thus, the association of Bem1p with Ste20p and Ste5p may contribute to the conveyance of spatial information that regulates polarized rearrangement of the actin cytoskeleton during yeast mating.
+7502048|0|Ste20p Ste5p|Thus, the association of Bem1p with Ste20p and Ste5p may contribute to the conveyance of spatial information that regulates polarized rearrangement of the actin cytoskeleton during yeast mating.
+
+
+10648622|1|Spb1p Nop5/58p|Coimmunoprecipitation experiments show that Spb1p is associated in vivo with the nucleolar proteins Nop1p and Nop5/58p.
+10648622|1|Spb1p Nop1p|Coimmunoprecipitation experiments show that Spb1p is associated in vivo with the nucleolar proteins Nop1p and Nop5/58p.
+10648622|0|Nop1p Nop5/58p|Coimmunoprecipitation experiments show that Spb1p is associated in vivo with the nucleolar proteins Nop1p and Nop5/58p.
+
+10648622|1|Spb1p Nop1p|Spb1p is a yeast nucleolar protein associated with Nop1p and Nop58p that is able to bind S-adenosyl-L-methionine in vitro.
+10648622|1|Spb1p Nop58p|Spb1p is a yeast nucleolar protein associated with Nop1p and Nop58p that is able to bind S-adenosyl-L-methionine in vitro.
+10648622|0|Nop1p Nop58p|Spb1p is a yeast nucleolar protein associated with Nop1p and Nop58p that is able to bind S-adenosyl-L-methionine in vitro.
+
+
+9482897|1|Sup45p Sup35p|Because Sup45p complexes with Sup35p, we hypothesize that excess Sup45p may sequester Sup35p, thereby reducing the opportunity for Sup35p conformational flips and/or self-interactions leading to prion formation.
+
+
+8918885|0|Dig1 Dig2|Using the two-hybrid method, both Dig1 and Dig2 also interact with the other MAP kinase of the pheromone response pathway, Fus3.
+8918885|1|Dig1 Fus3|Using the two-hybrid method, both Dig1 and Dig2 also interact with the other MAP kinase of the pheromone response pathway, Fus3.
+8918885|1|Dig2 Fus3|Using the two-hybrid method, both Dig1 and Dig2 also interact with the other MAP kinase of the pheromone response pathway, Fus3.
+
+
+10708377|1|Chs4p Chs3p|Yeast two-hybrid analysis with truncated Chs4p demonstrated that the region of Chs4p between amino acids 269 and 563 is indispensable not only for eliciting the non-zymogenic activity of Chs3p but also for binding of Chs4p to Chs3p.
+
+10708377|1|Chs3p Chs4p|Thus, it was demonstrated that stimulation of non-zymogenic Chs3p activity by Chs4p requires the amino acid region from 269 to 563 of Chs4p, and it seems that Chs4p activates Chs3p through protein-protein interaction.
+
+
+9418890|1|Cln3 Cdc28|Inhibition occurs mainly at the level of specific activity of Cln3-Cdc28 complexes. 
+
+
+9032248|1|Cdc28 Cln1|In budding yeast, entry into the mitotic cell cycle, or Start, requires the Cdc28 cyclin-dependent kinase (Cdk) and one of its three associated G1 cyclins, Cln1, Cln2, or Cln3. 
+9032248|1|Cdc28 Cln2|In budding yeast, entry into the mitotic cell cycle, or Start, requires the Cdc28 cyclin-dependent kinase (Cdk) and one of its three associated G1 cyclins, Cln1, Cln2, or Cln3. 
+9032248|1|Cdc28 Cln3|In budding yeast, entry into the mitotic cell cycle, or Start, requires the Cdc28 cyclin-dependent kinase (Cdk) and one of its three associated G1 cyclins, Cln1, Cln2, or Cln3. 
+9032248|0|Cln1 Cln2|In budding yeast, entry into the mitotic cell cycle, or Start, requires the Cdc28 cyclin-dependent kinase (Cdk) and one of its three associated G1 cyclins, Cln1, Cln2, or Cln3. 
+9032248|0|Cln1 Cln3|In budding yeast, entry into the mitotic cell cycle, or Start, requires the Cdc28 cyclin-dependent kinase (Cdk) and one of its three associated G1 cyclins, Cln1, Cln2, or Cln3. 
+9032248|0|Cln2 Cln3|In budding yeast, entry into the mitotic cell cycle, or Start, requires the Cdc28 cyclin-dependent kinase (Cdk) and one of its three associated G1 cyclins, Cln1, Cln2, or Cln3. 
+
+
+8755551|1|Cdc28 Cln1|In yeast, commitment to cell division (Start) is catalyzed by activation of the Cdc28 protein kinase in late G1 phase by the Cln1, Cln2, and Cln3 G1 cyclins. 
+8755551|1|Cdc28 Cln2|In yeast, commitment to cell division (Start) is catalyzed by activation of the Cdc28 protein kinase in late G1 phase by the Cln1, Cln2, and Cln3 G1 cyclins. 
+8755551|1|Cdc28 Cln3|In yeast, commitment to cell division (Start) is catalyzed by activation of the Cdc28 protein kinase in late G1 phase by the Cln1, Cln2, and Cln3 G1 cyclins. 
+8755551|0|Cln1 Cln2|In yeast, commitment to cell division (Start) is catalyzed by activation of the Cdc28 protein kinase in late G1 phase by the Cln1, Cln2, and Cln3 G1 cyclins. 
+8755551|0|Cln1 Cln3|In yeast, commitment to cell division (Start) is catalyzed by activation of the Cdc28 protein kinase in late G1 phase by the Cln1, Cln2, and Cln3 G1 cyclins. 
+8755551|0|Cln2 Cln3|In yeast, commitment to cell division (Start) is catalyzed by activation of the Cdc28 protein kinase in late G1 phase by the Cln1, Cln2, and Cln3 G1 cyclins. 
+
+
+8668184|1|CDC28 Cln3|This process is triggered by p34CDC28-dependent phosphorylation of Cln3.
+
+
+7973730|1|CDC28 CLN1|Passage through the G1 phase of the cell cycle is regulated by complexes of CDC28 and G1 cyclins (CLN1, CLN2, and CLN3). 
+7973730|1|CDC28 CLN2|Passage through the G1 phase of the cell cycle is regulated by complexes of CDC28 and G1 cyclins (CLN1, CLN2, and CLN3). 
+7973730|1|CDC28 CLN3|Passage through the G1 phase of the cell cycle is regulated by complexes of CDC28 and G1 cyclins (CLN1, CLN2, and CLN3). 
+7973730|0|CLN1 CLN2|Passage through the G1 phase of the cell cycle is regulated by complexes of CDC28 and G1 cyclins (CLN1, CLN2, and CLN3). 
+7973730|0|CLN1 CLN3|Passage through the G1 phase of the cell cycle is regulated by complexes of CDC28 and G1 cyclins (CLN1, CLN2, and CLN3). 
+7973730|0|CLN2 CLN3|Passage through the G1 phase of the cell cycle is regulated by complexes of CDC28 and G1 cyclins (CLN1, CLN2, and CLN3). 
+
+
+8090204|0|Cln1 Cln2|The G1 cyclins Cln1, Cln2 and Cln3 activate the Cdc28 protein kinase and are rate-limiting activators of Start.
+8090204|0|Cln1 Cln3|The G1 cyclins Cln1, Cln2 and Cln3 activate the Cdc28 protein kinase and are rate-limiting activators of Start.
+8090204|0|Cln2 Cln3|The G1 cyclins Cln1, Cln2 and Cln3 activate the Cdc28 protein kinase and are rate-limiting activators of Start.
+8090204|1|Cln1 Cdc28|The G1 cyclins Cln1, Cln2 and Cln3 activate the Cdc28 protein kinase and are rate-limiting activators of Start.
+8090204|1|Cln2 Cdc28|The G1 cyclins Cln1, Cln2 and Cln3 activate the Cdc28 protein kinase and are rate-limiting activators of Start.
+8090204|1|Cln3 Cdc28|The G1 cyclins Cln1, Cln2 and Cln3 activate the Cdc28 protein kinase and are rate-limiting activators of Start.
+
+
+8262069|0|CLN1 CLN2|The CLN1, CLN2 and CLN3 gene family of G1-acting cyclin homologs of Saccharomyces cerevisiae is functionally redundant: any one of the three Cln proteins is sufficient for activation of Cdc28p protein kinase activity for cell cycle START. 
+8262069|0|CLN1 CLN3|The CLN1, CLN2 and CLN3 gene family of G1-acting cyclin homologs of Saccharomyces cerevisiae is functionally redundant: any one of the three Cln proteins is sufficient for activation of Cdc28p protein kinase activity for cell cycle START. 
+8262069|0|CLN2 CLN3|The CLN1, CLN2 and CLN3 gene family of G1-acting cyclin homologs of Saccharomyces cerevisiae is functionally redundant: any one of the three Cln proteins is sufficient for activation of Cdc28p protein kinase activity for cell cycle START. 
+8262069|1|CLN1 Cdc28p|The CLN1, CLN2 and CLN3 gene family of G1-acting cyclin homologs of Saccharomyces cerevisiae is functionally redundant: any one of the three Cln proteins is sufficient for activation of Cdc28p protein kinase activity for cell cycle START. 
+8262069|1|CLN2 Cdc28p|The CLN1, CLN2 and CLN3 gene family of G1-acting cyclin homologs of Saccharomyces cerevisiae is functionally redundant: any one of the three Cln proteins is sufficient for activation of Cdc28p protein kinase activity for cell cycle START. 
+8262069|1|CLN3 Cdc28p|The CLN1, CLN2 and CLN3 gene family of G1-acting cyclin homologs of Saccharomyces cerevisiae is functionally redundant: any one of the three Cln proteins is sufficient for activation of Cdc28p protein kinase activity for cell cycle START. 
+
+
+8395009|1|Cdc28 Cln1|We have studied the kinase complexes formed between Cdc28 and each of the G1 cyclins Cln1, Cln2, and Cln3.
+8395009|1|Cdc28 Cln2|We have studied the kinase complexes formed between Cdc28 and each of the G1 cyclins Cln1, Cln2, and Cln3.
+8395009|1|Cdc28 Cln3|We have studied the kinase complexes formed between Cdc28 and each of the G1 cyclins Cln1, Cln2, and Cln3.
+8395009|0|Cln1 Cln2|We have studied the kinase complexes formed between Cdc28 and each of the G1 cyclins Cln1, Cln2, and Cln3.
+8395009|0|Cln1 Cln3|We have studied the kinase complexes formed between Cdc28 and each of the G1 cyclins Cln1, Cln2, and Cln3.
+8395009|0|Cln2 Cln3|We have studied the kinase complexes formed between Cdc28 and each of the G1 cyclins Cln1, Cln2, and Cln3.
+
+
+**8319908|0|CLN1 CLN2|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN1 CLN3|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN2 CLN3|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLB1 CLB2|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLB1 CLB3|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLB1 CLB4|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLB2 CLB3|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLB2 CLB4|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLB3 CLB4|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN1 CLB1|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN1 CLB2|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN1 CLB3|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN1 CLB4|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN2 CLB1|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN2 CLB2|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN2 CLB3|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN2 CLB4|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN3 CLB1|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN3 CLB2|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN3 CLB3|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+**8319908|0|CLN3 CLB4|The functions of the Cdc28 protein kinase in DNA replication and mitosis in Saccharomyces cerevisiae are thought to be determined by the type of cyclin subunit with which it is associated. G1-specific cyclins encoded by CLN1, CLN2, and CLN3 are required for entry into the cell cycle (Start) and thereby for S phase, whereas G2-specific B-type cyclins encoded by CLB1, CLB2, CLB3, and CLB4 are required for mitosis.
+
+
+8497251|1|Cln3 Cdc28|Cln3 binds to Cdc28, a protein kinase catalytic subunit essential for cell cycle START, and Cln3 instability requires Cdc28 activity.
+
+8497251|1|Cdc28 Cln3|Thus, sequences in the C-terminal third of Cln3 might help stabilize functional Cdc28-Cln3 association, as well as decreasing the lifetime of the Cln3 protein. 
+
+
+8449978|1|Cdc28 Cln1|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus. 
+8449978|1|Cdc28 Cln2|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+8449978|1|Cdc28 Cln3|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+8449978|1|Cdc28 Clb1|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus. 
+8449978|1|Cdc28 Clb2|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+8449978|0|Cln1 Clb1|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus. 
+8449978|0|Cln1 Clb2|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+8449978|0|Cln2 Clb1|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+8449978|0|Cln2 Clb2|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+8449978|0|Cln3 Clb1|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+8449978|0|Cln3 Clb2|Our results suggest that activation of Cdc28 by G1 cyclins (Cln1, Cln2, or Cln3) in unbudded G1 cells triggers polarization of the cortical actin cytoskeleton to a specialized pre-bud site at one end of the cell, while activation of Cdc28 by mitotic cyclins (Clb1 or Clb2) in budded G2 cells causes depolarization of the cortical actin cytoskeleton and secretory apparatus.
+
+
+1832338|0|CDC28 CLN1|Entry into the mitotic cycle (START) requires a protein kinase encoded by the CDC28 gene and one of three redundant G1-specific cyclins encoded by CLN1, -2, and -3.
+1832338|0|CDC28 CLN2|Entry into the mitotic cycle (START) requires a protein kinase encoded by the CDC28 gene and one of three redundant G1-specific cyclins encoded by CLN1, -2, and -3.
+1832338|0|CDC28 CLN3|Entry into the mitotic cycle (START) requires a protein kinase encoded by the CDC28 gene and one of three redundant G1-specific cyclins encoded by CLN1, -2, and -3.
+
+
+**1829507|0|CDC28 CLN1|They also require the CDC28 protein kinase and at least one of three G1-specific cyclins encoded by CLN1, 2, and 3.
+**1829507|0|CDC28 CLN2|They also require the CDC28 protein kinase and at least one of three G1-specific cyclins encoded by CLN1, 2, and 3.
+**1829507|0|CDC28 CLN3|They also require the CDC28 protein kinase and at least one of three G1-specific cyclins encoded by CLN1, 2, and 3.
+
+
+11779797|0|Sst2p Fus3p|Other results indicate that Sst2p acts through Mpt5p and that this action occurs downstream of Fus3p and through Cln3p/Cdc28p.
+11779797|2|Sst2p Cln3p|Other results indicate that Sst2p acts through Mpt5p and that this action occurs downstream of Fus3p and through Cln3p/Cdc28p.
+11779797|2|Sst2p Cdc28p|Other results indicate that Sst2p acts through Mpt5p and that this action occurs downstream of Fus3p and through Cln3p/Cdc28p.
+11779797|0|Fus3p Cln3p|Other results indicate that Sst2p acts through Mpt5p and that this action occurs downstream of Fus3p and through Cln3p/Cdc28p.
+11779797|0|Fus3p Cdc28p|Other results indicate that Sst2p acts through Mpt5p and that this action occurs downstream of Fus3p and through Cln3p/Cdc28p.
+11779797|2|Cln3p Cdc28p|Other results indicate that Sst2p acts through Mpt5p and that this action occurs downstream of Fus3p and through Cln3p/Cdc28p.
+
+
+**2082935|1|WHI1 CLN1|The identification of structural and functional homologues of p34 suggests that it has a role in the control of DNA replication in all eukaryotes. The WHI1+, CLN1+ and CLN2+ gene products, identified in S. cerevisiae, are positive regulators that function at START and may interact with p34. 
+**2082935|1|WHI1 CLN2|The identification of structural and functional homologues of p34 suggests that it has a role in the control of DNA replication in all eukaryotes. The WHI1+, CLN1+ and CLN2+ gene products, identified in S. cerevisiae, are positive regulators that function at START and may interact with p34.
+**2082935|1|CLN1 CLN2|The identification of structural and functional homologues of p34 suggests that it has a role in the control of DNA replication in all eukaryotes. The WHI1+, CLN1+ and CLN2+ gene products, identified in S. cerevisiae, are positive regulators that function at START and may interact with p34.
+
+
+**10964916|1|Cdc7p Dbf4p|The yeast Saccharomyces cerevisiae Cdc7p/Dbf4p protein kinase complex was purified to near homogeneity from insect cells. The complex efficiently phosphorylated yeast Mcm2p and less efficiently the remaining Mcm proteins or other replication proteins.
+**10964916||Cdc7p Mcm2p|The yeast Saccharomyces cerevisiae Cdc7p/Dbf4p protein kinase complex was purified to near homogeneity from insect cells. The complex efficiently phosphorylated yeast Mcm2p and less efficiently the remaining Mcm proteins or other replication proteins.
+**10964916||Dbf4p Mcm2p|The yeast Saccharomyces cerevisiae Cdc7p/Dbf4p protein kinase complex was purified to near homogeneity from insect cells. The complex efficiently phosphorylated yeast Mcm2p and less efficiently the remaining Mcm proteins or other replication proteins.
+
+
+9407029|1|Cdc7 Dbf4|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro. 
+9407029|1|Cdc7 Mcm2|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+9407029|2|Cdc7 Mcm3|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+9407029|1|Dbf4 Mcm2|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+9407029|2|Dbf4 Mcm3|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+9407029|0|Mcm2 Mcm3|Cdc7-Dbf4 interacts physically with Mcm2 and phosphorylates Mcm2 and three other members of the Mcm2-7 family in vitro.
+
+
+9407029|1|Mcm2 Cdc7|Taken together, our data suggest that phosphorylation of Mcm2 and probably other members of the Mcm2-7 proteins by Cdc7-Dbf4 at the G1-to-S phase transition is a critical step in the initiation of DNA synthesis at replication origins.
+9407029|2|Mcm3 Cdc7|Taken together, our data suggest that phosphorylation of Mcm2 and probably other members of the Mcm2-7 proteins by Cdc7-Dbf4 at the G1-to-S phase transition is a critical step in the initiation of DNA synthesis at replication origins.
+9407029|1|Mcm2 Dbf4|Taken together, our data suggest that phosphorylation of Mcm2 and probably other members of the Mcm2-7 proteins by Cdc7-Dbf4 at the G1-to-S phase transition is a critical step in the initiation of DNA synthesis at replication origins.
+9407029|2|Mcm3 Dbf4|Taken together, our data suggest that phosphorylation of Mcm2 and probably other members of the Mcm2-7 proteins by Cdc7-Dbf4 at the G1-to-S phase transition is a critical step in the initiation of DNA synthesis at replication origins.
+9407029|1|Cdc7 Dbf4|Taken together, our data suggest that phosphorylation of Mcm2 and probably other members of the Mcm2-7 proteins by Cdc7-Dbf4 at the G1-to-S phase transition is a critical step in the initiation of DNA synthesis at replication origins.
+9407029|0|Mcm2 Mcm3|Taken together, our data suggest that phosphorylation of Mcm2 and probably other members of the Mcm2-7 proteins by Cdc7-Dbf4 at the G1-to-S phase transition is a critical step in the initiation of DNA synthesis at replication origins.
+
+
+**8918881|2|Clb1 Cln1|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+**8918881|2|Clb1 Cln2|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+**8918881|2|Clb2 Cln1|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+**8918881|2|Clb2 Cln2|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+**8918881|2|Clb3 Cln1|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+**8918881|2|Clb3 Cln2|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+**8918881|2|Clb4 Cln1|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+**8918881|2|Clb4 Cln2|The functional specificity of the Cdc28 kinase is determined by its association with G1 or G2 cyclins. Here we show that the G2 cyclins Clb1, Clb2, Clb3 and Clb4 are required for the proteolysis of the G1 cyclins Cln1 and Cln2, providing a mechanism for coupling synthesis of G2 cyclins with the disappearance of G1 cyclins.
+
+
+10206189|1|Clb2p Cdc28p|Using specific clb deletion mutants and plasmid or genomic HA epitope-tagged CLBs, we show that one of these complexes is composed almost exclusively (93% or greater) of Clb2p-Cdc28p, whereas the other is mainly (75% or greater) Clb3p-Cdc28p. 
+10206189|1|Clb3p Cdc28p|Using specific clb deletion mutants and plasmid or genomic HA epitope-tagged CLBs, we show that one of these complexes is composed almost exclusively (93% or greater) of Clb2p-Cdc28p, whereas the other is mainly (75% or greater) Clb3p-Cdc28p.
+10206189|0|Clb2p Clb3p|Using specific clb deletion mutants and plasmid or genomic HA epitope-tagged CLBs, we show that one of these complexes is composed almost exclusively (93% or greater) of Clb2p-Cdc28p, whereas the other is mainly (75% or greater) Clb3p-Cdc28p.
+
+
+10233162|1|Fus3 Ste5|Fus3 has highest specific activity within a 350- to 500-kDa complex previously shown to contain Ste5, Ste11, and Ste7. 
+10233162|1|Fus3 Ste11|Fus3 has highest specific activity within a 350- to 500-kDa complex previously shown to contain Ste5, Ste11, and Ste7. 
+10233162|1|Fus3 Ste7|Fus3 has highest specific activity within a 350- to 500-kDa complex previously shown to contain Ste5, Ste11, and Ste7. 
+10233162|1|Ste5 Ste11|Fus3 has highest specific activity within a 350- to 500-kDa complex previously shown to contain Ste5, Ste11, and Ste7. 
+10233162|1|Ste5 Ste7|Fus3 has highest specific activity within a 350- to 500-kDa complex previously shown to contain Ste5, Ste11, and Ste7. 
+10233162|1|Ste11 Ste7|Fus3 has highest specific activity within a 350- to 500-kDa complex previously shown to contain Ste5, Ste11, and Ste7. 
+
+10233162|1|Ste5  Fus3|Ste5 is required for Fus3 to exist in this complex. 
+
+
+9638643|2|STE5 STE11|The STE5 protein recruits MAPK module kinases (STE11, STE7, and FUS3) to give a specificity for the pheromone pathway.
+9638643|2|STE5 STE7|The STE5 protein recruits MAPK module kinases (STE11, STE7, and FUS3) to give a specificity for the pheromone pathway.
+9638643|2|STE5 FUS3|The STE5 protein recruits MAPK module kinases (STE11, STE7, and FUS3) to give a specificity for the pheromone pathway.
+9638643|0|STE11 STE7|The STE5 protein recruits MAPK module kinases (STE11, STE7, and FUS3) to give a specificity for the pheromone pathway. 
+9638643|0|STE7 FUS3|The STE5 protein recruits MAPK module kinases (STE11, STE7, and FUS3) to give a specificity for the pheromone pathway.
+9638643|0|STE11 FUS3|The STE5 protein recruits MAPK module kinases (STE11, STE7, and FUS3) to give a specificity for the pheromone pathway.
+
+
+9427746|1|Tlg1p Snc1p|Tlg1p also binds the plasma membrane v-SNARE Snc1p. 
+
+
+10648622|1|Spb1p Nop1p|Coimmunoprecipitation experiments show that Spb1p is associated in vivo with the nucleolar proteins Nop1p and Nop5/58p.
+10648622|1|Spb1p Nop5/58p|Coimmunoprecipitation experiments show that Spb1p is associated in vivo with the nucleolar proteins Nop1p and Nop5/58p.
+10648622|0|Nop1p Nop5/58p|Coimmunoprecipitation experiments show that Spb1p is associated in vivo with the nucleolar proteins Nop1p and Nop5/58p.
+
+
+11486023|1|Rad24 Rfc2|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|1|Rad24 Rfc2|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|1|Rad24 Rfc2|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|1|Rad24 Rfc2|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|0|Rfc2 Rfc3|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|0|Rfc2 Rfc4|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|0|Rfc2 Rfc5|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|0|Rfc3 Rfc4|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|0|Rfc3 Rfc5|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+11486023|0|Rfc4 Rfc5|Rad24 is structurally related to subunits of the replication factor C (RFC) complex, and forms an RFC-related complex with Rfc2, Rfc3, Rfc4, and Rfc5. 
+
+
+10913172|0|Rad24 rfc50|Coimmunoprecipitation experiments revealed that Rad24(K115R) fails to interact with the RFC proteins in rfc50 mutants. 
+
+
+10660302|1|Rfc2 Rad24|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|1|Rfc3 Rad24|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|1|Rfc4 Rad24|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|1|Rfc5 Rad24|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc2 Rfc3|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc2 Rfc4|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc2 Rfc5|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc3 Rfc4|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc3 Rfc5|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc4 Rfc5|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|-1|Rfc1 Rad24|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc2 Rfc3|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc1 Rfc2|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc1 Rfc3|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc1 Rfc4|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+10660302|0|Rfc1 Rfc5|These experiments showed that the small RFC proteins, Rfc2, Rfc3, Rfc4 and Rfc5, interacted with Rad24, whereas the Rfc1 subunit did not. 
+
+
+11389843|0|Ctf18p Ctf8p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Ctf18p Dcc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Ctf8p Dcc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf18p Rfc2p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p.
+11389843|1|Ctf18p Rfc2p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf18p Rfc3p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf18p Rfc4p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf18p Rfc5p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf8p Rfc2p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf8p Rfc3p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf8p Rfc4p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Ctf8p Rfc5p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Dcc1p Rfc2p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Dcc1p Rfc3p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Dcc1p Rfc4p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|1|Dcc1p Rfc5p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|-1|Ctf18p Rfc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|-1|Ctf18p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|-1|Ctf8p Rfc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|-1|Ctf8p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|-1|Dcc1p Rfc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|-1|Dcc1p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc2p Rfc3p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc2p Rfc4p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc2p Rfc5p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc3p Rfc4p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc3p Rfc5p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc4p Rfc5p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc2p Rfc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc3p Rfc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc4p Rfc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc5p Rfc1p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc2p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc3p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc4p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rfc5p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+11389843|0|Rf1p Rad24p|Ctf18p, Ctf8p, and Dcc1p interact physically in a complex with Rfc2p, Rfc3p, Rfc4p, and Rfc5p but not with Rfc1p or Rad24p. 
+
+
+11005857|1|Tid1 Rdh54|The role of Tid1/Rdh54 in coordinating RecA homolog assembly may be very direct, because Tid1/Rdh54 is known to physically bind both Dmc1 and Rad51. 
+11005857|1|Tid1 Dmc1|The role of Tid1/Rdh54 in coordinating RecA homolog assembly may be very direct, because Tid1/Rdh54 is known to physically bind both Dmc1 and Rad51. 
+11005857|1|Tid1 Rad51|The role of Tid1/Rdh54 in coordinating RecA homolog assembly may be very direct, because Tid1/Rdh54 is known to physically bind both Dmc1 and Rad51. 
+11005857|1|Rdh54 Dmc1|The role of Tid1/Rdh54 in coordinating RecA homolog assembly may be very direct, because Tid1/Rdh54 is known to physically bind both Dmc1 and Rad51. 
+11005857|1|Rdh54 Rad51|The role of Tid1/Rdh54 in coordinating RecA homolog assembly may be very direct, because Tid1/Rdh54 is known to physically bind both Dmc1 and Rad51.
+11005857|0|Dmc1 Rad51|The role of Tid1/Rdh54 in coordinating RecA homolog assembly may be very direct, because Tid1/Rdh54 is known to physically bind both Dmc1 and Rad51.  
+
+
+9335591|1|Dmc1p Tid1p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|1|Dmc1p Rad54p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|1|Dmc1p Tid4p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|1|Dmc1p Rad16p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|-1|Tid1p Rad54p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|-1|Rad54p Rad51p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|-1|Tid4p Rad51p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|-1|Rad16p Rad51p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|0|Dmc1p Rad51p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|0|Tid1p Rad54p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|0|Rad54p Tid4p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|0|Tid1p Tid4p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|0|Tid1p rad16p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+9335591|0|Rad54p Tid4p|However, Dmc1p does interact with Tid1p, a Rad54p homologue, with Tid4p, a Rad16p homologue, and with other fusion proteins that do not interact with Rad51p, suggesting that Dmc1p and Rad51p function in separate, though possibly overlapping, recombinational repair complexes.
+

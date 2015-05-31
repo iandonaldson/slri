@@ -1,0 +1,19 @@
+/bind_parser.cpp/1.1/Thu Apr 15 19:04:24 2004//
+/cbmmdb.c/1.9/Tue Dec 14 16:46:29 2004//
+/cddb.c/1.3/Tue Jan 13 21:43:33 2004//
+/domname.c/1.2/Tue Jan  6 22:32:13 2004//
+/domname.h/1.1.1.2/Wed Mar 13 09:27:19 2002//
+/make.cbmmdb/1.2/Tue Jan 13 15:23:17 2004//
+/make.cddb/1.2/Tue Jan 13 15:23:17 2004//
+/make.domname/1.1.1.2/Tue Mar 19 09:27:26 2002//
+/make.mother/1.3/Thu Aug  5 20:14:10 2004//
+/make.redund/1.3/Tue Aug  3 19:17:02 2004//
+/make.redundlist/1.1.1.2/Sat Mar  2 09:25:29 2002//
+/make.sendb/1.2/Tue Jan 13 15:22:49 2004//
+/mmdblocl.c/1.3/Tue Jan  6 22:32:13 2004//
+/mother.c/1.36/Tue Apr 26 19:14:46 2005//
+/redund.c/1.7/Tue Dec 14 16:40:45 2004//
+/redundlist.c/1.1.1.1/Fri Mar  1 09:25:27 2002//
+/rpsdb.mk/1.1.1.1/Thu Feb 28 09:25:44 2002//
+/sendb.c/1.2/Tue Jan  6 22:32:14 2004//
+D

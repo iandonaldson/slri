@@ -1,0 +1,276 @@
+SeqHound Release 3.02 summary notes
+
+These notes summarize important changes that are inclusive to
+SeqHound code version 3.02 (November 29, 2004) since version
+3.0 (August 27, 2004).  
+
+These summary notes are divided into the following sections:
+ 1. Summary
+ 2  Global changes 
+ 3. Known issues/bugs
+ 4. Web interface
+ 5. C local API
+ 6. Parsers and scripts
+ 7. Local installation instructions
+ 8. Incorporating GO Annotation data into an existing SeqHound
+    database
+
+
+**************************************************************
+1. Summary 
+**************************************************************
+Release 3.02 is a bug fix release which
+a) resolves a number of errors arising when installing
+   SeqHound locally
+b) Simplifies local installation of SeqHound by packaging
+   SeqHound distributions on selected platforms (SUN Solaris
+   and Intel x86 Linux) 
+
+**************************************************************
+2. Global Changes
+**************************************************************
+[bug 3951]
+Required scripts missing from the source tree, such as 
+mmdbftp.pl, have been included.
+
+Example configuration files missing from the source tree, such 
+as .ncbirc, have been included.
+
+[bug 3956]
+Importing mysqldump files.
+An ERROR 1153: Got a packet bigger than 'max_allowed_packet'
+occurs if a SQL statement from the mysqldump file exceeds the 
+value for "max_allowed_packet" configured on the MySQL server.
+Increasing the "max_allowed_packet" in the global config 
+should resolve the error.  Please see 
+http://dev.mysql.com/doc/mysql/en/Packet_too_large.html
+A note regarding this will be added to the SeqHound manual in 
+the next major release.
+
+**************************************************************
+3. Known issues/bugs
+**************************************************************
+
+[bug 2816]
+SHoundGiFromGOIDList
+Function times out for goids returning lots of data such as
+goid = 5634 (nucleus)
+
+Bugs outstanding from 3.0
+**************************************************************
+
+[bug 2912]
+For Solaris UNIX only, SeqHound API SHoundGetGenBankff and
+SHoundGetGenBankffList breaks due to a bug in the NCBI library
+file ncbistr.c (in directory ncbi/corelib and ncbi/build).
+To fix the problem, apply the patch ncbistr.c.patch available 
+from our ftp site at: 
+ftp://ftp.blueprint.org/pub/SeqHound/patches/ncbistr.c.patch) 
+to the file ncbi/corelib/ncbistr.c in the NCBI C toolkit 
+source tree before compiling the NCBI C toolkit.  On UNIX, 
+this is done using the following command(assuming your are in 
+the directory ncbi/corelib/):
+
+patch -i ncbistr.c.patch ncbistr.c
+
+Alternatively, you can manually make the changes by replacing 
+all the code inside the function Nlm_TrimSpacesAroundString()
+in the file ncbistr.c with the following text:
+
+    char *ptr, *dst, *revPtr;
+    int spaceCounter = 0;
+                                                                               
+                                             
+    ptr = dst = revPtr = str;
+                                                                               
+                                             
+    if ( !str || str[0] == '\0' )
+        return str;
+                                                                               
+                                             
+    while ( *revPtr != '\0' )
+        if ( *revPtr++ <= ' ' )
+            spaceCounter++;
+                                                                               
+                                             
+    if ( (revPtr - str) <= spaceCounter )
+    {
+        *str = '\0';
+        return str;
+    }
+                                                                               
+                                             
+    while ( revPtr > str && *revPtr <= ' ' ) revPtr--;
+    while ( ptr < revPtr && *ptr <= ' ' ) ptr++;
+    while ( ptr <= revPtr ) *dst++ = *ptr++;
+    *dst = '\0';
+                                                                               
+                                             
+    return str;
+
+
+[bug 2632]
+ShoundGetFasta
+ShoundGetFastaList
+Functions hang when given a virtual sequence identifier
+
+[bug 2905]
+SHound3DListFromTaxID
+For remote APIs, function times out for taxids which return
+lots of data such as
+
+10090:  Mus musculus
+ 9606:  Homo sapiens
+ 7227:  Drosophila melanogaster
+ 6239:  Caenorhabditis elegans
+ 3702:  Arabidopsis thaliana
+
+[bug 2522]
+Shound3DNeighboursFromTaxID
+SHoundGetGisByNumberOfDomains
+Time out on remote calls due to voluminous return results.
+
+[bug 2926]
+SHoundGetAllTaxProgeny
+A taxid located at the top of the NCBI tree like
+131567:cellularorganisms times out but a taxid which returns
+less data such as 37357:Plasmodiophorida does not.
+
+
+**************************************************************
+4. Web interface
+**************************************************************
+
+cgi/wwwseekgi.c
+**************************************************************
+[bug 3113]
+Added support for searching by pubmed ID to the interface.
+
+[bug 3917]
+Various internal code fixes in seqrem, wwwseekgi and intrez.c 
+which caused crashes.  These have been fixed; the fixes did 
+not result in any interface changes. 
+
+html/index.html
+**************************************************************
+[bug 3661]
+Changed drop down menu in wwwseekgi.  "Seq. Name" drop down 
+menu changed to option "Non-GenBank Identifier" as requested
+
+
+**************************************************************
+5. C local API
+**************************************************************
+[bug 3087]
+SHoundGetGenBankff
+SHoundGetGenBankffList 
+Returned extraneous GenBank flatfile entries in addition
+to the correct ones. Modified SHoundGetGenBankff 
+(SHoundGetGenBankffList) to deal with phy-set seqentries.
+
+[bug 3239]
+SHoundGetDefline
+SHoundGetDeflineList
+Changed format of defline so that if accession is null, it 
+will insert a blank space in between the '|' delimiters, 
+rather than omitting that field altogether.  This makes 
+parsing more consistent
+
+**************************************************************
+6. Parsers and scripts
+**************************************************************
+
+makeallsh
+**************************************************************
+enforce environment variables SLRI NCBI ODBC and BZDIR
+
+src/go_odbc.c
+**************************************************************
+[bug 3966]
+Dangling pointer in library go_odbc.c which crashed the test
+driver shunittest.c on Linux fixed.
+
+src/intrez.c
+**************************************************************
+[bug 3370]
+Added test to prevent null pointer error.  Related to bug 3087
+
+src/intrez_odbc.c
+**************************************************************
+[bug 3113]
+Fixed bug in SearchPUBSEQ
+
+parsers/mother.c
+**************************************************************
+[bug 3600]
+Fixed a memory leak in FillBionameDB. 
+
+scripts/mmdbftp.pl
+**************************************************************
+re-added
+
+**************************************************************
+7. Local installation instructions
+**************************************************************
+1) Download the tar ball (e.g. 
+
+seqhound3.01.linux_x86_32bin.tar.gz).
+
+2) Specify the home directory for user seqhound (e.g. export
+
+SEQHOUND_HOME=/export/home/seqhound)
+
+3) Unpackage the tar ball (e.g.
+
+gtar xzf seqhound3.01.linux_x86_32bin.tar.gz).
+
+4) cd $SEQHOUND_HOME/config.
+
+Edit the config file .intrezrc to specify database name, user 
+id and password. Edit config file .odbc.ini to specify 
+database ODBC driver path, database server name (or IP 
+address), server port number, user ID and password. Run script 
+deploy_intrezrc.sh, which will deploy .intrezrc and .odbc.ini 
+to the appropriate directory. 
+
+5) Copy contents of $SEQHOUND_HOME/www to /www: 
+
+cp -r $SEQHOUND_HOME/www/seqhound /www
+
+6) Copy $SEQHOUND_HOME/config/VirtualHost to apache configure 
+directory:
+
+cp $SEQHOUND_HOME/config/VirtualHost apache/conf/
+
+7) Edit apache configuration file httpd.conf based on
+$SEQHOUND_HOME/config/httpd.conf.extra and 
+apache/conf/VirtualHost/server.myvirtualhost.org (rename the 
+file name based on the DNS name of your server)
+
+8) Restart apache.
+
+9) Utilities for complete build of seqhound database are 
+located in $SEQHOUND_HOME/build (parsers, FTP scripts and 
+config files) and $SEQHOUND_HOME/sql (SQL scripts for creating 
+database tables). 
+
+10) Daily update utilities (scripts, parsers, config files and 
+cronjob template file) are located in $SEQHOUND_HOME/updates.
+
+11) Test drivers are located in directory $SEQHOUND_HOME/test.
+Before executing the remote C driver shunittest_odbc_rem, edit 
+shoundremrc in the same directory (e.g. server1 = localhost).
+
+**************************************************************
+8. Incorporating GO Annotation data into an existing SeqHound
+   database
+**************************************************************
+
+Instructions on incorporating the GO Annotation data into an 
+existing SeqHound database are available in the README on the 
+ftp site ftp://ftp.blueprint.org/pub/SeqHound/Data/goa/
+The data is available from:
+ftp://ftp.blueprint.org/pub/SeqHound/Data/goa/seqhound.gigo.YY
+YYMMDD.gz 
+where YYYYMMDD is the date for the data. 
+

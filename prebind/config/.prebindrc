@@ -1,0 +1,40 @@
+;settings for prebind
+
+[databases]
+;enter the path to the directory for datafiles
+;this is where PreBIND parser will place created datafiles and where it will look for them later
+;PreBIND searcher and the PreBIND cgi also look for datafiles in this directory
+path = /www/prebind/db/
+
+[parser_input_files]
+;enter the complete path to the RefSeq  binary file to be parsed by PreBIND_parser
+refseq_binary = /seqhound/prebind/parser_input_files/rscu.bna
+;enter the complete path to the text file of yeast names created by YeastNames.pl
+yeast_names = /seqhound/prebind/parser_input_files/yeast_names.txt
+
+[searcher_input_files]
+;enter the complete path to the text file of POtential INTeraction scores
+point_scores = /www/prebind/db/searcher_input_files/point_scores.txt
+
+[prebind_cgi]
+;enter the path to the prebind cgi executable
+path = /cgi-bin/prebind_cgi
+;enter the paths of the executables for the instance of BIND to which
+;records will be submitted from prebind
+dataget_location = http://submit.bind.ca/cgi-bin/dataget
+dataentry_location =  http://submit.bind.ca/cgi-bin/dataentry
+;dont forget to specify the location of seqhound in the shoundrem.ini configuration file
+blueprint_location = http://www.bind.ca/
+seqhound_location = http://deep.mshri.on.ca/cgi-bin/seqhound
+anon_user_id = 2
+genetic_user_id = 3
+
+[log_files]
+;enter the path to log files
+;parser_path = /seqhound/prebind/datafiles/parser_log.txt
+;search_results_path = /seqhound/prebind/datafiles/search_results_log.txt
+;search_errors_path = /seqhound/prebind/datafiles/search_errors_log.txt
+
+[data]
+org_name_list = taxlist.txt
+

@@ -1,0 +1,46 @@
+***common to do***
+
+
+
+-all printf's should also print to log file
+-parser_log file should be written to datafiles folder where all other results go
+
+
+
+
+
+***prebind_cgi to do***
+
+/*THINGS TO DO:
+SHORT TERM
+-the cgi will run as a console app if not given an accession number parameter but produces an application error if run over the network with no accession number??
+(it did not always do this). A warning is posted to the log file:
+WARNING: [000.000] {taskapi.c, line 475} [GetTaskArgs] No value found for arg |accession|.
+The web page successfully displays the default search results anyway but spawns a process that hangs.
+-change error message for nothing found in name search
+-change linking method for accession list page
+-header/footer to accession link page and print as a table
+-consider changing occurence sof StrCpy to StrSave
+-implement name redundancy flag
+
+-change GetAllDatabyAccorGIandPrint so that it uses GetAccRecodbyGI
+-implement name redundancy flag
+
+
+LONGER TERM
+-feedback functions
+-taxon number to name function/database
+-the functions ResultFillNode and SearchFillNode may be unecessary and could be combined with (respectively) GetListofResults and GetListofSearches
+as it was for GetListofPoints
+-allow users to specify their opinion about a paper in general (interaction or not)
+-allow users to generate complex records
+*/
+
+***prebind_searcher to do***
+
+-do not allow searcher to proceed unless a defined taxon has been specified (use config file settings)
+
+
+**********
+***done***
+**********

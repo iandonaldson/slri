@@ -1,0 +1,29 @@
+<br><br>
+
+<table border=0 width=100%%  cellspacing=2 cellpadding=2 cols=4>
+
+	<tr bgcolor="lightsteelblue"><!--indianred-->
+
+		<td colspan=4 height = "20">
+
+			<h1><font color="black">Interaction literature and intersecting names</font> </h1><!--font color="lightgoldenrodyellow"-->
+
+		</td>
+
+	</tr>
+
+	<tr>
+
+		<td>
+
+		<p>The above names were used to search the literature for your protein of interest. Each section beginning with a blue bar indicates a single PubMed abstract that was classified as containing interaction data.  For each of these "interaction" papers, the other gene product names present in the title and abstract are listed.  Simple language processing was used to determine if any of the named gene products was likely to be involved in an interaction with your protein of interest.  Use the "GO" button to review all potential, pairwise interactions in the paper.
+
+		</td>
+
+	</tr>
+
+
+
+</table>
+
+<br><br>

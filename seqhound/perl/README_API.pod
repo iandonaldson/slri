@@ -1,0 +1,2525 @@
+=head1 NAME
+
+README_API.pod
+
+=head1 DESCRIPTION
+
+SeqHound Perl API documentation by function category.
+Functions sorted alphabetically within categories.
+
+The README_API.pod can be converted to various formats such as html or man pages using POD utilities such as pod2html and pod2man.  See Perl documentation for usage.
+
+=head1 System Initialization, Finishing And Testing
+
+=head2 SHoundFini
+
+  Title    :  SHoundFini
+  Function :  Closes the SeqHound system and the NCBI NetEntrez service if it has been
+              initialized.
+  Returns  :  none
+  Args     :  none
+  Example  :  SHoundFini();
+
+=cut
+
+=head2 SHoundInit
+
+  Title    :  SHoundInit
+  Function :  Initializes the SeqHound system; checks if the server is ready for querying.
+              NCBI NetEntrez service can be initialized simultaneously if the user desires to
+              query obsolete (outdated) sequences.
+  Returns  :  "TRUE" if success or "FALSE" (in this case do not continue querying SeqHound)
+  Args     :  boolean value indicating if the user wants to initialize NetEntrez service
+              (acceptable values: "TRUE"/"FALSE"); current application name
+  Example  :  SHoundInit("FALSE", "myapp");
+
+=cut
+
+=head2 SHoundIsInited
+
+  Title    :  SHoundIsInited
+  Function :  Reports if SeqHound has been initialized.
+  Returns  :  "TRUE" if success or "FALSE"
+  Args     :  none
+  Example  :  $result = SHoundIsInited();
+
+=cut
+
+=head2 SHoundIsNetEntrezOn
+
+  Title    :  SHoundIsNetEntrezOn
+  Function :  Finds out if NCBI NetEnrez service has been initialized. NCBI NetEntrez service
+              can be used to query obsolete (outdated)  sequences.
+  Returns  :  "TRUE" if success or "FALSE"
+  Args     :  none
+  Example  :  SHoundIsNetEntrezOn();
+
+=cut
+
+=head2 SHoundNetEntrezInit
+
+  Title    :  SHoundNetEntrezInit
+  Function :  Initializes the SeqHound system together with NCBI NetEntrez service. NCBI
+              NetEntrez service can be used to query obsolete (outdated) sequences.
+  Returns  :  "TRUE" if success or "FALSE"
+  Args     :  application name
+  Example  :  SHoundNetEntrezInit("myapp");
+
+=cut
+
+=head1 Genbank ID Conversions
+
+=head2 SHoundDbNameAndIdListFromGBAcc
+
+  Title    : SHoundDbNameAndIdListFromGBAcc
+  Function : This function takes a GenBank accession and retrieves all of the Database
+             name and Id pairs that are present in the seq-id portion of the corresponding
+	     GenBank record.
+  Returns  : an array of biobean_ShDbNameAndId. Each ShDbNameAndId object contains an 
+             alternate DB name and ID for the GenBank Accession parameter.
+	     ShDbNameAndId object is defined by
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure
+  Args     : The Genbank Accession
+  Example  : $service = new genbankIDConversionService();
+             $result = $service -> SHoundDbNameAndIdListFromGBAcc ('X88853');
+	     $i =-1;
+	     while (ref $result->[++$i]){
+	         print "chain => ", $result->[$i]{'chain'}, " ";
+		 print "dbName=> ", $result->[$i]{'dbName'}, " ";
+		 print "id=> ", $result->[$i]{'id'}, "\n";
+	     }
+
+=cut
+
+=head2 SHoundDbNameAndIdListFromGBAccKeyedList
+
+  Title    : SHoundDbNameAndIdListFromGBAccKeyedList
+  Function : This function takes a list of GenBank accession and retrieves all of the Database
+             name and Id pairs that are present in the seq-id portion of the corresponding
+	     GenBank record.
+  Returns  : an array of StringToDbNameAndIdArrayMapping objects.
+             each StringToDbNameAndIdArrayMapping object is a hash mapping an accession to
+	     an array of ShDbNameAndId.
+	     StringToDbNameAndIdArrayMapping object is defined by 
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure
+  Args     : a list of Genbank Accession 
+  Example  : $service = new genbankIDConversionService();
+             $result = $service -> SHoundDbNameAndIdListFromGBAccKeyedList (\@acclist);
+	     $i =-1;
+	     while (ref $result->[++$i]){
+	         my $value = $result->[$i]{'value'};
+		 print $result->[$i]{'key'}, "=>", $value, ": ";
+		 $j = -1;
+		 while (ref $value-> [++$j]){
+	             print "chain => ", $value->[$j]{'chain'}, " ";
+		     print "dbName=> ", $value->[$j]{'dbName'}, " ";
+		     print "id=> ", $value->[$j]{'id'}, "\n";
+		 }
+	     }
+
+
+=head2 SHoundDbNameAndIdListFromGi
+
+  Title    : SHoundDbNameAndIdListFromGi
+  Function : This function takes a GenBank identifier and retrieves all of the Database
+             name and Id pairs that are present in the seq-id portion of the corresponding
+	     GenBank record.
+  Returns  : an array of biobean_ShDbNameAndId. Each ShDbNameAndId object contains an 
+             alternate DB name and ID for the GenBank Accession parameter.
+	     ShDbNameAndId object is defined by
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure
+  Args     : The Genbank identifier
+  Example  : $service = new genbankIDConversionService();
+             $result = $service -> SHoundDbNameAndIdListFromGi (333);
+	     $i =-1;
+	     while (ref $result->[++$i]){
+	         print "chain => ", $result->[$i]{'chain'}, " ";
+		 print "dbName=> ", $result->[$i]{'dbName'}, " ";
+		 print "id=> ", $result->[$i]{'id'}, "\n";
+	     }
+
+
+=head2 SHoundDbNameAndIdListFromGiKeyedList
+
+  Title    : SHoundDbNameAndIdListFromGiKeyedList
+  Function : This function takes a list of GenBank identifiers and retrieves all of the Database
+             name and Id pairs that are present in the seq-id portion of the corresponding
+	     GenBank record.
+  Returns  : an array of IntToDbNameAndIdArrayMapping objects. IntToDbNameAndIdArrayMapping object Mappings
+             from the GenBank GI inputs to arrays of their corresponding alternate source DB names and IDs
+             IntToDbNameAndIdArrayMapping object is defined by
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure
+  Args     : The Genbank identifier
+  Example  : $service = new genbankIDConversionService();
+             $result = $service -> SHoundDbNameAndIdListFromGiKeyedList (\@gilist);
+	     $i =-1;
+	     while (ref $result->[++$i]){
+	         my $value = $result->[$i]{'value'};
+		 print $result->[$i]{'key'}, "=>", $value, ": ";
+	         $j = -1;
+		 while (ref $value-> [++$j]){
+	             print "chain => ", $value->[$j]{'chain'}, " ";
+		     print "dbName=> ", $value->[$j]{'dbName'}, " ";
+		     print "id=> ", $value->[$j]{'id'}, "\n";
+		 }
+	     }
+
+
+=head2 SHoundGBAccFromDbNameAndId
+
+  Title    : SHoundGBAccFromDbNameAndId
+  Function : This function takes a database name and identifier found in a GenBank sequence
+             record (in the seq-id) and returns the corresponding GenBank accession.
+  Returns  : a Genbank accession
+             return undef if failure
+  Args     : dbName: the GenBank name of a sequence database
+             id: the ID for a sequence record within the named sequence database
+	     chain: when the dbName is 'pdb', the chain ID of the sequence database, undef otherwise
+  Example  : $service = new genbankIDConversionService();
+             $gbacc = $service -> SHoundGBAccFromDbNameAndId ("embl", "ABIPDAGEN", undef);
+	     
+
+=head2 SHoundGBAccFromDbNameAndIdKeyedList
+
+  Title    : SHoundGBAccFromDbNameAndIdKeyedList
+  Function : This function takes a list of database name and identifier pairs found in a GenBank
+             sequence record (in the seq-id) and returns the corresponding GenBank accession. 
+  Returns  : an array of DbNameAndIdToStringMapping objects. each DbNameAndIdToStringMapping object
+             mappings from the alternate DB names and IDs to their corrsponding GenBank accessions.
+	     DbNameAndIdToStringMapping object is defined by
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure
+  Args     : dbNameAndIdList - an array of ShDbNameAndId objects, specifying the alternate 
+             DB names and IDs for which GenBank Accessions should be retrieved
+  Example  : not available now.
+	   
+
+=head2 SHoundGBAccFromGi
+
+  Title    : SHoundGBAccFromGi
+  Function : onverts a GI identifier to a GenBank accession number.
+  Returns  : a Genbank accession
+             return undef if failure
+  Args     : a GenBank identifier
+  Example  : $service = new genbankIDConversionService();
+             $gbacc = $service -> SHoundGBAccFromGi (333);
+	     
+
+=head2 SHoundGBAccFromGiKeyedList
+
+  Title    : SHoundGBAccFromGiKeyedList
+  Function : onverts a list of GI identifiers to a list of GenBank accession numbers.
+  Returns  : an array of IntToStringMapping objects. Each IntToStringMapping object 
+             mappings a int gi to a string accession number.
+             IntToStringMapping object is defined by
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure
+  Args     : a list of GenBank identifiers
+  Example  : $service = new genbankIDConversionService();
+             $result = $service -> SHoundGBAccFromGiKeyedList (\@gilist);
+	     $i=-1;
+	     while (ref $result->[++$i]){
+	         print "key: ", $result->[$i]{'key'}, "=> value: ", $result->[$i]{'value'}, "\n";
+	     }
+	     
+
+=head2 SHoundGiFromDbNameAndId
+
+  Title    : SHoundGiFromDbNameAndId
+  Function : This function takes a database name and identifier found in a GenBank sequence
+             record (in the seq-id) and returns the corresponding GenBank accession.
+  Returns  : a Genbank identifier
+             return undef if failure
+  Args     : dbName: the GenBank name of a sequence database
+             id: the ID for a sequence record within the named sequence database
+	     chain: when the dbName is 'pdb', the chain ID of the sequence database, undef otherwise
+  Example  : $service = new genbankIDConversionService();
+             $gi = $service -> SHoundGiFromDbNameAndId ("embl", "ABIPDAGEN", undef);
+	     
+
+=head2 SHoundGiFromDbNameAndIdKeyedList
+
+  Title    : SHoundGiFromDbNameAndIdKeyedList
+  Function : This function takes a list of database name and identifier pairs found in a GenBank
+             sequence record (in the seq-id) and returns the corresponding GenBank accession. 
+  Returns  : an array of DbNameAndIdToIntMapping objects.
+             DbNameAndIdToIntMapping object is defined by
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure.
+  Args     : dbNameAndIdList - an array of ShDbNameAndId objects, specifying the alternate 
+             DB names and IDs for which GenBank Accessions should be retrieved
+  Example  : not available now.
+	   
+
+=head2 SHoundGiFromGBAcc
+
+  Title    : SHoundGiFromGBAcc
+  Function : Converts a accession number to a GenBank identifier.
+  Returns  : a Genbank identifier
+             return undef if failure
+  Args     : a GenBank accession
+  Example  : $service = new genbankIDConversionService();
+             $gi = $service -> SHoundGiFromGBAcc ('X88853');
+	     
+
+=head2 SHoundGiFromGBAccKeyedList
+
+  Title    : SHoundGiFromGBAccKeyedList
+  Function : Converts a list of GenBank accession numbers to a list of GenBank identifiers.
+  Returns  : an array of StringToIntMapping objects.StringToIntMapping object mappings a 
+             string accession number to a int genbank identifier
+             StringToIntMapping object is defined by
+	     http://seqhound.blueprint.org:8080/soap/genbankIDConversion.wsdl.xml
+	     return an empty array if failure
+  Args     : a list of GenBank accession numbers
+  Example  : $service = new genbankIDConversionService();
+             $result = $service -> SHoundGiFromGBAccKeyedList (\@acclist);
+	     $i=-1;
+	     while (ref $result->[++$i]){
+	         print "key: ", $result->[$i]{'key'}, "=> value: ", $result->[$i]{'value'}, "\n";
+	     }
+
+=cut
+
+=head1 Database Cross-Reference Conversions (DBXREF)
+
+=head2 SHoundDxFieldNameListFromDbName
+
+  Title    : SHoundDxFieldNameListFromDbName
+  Function : This helper function will retrieve a set of field names that may be used
+             with the DBXref functions. The user may specify a single database name for
+	     which field names are to be retrieved. If this dbname is not specified, 
+	     all field names for all databases in the DBXref module will be returned. 
+	     The structure returned consists of a list of database names paired with 
+	     field names for that database.
+  Returns  : an array of ShDxFieldName
+             ShDxFieldName is specified by
+	     http://seqhound.blueprint.org:8080/soap/dbxref.wsdl.xml
+	     contains database name and its field name
+	     return an empty array if failure
+  Args     : a database name
+  Example  : $service = new dbxrefService();
+             $result = $service -> SHoundDxFieldNameListFromDbName ('GENE');
+	     $i=-1;
+	     while (ref $result->[++$i]){
+    		 print "dbName: ", $result->[$i]{'dbName'}, "	";
+    		 print "fieldName: ", $result->[$i]{'fieldName'}, "\n";
+	     }
+
+
+=head2 SHoundDxListFromGi
+
+  Title    : SHoundDxListFromGi
+  Function : This convenience function is based on SHoundDxListFromSource. The specified Gene Information 
+             identifier (GI) is converted to a list of GenBank accessions (considered equivalent to the 
+	     query using the redundant module) and all cross-references found in these records are returned.	    
+  Returns  : an array of ShDx
+             ShDx is specified by
+	     http://seqhound.blueprint.org:8080/soap/dbxref.wsdl.xml
+	     contains cv, db, field and id describing cross-reference
+	     return an empty array if failure
+  Args     : a genbank identifier
+  Example  : $service = new dbxrefService();
+             $result = $service -> SHoundDxListFromGi (131869);
+	     $i=-1;
+	     while (ref $result->[++$i]){
+    		 print "cv: ", $result->[$i]{'cv'}, "	";
+                 print "db: ", $result->[$i]{'db'}, "	";
+    		 print "field: ", $result->[$i]{'field'}, "	";
+    		 print "id: ", $result->[$i]{'id'}, "\n";
+	     }
+	     
+
+=head2 SHoundDxListFromSource
+
+  Title    : SHoundDxListFromSource
+  Function : Given a database name and identifier for some source record, retrieve a list of database
+             cross-references found in that record. The returned structure (ShDxList of ShDx) describes
+	     each cross-reference as a dbname and an id. The field in the source record where the 
+	     cross-reference was found is also returned (field) and the meaning of the cross-reference
+	     with respect to the source record (cv) is also returned in the same structure.	    
+  Returns  : an array of ShDx
+             ShDx is specified by
+	     http://seqhound.blueprint.org:8080/soap/dbxref.wsdl.xml
+	     contains cv, db, field and id describing cross-reference
+	     return an empty array if failure
+  Args     : dbName - a database name
+             recordId - an (alpha)numeric identifier for some records in the database specified by dbName
+	     field - field name, optional
+	     cv - control vocabulary term, optional
+  Example  : $service = new dbxrefService();
+             $result = $service -> SHoundDxListFromSource ("GENE", "1246501", "Col6", undef);
+	     $i=-1;
+	     while (ref $result->[++$i]){
+    		 print "cv: ", $result->[$i]{'cv'}, "	";
+                 print "db: ", $result->[$i]{'db'}, "	";
+    		 print "field: ", $result->[$i]{'field'}, "	";
+    		 print "id: ", $result->[$i]{'id'}, "\n";
+	     }
+  Note     : dbname is a database name. Use the helper function SHoundGetDxDbnames to retrieve a list
+             of dbnames that may be used as input to this function. id is an (alpha)numeric identifier
+	     for some record in the database specified by dbname. field may be optionally specified. 
+	     This will restrict database cross-references returned to those that are found in a certain
+	     field of the source record. Use the helper function SHoundDxFieldNameListFromDbName to 
+	     retrieve a list of field names that may be used as input to this function. cv may be optionally
+	     specified. This will restrict database cross-references returned to those that are labelled 
+	     with the specified controlled vocabulary term (cv). cv is an integer that describes the 
+	     relationaship of the cross-reference to the source record. See the SeqHound Manual (section 5)
+	     for more details on cv. You may also use the helper function SHoundGetDxCvTermList to retrieve 
+	     a list of cv values (and their meanings) that may be used as input to this function.	     
+	     
+
+=head2 SHoundGetDxCvTermList
+  
+  Title    : SHoundGetDxCvTermList
+  Function : This helper function will retrieve a set of controlled vocabulary terms that may be used
+             with the DBXref functions.	    
+  Returns  : an array of biobean ShDxCvTerm
+             ShDxCvTerm is specified by
+	     http://seqhound.blueprint.org:8080/soap/dbxref.wsdl.xml
+	     contains controlled vocabulary term and its description
+	     return an empty array if failure
+  Args     : There are no input parameters.
+  Example  : $service = new dbxrefService();
+  	     $result = $service -> SHoundGetDxCvTermList()
+	     $i=-1;
+	     while (ref $result->[++$i]){
+            	 print "description: ", $result->[$i]{'description'}, "	";
+                 print "dxCvId     : ", $result->[$i]{'dxCvId'}, "\n";
+	     }
+
+=head2 SHoundGetDxDbNames
+  
+  Title    : SHoundGetDxDbNames
+  Function : Retrieves a list of dbnames that may be consumed (or returned) by DBXref API functions.	    
+  Returns  : an array of database names in String
+             return an empty array if failure
+  Args     : source_dxnames - a boolean to specify if want to retrieve to the names of the source databases
+             dxnames - a boolean to specify if want to retrieve to the names of the cross-reference databases
+  Example  : $service = new dbxrefService();
+             $result = $service -> SHoundGetDxDbnames("TRUE", "FALSE");
+	     $i =-1;
+	     while (defined $result->[++$i]){
+    		 print $result->[$i], "	";
+	     }
+  Note     : The user may specify that they only want dbnames used to describe source records 
+             (set source_dbnames to "TRUE" and dxdbnames to "FALSE") or that they only want those names
+	     used to describe the database cross-references (use the inverse settings). 
+	     By default, all dbnames will be returned, both input booleans set to "TRUE").
+
+=head2 SHoundSourceListFromDx
+  
+  Title    : SHoundSourceListFromDx
+  Function : This is the reciprocal function to SHoundDxListFromSource. 
+             Given a database name and identifier for some database cross-reference,
+	     this function retrieves a list of source records where the cross-reference is cited.	    
+  Returns  : an array of ShDx
+             ShDx is specified by :
+	     http://seqhound.blueprint.org:8080/soap/dbxref.wsdl.xml
+	     contains cv, db, field and id describing cross-reference
+	     return an empty array if failure
+  Args     : dbName - a database name
+             recordId - an (alpha)numeric identifier for some records in the database specified by dbName
+	     field - field name, optional
+	     cv - control vocabulary term, optional
+  Example  : $service = new dbxrefService();
+             $result = $service -> SHoundSourceListFromDx("FB", "FBgn0013277", undef, undef);
+	     $i =-1;
+	     while (ref $result->[++$i]){
+    		 print "cv: ", $result->[$i]{'cv'}, "	";
+    		 print "db: ", $result->[$i]{'db'}, "	";
+    		 print "field: ", $result->[$i]{'field'}, "	";
+    		 print "id: ", $result->[$i]{'id'}, "\n";
+             }
+
+=cut
+
+=head1 Sequence Identifier Conversions
+
+=head2 SHoundAccFromGi
+
+  Title    :  SHoundAccFromGi
+  Function :  Converts a GI identifier to an NCBI accession number.
+  Returns  :  accession number or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundAccFromGi(435);
+  Note     :  Sequences from the PIR or PDB databases will return "n/a" for this function
+              since they do not have an NCBI accession.  Instead, use SHoundGetDefline to
+	      retrieve the accession for these sequences.
+
+=cut
+
+=head2 SHoundAccFromGiList
+
+  Title    :  SHoundAccFromGiList
+  Function :  Converts a list of GI identifier to a list of  NCBI accession numbers.
+  Returns  :  comma delimited  list of accessions or undef
+  Args     :  comma delimited  list of GI identifiers
+  Example  :  $a = SHoundAccFromGiList("123,34634");
+  Note     :  Sequences from the PIR or PDB databases will return "n/a" for this function
+              since they do not have an
+              NCBI accession.  Instead, use SHoundGetDeflineList to retrieve the accessions
+              for these sequences.
+              The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundFindAcc
+
+  Title    :  SHoundFindAcc
+  Function :  Converts an accession number for a sequence into a GenInfo identifier - GI.
+  Returns  :  GI identifier or undef
+  Args     :  accession number
+  Example  :  $a = SHoundFindAcc("CAA28783");
+  Note     :  This function will not accept a version number (e.g. NP_116609.1).  The '.1'
+              must be removed from the example version number to form a valid accession.
+              SeqHound only stores and returns the latest version of a sequence record.
+
+=cut
+
+=head2 SHoundFindAccList
+
+  Title    :  SHoundFindAccList
+  Function :  Converts a list of accession numbers into a list of GI identifiers.
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  comma delimited list of accessions
+  Example  :  $a = SHoundFindAccList("CAA28783,X66994");
+  Note     :  The order in the lists is not maintained
+  Note     :  This function will not accept a version number (e.g. NP_116609.1).  The '.1'
+              must be removed from the example version number to form a valid accession.
+              SeqHound only stores and returns the latest version of a sequence record.
+
+=cut
+
+=head2 SHoundFindName
+
+  Title    :  SHoundFindName
+  Function :  Converts PDB, EMBL, Swiss-Prot, PIR sequence identifier into a GI identifier.
+  Returns  :  GI identifier or undef
+  Args     :  sequence name
+  Example  :  $a = SHoundFindName("3TS1");
+  Note     :  Note that EMBL shares accession numbers with GenBank. EMBL GenInfo identifiers
+              may be returned using these accessions; for example SHoundFindAcc(X13776) will
+              return GI 45269.  EMBL also has its own identifiers (which the NCBI and SeqHound
+              refer to as 'name').  So the same GI may be returned by SHoundFindName(PAAMIR).
+
+=cut
+
+=head2 SHoundFindNameList
+
+  Title    :  SHoundFindNameList
+  Function :  Converts PDB, EMBL, Swiss-Prot, PIR sequence identifier into a GI identifier.
+  Returns  :  comma delimited  list of GI identifiers or undef
+  Args     :  comma delimited  list of sequence names
+  Example  :  $a = SHoundFindNameList("PMY14796,S36449,3TS1");
+  Note     :  The order in the lists is not maintained
+
+              Note that EMBL shares accession numbers with GenBank. EMBL GenInfo identifiers
+              may be returned using these accessions; for example SHoundFindAcc(X13776) will
+              return GI 45269.  EMBL also has its own identifiers (which the NCBI and SeqHound
+              refer to as 'name').  So the same GI may be returned by SHoundFindName(PAAMIR).
+
+=cut
+
+=head2 SHoundGetAccFromRetiredGi
+
+  Title    :  SHoundGetAccFromRetiredGi
+  Function :  Converts a retired GI identifier to an NCBI accession number.
+  Returns  :  accession or undef if failure
+  Args     :  GI (e.g. 4557628)
+  Example  :  $a = SHoundGetAccFromRetiredGi(4557628)
+
+=cut
+
+=head2 SHoundGetNameByGi
+
+  Title    :  SHoundGetNameByGi
+  Function :  Retrieves the Protein Data Bank (PDB) code from the given GI
+  Returns  :  PDB code (e.g. 3TS1) or undef if failure
+  Args     :  GI identifier
+  Example  :  $a = SHoundGetNameByGi(230940);
+
+=cut
+
+=head2 SHoundSeqIdFromGi
+
+  Title    :  SHoundSeqIdFromGi
+  Function :  Converts GI identifier into an ASN.1 structure SeqId which contains all
+              available identifiers for a given sequence.
+  Returns  :  SeqId ASN.1 in text form e.g.
+                       "SLRISeq-id ::= {
+                               embl {
+                              name "SCTRNE3A" ,
+                              accession "X08048" ,
+                              version 1 } ,
+                               gi 4646 }"
+              or undef if failure
+  Args     :  GI identifier
+  Example  :  $a = SHoundSeqIdFromGi(432);
+
+=cut
+
+=head2 SHoundSeqIdFromGiList
+
+  Title    :  SHoundSeqIdFromGiList
+  Function :  Converts a list of GI identifiers into an list of ASN.1 SeqId structures which
+              contain all available identifiers for a given sequence.
+  Returns  :  List of SeqId structures in a parseable text form of ASN.1
+  Args     :  comma delimited  list of GI identifiers
+  Example  :  $a = SHoundSeqIdFromGiList("432,543"); see also: SHoundSeqIdFromGi for example on
+              SeqId structure
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundTitleFromGi
+
+  Title    :  SHoundTitleFromGi
+  Function :  Retrieves the title ( a short description of the sequence record)
+              for the given GI identifier
+  Returns  :  title
+              or undef if failure
+  Args     :  GI identifier
+  Example  :  $a = SHoundTitleFromGi(21071030);
+
+=cut
+
+=head1 Sequence and Structure Checks
+
+=head2 SHound3DbWhat
+
+  Title    :  SHound3DbWhat
+  Function :  Finds out what kind of molecules are contained in a 3-D structure.
+  Returns  :  an integer which represents different kinds of molecules or undef
+  Args     :  integer MMDB identifier
+  Example  :  $a = SHound3DbWhat(3436);
+
+=cut
+
+=head2 SHound3DExists
+
+  Title    :  SHound3DExists
+  Function :  Finds out whether a given structural identifier (MMDB ID) exists in the system.
+  Returns  :  "TRUE" if exists, "FALSE" if it does not
+  Args     :  identifier from Molecular Modeling Database (MMDB ID) (e.g. 11)
+  Example  :  $a = SHound3DExists(4534);
+
+=cut
+
+=head2 SHoundExists
+
+  Title    :  SHoundExists
+  Function :  Reports whether a given GI identifier exists in the SeqHound system.
+  Returns  :  "TRUE" if exists, "FALSE" if it does not
+  Args     :  GI identifier
+  Example  :  $a = SHoundExists(34543);
+
+=cut
+
+=head2 SHoundGetLargestMMDBID
+
+  Title    :  SHoundGetLargestMMDBID
+  Function :  Gets the largest Molecular Modeling Database identifier (MMDBID) in the current
+              MMDB database
+  Returns  :  an integer largest MMDB ID or undef if failure
+  Args     :  null
+  Example  :  $a = SHoundGetLargestMMDBID();
+
+=cut
+
+=head2 SHoundIsNRFirst
+
+  Title    :  SHoundIsNRFirst
+  Function :  Reports if a given GI identifier represents the best annotated version from a
+              group of database entries referring to the same protein sequence (so called
+              redundant proteins).
+  Returns  :  "TRUE" if success, "FALSE"
+  Args     :  GI identifier (e.g. 3236312)
+  Example  :  $a = SHoundIsNRFirst(34543);
+  Note     :  Usable only for proteins, DNA will always return "FALSE"; generally the PDB,
+              RefSeq and Swiss-Prot annotations are considered the most complete
+
+=cut
+
+=head2 SHoundIsProtein
+
+  Title    :  SHoundIsProtein
+  Function :  Reports whether a given GI identifier denotes a protein (as opposed to DNA or
+              RNA).
+  Returns  :  "TRUE" if it is protein, "FALSE" if it is not
+  Args     :  GI identifier
+  Example  :  $a = SHoundIsProtein(354);
+  Note     :  This function will be deprecated.  Please use  SHoundMoleculeType
+
+=cut
+
+=head2 SHoundMoleculeType
+
+  Title    :  SHoundMoleculeType
+  Function :  Gets molecule type for a given GI identifier
+  Returns  :  molecule type (dna, rna, protein) or undef if failure
+  Args     :  GI (e.g. 6322016)
+  Example  :  $a = SHoundMoleculeType(6322016)
+  Note     :  This function deprecates SHoundIsProtein
+
+=cut
+
+=head2 SHoundSequenceLength
+
+  Title    :  SHoundSequenceLength
+  Function :  Gets sequence length from GI identifier
+  Returns  :  sequence length or undef if failure
+  Args     :  GI (e.g. 21071030)
+  Example  :  $a = SHoundSequenceLength(21071030);
+
+=cut
+
+=head1 Sequence Fetch ASN.1 Bioseq
+
+=head2 SHoundGetBioseq
+
+  Title    :  SHoundGetBioseq
+  Function :  Fetches ASN.1 representation of a sequence called Bioseq. The Bioseq is a
+              structure used to represent a single sequence, it contains all available
+              annotation.
+  Returns  :  ASN.1 Bioseq in a parseable text format or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundGetBioseq(535);
+
+=cut
+
+=head2 SHoundGetBioseqList
+
+  Title    :  SHoundGetBioseqList
+  Function :  Fetches a list of ASN.1 Bioseqs. The Bioseq is a structure used to represent a
+              single sequence, it contains all available annotation.
+  Returns  :  list of ASN.1 Bioseqs in a text format or undef
+  Args     :  comma delimited list of GI identifiers
+  Example  :  $a = SHoundGetBioseqList("332");
+  Note     :  The order in the lists is not maintained.
+
+=cut
+
+=head2 SHoundGetXMLBioseq
+
+  Title    :  SHoundGetXMLBioseq
+  Function :  Fetches XML representation of a Bioseq. The Bioseq is a structure used to
+              represent a single sequence, it contains  all available annotation.
+  Returns  :  XML sequence record or undef
+  Args     :  integer GI identifier (e.g. 4646)
+  Example  :  $a = SHoundGetXMLBioseq(555);
+
+=cut
+
+=head1 Sequence Fetch ASN.1 Bioseqset
+
+=head2 SHoundGetBioseqSet
+
+  Title    :  SHoundGetBioseqSet
+  Function :  Fetches ASN.1 representation of a sequence called BioseqSet. BioseqSet exists
+              only if there is more than one sequence in logical group of sequences (e.g. gene
+               and its protein product).
+  Returns  :  ASN.1 BioseqSet in a text format or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundGetBioseqSet(666);
+
+=cut
+
+=head2 SHoundGetBioseqSetList
+
+  Title    :  SHoundGetBioseqSetList
+  Function :  Fetches a list of ASN.1 BioseqSets. BioseqSet exists only if there is more than
+              one sequence in logical group of sequences (e.g. gene and its protein product).
+  Returns  :  list of ASN.1 BioseqSets in a test format of zero
+  Args     :  comma delimited  list of GI identifiers
+  Example  :  $a = SHoundGetBioseqSetList("666,555");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head1 Sequence Fetch ASN.1 SeqEntry
+
+=head2 SHoundGetSeqEntry
+
+  Title    :  SHoundGetSeqEntry
+  Function :  Fetches ASN.1 representation of a sequence called SeqEntry. SeqEntry contains a
+              single sequence or a group of sequences if they are logically related (e.g. gene
+               and its protein product).
+  Returns  :  ASN.1 SeqEntry in a text format or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundGetSeqEntry(234);
+
+=cut
+
+=head2 SHoundGetSeqEntryList
+
+  Title    :  SHoundGetSeqEntryList
+  Function :  Fetches a list of ASN.1 SeqEntries. SeqEntry contains a single sequence or a
+              group of sequences if they are logically related (e.g. gene and its protein
+              product).
+  Returns  :  list of ASN.1 SeqEntries in a text format or undef
+  Args     :  comma delimited  list of GI identifiers
+  Example  :  $a = SHoundGetSeqEntryList("342,555");
+  Note     :  The order in the lists is not maintained.
+
+=cut
+
+=head2 SHoundGetXMLSeqEntry
+
+  Title    :  SHoundGetXMLSeqEntry
+  Function :  Fetches XML representation of SeqEntry. SeqEntry contains a single sequence or a
+               group of sequences if they are logically related (e.g. gene and its protein
+              product).
+  Returns  :  XML object or undef
+  Args     :  GI identifier (e.g. 4646)
+  Example  :  $a = SHoundGetXMLSeqEntry(555);
+
+=cut
+
+=head1 Sequence Fetch FASTA
+
+=head2 SHoundGetFasta
+
+  Title    :  SHoundGetFasta
+  Function :  Fetches FASTA formatted sequence.  The FASTA format is widely used in the
+              bioinformatics community; it consists of a definition line, new line followed by
+               a sequence terminated by a second new line.
+  Returns  :  FASTA formatted sequence or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundGetFasta(666);
+
+=cut
+
+=head2 SHoundGetFastaFromRedundantGroupID
+
+  Title    :  SHoundGetFastaFromRedundantGroupID
+  Function :  Fetches FASTA formatted sequence for given redundant group identifier.  The
+              FASTA format is widely used in the bioinformatics community; it consists of a
+              definition line, new line followed by a sequence terminated by a second new
+              line.  Entrez collection of databases contains redundant entries i.e. proteins
+              with the same sequence but different annotations.   The redundant group
+              identifiers can only be used temporarily, they change every day.
+  Returns  :   FASTA sequence or undef if failure
+  Args     :  redundant group id
+  Example  :  $a = SHoundGetFastaFromRedundantGroupID(123);
+
+=cut
+
+=head2 SHoundGetFastaFromRedundantGroupIDKeyedList
+
+  Title    :  SHoundGetFastaFromRedundantGroupIDKeyedList
+  Function :  Fetches FASTA formatted sequence for given redundant group identifiers.  The
+              FASTA format is widely used in bioinformatics community; it consists of a
+              definition line, new line followed by a sequence terminated by a second new
+              line.  Entrez collection of databases contains redundant entries i.e. proteins
+              with the same sequence but different annotations.   The redundant group
+              identifiers can only be used temporarily, they change every day.
+  Returns  :  hash table, each entry of the table stores FASTA structure and its associated
+              query redundant group id
+              or an empty hash table if failure
+  Args     :  comma delimited list of redundant group ids
+  Example  :  %hash = SHoundGetFastaFromRedundantGroupIDKeyedList("362477,123,111");
+
+=cut
+
+=head2 SHoundGetFastaKeyedList
+
+  Title    :  SHoundGetFastaKeyedList
+  Function :  Fetches GI identifiers and associated FASTA formatted sequences. The FASTA
+              format is widely used in bioinformatics community; it consists of a definition
+              line, new line followed by a sequence terminated by a second new line.
+  Returns  :  hash table, each entry of the table stores a fasta stucture and its associated
+              query gi 
+	      or an empty hash table if failure
+  Args     :  comma delimited list of GI identifiers
+  Example  :  %hash = SHoundGetFastaKeyedList("555,111,4557225");
+
+=cut
+
+=head2 SHoundGetFastaList
+
+  Title    :  SHoundGetFastaList
+  Function :  Fetches a list of FASTA formatted sequences. The FASTA format is widely used in
+              bioinformatics community; it consists of a definition line, new line followed by
+               a sequence terminated by a second new line.
+  Returns  :  FASTA formatted sequences or undef.
+  Args     :  comma delimited  list of GI identifiers
+  Example  :  $a = SHoundGetFastaList("666,555");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head1 Defline Fetch
+
+=head2 SHoundGetDefline
+
+  Title    :  SHoundGetDefline
+  Function :  Fetches definition line for a sequence.  A definition line contains the GI,
+              accession number and other available identifiers together with a short
+              description of the sequence.
+  Returns  :  string containing definition line or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundGetDefline(4646);
+
+=cut
+
+=head2 SHoundGetDeflineList
+
+  Title    :  SHoundGetDeflineList
+  Function :  Fetches multiple definition lines for a list of sequences. A definition line
+              contains the GI, accession number and other available identifiers together with
+              a short description of the sequence.
+  Returns  :  comma delimited  list containing definition lines or undef
+  Args     :  comma delimited  linked list of GI identifiers
+  Example  :  $a = SHoundGetDeflineList("2645003,480117,230940");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head1 Sequence Fetch GenBank Flat File
+
+=head2 SHoundGetGenBankff
+
+  Title    :  SHoundGetGenBankff
+  Function :  Fetches GenBank formatted sequence.  GenBank flat file contains comprehensive
+              full annotation of a sequence.
+  Returns  :  GenBank formatted sequence or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundGetGenBankff(32);
+
+=cut
+
+=head2 SHoundGetGenBankffList
+
+  Title    :  SHoundGetGenBankffList
+  Function :  Fetches a list of GenBank formatted sequences. GenBank flat file contains
+              comprehensive full annotation of a sequence.
+  Returns  :  GenBank formatted sequences
+  Args     :  comma delimited  list of GI identifiers or undef
+  Example  :  $a = SHoundGetGenBankffList("32,666");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head1 Structure Fetch
+
+=head2 SHoundGet3D
+
+  Title    :  SHoundGet3D
+  Function :  Fetches ASN.1 representation of a 3-D structure called Biostruc.  Biostrucs
+              represent data model in the Molecular Modeling database.
+  Returns  :  ASN.1 Biostruc in a parseable text format or undef
+  Args     :  identifier from Molecular Modeling Database (MMDB ID)
+  Example  :  $a = SHoundGet3D(32);
+
+=cut
+
+=head2 SHoundGet3DfromPdbId
+
+  Title    :  SHoundGet3DfromPdbId
+  Function :  Fetches ASN.1 representation of a 3-D structure called Biostruc. Biostrucs
+              represent data model in the Molecular Modeling database.
+  Returns  :  ASN.1 Biostruc in a parseable text format or undef
+  Args     :  PDB code (e.g. 3TS1)
+  Example  :  $a = SHoundGet3DfromPdbId("3INS");
+
+=cut
+
+=head2 SHoundGetPDB3D
+  Title    :  SHoundGetPDB3D
+  Function :  Fetches a 3-D structure in Protein Data Bank (PDB) format.  PDB text format is a
+               format used by Protein Data Bank.
+  Returns  :  PDB formatted structural record or undef
+  Args     :  identifier from Molecular Modeling Database (MMDB ID)
+  Example  :  $a = SHoundGetPDB3D(11);
+
+=cut
+
+=head2 SHoundGetXML3D
+
+  Title    :  SHoundGetXML3D
+  Function :  Fetches XML representation of a 3-D structure.  XML is a converted Biostruc
+              which represent data model in Molecular Modeling database.
+  Returns  :  XML structural record or undef
+  Args     :  identifier from Molecular Modeling Database (MMDB ID)
+  Example  :  $a = SHoundGetXML3D(11);
+
+=cut
+
+=head1 SeqHound Links
+
+=head2 SHound3DFromGi
+
+  Title    :  SHound3DFromGi
+  Function :  Converts a GI sequence identifier to a structural MMDB identifier. Reports in
+              which 3-D structure a particular sequence can be found.
+  Returns  :  MMDB identifier or undef
+  Args     :  GI sequence identifier
+  Example  :  $a = SHound3DFromGi(442560);
+
+=cut
+
+=head2 SHound3DFromGiList
+
+  Title    :  SHound3DFromGiList
+  Function :  Converts a list of sequence GI identifiers to a list of structural MMDB
+              identifiers.
+  Returns  :  comma delimited  list of MMDB identifiers or undef
+  Args     :  comma delimited list of GI identifiers
+  Example  :  $a = SHound3DFromGiList("442560,442572");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundDNAFromProtein
+
+  Title    :  SHoundDNAFromProtein
+  Function :  Converts protein (gene product)  identifier to a nucleic acid (gene) identifier.
+  Returns  :  DNA GI identifier or undef
+  Args     :  protein GI identifier
+  Example  :  $a = SHoundDNAFromProtein(32);
+
+=cut
+
+=head2 SHoundDNAFromProteinList
+
+  Title    :  SHoundDNAFromProteinList
+  Function :  Converts a list of protein (gene product) identifiers to a list of nucleic acids
+               (genes) identifiers.
+  Returns  :  comma delimited list of DNA identifiers or undef
+  Args     :  comma delimited list of protein identifiers
+  Example  :  $a = SHoundDNAFromProteinList("325,4546");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundDNAFromTaxID
+
+  Title    :  SHoundDNAFromTaxID
+  Function :  Gets all nucleic acid sequence identifiers from one organism.
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundDNAFromTaxID(10665);
+
+=cut
+
+=head2 SHoundDNAFromTaxIDIII
+
+  Title    :  SHoundDNAFromTaxIDIII
+  Function :  Gets all nucleic acid sequence identifiers from one organism.  The function
+              takes advantage of precomputed searches if the appropriate one is available.
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundDNAFromTaxIDIII(10665);
+
+=cut
+
+=head2 SHoundDNAFromTaxIDList
+
+  Title    :  SHoundDNAFromTaxIDList
+  Function :  Gets all nucleic acid sequence identifiers from a list of organisms.
+  Returns  :  comma delimited list of nucleic acid GI identifiers or undef
+  Args     :  comma delimited list of taxonomy identifiers
+  Example  :  $a = SHoundDNAFromTaxIDList("10665,3055");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGetReferenceIDFromGi
+
+  Title    :  SHoundGetReferenceIDFromGi
+  Function :  Retrieves publication reference ID from a GI and reference type.
+  Returns  :  a list of comma delimited reference ID or undef if failure
+
+  Args     :  GI (e.g. 6322016)
+              reference type
+                  1 for PubMed ID
+                  2 for MedLine ID
+  Example  :  $a = SHoundGetReferenceIDFormGi(6322016,  2)
+  Note     :  This function deprecates SHoundMuidFromGi
+
+=cut
+
+=head2 SHoundGetReferenceIDFromGiList
+
+  Title    :  SHoundGetReferenceIDFromGiList
+  Function :  Retrieves publication reference ID from a GI list and reference type.
+  Returns  :  a list of comma delimited reference ID or undef if failure
+  Args     :  GI list (e.g. 6322016,4557225,21071030)
+              reference type
+                  1 for PubMed ID
+                  2 for MedLine ID
+  Example  :  $a = SHoundGetReferenceIDFromGiList(2, "6322016,4557225,21071030")
+  Note     :  This function deprecates SHoundMuidFromGiList
+
+=cut
+
+=head2 SHoundGiFrom3D
+
+  Title    :  SHoundGiFrom3D
+  Function :  Gets GI identifiers for sequence or sequences contained in a 3-D structure.
+  Returns  :  comma delimited  list of GI identifiers or one GI or undef
+  Args     :  identifier from Molecular Modeling Database (MMDB ID) and a boolean variable
+              indicating if user wants to get only protein GI identifiers
+  Example  :  $a = SHoundGiFrom3D(23, "FALSE");
+
+=cut
+
+=head2 SHoundGiFrom3DList
+
+  Title    :  SHoundGiFrom3DList
+  Function :  Gets GI identifiers contained in a list of 3-D identifiers.
+  Returns  :  comma delimited  list of GI identifiers or undef
+  Args     :  comma delimited list of MMDB identifiers and a boolean variable indicating if
+              user wants to get only protein GI identifiers
+  Example  :  $a = SHoundGiFrom3DList("FALSE", "23,32");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGiFromPDBchain
+
+  Title    :  SHoundGiFromPDBchain
+  Function :  Gets a GI  identifier for a Protein Data Bank (PDB) structural chain.  PDB code
+              supplemented with a chain always refers to a single sequence.
+  Returns  :  GI identifier for the PDB chain or undef
+  Args     :  PDB code; PDB chain (e.g. "A")
+  Example  :  $a = SHoundGiFromPDBchain("9XIM", "A");
+
+=cut
+
+=head2 SHoundGiFromReferenceID
+
+  Title    :  SHoundGiFromReferenceID
+  Function :  Gets GI identifiers from publication reference ID.
+  Returns  :   a list of comma delimited GI or undef if failure
+  Args     :  reference ID (e.g. 85190481)
+              reference type
+                  1 for PubMed ID
+                  2 for MedLine ID
+  Example  :  $a = SHoundGiFromReferenceID(85190481,  2)
+  Note     :  The return list may contain duplicates.
+              Return value may be very long for some publications, eg for a high throughput
+              publication.
+
+=cut
+
+=head2 SHoundGiFromReferenceList
+
+  Title    :  SHoundGiFromReferenceList
+  Function :  Gets GI identifiers from publication reference ID list.
+  Returns  :  a list of comma delimited GI or undef if failure
+  Args     :  referenceID list (e.g. 97002444, 85190481)
+              reference type
+                  1 for PubMed ID
+                  2 for MedLine ID
+  Example  :  $a = SHoundGiFromReferenceList(2, "97002444,85190481")
+  Note     :  Return value may be very long for some publications, eg for a high throughput
+              publication.
+              The return gilist may contain duplicates
+			  
+=cut
+
+=head2 SHoundMuidFrom3D
+
+  Title    :  SHoundMuidFrom3D
+  Function :  Converts a Molecular Modeling Database structural identifier (MMDBID) to one or
+              more MEDLINE identifiers (MUID). Fetches  identifier of the original paper
+              discussing a given 3-D structure.
+  Returns  :  comma delimited list of MEDLINE identifiers or undef
+  Args     :  MMDB identifier
+  Example  :  $a = SHoundMuidFrom3D(11);
+
+=cut
+
+=head2 SHoundMuidFrom3DList
+
+  Title    :  SHoundMuidFrom3DList
+  Function :  Converts a list of Molecular Modeling Database structural identifiers (MMDBID)
+              to a list of MEDLINE identifiers (MUID). Fetches identifiers of the original
+              papers discussing given 3-D structures.
+  Returns  :  comma delimited  list of MEDLINE identifiers or undef
+  Args     :  comma delimited  list of MMDB identifiers
+  Example  :  $a = SHoundMuidFrom3DList("11,12");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundMuidFromGi
+
+  Title    :  SHoundMuidFromGi
+  Function :  Gets MEDLINE identifier(s) (MUID) for a given GI identifier.  Fetches
+              identifier(s) of the original paper(s) discussing a given sequence.
+  Returns  :  comma delimited  list of MUID identifiers or undef
+  Args     :  GI sequence identifier
+  Example  :  $a = SHoundMuidFromGi(32);
+  Note     :  This function will be deprecated.  Please use SHoundGetReferenceIDFromGi
+
+=cut
+
+=head2 SHoundMuidFromGiList
+
+  Title    :  SHoundMuidFromGiList
+  Function :  Gets MEDLINE identifiers (MUID) for a list of GI identifiers. Fetches
+              identifiers of  the original papers discussing given sequences.
+  Returns  :  comma delimited  list of MUID identifiers or undef
+  Args     :  comma delimited  list of GI identifiers
+  Example  :  $a = SHoundMuidFromGiList("324,32");
+  Note     :  The order in the lists is not maintained
+
+              This function will be deprecated.  Please use SHoundGetReferenceIDFromGiList
+
+=cut
+
+=head2 SHoundProteinFromDNA
+
+  Title    :  SHoundProteinFromDNA
+  Function :  Converts a nucleic acid (gene) identifier to one or more  protein (gene product)
+              identifiers.
+  Returns  :  comma delimited  list of protein identifiers
+  Args     :  DNA GI identifier
+  Example  :  $a = SHoundProteinFromDNA(31);
+
+=cut
+
+=head2 SHoundProteinFromDNAList
+
+  Title    :  SHoundProteinFromDNAList
+  Function :  Converts a list of nucleic acid (gene) identifiers to a list of protein (gene
+              product) identifiers.
+  Returns  :  comma delimited  list of protein identifiers or undef
+  Args     :  comma delimited  list of DNA identifiers
+  Example  :  $a = SHoundProteinFromDNAList("324,4545");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundProteinsFromTaxID
+
+  Title    :  SHoundProteinsFromTaxID
+  Function :  Gets all protein GI identifiers from one organism.
+  Returns  :  comma delimited  list of protein GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundProteinsFromTaxID(10665);
+
+=cut
+
+=head2 SHoundProteinsFromTaxIDIII
+
+  Title    :  SHoundProteinsFromTaxIDIII
+  Function :  Gets all protein GI identifiers from one organism. The function takes advantage
+              of precomputed searches if the appropriate one is available.
+  Returns  :  comma delimited  list of protein GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundProteinsFromTaxIDIII(10665);
+
+=cut
+
+=head2 SHoundProteinsFromTaxIDList
+
+  Title    :  SHoundProteinsFromTaxIDList
+  Function :  Gets all protein GI identifiers from a list of organisms.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  comma delimited list of taxonomy identifiers
+  Example  :  $a = SHoundProteinsFromTaxIDList(10665);
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundTaxIDFrom3D
+
+  Title    :  SHoundTaxIDFrom3D
+  Function :  Converts a structural identifier to one or more taxonomy identifiers.   Reports
+              which organism(s) the 3-D structure comes from.
+  Returns  :  comma delimited  list of taxonomy identifiers or undef
+  Args     :  MMDB identifier
+  Example  :  $a = SHoundTaxIDFrom3D(11);
+
+=cut
+
+=head2 SHoundTaxIDFrom3DList
+
+  Title    :  SHoundTaxIDFrom3DList
+  Function :  Converts a list of structural identifiers to a list of taxonomy identifiers.
+              Reports which organisms the 3-D structures come from.
+  Returns  :  comma delimited  list of taxonomy identifiers or undef
+  Args     :  comma delimited  list of MMDB identifiers
+  Example  :  $a = SHoundTaxIDFrom3DList("11,12");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundTaxIDFromGi
+
+  Title    :  SHoundTaxIDFromGi
+  Function :  Converts a GI identifier to an NCBI taxonomy identifier. Reports which organism
+              a given sequence is from.
+  Returns  :  taxonomy identifier or undef
+  Args     :  GI sequence identifier
+  Example  :  $a = SHoundTaxIDFromGi(32);
+
+=cut
+
+=head2 SHoundTaxIDFromGiList
+
+  Title    :  SHoundTaxIDFromGiList
+  Function :  Converts a list of GI identifiers to a list of NCBI taxonomy identifier  Reports
+               which organisms given sequences are from.
+  Returns  :  comma delimited  list of taxonomy identifiers or undef
+  Args     :  comma delimited  list of GI identifiers
+  Example  :  $a = SHoundTaxIDFromGiList("324,32");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head1 Complete Genome Iterators
+
+=head2 SHoundAllGenomes
+
+  Title    :  SHoundAllGenomes
+  Function :  Gets a list of taxonomy identifiers for all complete genomes present in the
+              SeqHound system. Complete genome annotations are available from NCBI.
+  Returns  :  comma delimited list of taxonomy identifiers or undef
+  Args     :  none
+  Example  :  SHoundAllGenomes();
+
+=cut
+
+=head2 SHoundChromosomeFromGenome
+
+  Title    :  SHoundChromosomeFromGenome
+  Function :  Gets a list of DNA molecules from a complete genome.  The desired return types
+              of DNA molecules can be filtered.
+  Returns  :  comma delimited list of chromosomal identifiers or undef
+  Args     :  taxonomy identifier and a filter integer representing different kinds of DNA
+              molecule (see comment)
+  Example  :  $a = SHoundChromosomeFromGenome(155864, 1);
+  Note     :  The arguments concerning DNA molecule type are so called "byte  flags" where
+              each bit is reserved for one kind of DNA molecule:
+                           1 is chromosome
+                           2 is mitochondrion
+                           4 is chloroplast
+                           8 is plasmid
+                           16 is extra-chromosomal element
+                           32 is plastid
+                           64 is phage
+                           128 is miscellaneous
+              the flags are additive; for example 255 means that all kinds of DNA molecules in
+              a given organism are requested
+
+=cut
+
+=head2 SHoundChromosomeFromGenomeList
+
+  Title    :  SHoundChromosomeFromGenomeList
+  Function :  Gets a list of DNA molecules from a complete genome list.  The desired return
+              types of DNA molecules can be filtered.
+  Returns  :  comma delimited list of chromosomal identifiers or undef
+  Args     :  comma delimited list of taxonomy identifiers and a filter integer representing
+              different kinds of DNA molecule (see comment)
+  Example  :  $a = SHoundChromosomeFromGenomeList(1, "155864,3055");
+  Note     :  The order in the lists is not maintained
+              The arguments concerning DNA molecule type are so called "byte  flags" where
+              each bit is reserved for one kind of DNA molecule:
+                           1 is chromosome
+                           2 is mitochondrion
+                           4 is chloroplast
+                           8 is plasmid
+                           16 is extra-chromosomal element
+                           32 is plastid
+                           64 is phage
+                           128 is miscellaneous
+              the flags are additive; for example 255 means that all kinds of DNA molecules in
+              a given organism are requested
+
+=cut
+
+=head2 SHoundDNAFromChromosome
+
+  Title    :  SHoundDNAFromChromosome
+  Function :  Gets all DNA identifiers from one DNA molecule such as chromosome, plasmid etc.
+               The resulting DNA identifiers constitute a subset of complete genome annotation
+               available from NCBI.
+  Returns  :  comma delimited list of DNA GI identifiers or undef
+  Args     :  chromosomal identifier
+  Example  :  $a = SHoundDNAFromChromosome(169);
+
+=cut
+
+=head2 SHoundDNAFromChromosomeList
+
+  Title    :  SHoundDNAFromChromosomeList
+  Function :  Gets all DNA identifiers from a list DNA molecules such as chromosomes, plasmids
+               etc. The resulting DNA identifiers constitute a subset of complete genome
+              annotation available from NCBI.
+  Returns  :  comma delimited  list of DNA GI identifiers or undef
+  Args     :  comma delimited  list of chromosomal identifiers
+  Example  :  $a = SHoundDNAFromChromosomeList("169,132");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundDNAFromOrganism
+
+  Title    :  SHoundDNAFromOrganism
+  Function :  Gets all DNA identifiers from a complete genome annotation. Complete genome
+              annotations are available from NCBI.
+  Returns  :  comma delimited list of DNA GI identifiers or undef
+  Args     :  taxonomy identifier and a filter integer representing different kinds of DNA
+              molecule (see comment)
+  Example  :  $a = SHoundDNAFromOrganism(155864, 1);
+  Note     :  The arguments concerning DNA molecule type are so called "byte flags" where each
+               bit is reserved for one kind of DNA molecule:
+                           1 is chromosome
+                           2 is mitochondrion
+                           4 is chloroplast
+                           8 is plasmid
+                           16 is extra-chromosomal element
+                           32 is plastid
+                           64 is phage
+                           128 is miscellaneous
+              the flags are additive; for example 255 means that all kinds of DNA molecules in
+              a given organism are requested
+
+=cut
+
+=head2 SHoundDNAFromOrganismList
+
+  Title    :  SHoundDNAFromOrganismList
+  Function :  Gets all DNA identifiers from a complete genomes list. Complete genome
+              annotations are available from NCBI.
+  Returns  :  comma delimited list of DNA GI identifiers or undef
+  Args     :  comma delimited list of taxonomy identifiers and a filter integer representing
+              different kinds of DNA molecule (see comment)
+  Example  :  $a = SHoundDNAFromOrganismList(1, "155864,139");
+  Note     :  The arguments concerning DNA molecule type are so called "byte flags" where each
+               bit is reserved for one kind of DNA molecule:
+                           1 is chromosome
+                           2 is mitochondrion
+                           4 is chloroplast
+                           8 is plasmid
+                           16 is extra-chromosomal element
+                           32 is plastid
+                           64 is phage
+                           128 is miscellaneous
+	      the flags are additive; for example 255 means that all kinds of DNA molecules in
+              a given organism are requested
+	      The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundDNAFromUnknownChromosome
+
+  Title    :  SHoundDNAFromUnknownChromosome
+  Function :  Gets all DNA identifiers which have not been assigned to a specific chromosome
+              from a complete genome.
+  Returns  :  comma delimited list of DNA GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundDNAFromUnknownChromosome(155864);
+
+=cut
+
+=head2 SHoundProteinsFromChromosome
+
+  Title    :  SHoundProteinsFromChromosome
+  Function :  Gets all protein GI identifiers from one DNA molecule such as chromosome,
+              plasmid etc.  The resulting protein GI identifiers constitute a subset of
+              complete genome annotation available from NCBI.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  chromosomal identifier
+  Example  :  $a = SHoundProteinsFromChromosome(169);
+
+=cut
+
+=head2 SHoundProteinsFromChromosomeList
+
+  Title    :  SHoundProteinsFromChromosomeList
+  Function :  Gets all protein GI identifiers from a list DNA molecules such as chromosomes,
+              plasmids etc. The resulting protein GI identifiers constitute a subset of
+              complete genome annotation available from NCBI.
+  Returns  :  comma delimited  list of protein GI identifiers or undef
+  Args     :  comma delimited  list of chromosomal identifiers
+  Example  :  $a = SHoundProteinsFromChromosomeList("169,132");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundProteinsFromOrganism
+
+  Title    :  SHoundProteinsFromOrganism
+  Function :  Gets all protein GI identifiers from a complete genome annotation. Complete
+              genome annotations are available from NCBI.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  taxonomy identifier and a filter integer representing different kinds of DNA
+              molecule (see comment)
+  Example  :  $a = SHoundProteinsFromOrganism(155864, 1);
+  Note     :  The arguments concerning DNA molecule type are so called "byte flags" where each
+               bit is reserved for one kind of DNA molecule:
+               1 is chromosome
+               2 is mitochondrion
+               4 is chloroplast
+               8 is plasmid
+              16 is extra-chromosomal element
+              32 is plastid
+              64 is phage
+              128 is miscellaneous
+              the flags are additive; for example 255 means that all kinds of DNA molecules in
+              a given organism are requested
+
+=cut
+
+=head2 SHoundProteinsFromOrganismList
+
+  Title    :  SHoundProteinsFromOrganismList
+  Function :  Gets all protein GI identifiers from a complete genomes list. Complete genome
+              annotations are available from NCBI.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  comma delimited list of taxonomy identifiers and a filter integer representing
+              different kinds of DNA molecule
+  Example  :  $a = SHoundProteinsFromOrganismList(1, "155864,139");
+  Note     :  The order in the lists is not maintained
+	      The arguments concerning DNA molecule type are so called "byte flags" where each
+              bit is reserved for one kind of DNA molecule:
+                           1 is chromosome
+                           2 is mitochondrion
+                           4 is chloroplast
+                           8 is plasmid
+                           16 is extra-chromosomal element
+                           32 is plastid
+                           64 is phage
+                           128 is miscellaneous
+              the flags are additive; for example 255 means that all kinds of DNA molecules in
+              a given organism are requested
+
+=cut
+
+=head2 SHoundProteinsFromUnknownChromosome
+
+  Title    :  SHoundProteinsFromUnknownChromosome
+  Function :  Gets all proteins identifiers which have not been assigned to a specific chromosome
+              from a complete genome.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundProteinsFromUnknownChromosome(155864);
+
+=cut
+
+=head2 SHoundRNAFromChromosome
+
+  Title    :  SHoundRNAFromChromosome
+  Function :  Gets all RNA identifiers from a NCBI chromosome identifier.
+  Returns  :  comma delimited list of RNA GI identifiers or undef
+  Args     :  NCBI chromosomal identifier
+  Example  :  $a = SHoundRNAFromChromosome(169);
+
+=cut
+
+=head2 SHoundRNAFromUnknownChromosome
+
+  Title    :  SHoundRNAFromUnknownChromosome
+  Function :  Gets all RNA identifiers which have not been assigned to a specific chromosome
+              from a complete genome.
+  Returns  :  comma delimited list of RNA GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundRNAFromUnknownChromosome(155864);
+
+=cut
+
+=head2 SHoundRNAFromOrganism
+
+  Title    :  SHoundRNAFromOrganism
+  Function :  Gets all RNA identifiers from a complete genome annotation. Complete genome
+              annotations are available from NCBI.
+  Returns  :  comma delimited list of RNA GI identifiers or undef
+  Args     :  taxonomy identifier and a filter integer representing different kinds of RNA
+              molecule (see comment)
+  Example  :  SHoundRNAFromOrganism(155864, 1);
+  Note     :  The arguments concerning RNA molecule type are so called "byte flags" where each
+               bit is reserved for one kind of DNA molecule:
+                           1 is chromosome
+                           2 is mitochondrion
+                           4 is chloroplast
+                           8 is plasmid
+                           16 is extra-chromosomal element
+                           32 is plastid
+                           64 is phage
+                           128 is miscellaneous
+              the flags are additive; for example 255 means that all kinds of RNA molecules in
+              a given organism are requested
+
+=cut
+
+=head1 Redundant (Equivalent) Sequences
+
+=head2 SHoundFirstOfRedundantGroupFromID
+
+  Title    :  SHoundFirstOfRedundantGroupFromID
+  Function :  Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations. The function gets a representative
+              entry (generally the one with best annotation such as PDB, RefSeq or SwissProt
+              entry) given a redundant group identifier. The redundant group identifiers can
+              only be used temporarily, they change every day.
+  Returns  :  GI protein identifier or undef
+  Args     :  redundant group identifier
+  Example  :  $a = SHoundFirstOfRedundantGroupFromID(362477);
+
+=cut
+
+=head2 SHoundFirstOfRedundantGroupFromIDList
+
+  Title    :  SHoundFirstOfRedundantGroupFromIDList
+  Function :  Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations. The function gets a list of
+              representative entries (generally the one with best annotation such as PDB,
+              RefSeq or SwissProt entry) given a list of redundant group identifiers.  The
+              redundant group identifiers can only be used temporarily, they change every day.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  comma delimited list of redundant group identifiers
+  Example  :  $a = SHoundFirstOfRedundantGroupFromIDList("362477,408917");
+  Note     :  The order in the lists is not maintained.
+
+=cut
+
+
+=head2 SHoundRedundantGroup
+
+  Title    :  SHoundRedundantGroup
+  Function :  Gets all protein entries with the same sequence from the system.
+              Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations.
+  Returns  :  a comma delimited list of protein GI identifiers or undef
+  Args     :  GI protein identifier
+  Example  :  $a = SHoundRedundantGroup(32);
+
+=cut
+
+
+=head2 SHoundRedundantGroupFromID
+
+  Title    :  SHoundRedundantGroupFromID
+  Function :  Gets a list of redundant protein sequences from a redundant group identifier.
+              Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations.  The redundant group identifiers can
+              only be used temporarily, they change every day.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  redundant group identifier
+  Example  :  $a = SHoundRedundantGroupFromID(362477);
+
+=cut
+
+=head2 SHoundRedundantGroupFromIDList
+
+  Title    :  SHoundRedundantGroupFromIDList
+  Function :  Gets a list of redundant protein sequences from a list of redundant group
+              identifiers.
+              Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations. The redundant group identifiers can
+              only be used temporarily, they change every day.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  comma delimited list of redundant group identifiers
+  Example  :  $a = SHoundRedundantGroupFromIDList("32,362477");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundRedundantGroupIDFromGI
+
+  Title    :  SHoundRedundantGroupIDFromGI
+  Function :  Gets an arbitrary redundant group identifier for a protein sequence.
+              Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations.  The redundant group identifiers can
+              only be used temporarily, they change every day.
+  Returns  :  redundant group identifier or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundRedundantGroupIDFromGI(32);
+
+=cut
+
+=head2 SHoundRedundantGroupIDFromGIList
+
+  Title    :  SHoundRedundantGroupIDFromGIList
+  Function :  Gets an arbitrary redundant group identifier for a list of protein sequences.
+              Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations.  The redundant group identifiers can
+              only be used temporarily, they change every day.
+  Returns  :  comma delimited list of redundant group identifiers or undef
+  Args     :  comma delimited list of protein GI identifiers
+  Example  :  $a = SHoundRedundantGroupIDFromGIList("32,6017926");
+  Note     :  The order in the lists is not maintained.
+
+=cut
+
+=head2 SHoundRedundantGroupKeyedList
+
+  Title    :  SHoundRedundantGroupKeyedList
+  Function :  Gets all protein GI identifiers with the same sequence as the query protein GI
+              identifier.
+              Entrez collection of databases contains redundant entries i.e. proteins with the
+              same sequence but different annotations.
+  Returns  :  a hash table, each entry of the table stores a query protein GI identifier and
+              its associated list of redundant group protein GI identifiers.
+              or an empty hash table if failure
+  Args     :  comma delimited list of protein GI identifiers
+  Example  :  %hash = SHoundRedundantGroupKeyedList("4557225,234,123");
+
+=cut
+
+=head2 SHoundRedundantGroupList
+
+  Title    :  SHoundRedundantGroupList
+  Function :  Gets all protein entries with the same sequence from the system for a list of
+              protein sequences.
+              Entrez collection of databases contains redundant entries i.e. proteins with the
+               same sequence but different annotations.
+  Returns  :  comma delimited list of protein GI identifiers or undef
+  Args     :  comma delimited list of protein GI identifiers
+  Example  :  $a = SHoundRedundantGroupList("32,4586891");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head1 Taxonomy
+
+=head2 SHoundGetAllTaxAncestors
+
+  Title    :  SHoundGetAllTaxAncestors
+  Function :  Operates on NCBI's taxonomy tree.  It retrieves all taxons (the whole subtree)
+              situated above a given taxon in the taxonomy tree.
+  Returns  :  comma delimited list of taxonomy identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  SHoundGetAllTaxAncestors(10665);
+
+=cut
+
+=head2 SHoundGetAllTaxProgeny
+
+  Title    :  SHoundGetAllTaxProgeny
+  Function :  Operates on NCBI's taxonomy tree.  It retrieves all taxons (the whole subtree)
+              situated below a given taxon in the taxonomy tree.
+  Returns  :  comma delimited list of taxonomy identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundGetAllTaxProgeny(10665);
+
+=cut
+
+=head2 SHoundGetTaxChildNodes
+
+  Title    :  SHoundGetTaxChildNodes
+  Function :  Operates on NCBI's taxonomy tree.  Retrieves all taxons situated directly below
+              a given taxon in the taxonomy tree.
+  Returns  :  comma delimited list of taxonomy identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundGetTaxChildNodes(10665);
+
+=cut
+
+=head2 SHoundGetTaxChildNodesList
+
+  Title    :  SHoundGetTaxChildNodesList
+  Function :  Operates on NCBI's taxonomy tree.  Retrieves all taxons situated directly below
+              a list of taxons in the taxonomy tree.
+  Returns  :  comma delimited list of taxonomy identifiers or undef
+  Args     :  comma delimited list of taxonomy identifiers
+  Example  :  $a = SHoundGetTaxChildNodesList("10665");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGetTaxLineageFromTaxID
+
+  Title    :  SHoundGetTaxLineageFromTaxID
+  Function :  Operates on NCBI's taxonomy tree.   Retrieves lineage information in a specified
+              style.
+  Returns  :  lineage or undef
+  Args     :  taxonomy identifier and lineage filter (e.g. "TAXDB_GetLineage_GENBANK")
+  Example  :  $a = SHoundGetTaxLineageFromTaxID(9606, "SHoundGetTaxLineage_FULL");
+  Note     :  Lineage filters:
+              SHoundGetTaxLineage_FULL --   gets full lineage
+              SHoundGetTaxLineage_GENBANK -- gets lineage as it appears in GenBank record
+              SHoundGetTaxLineage_TAXDBSHORT - gets lineage as it would appear on the taxonomy
+              database home page
+
+=cut
+
+=head2 SHoundGetTaxNameFromTaxID
+
+  Title    :  SHoundGetTaxNameFromTaxID
+  Function :  Operates on NCBI's taxonomy tree.   Retrieves taxonomy name in scientific form.
+  Returns  :  scientific taxonomy name or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundGetTaxNameFromTaxID(9606);
+  Note     :  if taxid is deleted, return undef
+	      if taxid is merged, get the new taxid and return its taxonomy name
+	      if taxonomy name not found, return undef
+
+=cut
+
+=head2 SHoundGetNewTaxIDFromMergedTaxID
+
+  Title    :  SHoundNewTaxIDFromMergedTaxID
+  Function :  Retrieves a new taxonomy identifier for a given possible merged TaxID.
+  Returns  :  taxonomy identifier or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundGetNewTaxIDFromMergedTaxID(395);
+  Note     :  returns a valid taxonomy identifier if the given taxid is merged
+              returns undef if the given taxid is not merged or does not exist
+
+=cut
+
+=head2 SHoundGetTaxNameFromTaxIDByClass
+
+  Title    :  SHoundGetTaxNameFromTaxIDByClass
+  Function :  Operates on NCBI's taxonomy tree.   Retrieves taxonomy name in specified style.
+  Returns  :  taxonomy name or undef
+  Args     :  taxonomy identifier and a style filter (e.g.
+              "SLRI_taxon_name_name_class_preferred_common_name")
+  Example  :  $a = SHoundGetTaxNameFromTaxIDByClass(9606,
+              "SLRI_taxon_name_name_class_preferred_common_name");
+  Note     :  Class filters usable:
+              SLRI_taxon_name_name_class_none
+              SLRI_taxon_name_name_class_acronym
+              SLRI_taxon_name_name_class_anamorph
+              SLRI_taxon_name_name_class_blast_name
+              SLRI_taxon_name_name_class_common_name
+              SLRI_taxon_name_name_class_equivalent_name
+              SLRI_taxon_name_name_class_includes
+              SLRI_taxon_name_name_class_in_part
+              SLRI_taxon_name_name_class_misnomer
+              SLRI_taxon_name_name_class_misspelling
+              SLRI_taxon_name_name_class_preferred_acronym
+              SLRI_taxon_name_name_class_preferred_common_name
+              SLRI_taxon_name_name_class_scientific_name
+              SLRI_taxon_name_name_class_synonym
+              SLRI_taxon_name_name_class_teleomorph
+              SLRI_taxon_name_name_class_other
+
+=cut
+
+=head2 SHoundGetTaxParent
+
+  Title    :  SHoundGetTaxParent
+  Function :  Operates on NCBI's taxonomy tree.   Retrieves the taxon situated directly above
+              a given taxon in the taxonomy tree.
+  Returns  :  taxonomy identifier or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundGetTaxParent(10665);
+
+=cut
+
+=head2 SHoundIsTaxDeleted
+
+  Title    :  SHoundIsTaxDeleted
+  Function :  Operates on NCBI's taxonomy tree. Reports if a given taxon has been deleted.
+  Returns  :  "TRUE" if success or "FALSE"
+  Args     :  taxonomy identifier
+  Example  :  $a = SHoundIsTaxDeleted(10665);
+
+=cut
+
+=head2 SHoundIsTaxMerged
+
+  Title    :  SHoundIsTaxMerged
+  Function :  Operates on NCBI's taxonomy tree. Reports if a given taxon has been renamed.
+  Returns  :  "TRUE" if success or "FALSE"
+  Args     :  taxonomy identifier
+  Example  :  SHoundIsTaxMerged(10665);
+
+=cut
+
+=head1 Sequence Neighbours
+
+=head2 SHound3DNeighboursFromGi
+
+  Title    :  SHound3DNeighboursFromGi
+  Function :  Retrieves a list of protein BLAST neighbours possessing 3-D structure.  Uses
+              redundancy information for the query protein.  This means that if the query
+              fails for the input GI identifier, then the query will be retried for all other
+              GI identifiers that belong to the same redundant group.
+	      The BLAST protein neighbours were calculated using 0.01 maximum E-value cutoff.
+  Returns  :  sequence neighbours as comma delimited list of GI identifiers or undef if failure
+  Args     :  protein GI identifier, E-value cutoff
+  Example  :  $a = SHound3DNeighboursFromGi(68502, 0.01);
+
+=cut
+
+=head2 SHound3DNeighboursFromGiList
+
+  Title    :  SHound3DNeighboursFromGiList
+  Function :  Retrieves a list of protein BLAST neighbours possessing 3-D structure using a
+              list of proteins as a query.  Uses redundancy information for the query protein.
+               This means that if the query fails for the input GI identifier, then the query
+              will be retried for all other GI identifiers that belong to the same redundant
+              group.
+              The BLAST protein neighbours were calculated using 0.01 maximum E-value cutoff.
+  Returns  :  sequence neighbours as comma delimited list of GI identifiers or undef if failure
+  Args     :  comma delimited list of protein GI  identifiers (e.g. 4557225, 6009729)
+              an evalue (e.g. 1.0)
+  Example  :  $a = SHound3DNeighboursFromGiList(0.01, "68502,266373");
+
+=cut
+
+=head2 SHound3DNeighboursFromTaxID
+
+  Title    :  SHound3DNeighboursFromTaxID
+  Function :  Retrieves a list of protein BLAST neighbours possessing 3-D structure using a
+              list of proteins belonging to a complete genome as a query. Uses redundancy
+              information for the query protein.
+              The BLAST protein neighbours were calculated using 0.01 maximum E-value cutoff.
+  Returns  :  sequence neighbours as comma delimited list of GI identifiers
+  Args     :  taxonomy identifier, E-value cutoff
+  Example  :  $a = SHound3DNeighboursFromTaxID(2097, 0.01);
+
+=cut
+
+=head2 SHoundNeighboursFromGi
+
+  Title    :  SHoundNeighboursFromGi
+  Function :  Retrieves a list of protein BLAST neighbours.  Uses redundancy information for
+              the query protein.  This means that if the query fails for the input GI
+              identifier, then the query will be retried for all other GI identifiers that
+              belong to the same redundant group.
+              The BLAST protein neighbours were calculated using 0.01 maximum E-value cutoff.
+  Returns  :  sequence neighbours as comma delimited list of GI identifiers or undef if failure
+  Args     :  protein GI identifier ( e.g. 4557225)
+              an evalue cutoff  (e.g. 0.5)
+              "TRUE" to restrict return list to 100, otherwise set limit "FALSE"
+  Example  :  $a = SHoundNeighboursFromGi(6017926,0.1,"FALSE");
+
+=cut
+
+=head2 SHoundNeighboursFromGiList
+
+  Title    :  SHoundNeighboursFromGiList
+  Function :  Retrieves a list of protein BLAST neighbours using a list of proteins as a
+              query.  Uses redundancy information for the query proteins.  This means that if
+              the query fails for the input GI identifier, then the query will be retried for
+              all other GI identifiers that belong to the same redundant group.
+              The BLAST protein neighbours were calculated using 0.01 maximum E-value cutoff.
+  Returns  :  sequence neighbours as comma delimited list of GI identifiers or undef if failure
+  Args     :  a comma delimited list of protein GI identifiers ( e.g. "4557225,4501843")
+              evalue cutoff  (e.g. 0.5)
+  Example  :  $a = SHoundNeighboursFromGiList(0.01, "6017926,32");
+
+=cut
+
+=head2 SHoundNeighboursFromTaxID
+
+  Title    :  SHoundNeighboursFromTaxID
+  Function :  Retrieves a list of protein BLAST neighbours using a list of proteins belonging
+              to a complete genome as a query.  Uses redundancy information for the query
+              proteins.
+              The BLAST protein neighbours were calculated using 0.01 maximum E-value cutoff.
+  Returns  :  sequence neighbours as comma delimited list of GI identifiers or undef
+  Args     :  taxonomy identifier, E-value cutoff
+  Example  :  $a = SHoundNeighboursFromTaxID(2097, 0.01);
+
+=cut
+
+=head1 Complete Genome Analysis
+
+=head2 SHound3DListFromTaxID
+
+  Title    :  SHound3DListFromTaxID
+  Function :  Returns a list of proteins with 3-D structure for a complete organism.  The
+              function uses redundancy information but no neighbour information
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  taxonomy identifier
+  Example  :  $a = SHound3DListFromTaxID(2097);
+
+=cut
+
+=head2 SHoundAllGenomesWithScientificNames
+
+  Title    :  SHoundAllGenomesWithScientificNames
+  Function :  Gets a list of taxonomy identifiers and their associated scientific names for all 
+              complete genomes present in the SeqHound system. 
+  Returns  :  a list of taxonomy identifiers and names or undef
+  Args     :  none
+  Example  :  @a = SHoundAllGenomesWithScientificNames();
+
+=cut
+
+=head2 SHoundAllGenomesWithNumProteins
+
+  Title    :  SHoundAllGenomesWithNumProteins
+  Function :  Gets a list of taxonomy identifiers and their associated number of proteins for all
+              complete genomes present in the SeqHound system. 
+  Returns  :  a list of taxonomy identifiers and number of proteins or undef
+  Args     :  none
+  Example  :  @a = SHoundAllGenomesWithNumProteins();
+
+=cut
+
+=head1 Functional Annotation
+
+=head2 SHoundCDDIDFromGi
+
+  Title    :  SHoundCDDIDFromGi
+  Function :  Fetches domains from Conserved Domain Database (CDD) as determined by Reverse
+              Position Specific BLAST on a given sequence.
+  Returns  :  comma delimited list of CDDIDs (e.g.COG2373, pfam00207,pfam01821,pfam01835) or
+              zero if failure
+  Args     :  GI identifier (must be protein GI identifier  e.g. 4502501)
+  Example  :  $a = SHoundCDDIDFromGi(4557225);
+  Note     :  Domain information returned by this function was originally retrieved for
+              proteins found in NCBI's LocusLink database.  If the query protein GI identifier
+               is not used by the LocusLink record then no information will be returned.  The
+              query protein GI identifier could be used to first retrieve a list of redundant
+              (identical) sequence GI identifiers using <a
+              href=apifunctsdet.html#SHoundRedundantGroup > SHoundRedundantGroup </a> and then
+              using these returned protein GI identifiers to query the LocusLink data.
+	      For more conserved domain information (for all proteins found in NCBI's nr
+              dataset) see API functions under <a href=apifunctsdet.html#SECTIONID_7> RPS
+              BLAST Domains.</a>
+
+=cut
+
+=head2 SHoundCDDIDFromGiList
+
+  Title    :  SHoundCDDIDFromGiList
+  Function :  Fetches domains from Conserved Domain Database (CDD) as determined by Reverse
+              Position Specific BLAST on a list of sequences.
+  Returns  :  comma delimited list of CDDIDs or undef if failure
+  Args     :  comma delimited GI identifiers (must be protein GI identifiers e.g.
+              4502501,4501843)
+  Example  :  $a = SHoundCDDIDFromGiList("4501841,4557225");
+  Note     :  Domain information returned by this function was originally retrieved for
+              proteins found in NCBI's LocusLink database.  If the query protein GI identifier
+               is not used by the LocusLink record then no information will be returned.  The
+              query protein GI identifier could be used to first retrieve a list of redundant
+              (identical) sequence GI identifiers using <a
+              href=apifunctsdet.html#SHoundRedundantGroup > SHoundRedundantGroup </a> and then
+              using these returned protein GI identifiers to query the LocusLink data.
+              For more conserved domain information (for all proteins found in NCBI's nr
+              dataset) see API functions under <a href=apifunctsdet.html#SECTIONID_7> RPS
+              BLAST Domains.</a>
+              The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundCDDIDFromLLID
+
+  Title    :  SHoundCDDIDFromLLID
+  Function :  Fetches all Conserved Domain Database (CDD) IDs for a given LocusLink ID (LLID)
+  Returns  :  list of CDDIDs or undef if failure
+  Args     :  Locus Link ID (LLID)
+  Example  :  $a = SHoundCDDIDFromLLID(1);
+
+=cut
+
+=head2 SHoundCDDScoreFromGi
+
+  Title    :  SHoundCDDScoreFromGi
+  Function :  Fetches a score for Conserved Domain Database (CDD) domain assignment as
+              determined by Reverse Position Specific BLAST.
+  Returns  :  a score or undef if failure
+  Args     :  Gene identifier (GI)
+              Conserved Domain Database ID (CDDID)
+  Example  :  $a = SHoundCDDScoreFromGi(34870013, "COG0606");      
+  Note     :  Information returned by this function was originally retrieved for proteins
+              found in NCBI's LocusLink database.  If the query protein GI identifier is not
+              used by the LocusLink record then no information will be returned.  The query
+              protein GI identifier could be used to first retrieve a list of redundant
+              (identical) sequence GI identifiers using <a
+              href=apifunctsdet.html#SHoundRedundantGroup > SHoundRedundantGroup </a> and then
+              using these returned protein GI identifiers to query the LocusLink data.
+              For more conserved domain information (for all proteins found in NCBI's nr
+              dataset) see API functions under <a href=apifunctsdet.html#SECTIONID_7> RPS
+              BLAST Domains.</a>
+
+=cut
+
+=head2 SHoundGiFromCDDID
+
+  Title    :  SHoundGiFromCDDID
+  Function :  Fetches all protein sequences carrying a domain from Conserved Domain Database
+              (CDD) as determined by Reverse Position Specific BLAST.  Uses information from
+              NCBI's LocusLink database.  If the query CDD identifier is not used by LocusLink
+               then no information will be returned.
+  Returns  :  comma delimited list of protein GI identifiers or undef if failure
+  Args     :  Conserved Domain Database ID (CDDID) (either Pfam or SMART e.g. pfam00202)
+  Example  :  $a = SHoundGiFromCDDID("pfam00664");
+
+=cut
+
+=head2 SHoundGiFromCDDIDList
+
+  Title    :  SHoundGiFromCDDIDList
+  Function :  Fetches all protein sequences carrying a list of domains from Conserved Domain
+              Database (CDD) as determined by Reverse Position Specific BLAST.  Uses
+              information from NCBI's LocusLink database.  If the query CDD identifier is not
+              used by LocusLink then no information will be returned.
+  Returns  :  comma delimited list of protein GI identifiers or undef if failure
+  Args     :  a comma delimited Conserved Domain Database ID (CDDID) list (e.g.
+              "pfam00202,pfam01835,pfam00079" )
+  Example  :  $a = SHoundGiFromCDDIDList("pfam00202,pfam01835,pfam00079,smart00231");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGiFromGOID
+
+  Title    :  SHoundGiFromGOID
+  Function :  Fetches all protein sequences which were assigned a given Gene Ontology (GO)
+              function, process or component.
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  GO identifier
+  Example  :  $a = SHoundGiFromGOID(8320);
+
+=cut
+
+=head2 SHoundGiFromGOIDAndECode
+
+  Title    :  SHoundGiFromGOIDAndECode
+  Function :  Gets GI identifiers from Gene Ontology ID (GOID) and evidence code (ECode)
+  Returns  :  a list of comma delimited GI or undef if failure
+  Args     :  GOID (e.g. 5554), ecode(e.g. ND)
+  Example  :  $a = SHoundGiFromGOIDAndECode(5554, ND)
+
+=cut
+
+=head2 SHoundGiFromGOIDList
+
+  Title    :  SHoundGiFromGOIDList
+  Function :  Fetches all protein sequences which were assigned a list of Gene Ontology (GO)
+              functions, processes or components.
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  comma delimited list of GO identifiers
+  Example  :  $a = SHoundGiFromGOIDList("8320,5737");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGiFromGOIDListAndECode
+
+  Title    :  SHoundGiFromGOIDListAndECode
+  Function :  Gets GI identifiers from Gene Ontology ID (GOID) list and evidence code (ECode)
+  Returns  :  a list of comma delimited GI or undef if failure
+  Args     :  GOIDList (e.g. 5554,4), ecode(e.g. ND)
+  Example  :  $a = SHoundGiFromGOIDListAndECode(NR, "8320,4009");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGiFromLLID
+
+  Title    :  SHoundGiFromLLID
+  Function :  Fetches protein GI identifiers associated with NCBI's LocusLink ID (LLID)
+  Returns  :  comma delimited list of protein GI identifiers or undef if failure
+  Args     :  LocusLink ID (LLID) (e.g. 9)
+  Example  :  $a = SHoundGiFromLLID(9);
+
+=cut
+
+=head2 SHoundGiFromLLIDList
+
+  Title    :  SHoundGiFromLLIDList
+  Function :  Fetches protein GI identifiers associated with a list of NCBI's LocusLink IDs
+              (LLID).
+  Returns  :  comma delimited list of protein GI identifiers (e.g.4557225,4557227,27754153) or
+              undef if failure
+  Args     :  comma delimited list of LLIDs (e.g. 2,9, 13)
+  Example  :  $a = SHoundGiFromLLIDList("1,2,13");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGiFromOMIM
+
+  Title    :  SHoundGiFromOMIM
+  Function :  Fetches all protein GI identifiers associated with an entry in Online Mendelian
+              Inheritance in Man (OMIM) database.
+  Returns  :  comma delimited list of protein GI identifiers (e.g. 4501847) or undef if failure
+  Args     :  OMIM ID (e.g. 137150 )
+  Example  :  $a = SHoundGiFromOMIM(103950);
+
+=cut
+
+=head2 SHoundGiFromOMIMList
+
+  Title    :  SHoundGiFromOMIMList
+  Function :  Fetches all protein GI identifiers associated with a list of entries in Online
+              Mendelian Inheritance in Man (OMIM) database.
+  Returns  :  comma delimited list of protein GI identifiers (e.g.4501847,4557225) or undef if
+              failure
+  Args     :  comma delimited OMIM IDs  (e.g. 137150,103950,108345 )
+  Example  :  $a = SHoundGiFromOMIMList("137150,103950,108345");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGOECodeFromGiAndGOID
+
+  Title    :  SHoundGOECodeFromGiAndGOID
+  Function :  Gets evidence code from GI identifier and Gene Ontology (GO) ID.
+  Returns  :  a list of comma delimited Ecode or undef if failure
+  Args     :  GI (e.g. 21071030), GOID (e.g. 5554)
+  Example  :  $a = SHoundGOECodeFromGiAndGOID(21071030, 5554);
+
+=cut
+
+=head2 SHoundGOIDFromGi
+
+  Title    :  SHoundGOIDFromGi
+  Function :  Fetches all Gene Ontology (GO) terms assigned to a protein sequence.  An
+              individual sequence can be referred to by one or more process, function or
+              component terms.
+  Returns  :  comma delimited list of GO identifiers or undef
+  Args     :  GI identifier
+  Example  :  $a = SHoundGOIDFromGi(15149484);
+
+=cut
+
+=head2 SHoundGOIDFromGiList
+
+  Title    :  SHoundGOIDFromGiList
+  Function :  Fetches all Gene Ontology (GO) terms assigned to a list of protein sequences.
+              An individual sequence can be referred to by one or more process, function or
+              component terms.
+  Returns  :  comma delimited list of GO identifiers or undef
+  Args     :  comma delimited list of GI identifiers
+  Example  :  $a = SHoundGOIDFromGiList("15149484,6912624");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGOIDFromLLID
+
+  Title    :  SHoundGOIDFromLLID
+  Function :  Fetches all Gene Ontology (GO) IDs for a given LocusLink ID (LLID)
+  Returns  :  comma delimited list of GOIDs or undef if failure
+  Args     :  Locus Link ID (LLID, e.g. 1)
+  Example  :  $a = SHoundGOIDFromLLID(1);
+
+=cut
+
+=head2 SHoundGOIDFromRedundantGi
+
+  Title    :  SHoundGOIDFromRedundantGi
+  Function :  Fetches all Gene Ontology (GO) term identifiers assigned to a protein sequence.
+              Uses redundancy information for the query GI identifier.  This means that if
+              the query fails for the input GI identifier, then the query will be retried for
+              all other GI identifiers that belong to the same redundant group.  An individual
+              sequence can be referred to by one or more a process, function or component
+              terms.
+  Returns  :  comma delimited list of GO identifiers or or undef if failure
+  Args     :  GI identifier (e.g. 21071030)
+  Example  :  $a = SHoundGOIDFromRedundantGi(15149484);
+
+=cut
+
+=head2 SHoundGOIDFromRedundantGiList
+
+  Title    :  SHoundGOIDFromRedundantGiList
+  Function :  Fetches all Gene Ontology (GO) term identifiers assigned to a list of protein
+              sequences.  Uses redundancy information for the query GI identifier.  This means
+              that if the query fails for the input GI identifier, then the query will be
+              retried for all other GI identifiers that belong to the same redundant group.
+              An individual sequence can be referred to by one or more a process, function or
+              component terms.
+  Returns  :  comma delimited list of GO identifiers or undef if failure
+  Args     :  comma delimited list of GI identifiers (e.g. "21071030,4586891")
+  Example  :  $a = SHoundGOIDFromRedundantGiList("15149484,6912624");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundGOPMIDFromGiAndGOID
+
+  Title    :  SHoundGOPMIDFromGiAndGOID
+  Function :  Gets PMID list from GI identifier and Gene Ontology ID (GOID)
+  Returns  :  a list of comma delimited PMID or undef if failure
+  Args     :  GI (e.g. 21071030), GOID (e.g. 5554)
+  Example  :  $a = SHoundGOPMIDFromGiAndGOID(21071030, 5554)
+
+=cut
+
+=head2 SHoundLLIDFromCDDID
+
+  Title    :  SHoundLLIDFromCDDID
+  Function :  Fetches LocusLink IDs (LLID) for a given Conserved Domain Database (CDD) ID
+  Returns  :  comma delimited list of LLIDs or undef if failure
+  Args     :  Conserved Domain ID
+  Example  :  $a = SHoundLLIDFromCDDID("smart00408");
+
+=cut
+
+=head2 SHoundLLIDFromGi
+
+  Title    :  SHoundLLIDFromGi
+  Function :  Fetches LocusLink IDs (LLID) for a given protein sequence.
+  Returns  :  LLID (e.g. 12) or undef if failure
+  Args     :  GI identifier (must be protein GI identifier e.g. 4501843)
+  Example  :  $a = SHoundLLIDFromGi(4501843);
+
+=cut
+
+=head2 SHoundLLIDFromGiList
+
+  Title    :  SHoundLLIDFromGiList
+  Function :  Fetches LocusLink IDs (LLID) associated with a list of protein GI identifiers.
+  Returns  :  comma delimited list of LLIDs (e.g. 2, 16) or undef if failure
+  Args     :  comma delimited list of GIs (must be protein GI identifiers e.g.
+              4501841,4557225)
+  Example  :  $a = SHoundLLIDFromGiList("4501841,4557225");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundLLIDFromGOIDAndECode
+
+  Title    :  SHoundLLIDFromGOIDAndECode
+  Function :  Fetches LocusLink IDs (LLID) for a given Gene Ontology ID (GOID) and evidence
+              code (ECode)
+  Returns  :  comma delimited list of LLIDs or undef if failure
+  Args     :  GOID
+              GO evidence code (e.g. "IEA")
+  Example  :  $a = SHoundLLIDFromGOIDAndECode(6810, "IEA");
+
+=cut
+
+=head2 SHoundLLIDFromOMIM
+
+  Title    :  SHoundLLIDFromOMIM
+  Function :  Fetches LocusLink IDs (LLID) for a given Online Mendelian Inheritance in Man
+              (OMIM) ID.
+  Returns  :  comma delimited list of LLIDs or undef if failure
+  Args     :  OMIM ID
+  Example  :  $a = SHoundLLIDFromOMIM(103950);
+
+=cut
+
+=head2 SHoundLocusFromGi
+
+  Title    :  SHoundLocusFromGi
+  Function :  Fetches a locus assignment for a protein sequence as found in NCBI's LocusLink
+              database.
+  Returns  :  locus (e.g. 14q32.1) or undef if failure
+  Args     :  GI identifier (must be protein GI identifier e.g. 51036689)
+  Example  :  $a = SHoundLocusFromGi(51036689);
+
+=cut
+
+=head2 SHoundOMIMFromGi
+
+  Title    :  SHoundOMIMFromGi
+  Function :  Fetches Online Mendelian Inheritance in Man (OMIM) database identifiers
+              associated with a protein GI identifier.
+  Returns  :  comma delimited list of OMIM IDs (e.g. 120820) or undef if failure
+  Args     :  GI identifier  (must be protein GI identifier e.g. 4502501)
+  Example  :  $a = SHoundOMIMFromGi(4505335);
+
+=cut
+
+=head2 SHoundOMIMFromGiList
+
+  Title    :  SHoundOMIMFromGiList
+  Function :  Fetches Online Mendelian Inheritance in Man (OMIM) database identifiers
+              associated with a list of protein GI identifiers.
+  Returns  :  comma delimited list of OMIM IDs (e.g. 107280,120820) or undef if failure
+  Args     :  comma delimited list of GI identifiers (must be protein GI identifiers e.g.
+              4502501,4501843)
+  Example  :  $a = SHoundOMIMFromGiList("4501841,4557225");
+  Note     :  The order in the lists is not maintained
+
+=cut
+
+=head2 SHoundOMIMFromLLID
+
+  Title    :  SHoundOMIMFromLLID
+  Function :  Fetches Online Mendelian Inheritance in Man (OMIM) IDs for a given LocusLink ID
+              (LLID)
+  Returns  :  OMIM ID or undef if failure
+  Args     :  Locus Link ID (LLID)
+  Example  :  $a = SHoundOMIMFromLLID(1);
+
+=cut
+
+=head1 GO Hierarchy
+
+=head2 SHoundGODBGetAllAncestors
+
+  Title    :  SHoundGODBGetAllAncestors
+  Function :  This function operates on Gene Ontology (GO) vocabulary graphs.  It retrieves a
+              list of all processes, functions or components situated above a given GO
+              identifier in the graphs.
+  Returns  :  comma delimited list of GO identifiers or undef
+  Args     :  GO identifier
+  Example  :  $a = SHoundGODBGetAllAncestors(7596);
+
+=cut
+
+=head2 SHoundGODBGetAllChildren
+
+  Title    :  SHoundGODBGetAllChildren
+  Function :  Operates on Gene Ontology (GO) vocabulary graphs.  Retrieves a list all of
+              processes, functions or components situated below a given GO identifier in the
+              graphs.
+  Returns  :  comma delimited list of GO identifiers or undef
+  Args     :  GO identifier
+  Example  :  $a = SHoundGODBGetAllChildren(6886);
+
+=cut
+
+=head2 SHoundGODBGetChildrenOf
+
+  Title    :  SHoundGODBGetChildrenOf
+  Function :  Operates on Gene Ontology (GO) vocabulary graphs.  Retrieves a list of
+              processes, functions or components situated directly below a given GO identifier
+              in the graphs.
+  Returns  :  comma delimited list of GO identifiers or undef
+  Args     :  GO identifier
+  Example  :  $a = SHoundGODBGetChildrenOf(7596);
+
+=cut
+
+=head2 SHoundGODBGetClassification
+
+  Title    :  SHoundGODBGetClassification
+  Function :  Operates on Gene Ontology (GO) vocabulary graphs.  Reports if a given GO
+              identifier describes a cellular process, a cellular function or a cellular
+              component.
+  Returns  :  string containing the category name or undef
+  Args     :  GO identifier
+  Example  :  $a = SHoundGODBGetClassification(4866);
+  Note     :  GO_MOL_FUN refers to a function
+              GO_BIO_PRO refers to a process
+              GO_CELL_COM refers to a component
+
+=cut
+
+=head2 SHoundGODBGetNameByID
+
+  Title    :  SHoundGODBGetNameByID
+  Function :  Operates on Gene Ontology (GO) vocabulary graphs.  Retrieves a name of a
+              process, a function or a component for a given GO identifier.
+  Returns  :  string containing the ontology name or undef
+  Args     :  GO identifier
+  Example  :  $a = SHoundGODBGetNameByID(4866);
+
+=cut
+
+=head2 SHoundGODBGetParentOf
+
+  Title    :  SHoundGODBGetParentOf
+  Function :  Operates on Gene Ontology (GO) vocabulary graphs.  Retrieves a list of
+              processes, functions or components situated directly above a given GO identifier
+               in the graphs.
+  Returns  :  comma delimited list of GO identifiers or undef
+  Args     :  GO identifier
+  Example  :  $a = SHoundGODBGetParentOf(7596);
+  Note     :  due to the logic of the GO hierarchy graphs, it is possible that a GO identifier
+              will have more than one parent
+
+=cut
+
+=head2 SHoundGODBGetRecordByReference
+
+  Title    :  SHoundGODBGetRecordByReference
+  Function :  Gets a list of  Gene Ontology (GO) IDs with a specified GO reference type.
+  Returns  :  a comma delimited list of records (e.g. 9,10,16,26,30,33,34......) or undef if
+              failure
+  Args     :  a reference type for GO module (e.g. EC)
+  Example  :  $a = SHoundGODBGetRecordByReference("EC");
+  Note     :  Return list is sorted and unique
+
+=cut
+
+=head1 RPS Blast Domains
+
+=head2 SHoundGetDomainIdFromLabel
+
+  Title    :  SHoundGetDomainIdFromLabel
+  Function :  Returns one or more Conserved Domain Database (CDD) identifiers given a short
+              non-unique label. The  labels are preferred among the scientific community.
+  Returns  :  comma delimited list of CDD identifiers or undef
+  Args     :  short label
+  Example  :  $a = SHoundGetDomainIdFromLabel("COLFI");
+
+=cut
+
+=head2 SHoundGetDomainLabelFromDomainId
+
+  Title    :  SHoundGetDomainLabelFromDomainId
+  Function :  Returns a short non-unique label given a domain for a Conserved Domain Database
+              (CDD). The  labels are preferred among the scientific community.
+  Returns  :  short label or undef
+  Args     :  CDD identifier
+  Example  :  $a = SHoundGetDomainLabelFromDomainId(smart00038);
+
+=cut
+
+=head2 SHoundGetDomainsFromGi
+
+  Title    :  SHoundGetDomainsFromGi
+  Function :  Fetches information about domains from the Conserved Domain Database (CDD) as
+              assigned by Reverse Position Specific BLAST to a given protein sequence.  Uses
+              redundancy information for the query proteins.  This means that if the query
+              fails for the input GI identifier, then the query will be retried for all other
+              GI identifiers that belong to the same redundant group.
+  Returns  :  linked list of StRpsdb structures in a parseable form or undef if failure
+  Args     :  protein GI identifier (e.g. 4557225)
+  Example  :  $a = SHoundGetDomainsFromGi(4557225);
+  Note     :  The returning structure contains CDD domain identifier, E-value, position,
+              length of the alignment, N and C terminal residues missing when compared to the
+              consensus domain and the total number of domains on a protein.
+
+=cut
+
+=head2 SHoundGetDomainsFromGiWithEvalue
+
+  Title    :  SHoundGetDomainsFromGiWithEvalue
+  Function :  Fetches information about domains from the Conserved Domain Database (CDD) as
+              assigned by Reverse Position Specific BLAST to a given protein sequence.  Uses
+              redundancy information for the query proteins.  This means that if the query
+              fails for the input GI identifier, then the query will be retried for all other
+              GI identifiers that belong to the same redundant group.  The function uses an
+              E-value cutoff for reporting results.
+  Returns  :  linked list of StRpsdb structures in a parseable form or undef if failure
+  Args     :  protein GI identifier (e.g. 6322015)
+              evalue cutoff  (e.g. 0.5)
+  Example  :  $a = SHoundGetDomainsFromGiWithEvalue(4557225,0.001);
+  Note     :  The returning structure contains CDD domain identifier, E-value, position,
+              length of the alignment, N and C terminal residues missing when compared to the
+              consensus domain and the total number of domains on a protein
+
+=cut
+
+=head2 SHoundGetGisByDomainId
+
+  Title    :  SHoundGetGisByDomainId
+  Function :  Fetches protein sequences on which a domain from the Conserved Domain Database
+              (CDD) was identified by Reverse Position Specific BLAST.
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  CDD identifier
+  Example  :  $a = SHoundGetGisByDomainId("smart00038");
+
+=cut
+
+=head2 SHoundGetGisByDomainIdAndEvalue
+
+  Title    :  SHoundGetGisByDomainIdAndEvalue
+  Function :  Fetches protein sequences on which a domain from the Conserved Domain Database
+              (CDD) was identified by Reverse Position Specific BLAST. The function uses an
+              E-value cutoff for reporting results.
+  Returns  :  comma delimited list of GI identifiers or undef
+  Args     :  CDD identifier and E-value cutoff
+  Example  :  $a = SHoundGetGisByDomainId("smart00038",0.001);
+
+=cut
+
+=head2 SHoundGetGisByNumberOfDomains
+
+  Title    :  SHoundGetGisByNumberOfDomains
+  Function :  Fetches all sequences with a specified number of domains identified by Reverse
+              Position Specific BLAST using Conserved Domain Database set of domains.
+  Returns  :  comma delimited list of GI identifiers
+  Args     :  number of domains
+  Example  :  $a = SHoundGetGisByNumberOfDomains(6);
+
+=cut
+

@@ -1,0 +1,72 @@
+########################################################################
+#
+# SeqHound Local MakeFile
+#
+# Target either for 
+# Codebase using cb
+# IBM DB2  using db2
+#
+#######################################################################
+include ../seqhound.mk
+
+# Look at seqhound.mk for library names
+
+#####################################################################
+##
+## Database Specific Targets
+##
+#####################################################################
+
+
+SEQH_DLL_CB = libshound.so
+
+all: $(SEQH_LIB_CB)
+so : dep_cb $(SEQH_DLL_CB)
+cb : dep_cb $(SEQH_LIB_CB)
+db2 : dep_db2 $(SEQH_LIB_DB2)
+odbc : dep_odbc $(SEQH_LIB_ODBC)
+
+
+
+$(SEQH_DLL_CB): $(SEQH_OBJ_COM) $(SEQH_OBJ_OCB)
+	gcc -shared -o $(SEQH_DLL_CB) $(SEQH_OBJ_COM) $(SEQH_OBJ_OCB)
+
+
+$(SEQH_LIB_CB): $(SEQH_OBJ_COM) $(SEQH_OBJ_OCB)
+	ar $(ARFLAGS) r $(SEQH_LIB_CB) $(SEQH_OBJ_COM) $(SEQH_OBJ_OCB)
+	ranlib $(SEQH_LIB_CB) || true
+	-mkdir -p $(SEQH_LIB)
+	cp $(SEQH_LIB_CB) $(SEQH_LIB)/$(SEQH_LIB_CB)
+
+$(SEQH_LIB_DB2): $(SEQH_OBJ_COM) $(SEQH_OBJ_ODB2)
+	ar $(ARFLAGS) r $(SEQH_LIB_DB2) $(SEQH_OBJ_COM) $(SEQH_OBJ_ODB2) 
+	ranlib $(SEQH_LIB_DB2) || true
+	-mkdir -p $(SEQH_LIB)
+	cp $(SEQH_LIB_DB2) $(SEQH_LIB)/$(SEQH_LIB_DB2)
+
+$(SEQH_LIB_ODBC): $(SEQH_ODBC_COM) $(SEQH_OBJ_OODBC) 
+	ar $(ARGFLAGS) r $(SEQH_LIB_ODBC) $(SEQH_ODBC_COM) $(SEQH_OBJ_OODBC)
+	ranlib $(SEQH_LIB_ODBC) || true
+	-mkdir -p $(SEQH_LIB)
+	cp $(SEQH_LIB_ODBC) $(SEQH_LIB)/$(SEQH_LIB_ODBC)
+
+clean:
+	rm -f $(SEQH_OBJ_COM)
+	rm -f $(SEQH_ODBC_COM)
+	rm -f $(SEQH_OBJ_OCB)
+	rm -f $(SEQH_OBJ_ODB2)
+	rm -f $(SEQH_OBJ_OODBC)
+	rm -f $(SEQH_LIB_CB) $(SEQH_LIB_DB2) $(SEQH_LIB_ODBC)
+	rm -f $(SEQH_LIB)/$(SEQH_LIB_CB) $(SEQH_LIB)/$(SEQH_LIB_DB2) $(SEQH_LIB)/$(SEQH_LIB_ODBC)
+
+
+dep_cb :
+	cd $(BZDIR);make -f $(BZMAKE)
+	cd $(SLRIDIR);make -f $(SLRILIBMAKE); make -f $(SLRILIBMAKE_CB)
+
+dep_db2 :
+	cd $(SLRIDIR);make -f $(SLRILIBMAKE); make -f $(SLRILIBMAKE_DB2)
+
+dep_odbc :
+#	cd $(SLRIDIR);make -f $(SLRILIBMAKE); make -f $(SLRILIBMAKE_ODBC)
+

@@ -1,0 +1,13 @@
+Changes
+LICENSE
+VERSION
+Makefile.PL
+MANIFEST
+README
+README.pod
+README_API.pod
+SeqHound.pm
+genbankIDConversionService.pm
+dbxrefService.pm
+test.pl
+client.pl

@@ -1,0 +1,644 @@
+***how_to_use_prebind_searcher.txt***
+
+
+1.Set up prebind.ini
+
+Set up the prebind.ini configuration file in the WINNT directory.  It should look something like this:
+
+==beginning of prebind.ini file
+
+;settings for prebind
+
+;settings for prebind
+
+[databases]
+;enter the path to the directory for datafiles
+;this is where PreBIND parser will place created datafiles and where it will look for them later
+;PreBIND searcher and the PreBIND cgi also look for datafiles in this directory
+;for noah path = E:\Ian_C_Programs\PreBIND\PreBIND_dev\PreBIND_parser\datafiles\
+;for innie path = /home3/people/janicek/databases/
+;for i.donaldson path = C:\prebind\datafiles\
+path = C:\prebind\datafiles\
+
+[parser_input_files]
+;enter the complete path to the RefSeq  binary file to be parsed by PreBIND_parser
+refseq_binary = C:\prebind\parser_input_files\rscu.bna
+;enter the complete path to the text file of yeast names created by YeastNames.pl
+yeast_names = C:\prebind\parser_input_files\yeast_names.txt
+
+[searcher_input_files]
+;enter the complete path to the text file of POtential INTeraction scores
+point_scores = C:\prebind\datafiles\searcher_input_files\point_scores.txt
+
+[prebind_cgi]
+;enter the path to the prebind cgi executable
+;example for innie use path = /cgi-bin/prebind/PreBIND
+;example for noah use path = prebind.exe
+path = prebind.exe
+;enter the paths of the executables for the instance of BIND to which 
+;records will be submitted from prebind
+dataget_location = http://localhost/bind_for_prebind/dataget.exe
+dataentry_location = http://localhost/bind_for_prebind/dataentry.exe
+;dont forget to specify the location of seqhound in the shoundrem.ini configuration file
+blueprint_location = http://www.bind.ca/
+seqhound_location = http://seqhound.mdsproteomics.com/cgi-bin/seqhound
+
+[log_files]
+;enter the path to log files
+parser_path = C:\prebind\datafiles\parser_log.txt
+search_results_path = C:\prebind\datafiles\search_results_log.txt
+search_errors_path = C:\prebind\datafiles\search_errors_log.txt
+
+[data]
+org_name_list = taxlist.txt
+==end of prebind.ini file
+
+PreBIND searcher looks to the prebind.ini file for several parameters (1) the path to the databases (2) the paths to the search_results log (3) the path to the search_errors log (4) path to the list of potential interaction scores.
+Make sure that 'path' under [databases] points to the set of databases that you want to use. Searcher will create a number of datafiles in this same directory.
+Under [log_files] "search_results_path" specifies the file to which run-time searh results (or other function reports)  will be appended. "Search_errors_path" specifies the file to which errors are written.  This file consists mostly of searches that broke the term-list parser and were not approved for searching.  This files is over-written each time PreBIND Searcher is run.
+Under [searcher_input_files], point_scores specifies the path to and filename of potential interaction scores in the format" pmid | gia | gib |score " (see below).
+ 
+
+
+2.Using the command line options.  
+
+You can get a list of options simply by typing
+
+	searcher -
+
+at the command line in the same directory as the executable "searcher.exe".
+
+An example of a command to search for yeast protein names in the literature is: 
+
+searcher -c F -s a -t 4932 
+
+All of the options available to searcher are listed and descibed here:
+
+-c
+Create databases if they do not already exist.  The default is (F) false.
+This is just usually left as false.
+
+-s
+Search type: (n)ew only, (u)pdates only, (a)ll types (default)
+
+-t
+Taxon-specific search (enter taxid). 0 is the default. 4932 is for yeast only searches.
+Currently, searcher can ONLY search for yeast, mouse or human proteins in the literature. 
+This parameter can also be used to specify a taxon to export results for when using either the -z or -b options
+
+-r
+Allow requeuing of previously peformed searches (T/F(default)).
+
+-a
+Build the ISVM and CORE databases only (T/F(default)) and then quit.  
+
+-i
+Import SVM interaction scores only (enter filename) and then quit. 
+
+-p
+Build potential interaction database (POINT) only (T/F(default)) and then quit. 
+
+-n
+Import POINT scores only (enter filename). 
+
+-l
+Score_list to import scores into(enter a number (1, 2 or 3)).  
+a file name must be specified by either parameter -i or -n.
+
+-u
+
+User is present for searches (non-automatic)(T(default)/F)
+This is set to false if the searcher is to be set up as a scheduled task.
+
+-m
+Maximum number of searches to perform at one time (default 50)
+Searches are approved and queued before they are performed.  Many thousands of searches may be approved.  This option allows you to do only a few searches at a time so you dont end up abusing the ncbi server.
+
+-x
+Remove all search results except for taxon x (default -1) and quit
+(BACK UP YOUR DATAFILES FOLDER BEFORE USING THIS OPTION)
+This option was written to fix a bug that performed non-yeast searches even though -t 4932 was specified.  The bug was fixed so you should not have to use this option again, but here's how it works.
+This option is only used if some taxon id is specified. For example:
+
+	-x 4932
+
+Will delete all of the Search results from the RESULT database for any queries that do not belong to yeast (4932).
+In addition, the non-yeast searches will be resest in the SeaRCH database to zero results returned (RESULTS), search not checked (STATUS = 0) and date last searched to Jan 1, 1000 (SEARCHED = 10000101).
+
+Output will be written to the screen and to the 
+
+Total number searches 73447 
+Total search results 61189 
+Total searches to delete 256 
+Results found to delete = 4820 
+Results deleted (This number is incorrect ?) = 6658.
+PreBIND searcher has finished removing all search results from the SeaRCH and RESULTS database except those for taxon 4932.
+  
+
+-h 
+Calculate name redundancy and quit.  
+This searhes through the SeaRCH database and for each name calculates how many other proteins that same name is used 
+to describe other protein in the same taxon.  This number is recorded in the NAMERED field of the SeaRCH datafile.  The number is used by the 
+prebind_cgi to warn users that the name they are searching for is not unique to one protein.
+
+example: prebind_searcher -h T
+
+-o
+This option is used when importing scores (see -i and -n options). If True, then scores will overwrite pre-existing scores.  Otherwise, scores will
+be imported only for non-scored items.
+
+example: prebind_searcher -i svm_scores.txt -o T
+
+-z 
+Export POINTS to be scored and then quit (T/F(default).  This option is used to export the contents of the POINTS datafile to a text file. This option can 
+make use of other command line parameters including -f, -y, -w and -t
+
+example: prebind_searcher -z T -f export_filename.txt -y F -w T -t 4932
+
+-f 
+File to export to (export_file.txt(default)).  Used to specify a filename in when using the -z option.
+
+example: prebind_searcher -z T -f export_filename.txt -y F -w T
+
+-y
+Export POINTS/RESULTs in non-interaction papers (T/F(default)).  Used with the -z or -b options.  If True, those POtential INTeractions or search RESULTs
+that occurred in papers not about interaction (according to the ISVM score) will be exported.
+
+example: prebind_searcher -z T -f export_filename.txt -y T -w T
+
+-w
+Export POINTS already scored (rescore?)(T/F(default). Used with the -z option.  If True, POtential INTeractions that already have been assigned a Protein interaction
+SCORE (PISCORE) will be exported from the POINT datafile to a text file.
+
+example: prebind_searcher -z T -f export_filename.txt -y T -w T
+
+-b
+Export RESULTS to be scored for POINTS. (T/F(default). If True, contents of the RESULTS datafile are written to a text file specified by -f. This option can be used 
+with the -t option to specify that search RESULTs are only to be exported for a specific taxon.
+
+example: prebind_searcher -b T -f export_yeast.txt -y F -t 4932
+
+
+3. Perform searches for names of yeast proteins in the literature.
+Performing searches of Medline for names of proteins is the first function of searcher.
+
+Make sure that you have a connection to the internet. At the command prompt in the directory where the searcher.exe executable exists type:
+
+	searcher -c T -s a -t 4932 -u T -m 1000 
+
+This cycles through the SeaRCH database and first checks that each of the searches are not going to break the term list parser (that takes the search query and uses it to search the MedLine database).  After searches are approved, they are performed once the user consents to proceed with performing the searches.  With these options, the user must be present to allow approved searches to proceed (-u T) and only 1000 searches will be performed at a time (-m 1000) regardless of how many are approved.  
+
+Note that PreBIND searcher only works for yeast taxon and human taxon searches so the -t option should always be 4932 (yeast) or 9606 (human).
+
+Any search that is approved will be performed as though it were for the yeast taxon.  For example, the search name RPO21 will spawn the search:
+
+Rpo21[WORD] AND "Saccaromyces cerevisiae"[MESH]
+
+An example of a human search would be:
+
+Ras1[WORD] AND "human"[MESH] 
+
+The searches that were performed and the results found and apended are listed in the search_results_log specified in the prebind.ini file under [log_files] 'search_results_path'.
+
+Searcher remembers when searches were performed. Once all of the yeast searches have been performed (probably a good idea to do this as a scheduled task; see below) you can start re-searching the searches by changing one option:
+
+	searcher -c T -s a -r T -t 4932 -u T -m 1000 
+
+When the requeue option is true (-r T) then searches that have already been performed will be requeued and approved for searching again.  The search type should be set to all (both new searches and updates or to updates only: -s a or -s u).
+
+The user sees the output:
+
+ERROR: [070.000] {prebind_searcher.c, line 3200} Main: OpenRESULT failed.
+> ./prebind_searcher -c T -s a -t 4932 -u T -m 10
+PreBIND searcher has started. The time is: Sep 8, 2003  3:10 PM.
+Errors will be logged to /seqhound/prebind/datafiles_new/search_errors_log.txt
+PreBIND searcher is finished opening databases
+PreBIND searcher is checking the search database
+Finished checking searches
+searches that were unqueued = 0
+searches that were checked = 704358
+searches found to have errors = 658
+type of searches to do: UPDATES + NEWSEARCHES
+restrict searches to taxon id: 4932
+searches to do= 13607
+
+Press the 'y' key and return to perform 10 searches. Press any other key to quit.
+
+y
+
+Search results will be logged to /seqhound/prebind/datafiles_new/search_results_log.txt.
+Today's date (in the form CCYY.MM.DD) is= 2003.09.08
+Press the 'y' key and return if this is correct. Press any other key to quit.
+
+y
+
+y
+STATUS REPORT
+
+
+NETWORK ACCESS
+  Last Dispatcher Used: NCBI Named Service
+
+  Load-balancing service mapping facility
+
+  Your Network Entrez administrator is:
+    Anton Lavrentiev (lavr@ncbi.nlm.nih.gov)
+  Entrez service currently connected to jughead server
+
+
+CURRENT MEDIA
+  Entrez PubMed
+  Version 27.2050
+  # MEDLINE entries = 12570540
+  # Protein entries = 3840729
+  # Nucleotide entries = 29997097
+  # Structure entries = 19640
+  # Genome entries = 6805
+
+srch     0      query= NO_PRIMARY_LOCUS_NAME[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     1      query=                 Orf6p[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     2      query=                  ORF6[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     3      query= NO_PRIMARY_LOCUS_NAME[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     4      query=                 Orf7p[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     5      query=                  ORF7[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     6      query= NO_PRIMARY_LOCUS_NAME[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     7      query=                 Orf8p[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     8      query=                  ORF8[WORD] & Saccharomyces_cerevisiae[MESH]       0 results
+srch     9      query=                  COX1[WORD] & Saccharomyces_cerevisiae[MESH]      50 results     appended= 50    present= 0
+
+total results found= 50
+total time = 76 seconds
+Entrez closed
+>
+
+
+
+4. Setting up searcher as a scheduled task
+
+Once you have tried a few runs of searches and are satisfied that everything is proceeding as expected (you can view the SRCH.dbf and RESULT.dbf databases using Excel or FoxPro).
+
+Select START/Settings/control panel/scheduled tasks
+
+Right click and select New/Scehduled task
+
+Name the new task and then double click on it to set it up.
+
+If the executable is in C:\cvs\slri\build\prebind_debug then
+
+Under Task/Run, type:  C:\cvs\slri\build\prebind_debug\searcher.exe -c F -s a -t 4932 -u F -m 1000
+
+Under Task/Start_in, type : C:\cvs\slri\build\prebind_debug 
+(this is the location of the searcher.exe executable
+
+Under Run as, type: MDSPROTEOMICS\idonaldson (this is the domain and user name that you logged on as)
+
+Make sure that the "Password" is set to your current password and make sure that the box in the bottom left of the "Task" tab is checked as "Enabled (scheduled task runs at specified time)."  Unchecking this check box will allow you to disable the task without deleting the Scheduled task.
+
+Under Schedule/Schedule task select the time to run the task and then under advanced you can choose to repeat the task every ten minutes until a certain time.
+
+Under the "Settings" tab check the box entititled "Stop the taskif it runs for x hours"
+(where x is some time greater than what you wnat the task to run for.
+
+SAVE YOUR DATAFILES FOLDER AS A BACKUP BEFORE PROCEEDING
+
+5. Build the ISVM and CORE databases only (T/F(default)) and then quit.  
+
+searcher -a T ('a' is for Analyze the search results)
+
+This option calls two functions successively
+1) AddResultsToISVM(): cycles through the RESULT database and adds search results (PMIDs) to the ISVM database then
+2) CountResults(): cycles through the RESULT database and counts the number of names and gi's that returned each search and stores the results in the COuntREseults datafile.
+
+AddResultsToISVM()
+The output of this function is the ISVM (interaction SVM) datafile.  Each PMID that was returned by a search is represented here once.  Joel Martins interaction SVM will give each of the abstracts a score (interaction papers score > 0).  You must copy the list of PMIDs in this datafile (use Excel to view the file) and send it to Joel who will return the scores in a test file of the form:
+
+pmid|score
+762342|1.3
+234243|-0.5
+etc...
+
+
+
+see step 6 below (Import SVM interaction scores only (enter filename) and then quit.)
+
+
+CountResults()
+CountResults: cycles through the RESULT datafile and counts the number of times that each PMID was found.  This number (NUMN) is recorded the results in the COunt REsults datafile.  Each time the -a option is used, all of the PMIDs in the RESULT  datafile are added to the COuntREsults datafile and the number of times that the PMID appears is recalculated. CountResults in turn calls CountResultsByGI(max_numn) where max_numn is the maximum number of times that any one PMID was found by all of the searches. 
+CountResultsByGI: Cycles through the CORE datafile and calculates the number of unique gi's that return each PMID in the RESULT database.  This number (NUMG) is recorded in the COuntREsults datafile.  So the final CORE datafile is of the form:
+
+PMID | NUMN | NUMG
+
+These numbers are used to construct the POtential Interaction datafile. See step 7 below and option -p.
+
+COunt REsults also analyses the pmids by the number of searches that they were returned by and prints a list to the results_file of the form:
+
+The maximum number of gi's returning a single paper is = 37
+  37 gi's calling one paper occured in     1 case(s)
+  36 gi's calling one paper occured in     0 case(s)
+  35 gi's calling one paper occured in     0 case(s)
+  34 gi's calling one paper occured in     0 case(s)
+  33 gi's calling one paper occured in     0 case(s)
+  32 gi's calling one paper occured in     0 case(s)
+etc...........
+
+
+Lastly, COunt_REsults prints a list of all pmids that were returned into the results_file starting with those that were returned by 2 ,3 , 4 etc. name searches and finally a list of pmids that were returned by only one name search.
+
+
+6. Import SVM interaction scores only (enter filename) and then quit. 
+
+The list of scores PMID|SVM_SCORE must first be obtained from Joel.
+
+You must copy the non-redundant list of PMIDs in the ISVM datafile (use Excel to view the file) and send it to Joel who will return the scores in a test file of the form:
+
+pmid|score
+762342|1.3
+234243|-0.5
+etc...
+
+To import the list of scores, use the command line options:
+searcher -i svm_scores.txt -l 1 -o F
+
+This option calls the function "ImportSvmScores".This function imports svm scores for interaction into the ISVM	database. Only scores of 
+zero (not previously scored) are imported unless the overwrite option is set to true (-o T). Scores can only be added to pmid numbers that are present in the database already. The -i option specifies the name of the text file containing the scores.  
+
+Scores can be added to one of three columns in the ISVM datafile specified by the -l option
+-l 1: ISVM1 (this is the ususal place where scores are stored)
+-l 2: ISVM2 (this is for future use)
+-l 3: ITRUTH (this is for scoring whether a human has classified the paper as about an interactio (1) or not (-1)
+      Usually, this value will be 0 (not classified by a human).
+
+So the final ISVM datafile will be of the form
+
+PMID	ISVM1	ISVM2	ITRUTH
+23423 	0.3	0	1
+etc...
+
+Currently, I use ISVM2 to import a list of papers that are about interactions.  This was generated by a simple text query of MedLine. 
+These scores were generated in order to judge svm performance aginst a simple text search. 
+This method uses the following text search to find interaction papers for yeast in Medline:
+
+(the following OR'ed terms)
+bind
+binds
+bound
+binding
+interact*
+	interacts
+	interacted
+	interacting
+	interaction
+co-immunoprecipitat*
+	co-immunoprecipitate
+	co-immunoprecipitates
+	co-immunoprecipitated
+	co-immunoprecipitating
+	co-immunoprecipitation
+coimmunoprecipitat*
+	coimmunoprecipitate
+	coimmunoprecipitates
+	coimmunoprecipitated
+	coimmunoprecipitating
+	coimmunoprecipitation
+co-precipitat*
+	co-precipitation
+	co-precipitates
+	co-precipitated
+coprecipitat*
+	coprecipitation
+	coprecipitates
+	coprecipitated
+two-hybrid
+2-hybrid
+
+complex* (expands to too many possibilities)
+complex
+complexes
+complexed
+associat*
+	associate
+	associates
+	associated
+	associating
+	association
+
+activat* (expands to too many possibilities)
+activate
+activates
+activated
+activating	
+activation
+activator
+activators
+	
+substrate
+substrates
+
+phosphorylat*
+	phosphorylate
+	phosphorylates
+	phosphorylated
+	phosphorylating
+	phosphorylation
+
+dephosphorylt*
+	dephosphorylate
+	dephosphorylates
+	dephosphorylated
+	dephosphorylating
+	dephosphorylation
+
+http://www.ncbi.nlm.nih.gov/htbin-post/Entrez/query?db=m&form=4&term=
+bind[WORD]
++OR+binds[WORD]
++OR+bound[WORD]
++OR+binding[WORD]
++OR+interact*[WORD]
++OR+co-immunoprecipitat*[WORD]
++OR+coimmunoprecipitat*[WORD]
++OR+co-precipitat*[WORD]
++OR+coprecipitat*[WORD]
++OR+two-hybrid[WORD]
++OR+2-hybrid[WORD]
++OR+complex[WORD]
++OR+complexes[WORD]
++OR+complexed[WORD]
++OR+associat*[WORD]
++OR+activate[WORD]
++OR+activates[WORD]
++OR+activated[WORD]
++OR+activating[WORD]
++OR+activation[WORD]
++OR+activator[WORD]
++OR+activators[WORD]
++OR+phosphorylat*[WORD]
++OR+dephosphorylat*[WORD]
++OR+substrate[WORD]
++OR+substrates[WORD]
+&Dopt=u&html=no&title=no&dispmax=2000000
+
+
+
+http://www.ncbi.nlm.nih.gov/htbin-post/Entrez/query?db=m&form=4&term=bind[WORD]+OR+binds[WORD]+OR+bound[WORD]+OR+binding[WORD]+OR+interact*[WORD]+OR+co-immunoprecipitat*[WORD]+OR+coimmunoprecipitat*[WORD]+OR+co-precipitat*[WORD]+OR+coprecipitat*[WORD]+OR+two-hybrid[WORD]+OR+2-hybrid[WORD]+OR+complex[WORD]+OR+complexes[WORD]+OR+complexed[WORD]+OR+associat*[WORD]+OR+activate[WORD]+OR+activates[WORD]+OR+activated[WORD]+OR+activating[WORD]+OR+activation[WORD]+OR+activator[WORD]+OR+activators[WORD]+OR+phosphorylat*[WORD]+OR+dephosphorylat*[WORD]+OR+substrate[WORD]+OR+substrates[WORD]&Dopt=u&html=no&title=no&save=p&dispmax=2500000
+
+
+#28 Search #1 OR #2 OR #3 OR #4 OR #5 OR #6 OR #7 OR #8 OR #9 OR #10 OR #11 OR #12 OR #13 OR #14 OR #15 OR #17 OR #18 OR #19 OR #20 OR #21 OR #22 OR #23 OR #24 OR #25 OR #26 OR #27 17:40:48 2320228 
+#27 Search dephosphorylat* [TIAB] 17:35:31 9734 
+#26 Search phosphorylat* [TIAB] 17:35:24 84162 
+#25 Search substrates [TIAB] 17:35:04 62369 
+#24 Search substrate [TIAB] 17:34:58 121058 
+#23 Search activators [TIAB] 17:34:48 13031 
+#22 Search activator [TIAB] 17:34:39 42878 
+#21 Search activation [TIAB] 17:34:30 297751 
+#20 Search activating [TIAB] 17:34:21 41853 
+#19 Search activated [TIAB] 17:34:13 172105 
+#18 Search activates [TIAB] 17:34:05 24547 
+#17 Search activate [TIAB] 17:33:58 40738 
+#16 Search activat* [TIAB] 17:33:35 450881 
+#15 Search associat* [TIAB] 17:33:22 1041039 
+#14 Search complexed [TIAB] 17:33:12 9524 
+#13 Search complexes [TIAB] 17:33:06 93733 
+#12 Search complex [TIAB] 17:32:59 321193 
+#11 Search 2-hybrid [TIAB] 17:32:42 45 
+#10 Search two-hybrid [TIAB] 17:32:31 2192 
+#9 Search coprecipitat* [TIAB] 17:32:18 1778 
+#8 Search co-precipitat* [TIAB] 17:32:11 881 
+#7 Search coimmunoprecipitat* [TIAB] 17:31:57 2173 
+#6 Search co-immunoprecipitat* [TIAB] 17:31:42 1877 
+#5 Search interact* [TIAB] 17:31:26 392114 
+#4 Search binding [TIAB] 17:31:18 442590 
+#3 Search bound [TIAB] 17:31:11 142208 
+#2 Search binds [TIAB] 17:31:03 55129 
+#1 Search bind [TIAB] 17:30:51 76785 
+
+The output is saved to a word file (all_int_papers.txt) and converted to the form:
+
+PMID|1.0
+
+and imported into the prebind database using:
+ 
+PreBIND -i all_int_papers.txt -l 2
+
+These scores will obviously overpredict interaction papers.
+
+
+7. Build potential interaction database (POINT) only (T/F(default)) and then quit. 
+
+Use the command line parameters:
+
+-p T
+
+This calls the function BuildPOINT.  BuildPOINT cycles through the COunt REsult db and for each NUMG that is greater than one assemble a list of potential pairwise protein interactions that may be found in that paper.  These potential interactions are stored in the POtential INTeraction db in the form:
+
+PMID | MUID | GIA | NAMA | ATYPE | GIB | NAMB | BTYPE | OPNO | OPYES | PISCORE | PISCORE2 | PITRUTH
+
+where only the starred fields are filled in.
+
+PMID*		pubmed id of paper
+MUID		medline id of paper
+GIA*		gi of molecule A
+NAMA* 		slash delimited list of names for A that appear in abstract
+ATYPE		1- A is a DNA, 2- A is a protein
+GIB*		gi of molecule B
+NAMB*		slash delimited list of names for B that appear in abstract
+BTYPE*		1- B is a DNA, 2- B is a protein
+OPNO		opinion count- no this is not an interaction
+OPYES		opinion count- yes this is an interaction
+PISCORE		pairwise interaction score-protein::protein
+PISCORE2	pairwise interaction score- protein::DNA
+PITRUTH		pairwise interaction truth
+
+The POINT database must be built before the POINT scores are imported (step 8).
+
+
+8. Export search RESULTs for scoring.
+
+Use the command line options:
+
+prebind_searcher -b T -f export_yeast.txt -y F -t 4932
+
+These options print search RESULTs from the RESULT datafile to a text file (export_yeast.txt) only if the search result has been scored as an interaction paper (-y F).
+Search results should be exported for only a single organism at a time (-t 4932).  The printed file is tab-delimited for:
+
+GI_PROT, NAME, and PMID
+
+10. Import POINT scores only (enter filename). 
+
+Before this step you must obtain a list of POINT scores generated from the output of step 8 and a scoring algorithm of some sort:
+
+The way things are analyzed:
+
+a) examine each PMID paper for interaction sentences
+
+b) for each interaction sentence determine if any of the NAMES returning that PMID are present in the sentence
+
+c) convert the names to gi numbers (GI_PROT)
+
+d) if the sentence mentions two (and no more than two) separate proteins, [and if the first letter of each name is capital and the second letter of each name is small (for yeast only)] then increase the "interaction score" for that gi-pair by one
+
+e) return a list:
+
+PMID | GI of protein A | GI of protein B | score
+
+where score is assigned according to the above rules.
+
+As an example:
+
+Given the results table:
+gi	name	pmid
+1	A	10001
+2	B	10001
+2	C	10001
+3	D	10001
+
+and the abstract for PMID 10001:
+
+"A and B interact with D. B interacts with D. C interacts with D. B and C are the same thing and likely related to A"
+
+Berry's programme would return a tab-delimited list: 
+
+pmid	piscore	gia	gib
+10001	2	3	2
+
+To import these scores type the following at the command line:
+
+prebind_searcher -n T - l 1 -o T
+
+where -n specifies that POINT scores are to be imported.  The full path and name of the text file containing the list of pipe delimited values 
+returned is specified by the line "point_scores" under [searcher_input_files] in the prebind configuration file. 
+The -l arg is the list into which these scores are written in the POINT database (1) is piscore (protein-protein interaction scores) and 
+(2) is for piscore2 (protein-DNA interactions).
+
+These command line parameters call ImportPointScores. Only scores of zero (not previously scored) are overwritten unless the -o option is set to TRUE	
+Scores can only be added to pmid numbers that are present in the POINT database already.	
+
+
+11. The POINT (POtential INTeraction) data tble can be exported to a text file (for analysis against other datasets etc).
+The resulting text file is tab-delimited for 
+
+pmid	gia	nama	gib	namb	piscore
+
+pmid = pmid of paper
+gia = gi of protein a in potential interactio
+gib = gi of protein b
+nama = slash-delimited list of names by which protein a is referred to in the abstract
+namb = see nama
+piscore = see step 10 above
+ 
+Use the command line parameters:
+
+prebind_searcher -z T -f yeast_points -u T -t 4932 -y T -w T
+
+
+where
+-z specifies that the POINT db is to be exported to a text file 
+-f is the name of the file to which results are exported
+-t specifies that only points for some taxon are to be exported
+-y specifies that points found in non-interaction papers are to be scored
+-w specifies that points with piscore > 0 are to be exported
+
+
+			
+
+
+

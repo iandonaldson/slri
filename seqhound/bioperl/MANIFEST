@@ -1,0 +1,14 @@
+Changes
+LICENSE
+Makefile.PL
+MANIFEST
+README
+README.pod
+SeqHound.pm
+SeqHoundGB.pm
+SeqHoundLOB.pm
+SeqHoundTextOb.pm
+SLRIMisc.pm
+_SeqHoundI.pm
+test.pl
+VERSION

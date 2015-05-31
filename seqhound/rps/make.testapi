@@ -1,0 +1,85 @@
+#$Id: make.testapi,v 1.1.1.3 2002/05/07 08:27:06 root Exp $ 
+#######################################################################
+#
+# SeqHound Redund parser
+#
+#######################################################################
+include ../seqhound.mk
+
+DEF =
+SRC = testapi.c ../src/rpsdbapi.c ../src/rpsdb_cb.c ../src/objslristruc.c ../src/intrez_cfg.c
+EXE = apitest
+EXE_CB = RpsBlastToDB_cb
+EXE_DB2 = RpsBlastToDB_db2
+
+## Default thing to make will be "all"
+all : $(EXE_CB)
+#echo You must pick a target: cb or db2
+
+#######
+# Redefine these macros
+# from seqhound.mk
+# Link to libstdc++.a on linux
+########
+
+SYSTEM_LIBS=/usr/lib/gcc-lib/i686-pld-linux/3.0.1
+SEQH_REM_DEPS = $(LIB23) $(LIB22) $(LIB8) $(LIB7) $(LIB6 ) $(LIB3) $(LIB2) $(LIB1) -lslri_cb -lslri $(OTHERLIBS)
+SEQH_REM_LIBS = $(SEQH_REM_LIB) $(SLRILIB) $(SEQH_REM_DEPS)
+LIBPATH = $(NCBI_LIBDIR) -L$(SEQH_LIBDIR) $(CUSTOM_LIBDIR) -L$(LIBDIR_CB) -L$(LIBDIR_DB2) -L$(SYSTEM_LIBS)
+LDFLAGS  = $(NCBI_LDFLAGS1) -I$(INCPATH) $(OPTFLAG) -L$(LIBPATH) $(VIBFLAG)
+LDFLAGS_CB        = $(LDFLAGS) $(DEF_CB)
+ 
+#############################
+# Database specific Targets #
+#############################
+cb  : dep_sh_cb  $(EXE_CB)
+db2 : dep_sh_db2 $(EXE_DB2)
+
+$(EXE_CB) : $(SRC)
+	$(CC) -o $(EXE_CB) -g -DX11 $(LDFLAGS_CB) $(SRC) \
+	$(SEQH_REM_LIBS) $(CBLIB)
+	-mkdir $(BUILDDIR)
+	mv $(EXE_CB) $(BUILDDIR)/$(EXE)
+
+$(EXE_DB2) : $(SRC)
+	$(CC) -o $(EXE_DB2) -DX11 $(LDFLAGS_DB2) $(SRC) \
+	$(SEQH_REM_LIBS) $(DB2LIB)
+	-mkdir $(BUILDDIR)
+	mv $(EXE_DB2) $(BUILDDIR)/$(EXE)
+
+dep_sh_cb :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) cb
+
+dep_sh_db2 :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) db2
+
+clean:
+	rm -f $(BUILDDIR)/$(EXE)
+
+
+#$Log: make.testapi,v $
+#Revision 1.1.1.3  2002/05/07 08:27:06  root
+#Automated import from Sourceforge.net
+#
+#Revision 1.3  2002/05/06 20:45:32  betel
+#Added more function annotation
+#
+#Revision 1.2  2002/03/18 22:01:06  betel
+#Small changes
+#
+#Revision 1.1  2002/03/15 22:28:41  betel
+#RPSDB API testing application
+#
+#Revision 1.1  2002/03/12 21:12:17  betel
+#Moved all rpsdb relevant files to rps dir
+#
+#Revision 1.3  2002/02/28 22:46:35  betel
+#Modified  to sync with seqhound.mk
+#
+#Revision 1.2  2002/02/27 20:08:47  betel
+#Changes to make
+#
+#Revision 1.1  2002/02/21 23:29:31  betel
+#Initial import of RPS-BLAST parser. Not Tested ls
+#
+

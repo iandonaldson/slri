@@ -1,0 +1,127 @@
+#!/bin/bash
+
+LIB=$1
+MOD=$2
+
+ALL="all"
+echo $ALL
+CGI="cgi"
+DOMAINS="domains"
+EXAMPLES="examples"
+GENOMES="genomes"
+GO="go"
+LL="locuslink"
+PARSERS="parsers"
+SCRIPTS="scripts"
+TAXON="taxon"
+UPDATES="updates"
+ODBC_REM=${LIB}_rem
+ODBC_LOCAL=${LIB}_local
+
+if [ $# != 2 ]
+then
+    echo "usage: `makeallsh $0` [odbc] [all/cgi/domains/examples/genomes/go/locuslink/parsers/scripts/taxon/updates]"
+    exit 1
+fi
+
+if [ -z $SLRI ] || [ -z $NCBI ] || [ -z $ODBC ] || [ -z $BZDIR ]
+then 
+    echo "Environment variables SLRI, NCBI, ODBC or BZDIR are not set. Please set variables and retry"
+	echo "SLRI = $SLRI NCBI = $NCBI ODBC = $OCBC BZDIR = $BZDIR"
+    exit 1
+fi
+
+
+#Build BZIP2 library
+( cd ${BZDIR} && make -f make.bzlib )
+
+#Build SLRI libray
+( cd ${SLRI}/lib && make -f make.slrilib && make -f make.slrilib odbc )
+
+if [ ${MOD} = ${CGI} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${CGI}
+	make -ef make.seqrem ${LIB}
+	make -ef make.wwwseekgi ${LIB}
+	make -ef make.fwwwseekgi ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${DOMAINS} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${DOMAINS}
+	make -ef make.fastadom ${LIB}
+	make -ef make.pdbrep ${LIB}
+	make -ef make.vastblst ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${EXAMPLES} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${EXAMPLES}
+        make -ef make.readseqslib ${LIB}
+	make -ef make.clustmask ${LIB}
+	make -ef make.clustmasklist ${LIB}
+	make -ef make.fastadom ${LIB}
+	make -ef make.gen2fasta ${LIB}
+	make -ef make.gen2struc ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${GENOMES} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${GENOMES}
+	make -ef make.postcomgen ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${LL} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${LL}
+	make -ef make.llparser ${LIB}
+	make -ef make.llquery ${LIB}
+	make -ef make.llgoa ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${GO} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${GO}
+	make -ef make.goparser ${LIB}
+	make -ef make.goquery ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${PARSERS} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${PARSERS}
+	make -ef make.cbmmdb ${LIB}
+	make -ef make.cddb ${LIB}
+	make -ef make.mother ${LIB}
+	make -ef make.redund ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${SCRIPTS} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${SCRIPTS}
+	make -ef make.isshoundon ${LIB}
+	make -ef make.sh_nbhrs ${LIB}
+	make -ef make.shunittest ${ODBC_LOCAL}
+	make -ef make.shunittest ${ODBC_REM}
+	cd ..
+fi
+
+if [ ${MOD} = ${TAXON} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${TAXON}
+	make -ef make.importtaxdb ${LIB}
+	cd ..
+fi
+
+if [ ${MOD} = ${UPDATES} ] || [ ${MOD} = ${ALL} ] 
+then
+	cd ${UPDATES}
+      make -ef make.histparser ${LIB}
+	cd ..
+fi

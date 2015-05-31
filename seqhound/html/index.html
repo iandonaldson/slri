@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>SeqHound</title>
+</head>
+<body
+bgcolor = "ffffff">
+<center><img src="shweb/seq-logo.gif" alt="SeqHound">
+<hr> 
+<h1>SeqHound sequence fetch.</h1>
+<h4>SeqHound understands comma-separated lists of GenInfo (GI identifiers) and accessions.</h4></center>
+<FORM ACTION="/cgi-bin/wwwseekgi" METHOD="GET">
+<table cellpadding="3" width=100%>
+<tr>
+<td bgcolor = "f0f0f0" align=center>
+<b>Search:
+<SELECT NAME="field">
+<OPTION SELECTED>GI identifier
+<OPTION>Accession
+<OPTION>Non-GenBank Identifier
+<OPTION>Taxonomy ID
+<OPTION>Taxonomy ID Proteins
+<OPTION>Taxonomy ID NA
+<OPTION>Medline ID
+<OPTION>Pubmed ID
+</SELECT></b>
+</td>
+<td bgcolor = "f0f0f0" align=center>
+<b>Format:
+<SELECT NAME="format">  
+<OPTION SELECTED>defline
+<OPTION>FASTA
+<OPTION>ASN.1   
+<OPTION>GenBank
+<OPTION>XML
+</SELECT></b>
+</td>
+<td bgcolor = "f0f0f0" align=center><b>
+<!-- <INPUT TYPE="reset" VALUE="Reset"> -->
+<INPUT NAME="GI" SIZE=20 VALUE="">
+<INPUT TYPE="submit"  VALUE="Fetch"></b>
+</td>
+<td bgcolor = "f0f0f0"  align=center bgcolor="white"><b>Records per page:<SELECT NAME="npp">
+<OPTION>1
+<OPTION>5
+<OPTION>10
+<OPTION SELECTED>20
+<OPTION>50
+<OPTION>75
+<OPTION>100
+</SELECT></b>
+</td>
+</tr>
+</table>
+</FORM>
+<hr>
+<a href="http://www.blueprint.org/seqhound/">SeqHound home page</a> |
+<a href="http://www.blueprint.org/seqhound/api_help/seqhound_help_web.html">Seqhound WEB interface help</a> |
+<a href="http://www.blueprint.org/seqhound/api_help/seqhound_help_guides.html">SeqHound for programmers</a> |
+<a href="http://www.blueprint.org/"> Blueprint home page</a>
+</BODY>
+</HTML>

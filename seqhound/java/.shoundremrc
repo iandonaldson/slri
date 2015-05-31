@@ -1,0 +1,12 @@
+[remote]
+server1 = seqhound.blueprint.org 
+server2 = seqhound.blueprint.org 
+CGI = /cgi-bin/seqrem
+
+[jseqrem]
+jseqrem_server1 = skinner.blueprint.org:8080
+jseqrem_server2 = skinner.blueprint.org:8080
+jseqrem_CGI = /jseqhound/jseqrem
+
+[log]
+logfile = shoundlog_java 

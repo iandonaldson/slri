@@ -1,0 +1,38 @@
+# prebindsearcher makefile
+
+include prebind.mk
+include prebindflags.mk
+
+#OPTFLAG = -g
+SRC = $(PREBINDDIR)/searcher/prebind_searcher.c
+
+EXE = prebind_searcher
+DEF =
+
+
+## Default thing to make will be "all"
+##
+all : $(EXE)
+
+## make individual applications and components
+##
+
+$(EXE) : $(SRC) $(PREBINDLIB)/libprebind.a
+	$(CC) -o $(EXE) $(LDFLAGS) $(SRC) \
+	$(LIB206) $(LIB207) $(LIB210) $(LIB208) $(LIB97) \
+	$(LIB209) $(LIB202) $(LIB199) $(LIB101) $(LIB102) $(LIB98) \
+	$(LIB41) $(LIB40) $(LIB36) $(LIB22) $(LIB23) $(LIB8) \
+	$(LIB7) $(LIB6) $(LIB5) $(LIB3) $(LIB2) $(LIB1) \
+	$(MISCLIBS) $(OTHERLIBS)
+	-mkdir $(BUILDDIR)
+	mv $(EXE) $(BUILDDIR)
+
+$(PREBINDLIB)/libprebind.a :
+	$(MAKE) -f make.prebindlib
+    
+clean :
+	rm -f $(EXE)
+	rm -f $(BUILDDIR)/$(EXE)
+	$(MAKE) -f make.prebindlib clean
+
+

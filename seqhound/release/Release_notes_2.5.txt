@@ -1,0 +1,392 @@
+SeqHound Release 2.5 summary notes
+
+These notes summarize important changes that are inclusive to 
+SeqHound code version 2.5 (April 26, 2004) since version 
+2.4 (February 16th, 2004).  Complete comments for this version
+are listed after the summary comments.
+
+These summary notes are divided into the following sections:
+1. Global changes
+2. Web interface
+3. Perl remote API
+4. Bioperl remote API
+5. Java remote API
+6. C++ remote API
+7. C remote API
+8. C local API
+9. Parsers and scripts
+10. Database layer - ODBC
+
+
+
+**************************************************************
+1. Global changes
+**************************************************************
+
+src/rpsdbapi.c
+SHoundGetDomainsFromGi and SHoundGetDomainsFromGiWithEvalue 
+Redundant GI functionality has been added to SHoundGetDomainsFromGi and
+SHoundGetDomainsFromGiWithEvalue.  These functions will now check for
+rpsdb entries for the other GIs in the query GI's redundant group if
+there are none for the query GI. [bug 1847]
+
+
+**************************************************************
+2. Web interface
+**************************************************************
+
+cgi/wwwseekgi.c
+
+Pubmed ID's will be displayed along with MUID's when the user clicks on
+the MedLine linke for a sequence record.
+
+Filtering fixed so that broken gi's are found on the fly.  A fasta
+output implemented for broken gi's with a screen message and link to
+ncbi's entrez system.  Not all known error types have been dealt with
+and the solution will be expanded as these errors come up. [bug 1946]
+
+**************************************************************
+3. Perl remote API
+**************************************************************
+
+SeqHound.pm
+
+The following functions have been added in the Perl module:
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+ProcessContentKeyedList Str2Hash
+
+test.pl
+The following functions have been added:
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+
+The name of the log file has been changed from test.log to perl_test.log
+
+
+**************************************************************
+4. Bioperl remote API
+**************************************************************
+
+_SeqHoundParser.pm
+The following function has been added
+parse_FastaHash
+
+SeqHound.pm
+The following functions have been added in the Bioperl module:
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+ShoundGetNameByGi [bug 1241]
+
+SLRIMisc.pm
+The following function has been added
+Str2HashTable: helper function for processing keyedlist.
+
+test.pl
+The following functions have been added
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+
+
+**************************************************************
+5. Java remote API
+**************************************************************
+
+The internal cvs structure for java has changed.  Java files  can be
+found in the java tree which is checked out when executing 'cvs co
+seqhound'
+
+SLRIMisc.java
+Helper functions added for processing list API functions:
+ StrArr2Hash
+PrintHashTable
+
+SeqHound.java
+The following functions have been added to the API:
+ShoundGetFastaFromRedundantGroupID [bug 1996]
+ShoundGetFastaFromRedundantGroupIDKeyedList [bug 1996]
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+ProcessRetStr
+
+Changes made to logging.  Logging fixed so that null is changed to the
+proper field, the class name, in LogRecord object. Also logging level
+fixed to allow user to specify the miniumim threshold of logging.  [bug
+1407]
+
+fixed javadoc errors
+merged with slri seqhound.java
+updated seqhound to use HttpClient (must use HTTP 1.0 protocol
+
+**************************************************************
+6. C++ remote API
+**************************************************************
+
+The following functions have been added:
+
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+
+
+
+**************************************************************
+7. C remote API
+**************************************************************
+seqhoundapi.c
+The following functions have been added:
+SHoundGetFastaFromRedundantGroupID [bug 1996]
+SHoundGetFastaFromRedundantGroupIDKeyedList [bug 1996]
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+
+
+Minor change to the error message returned by API function
+SHoundGetTaxNameFromTaxID [bug 1768]
+
+Inconsistency of return values fixed for some functions [bug 372]
+SHoundAccFromGi
+SHoundCDDScoreFromGi
+SHoundGetAccFromRetiredGi
+SHoundGetCurrentServer
+SHoundGetLargestMMDBID
+SHoundGetNameByGi
+SHoundLLIDFromGi
+SHoundSequenceLength
+
+**************************************************************
+8. C local API
+**************************************************************
+
+
+intrez.c
+The following functions have been added:
+ShoundGetFastaFromRedundantGroupID [bug 1996]
+ShoundGetFastaFromRedundantGroupIDKeyedList [bug 1996]
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+
+When a taxid 0 is given to the API SHoundTaxIDFromGi an info message is
+given instead of a severe error message. [bug 1759]
+
+SHoundMoleculeType modified to search GI from TAXGI instead of ASNDB
+
+SHoundIsProtein modified to search the table TAXGI for molecule type.
+The change reduced API response time by optimizing disk I/O access. [bug
+1854]
+
+For ODBC port, get max(mmdbid) from database directly.
+
+Turned off NetEntrez access
+
+Changed protein report error log to info log
+
+Fixed bug in SHoundGiFromPDBchain. Allow the function to accept both
+upper case and lower case pdbcode and chain. [bug 697]
+
+Fixed bug in SHoundIsTaxDeleted and SHoundIsTaxMerged.  SeqHound
+functions should return TRUE if the DB functions return ?1 but these two
+functions were returning the opposite. [bug 1663]
+
+Check if list is null in SHoundGetGenBankffList.
+
+seqrem.c
+The following functions have been added:
+ShoundGetFastaFromRedundantGroupID [bug 1996]
+ShoundGetFastaFromRedundantGroupIDKeyedList [bug 1996]
+ShoundGetFastaKeyedList [bug 1773]
+ShoundRedundantGroupKeyedList [bug 1773]
+
+GI logging functionality has been added for compliance with swissprot
+licensing terms [bug 1746]
+
+Removed bstdt.val dictionary load and added ifdefs for fast CGI 
+
+OpenMMDBAPI moved so that it is only called if the MMDBAPI is required
+by the SeqHound API function being called [bug 1510]
+
+
+**************************************************************
+9. Parsers and scripts
+**************************************************************
+
+comgen parser
+**************************************************************
+genomes/comgen.c
+Use database layer function SHoundFindGiByAcc in order to speed up query
+in a loop for ODBC.
+
+
+complete genomes 
+**************************************************************
+
+genff was updated in hand.
+A program called genff_cxx was added that rebuilds the genff file.
+Associated new/modified scripts are pregen.pl, gen.pl, comff and
+ncbi.bacteria.pl
+
+addgoid parser
+**************************************************************
+locuslink/addgoid.c
+Addgoid optimized by changing SHoundIsProtein to search for melecule
+type from the table TAXGI see bug details on performance tuning of
+addgoid [bug 1854]
+
+Improve performance by opening the LL_GODB table without an index and
+then adding the index later. [bug 1854]
+
+locus link
+**************************************************************
+
+locuslink/ll_query.c 
+duplicate copy. File now dead (deprecated). Use copy in src [bug 372]
+
+locuslink/ll_parser.c
+The locus link parser uses the symbol ">>" to determine when a new
+record starts. When the string ">>" appears without a following integer
+(the locus id) the file ends, causing the parser to end the import.  Bug
+was caused by new additions to locus id 14463. On the line just before
+the start of locus id 14464, the symbol ">>" was used, without  an
+integer. As a
+consequence, the importer stopped.  The parser has been updated. [bug
+2081]
+
+
+cbmmdb parser
+**************************************************************
+
+parsers/cbmmdb.c
+Removed unnecessary printout.  Error with gunzip
+
+Do not create MMDB.txt for ODBC.
+
+mother
+*****************************************************************
+mother.c
+Set CodeBase Exclusive Read and Write Flag (code tune) This results in
+an aproximate 30x performance improvement.
+
+
+Improved taxonomy identifier parsing by keeping track of all Bioseq-set
+descriptors [bug 1729]
+
+
+
+redund parser
+**************************************************************
+redund.c
+
+Added functions for opening redund with no index and doing indexing at
+end of program.  Resulted in significant increase in speed.  [bug 1854]
+
+Fixed bug with lines, that may be more than 40Kb:
+1. added check for limits of static buffers.
+2. added check for '\0'
+3. changed pcBuf from stack buffer to buffer on memory heap
+   and increased buffer size from 40000 to 16Mb.
+
+rps
+**************************************************************
+
+rps/domname.c
+
+Fixed attempts by the domname parser to print the pCddid data structure
+as though it were a character string, and which is generally not
+allocated at the times it is being called.  Replaced the pCddid
+reference to a reference to pDomname->accession.
+
+rps/MergeRpsTables.cpp
+Defined evalue and bitscore as Str4large structures instead of Str4ten
+structures to accomodate evalues which cannot fit inside a ten character
+string.  This resolves bug.[bug 2095]
+
+rps/redundlist.c
+
+Changed SHoundInit to SHoundInitReadOnly, as write access is unnecessary
+and may be dangerous.
+
+rps/rpsdb.c
+
+Several bug fixes which correct problems which resulted in the parser
+performing invalid rpsblast searches and incorrectly recording data to
+the table.  This resolves bugs [bug 1650] and [bug 1614]
+
+**************************************************************
+Scripts
+**************************************************************
+
+The following scripts have been changed so that the FTP Passive flag has
+been set to 0 (off) [bug 1916]
+scripts/comgencron.pl
+scripts/dupdcron.pl
+scripts/genftp.pl
+scripts/llcron.pl
+scripts/seqsync.pl
+
+scripts/asnftp.pl
+**************************************************************
+Rename refseq file ?rscucomplete*.aso.gz? to ?rscu*.aso.gz? to
+accommodate the 10-character limit on division length set by the  parser
+mother. 
+
+Changed FTP directory to /refseq/release/complete for all RefSeq files
+needed for initial SeqHound build
+
+scripts/dbcreate.sql
+**************************************************************
+New file added for creating tables in MySQL.
+
+scripts/mmdbftp.pl
+**************************************************************
+disabled copying to build directory
+
+scripts/parsertest.pl
+**************************************************************
+initial check-in perl script for testing SeqHound parsers
+
+scripts/redundcron.pl
+**************************************************************
+Force unzip nr.gz even if nr exists in directory  redundcron.pl did not
+unzip newly downloaded nr.gz file if there was an existing nr file in
+the same directory. [bug 1995]
+
+scripts/seqhound_cron.pl
+**************************************************************
+Cron job script for calling dupdcron and redundcron scripts
+
+scripts/seqsync.pl
+**************************************************************
+Fixed seqsync for mail loggings, and for more robust functions
+
+scripts/sh_nbhrs.c
+**************************************************************
+Fixed bug with nested /* */ comments
+
+scripts/shunittest.c
+**************************************************************
+Minor change: changed taxid value for API SHoundProteinsfromTaxIDIII for
+faster response
+
+Added API SHoundProteinsFromTaxIDIII for access to precomputed data
+
+Removed API SHoundNeighboursOfNeighboursFromTaxID [bug 1665]
+
+Changed taxid for testing SHoundIsTaxDeleted and SHoundIsTaxMerged.
+Added test case to test if taxid is not deleted/merged. [bug 1663]
+
+Added tests for SHoundNumNeighboursInDB and
+SHoundNeighboursOfNeighboursList.  Changed GIs and Taxids used in
+SHoundGetBlastResult, SHoundGetBlastSeqAlign and
+SHoundNeighboursOfNeighboursFromTaxID calls to valid values.  See
+bugzilla report for details. [bug 1665]
+
+
+**************************************************************
+10. Database layer - ODBC
+**************************************************************
+
+**************************************************************
+
+
+
+
+

@@ -1,0 +1,469 @@
+NAME
+    README for SeqHound Perl
+
+DESCRIPTION
+    SeqHound is intended to be a high performance server platform for
+    bioinformatics research. SeqHound is over 600GB (and growing) of high
+    quality annotated biological data that researchers can use to support
+    their in-house research. It is a collection of biological sequences,
+    taxonomy, annotation and 3-D structure database system.
+
+    SeqHound.pm is a Perl module to support remote access to SeqHound
+    through a collection of well-defined API functions. Users can develop
+    sophisticated applications that retrieve data using the API and then
+    process those raw data as appropriate. For detailed descriptions of the
+    API functions please consult the README_API.pod or the web page
+    http://www.blueprint.org/seqhound/api_help/seqhound_help_guides.html
+    under "Detailed description of API functions" and "Using the SeqHound
+    remote API" section in The SeqHound Manual.
+
+    In order to use this module, your perl script must contain the
+    statement:
+
+        use SeqHound;
+    
+    From April 2005, SeqHound provides SOAP service to access
+    genbankIDConversion and dbxrefService functions. In order to use these
+    two modules, your perl script must contain the statement:
+
+        use genbankIDConversionService;
+        use dbxrefService;
+    
+    There is a script called client.pl which provides the examples of how to
+    use SeqHound APIs. See TROUBLESHOOTING section 'Start up script'.
+
+    SeqHound is also available in C++, C, Java and Bioperl. You can also
+    build SeqHound locally on your internal servers. See
+    http://www.blueprint.org/seqhound/seqhound.html for details.
+
+    The README.pod can be converted to various formats such as html or man
+    pages using POD utilities such as pod2html and pod2man. See Perl
+    documentation for usage. A text version, README, is provided.
+
+SYNOPSIS
+      #!/usr/bin/perl -w
+
+      # you may have to change the path above, eg to
+      # /usr/perl or /bin/perl, based on your system.
+  
+      use strict;
+      use SeqHound;
+  
+      # Initialize the Seqhound system.
+      # FALSE means that obsolete/outdated sequences from NCBI
+      # will not be queried
+      # Change to TRUE if obsolete/outdated sequences required
+  
+      SHoundInit("FALSE", " sh-mytest-perl") or die "SHoundInit failed.\n";
+      print "***Starting Program\n";
+
+      print "Test SHoundLLIDFromGi\n";
+      $gi = 4557225;
+      my $llid = SHoundLLIDFromGi($gi);
+      #$llid return a locus link id if success or return undef if failure
+      if (defined $llid) {
+          print "Locuslink id = $llid for gi = $gi.\n";
+      }
+  
+      # Close the SeqHound system
+      my $aa = SHoundFini();
+      print "***SeqHound closed: $aa\n";
+
+DIRECTORY
+      Changes
+      LICENSE
+      VERSION
+      Makefile.PL
+      MANIFEST
+      README
+      README.pod
+      README_API.pod
+      SeqHound.pm
+      genbankIDConversionService.pm
+      dbxrefService.pm
+      test.pl
+      client.pl
+
+LICENSE
+    See LICENSE
+
+PUBLICATION TO CITE
+    If you use SeqHound in your work or research, please cite:
+
+    SeqHound: Biological sequence and structure database as a platform for
+    bioinformatics research: Michalickova, K. et al, BMC Bioinformatics
+    2002, 3:32
+
+    available online for free at BioMed Central:
+    http://www.biomedcentral.com/1471-2105/3/32
+
+VERSION
+    4.0
+
+RECENT CHANGES
+    See CHANGES
+
+BUGS
+    Please send bug reports to seqhound@blueprint.org
+
+MAILING LISTS
+    Please see
+
+    http://lists.blueprint.org/mailman/listinfo/seqhound.usergroup
+
+PREREQUISITES
+    The SeqHound Perl module requires the following additional modules and
+    libraries:
+
+    1 Perl 5.006 or later
+    2 LWP::UserAgent
+    3 For Windows platforms you will need a copy of NMake available from
+    Microsoft
+    4 XML::Parser and SOAP::Lite
+INSTALLATION
+    1 Install Perl and install the LWP::UserAgent module
+      a Install Perl
+        You must have installed Perl. See http://www.cpan.org/ for freely
+        available software and installation instructions. For Windows see
+        http://www.activestate.com/Products/ActivePerl/
+
+      b Install LWP::UserAgent
+        A default Perl installation has a module defined to download and
+        install modules from CPAN which you can invoke for this purpose.
+        Enter:
+
+          perl -MCPAN -e 'install LWP::UserAgent'
+
+        The script will indicate whether LWP::UserAgent is already installed
+        and up to date.
+
+      c Install SOAP::Lite
+        XML::Parser is available on Perl 5.006 or later. SOAP::Lite is a
+        collection of Perl modules which provides a simple and lightweight
+        interfaces to the Simple Object Access Protocol (SOAP) both on
+        client and server side. Enter:
+
+          perl -MCPAN -e 'install SOAP::Lite'
+
+        to install it. If you want to install SOAP::Lite, but don't have
+        root/administrator privileges, you can refer
+        http://search.cpan.org/~byrne/SOAP-Lite-0.60a/lib/SOAP/Lite.pm#WEBHO
+        STING_INSTALLATION
+
+    2 For Windows only install NMake from Microsoft
+      http://download.microsoft.com/download/vc15/Patch/1.52/W95/EN-US/Nmake
+      15.exe
+
+      a Run the downloaded exe to extract it.
+      b Copy both the NMAKE.EXE and the NMAKE.ERR file to your Perl bin
+      directory, normally C:\Perl\bin.
+    3 Download or check out the SeqHound Perl module
+      These instructions tell you how to download and install the Perl
+      module from the SourceForge ftp site. You may also choose to check out
+      the slri source code tree using CVS (Concurrent Versions System) if
+      you want the most up-to-date version of the code. CVS is freely
+      available for multiple platforms from http://www.cvshome.org/. The
+      SeqHound PERL module is available from SourceForge:
+      http://sourceforge.net/project/showfiles.php?group_id=17918&package_id
+      =39608 and the SeqHound Blueprint ftp site:
+      ftp://ftp.blueprint.org/pub/SeqHound/
+
+      a Find where your PERL modules are kept.
+        For example perl5.6/lib
+
+        If the directory does not exist, or if it does not contain LWP.pm,
+        you can search where your Perl modules are installed.
+
+        (Note - the SeqHound module does not have to be there, but its just
+        a good idea to put files where you, your system and others would
+        expect them to be.)
+
+      b Download the seqhound.perl.X.X.tar.gz file where X.X is the version
+      For Windows, using a web browser go to one of the locations listed
+      under item 2. Save the file to your Perl module directory and
+      uncompress it with PKZIP or WinZip. You can delete
+      seqhound.perl.X.X.tar.gz after uncompressing it.
+        In a Unix environment you could use:
+
+          ftp ftp.sourceforge.net
+          login as anonymous
+          cd pub/sourceforge/slritools
+          get seqhound.perl.X.X.tar.gz
+          bye
+          gunzip seqhound.perl.X.X.tar.gz
+          tar -xvf seqhound.perl.X.X.tar
+          rm seqhound.perl.X.X.tar
+
+      c Change the name of the uncompressed directory from perl to seqhound
+      d Move to the seqhound directory and make the PERL module To install
+      into the default location, you will need root/administrator access.
+        For UNIX platforms
+
+          perl Makefile.PL
+          make
+          make test
+          make install
+
+        To install into non-default location (optional)
+
+          perl Makefile.PL LIB=/home/your/local/perl/lib PREFIX=/home/your/local/perl
+          make
+          make install
+
+        You can skip the make test step since this will likely have some
+        test cases fail. But remember to add non-default location to your
+        PERL5LIB, for example,
+
+         export PERl5LIB=/home/your/local/perl/lib
+
+        in .bashrc.
+
+        For Windows platforms
+
+          perl Makefile.pl
+          nmake
+          nmake test
+          nmake install
+
+TROUBLESHOOTING
+    1 Error messages
+      Error messages are written to the log file, shoundlog, found in the
+      same directory as your script.
+
+    2 Test script
+      There is a script called test.pl which will test all the API functions
+      using Test::More module. Test results will be written to test.log. To
+      run the test script:
+
+        perl test.pl 
+
+      It also works with
+
+        make test
+
+    3 start up script
+      There is a script called client.pl which provides the examples of how
+      to use SeqHound APIs.
+
+EXPORT
+    By default all the public functions in SeqHound are exported. List of
+    available API functions in alphabetical order are:
+
+          SHound3DbWhat()
+          SHound3DExists()
+          SHound3DFromGi()
+          SHound3DFromGiList()
+          SHound3DListFromTaxID()
+          SHound3DNeighboursFromGi()
+          SHound3DNeighboursFromGiList()
+          SHound3DNeighboursFromTaxID()
+          SHoundAccFromGi()
+          SHoundAccFromGiList()
+          SHoundAllGenomes()
+          SHoundAllGenomesWithNumProteins()
+          SHoundAllGenomesWithScientificNames()
+          SHoundCDDIDFromGi()
+          SHoundCDDIDFromGiList()
+          SHoundCDDIDFromLLID()
+          SHoundCDDScoreFromGi()
+          SHoundChromosomeFromGenome()
+          SHoundChromosomeFromGenomeList()
+          SHoundDbNameAndIdListFromGBAcc()
+          SHoundDbNameAndIdListFromGBAccKeyedList()
+          SHoundDbNameAndIdListFromGi()
+          SHoundDbNameAndIdListFromGiKeyedList()
+          SHoundDNAFromChromosome()
+          SHoundDNAFromChromosomeList()
+          SHoundDNAFromOrganism()
+          SHoundDNAFromOrganismList()
+          SHoundDNAFromProtein()
+          SHoundDNAFromProteinList()
+          SHoundDNAFromTaxID()
+          SHoundDNAFromTaxIDIII()
+          SHoundDNAFromTaxIDList()
+          SHoundDNAFromUnknownChromosome()
+          SHoundDxFieldNameListFromDbName()
+          SHoundDxListFromGi()
+          SHoundDxListFromSource()
+          SHoundExists()
+          SHoundFindAcc()
+          SHoundFindAccList()
+          SHoundFindName()
+          SHoundFindNameList()
+          SHoundFini()
+          SHoundFirstOfRedundantGroupFromID()
+          SHoundFirstOfRedundantGroupFromIDList()
+          SHoundGBAccFromDbNameAndId()
+          SHoundGBAccFromDbNameAndIdKeyedList()
+          SHoundGBAccFromGi()
+          SHoundGBAccFromGiKeyedList()
+          SHoundGet3D()
+          SHoundGet3DfromPdbId()
+          SHoundGetAccFromRetiredGi()
+          SHoundGetAllTaxAncestors()
+          SHoundGetAllTaxProgeny()
+          SHoundGetBioseq()
+          SHoundGetBioseqList()
+          SHoundGetBioseqSet()
+          SHoundGetBioseqSetList()
+          SHoundGetDefline()
+          SHoundGetDeflineList()
+          SHoundGetDomainIdFromLabel()
+          SHoundGetDomainLabelFromDomainId()
+          SHoundGetDomainsFromGi()
+          SHoundGetDomainsFromGiWithEvalue()
+          SHoundGetDxCvTermList()
+          SHoundGetDxDbnames()
+          SHoundGetFasta()
+          SHoundGetFastaFromRedundantGroupID()
+          SHoundGetFastaFromRedundantGroupIDKeyedList()
+          SHoundGetFastaKeyedList()
+          SHoundGetFastaList()
+          SHoundGetGenBankff()
+          SHoundGetGenBankffList()
+          SHoundGetGisByDomainId()
+          SHoundGetGisByDomainIdAndEvalue()
+          SHoundGetGisByNumberOfDomains()
+          SHoundGetLargestMMDBID()
+          SHoundGetNameByGi()
+          SHoundGetNewTaxIDFromMergedTaxID()
+          SHoundGetPDB3D()
+          SHoundGetReferenceIDFromGi()
+          SHoundGetReferenceIDFromGiList()
+          SHoundGetSeqEntry()
+          SHoundGetSeqEntryList()
+          SHoundGetTaxChildNodes()
+          SHoundGetTaxChildNodesList()
+          SHoundGetTaxLineageFromTaxID()
+          SHoundGetTaxNameFromTaxID()
+          SHoundGetTaxNameFromTaxIDByClass()
+          SHoundGetTaxParent()
+          SHoundGetXML3D()
+          SHoundGetXMLBioseq()
+          SHoundGetXMLSeqEntry()
+          SHoundGiFrom3D()
+          SHoundGiFrom3DList()
+          SHoundGiFromCDDID()
+          SHoundGiFromCDDIDList()
+          SHoundGiFromDbNameAndId()
+          SHoundGiFromDbNameAndIdKeyedList()
+          SHoundGiFromGBAcc()
+          SHoundGiFromGBAccKeyedList()
+          SHoundGiFromGOID()
+          SHoundGiFromGOIDAndECode()
+          SHoundGiFromGOIDList()
+          SHoundGiFromGOIDListAndECode()
+          SHoundGiFromLLID()
+          SHoundGiFromLLIDList()
+          SHoundGiFromOMIM()
+          SHoundGiFromOMIMList()
+          SHoundGiFromPDBchain()
+          SHoundGiFromReferenceID()
+          SHoundGiFromReferenceList()
+          SHoundGODBGetAllAncestors()
+          SHoundGODBGetAllChildren()
+          SHoundGODBGetChildrenOf()
+          SHoundGODBGetClassification()
+          SHoundGODBGetNameByID()
+          SHoundGODBGetParentOf()
+          SHoundGODBGetRecordByReference()
+          SHoundGOECodeFromGiAndGOID()
+          SHoundGOIDFromGi()
+          SHoundGOIDFromGiList()
+          SHoundGOIDFromLLID()
+          SHoundGOIDFromRedundantGi()
+          SHoundGOIDFromRedundantGiList()
+          SHoundGOPMIDFromGiAndGOID()
+          SHoundInit()
+          SHoundIsInited()
+          SHoundIsNetEntrezOn()
+          SHoundIsNRFirst()
+          SHoundIsProtein()
+          SHoundIsTaxDeleted()
+          SHoundIsTaxMerged()
+          SHoundLLIDFromCDDID()
+          SHoundLLIDFromGi()
+          SHoundLLIDFromGiList()
+          SHoundLLIDFromGOIDAndECode()
+          SHoundLLIDFromOMIM()
+          SHoundLocusFromGi()
+          SHoundMoleculeType()
+          SHoundMuidFrom3D()
+          SHoundMuidFrom3DList()
+          SHoundMuidFromGi()
+          SHoundMuidFromGiList()
+          SHoundNeighboursFromGi()
+          SHoundNeighboursFromGiList()
+          SHoundNeighboursFromTaxID()
+          SHoundNetEntrezInit()
+          SHoundOMIMFromGi()
+          SHoundOMIMFromGiList()
+          SHoundOMIMFromLLID()
+          SHoundProteinFromDNA()
+          SHoundProteinFromDNAList()
+          SHoundProteinsFromChromosome()
+          SHoundProteinsFromChromosomeList()
+          SHoundProteinsFromOrganism()
+          SHoundProteinsFromOrganismList()
+          SHoundProteinsFromTaxID()
+          SHoundProteinsFromTaxIDIII()
+          SHoundProteinsFromTaxIDList()
+          SHoundProteinsFromUnknownChromosome()
+          SHoundRedundantGroup()
+          SHoundRedundantGroupFromID()
+          SHoundRedundantGroupFromIDList()
+          SHoundRedundantGroupIDFromGI()
+          SHoundRedundantGroupIDFromGIList()
+          SHoundRedundantGroupKeyedList()
+          SHoundRedundantGroupList()
+          SHoundRNAFromChromosome()
+          SHoundRNAFromOrganism()
+          SHoundRNAFromUnknownChromosome()
+          SHoundSeqIdFromGi()
+          SHoundSeqIdFromGiList()
+          SHoundSequenceLength()
+          SHoundSourceListFromDx()
+          SHoundTaxIDFrom3D()
+          SHoundTaxIDFrom3DList()
+          SHoundTaxIDFromGi()
+          SHoundTaxIDFromGiList()
+          SHoundTitleFromGi()
+      
+AUTHORS
+      Hao Lieu
+      Software Developer
+      The Blueprint Initiative
+      seqhound@blueprint.org
+
+      Katerina Michalickova
+      The Blueprint Initiative
+      Samuel Lunenfeld Research Institute,  
+      Mount Sinai Hospital
+      katerina@mshri.on.ca
+
+      Rong Yao
+      Software Developer
+      The Blueprint Initiative
+      ryao@blueprint.org
+
+INSTITUTE
+      The Blueprint Initiative
+      Samuel Lunenfeld Research Institute
+      Mount Sinai Hospital
+      522 University Avenue,
+      9th Floor, Suite 900
+      Toronto, ON, Canada
+      M5G 1W7
+      Phone: (416) 596-8505
+      Fax  : (416) 596-8077
+
+      SeqHound inquiries:    seqhound@blueprint.org
+      Other inquiries:       info@blueprint.org
+
+COPYRIGHT
+      (c) 2004 The Blueprint Initiative of Mount Sinai Hospital.
+      All Rights Reserved.
+
+UPDATED
+    April 22, 2005
+

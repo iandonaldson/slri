@@ -1,0 +1,354 @@
+56636	1	1	NC_000854	Aeropyrum pernix
+181661	2	1	NC_003063	Agrobacterium tumefaciens C58 Cereon chromosome linear
+181661	3	1	NC_003062	Agrobacterium tumefaciens C58 Cereon chromosome circular
+181661	4	8	NC_003064	Agrobacterium tumefaciens C58 Cereon plasmid AT
+181661	5	8	NC_003065	Agrobacterium tumefaciens C58 Cereon plasmid Ti
+180835	6	1	NC_003305	Agrobacterium tumefaciens C58 UWash chromosome linear
+180835	7	1	NC_003304	Agrobacterium tumefaciens C58 UWash chromosome circular
+180835	8	8	NC_003306	Agrobacterium tumefaciens C58 UWash plasmid AT
+180835	9	8	NC_003308	Agrobacterium tumefaciens C58 UWash plasmid Ti
+63363	10	1	NC_000918	Aquifex aeolicus
+63363	11	8	NC_001880	Aquifex aeolicus plasmid ece1
+2234	12	1	NC_000917	Archaeoglobus fulgidus
+198094	280	1	NC_003997	Bacillus anthracis Ames
+226900	276	1	NC_004722	Bacillus cereus ATCC14579 chromosome
+226900	277	8	NC_004721	Bacillus cereus ATCC14579 plasmid pBClin15
+86665	13	1	NC_002570	Bacillus halodurans
+1423	14	1	NC_000964	Bacillus subtilis
+226186	283	1	NC_004663	Bacteroides thetaiotaomicron VPI-5482
+206672	15	1	NC_004307	Bifidobacterium longum
+203907	296	1	NC_005061	Blochmannia floridanus
+518	298	1	NC_002927	Bordetella bronchiseptica
+519	297	1	NC_002928	Bordetella parapertussis
+520	295	1	NC_002929	Bordetella pertussis
+139	16	1	NC_001318	Borrelia burgdorferi chromosome
+139	17	8	NC_001903	Borrelia burgdorferi plasmid cp26
+139	18	8	NC_001904	Borrelia burgdorferi plasmid cp9
+139	19	8	NC_000948	Borrelia burgdorferi plasmid cp32-1
+139	20	8	NC_000949	Borrelia burgdorferi plasmid cp32-3
+139	21	8	NC_000950	Borrelia burgdorferi plasmid cp32-4
+139	22	8	NC_000951	Borrelia burgdorferi plasmid cp32-6
+139	23	8	NC_000952	Borrelia burgdorferi plasmid cp32-7
+139	24	8	NC_000953	Borrelia burgdorferi plasmid cp32-8
+139	25	8	NC_000954	Borrelia burgdorferi plasmid cp32-9
+139	26	8	NC_000957	Borrelia burgdorferi plasmid lp5
+139	27	8	NC_001849	Borrelia burgdorferi plasmid lp17
+139	28	8	NC_000955	Borrelia burgdorferi plasmid lp21
+139	29	8	NC_001850	Borrelia burgdorferi plasmid lp25
+139	30	8	NC_001851	Borrelia burgdorferi plasmid lp28-1
+139	31	8	NC_001852	Borrelia burgdorferi plasmid lp28-2
+139	32	8	NC_001853	Borrelia burgdorferi plasmid lp28-3
+139	33	8	NC_001854	Borrelia burgdorferi plasmid lp28-4
+139	34	8	NC_001855	Borrelia burgdorferi plasmid lp36
+139	35	8	NC_001856	Borrelia burgdorferi plasmid lp38
+139	36	8	NC_001857	Borrelia burgdorferi plasmid lp54
+139	37	8	NC_000956	Borrelia burgdorferi plasmid lp56
+375	264	1	NC_004463	Bradyrhizobium japonicum
+29459	38	1	NC_003317	Brucella melitensis chromosome I
+29459	39	1	NC_003318	Brucella melitensis chromosome II
+204722	40	1	NC_004310	Brucella suis 1330 chromosome I
+204722	41	1	NC_004311	Brucella suis 1330 chromosome II
+135842	259	1	NC_004545	Buchnera aphidicola
+198804	42	1	NC_004061	Buchnera aphidicola Sg
+107806	43	1	NC_002528	Buchnera sp
+107806	44	8	NC_002252	Buchnera sp plasmid pTrp
+107806	45	8	NC_002253	Buchnera sp plasmid pLeu
+197	46	1	NC_002163	Campylobacter jejuni
+190650	47	1	NC_002696	Caulobacter crescentus
+83560	48	1	NC_002620	Chlamydia muridarum chromosome
+83560	49	8	NC_002182	Chlamydia muridarum plasmid pMoPn
+813	50	1	NC_000117	Chlamydia trachomatis
+227941	273	1	NC_003361	Chlamydophila caviae chromosome
+227941	274	8	NC_004720	Chlamydophila caviae plasmid pCpGP1
+115711	51	1	NC_002179	Chlamydophila pneumoniae AR39
+83558	52	1	NC_000922	Chlamydophila pneumoniae CWL029
+138677	53	1	NC_002491	Chlamydophila pneumoniae J138
+182082	285	1	NC_005043	Chlamydophila pneumoniae TW 183
+194439	54	1	NC_002932	Chlorobium tepidum TLS
+243365	299	1	NC_005085	Chromobacterium violaceum
+1488	55	1	NC_003030	Clostridium acetobutylicum
+1488	56	8	NC_001988	Clostridium acetobutylicum megaplasmid pSOL1
+1502	57	1	NC_003366	Clostridium perfringens
+1502	58	8	NC_003042	Clostridium perfringens plasmid pCP13
+212717	257	1	NC_004557	Clostridium tetani E88
+196164	261	1	NC_004369	Corynebacterium efficiens YS-314
+1718	59	1	NC_003450	Corynebacterium glutamicum
+227377	284	1	NC_002971	Coxiella burnetii
+1299	60	1	NC_001263	Deinococcus radiodurans chromosome 1
+1299	61	1	NC_001264	Deinococcus radiodurans chromosome 2
+1299	62	8	NC_000958	Deinococcus radiodurans megaplasmid MP1
+1299	63	8	NC_000959	Deinococcus radiodurans plasmid CP1
+226185	281	1	NC_004668	Enterococcus faecalis V583
+199310	260	1	NC_004431	Escherichia coli CFT073
+562	64	1	NC_000913	Escherichia coli K12
+83334	65	1	NC_002695	Escherichia coli O157H7
+155864	66	1	NC_002655 	Escherichia coli O157H7 EDL933
+190304	67	1	NC_003454	Fusobacterium nucleatum
+233412	286	1	NC_002940	Haemophilus ducreyi 35000HP
+727	68	1	NC_000907 	Haemophilus influenzae
+64091	69	1	NC_002607	Halobacterium sp chromosome
+64091	70	8	NC_002608	Halobacterium sp plasmid pNRC200
+64091	71	8	NC_001869	Halobacterium sp plasmid pNRC100
+235279	287	1	NC_004917	Helicobacter hepaticus
+85962	72	1	NC_000915	Helicobacter pylori 26695
+85963	73	1	NC_000921	Helicobacter pylori J99
+220668	263	1	NC_004567	Lactobacillus plantarum
+1360	74	1	NC_002662	Lactococcus lactis
+189518	247	1	NC_004342	Leptospira interrogans chromosome I
+189518	248	1	NC_004343	Leptospira interrogans chromosome II
+1642	75	1	NC_003212	Listeria innocua
+1642	76	8	NC_003383	Listeria innocua plasmid pLI100
+169963	77	1	NC_003210	Listeria monocytogenes
+381	78	1	NC_002678	Mesorhizobium loti
+381	79	8	NC_002679	Mesorhizobium loti plasmid pMLa
+381	80	8	NC_002682	Mesorhizobium loti plasmid pMLb
+145262	81	1	NC_000916	Methanobacterium thermoautotrophicum
+2190	82	1	NC_000909 	Methanococcus jannaschii chromosome
+2190	83	16	NC_001733	Methanococcus jannaschii small extrachromosomal element
+2190	84	16	NC_001732 	Methanococcus jannaschii large extrachromosomal element
+190192	85	1	NC_003551	Methanopyrus kandleri
+188937	86	1	NC_003552	Methanosarcina acetivorans
+192952	87	1	NC_003901	Methanosarcina mazei
+233413	288	1	NC_002945	Mycobacterium bovis
+1769	88	1	NC_002677	Mycobacterium leprae
+83331	89	1	NC_002755 	Mycobacterium tuberculosis CDC1551
+1773	90	1	NC_000962	Mycobacterium tuberculosis H37Rv
+233150	289	1	NC_004829	Mycoplasma gallisepticum
+2097	91	1	NC_000908	Mycoplasma genitalium
+28227	258	1	NC_004432	Mycoplasma penetrans
+2104	92	1	NC_000912	Mycoplasma pneumoniae
+2107	93	1	NC_002771	Mycoplasma pulmonis
+122586	94	1	NC_003112 	Neisseria meningitidis MC58
+487	95	1	NC_003116	Neisseria meningitidis Z2491
+228410	282	1	NC_004757	Nitrosomonas europaea
+103690	96	1	NC_003272	Nostoc sp chromosome
+103690	97	8	NC_003276	Nostoc sp plasmid pCC7120alpha
+103690	98	8	NC_003240	Nostoc sp plasmid pCC7120beta
+103690	99	8	NC_003267	Nostoc sp plasmid pCC7120gamma
+103690	100	8	NC_003273	Nostoc sp plasmid pCC7120delta
+103690	101	8	NC_003270	Nostoc sp plasmid pCC7120epsilon
+103690	102	8	NC_003241	Nostoc sp plasmid pCC7120zeta
+182710	103	1	NC_004193	Oceanobacillus iheyensis
+747	104	1	NC_002663	Pasteurella multocida
+117	290	1	NC_005027	Pirellula sp
+242619	301	1	NC_002950	Porphyromonas gingivalis W83
+167539	294	1	NC_005042	Prochlorococcus marinus CCMP1375
+59919	293	1	NC_005072	Prochlorococcus marinus MED4
+74547	292	1	NC_005071	Prochlorococcus marinus MIT9313
+287	105	1	NC_002516	Pseudomonas aeruginosa
+160488	262	1	NC_002947	Pseudomonas putida KT2440
+223283	266	1	NC_004578	Pseudomonas syringae
+13773	106	1	NC_003364	Pyrobaculum aerophilum
+29292	107	1	NC_000868	Pyrococcus abyssi
+186497	108	1	NC_003413	Pyrococcus furiosus
+53953	109	1	NC_000961	Pyrococcus horikoshii
+305	110	1	NC_003295	Ralstonia solanacearum chromosome
+305	111	8	NC_003296	Ralstonia solanacearum megaplasmid
+781	112	1	NC_003103	Rickettsia conorii
+782	113	1	NC_000963	Rickettsia prowazekii
+90370	114	1	NC_003198	Salmonella typhi
+90370	115	8	NC_003384	Salmonella typhi plasmid pHCM1
+90370	116	8	NC_003385	Salmonella typhi plasmid pHCM2
+209261	279	1	NC_004631	Salmonella typhi Ty2
+99287	117	1	NC_003197	Salmonella typhimurium LT2
+99287	118	8	NC_003277	Salmonella typhimurium LT2 plasmid pSLT
+211586 	249	1	NC_004347	Shewanella oneidensis chromosome
+211586 	250	8	NC_004349	Shewanella oneidensis megaplasmid
+198214	251	1	NC_004337	Shigella flexneri 2a
+198215	275	1	NC_004741	Shigella flexneri 2a 2457T
+382	119	1	NC_003047	Sinorhizobium meliloti
+382	120	8	NC_003037	Sinorhizobium meliloti plasmid pSymA
+382	121	8	NC_003078	Sinorhizobium meliloti plasmid pSymB
+196620	122	1	NC_003923	Staphylococcus aureus MW2
+158878	123	1	NC_002758	Staphylococcus aureus Mu50
+158878	124	8	NC_002774	Staphylococcus aureus Mu50 plasmid VRSAp
+158879	125	1	NC_002745	Staphylococcus aureus N315
+158879	126	8	NC_003140	Staphylococcus aureus N315 plasmid pN315
+176280	252	1	NC_004461	Staphylococcus epidermidis ATCC 12228
+208435	127	1	NC_004116	Streptococcus agalactiae 2603
+211110	253	1	NC_004368	Streptococcus agalactiae NEM316
+210007	256	1	NC_004350	Streptococcus mutans
+171101	128	1	NC_003098	Streptococcus pneumoniae R6
+160490	129	1	NC_003028	Streptococcus pneumoniae TIGR4
+160490	130	1	NC_002737	Streptococcus pyogenes
+198466	131	1	NC_004070	Streptococcus pyogenes MGAS315
+186103	132	1	NC_003485	Streptococcus pyogenes MGAS8232
+193567	265	1	NC_004606	Streptococcus pyogenes SSI-1
+227882	278	1	NC_003155	Streptomyces avermitilis
+100226	133	1	NC_003888	Streptomyces coelicolor chromosome
+100226	134	8	NC_003903	Streptomyces coelicolor plasmid SCP1
+100226	135	8	NC_003904	Streptomyces coelicolor plasmid SCP2
+2287	136	1	NC_002754	Sulfolobus solfataricus
+111955	137	1	NC_003106	Sulfolobus tokodaii
+84588	291	1	NC_005070	Synechococcus sp WH8102
+1148	138	1	NC_000911	Synechocystis PCC6803
+119072	139	1	NC_003869	Thermoanaerobacter tengcongensis
+2303	140	1	NC_002578	Thermoplasma acidophilum
+50339	141	1	NC_002689	Thermoplasma volcanium
+197221	142	1	NC_004113	Thermosynechococcus elongatus
+2336	143	1	NC_000853	Thermotoga maritima
+160	144	1	NC_000919 	Treponema pallidum
+218496	268	1	NC_004551	Tropheryma whipplei TW08 27
+203267	269	1	NC_004572	Tropheryma whipplei Twist
+2130	145	1	NC_002162	Ureaplasma urealyticum
+666	146	1	NC_002505	Vibrio cholerae chromosome 1
+666	147	1	NC_002506	Vibrio cholerae chromosome 2
+223926	267	1	NC_004603	Vibrio parahaemolyticus chromosome I
+223926	270	1	NC_004605	Vibrio parahaemolyticus chromosome II
+216895	271	1	NC_004459	Vibrio vulnificus CMCP6 chromosome I
+216895	272	1	NC_004460	Vibrio vulnificus CMCP6 chromosome II
+164609	246	1	NC_004344	Wigglesworthia brevipalpis
+844	300	1	NC_005090	Wolinella succinogenes
+190485	148	1	NC_003902	Xanthomonas campestris
+190486	149	1	NC_003919	Xanthomonas citri
+2371	150	1	NC_002488	Xylella fastidiosa chromosome
+2371	151	8	NC_002490	Xylella fastidiosa plasmid pXF51
+2371	152	8	NC_002489 	Xylella fastidiosa plasmid pXF1.3
+183190	254	8	NC_004554	Xylella fastidiosa Temecula1 plasmid pXFPD1.3
+183190	255	1	NC_004556	Xylella fastidiosa Temecula1 
+632	153	1	NC_003143	Yersinia pestis CO92
+632	154	8	NC_003131	Yersinia pestis CO92 plasmid pCD1
+632	155	8	NC_003132	Yersinia pestis CO92 plasmid pPCP1
+632	156	8	NC_003134	Yersinia pestis CO92 plasmid pMT1
+187410	157	1	NC_004088	Yersinia pestis KIM
+3702	164	1	NC_003070	Arabidopsis thaliana chromosome I
+3702	165	1	NC_003071	Arabidopsis thaliana chromosome II
+3702	166	1	NC_003074	Arabidopsis thaliana chromosome III
+3702	167	1	NC_003075	Arabidopsis thaliana chromosome IV
+3702	168	1	NC_003076	Arabidopsis thaliana chromosome V
+6239	158	1	NC_003279	Caenorhabditis elegans chromosome I
+6239	159	1	NC_003280	Caenorhabditis elegans chromosome II
+6239	160	1	NC_003281	Caenorhabditis elegans chromosome III
+6239	161	1	NC_003282	Caenorhabditis elegans chromosome IV
+6239	162	1	NC_003283	Caenorhabditis elegans chromosome V
+6239	163	1	NC_003284	Caenorhabditis elegans chromosome X
+7227	302	1	NT_033778	Drosophila melanogaster chromosome 2R
+7227	303	1	NT_033779	Drosophila melanogaster chromosome 2L
+7227	304	1	NT_033777	Drosophila melanogaster chromosome 3R
+7227	305	1	NT_037436	Drosophila melanogaster chromosome 3L
+7227	306	1	NC_004353	Drosophila melanogaster chromosome 4
+7227	307	1	NC_004354	Drosophila melanogaster chromosome X
+6035	169	1	NC_003242	Encephalitozoon cuniculi chromosome I
+6035	170	1	NC_003229	Encephalitozoon cuniculi chromosome II
+6035	171	1	NC_003230	Encephalitozoon cuniculi chromosome III
+6035	172	1	NC_003231	Encephalitozoon cuniculi chromosome IV
+6035	173	1	NC_003232	Encephalitozoon cuniculi chromosome V
+6035	174	1	NC_003233	Encephalitozoon cuniculi chromosome VI
+6035	175	1	NC_003234	Encephalitozoon cuniculi chromosome VII
+6035	176	1	NC_003235	Encephalitozoon cuniculi chromosome VIII
+6035	177	1	NC_003238 	Encephalitozoon cuniculi chromosome IX
+6035	178	1	NC_003236	Encephalitozoon cuniculi chromosome X
+6035	179	1	NC_003237	Encephalitozoon cuniculi chromosome XI
+9606	200	1	hs_chr1		Homo sapiens chromosome 1
+9606	201	1	hs_chr2		Homo sapiens chromosome 2
+9606	202	1	hs_chr3		Homo sapiens chromosome 3
+9606	203	1	hs_chr4		Homo sapiens chromosome 4
+9606	204	1	hs_chr5		Homo sapiens chromosome 5
+9606	205	1	hs_chr6		Homo sapiens chromosome 6
+9606	206	1	hs_chr7		Homo sapiens chromosome 7
+9606	207	1	hs_chr8		Homo sapiens chromosome 8
+9606	208	1	hs_chr9		Homo sapiens chromosome 9
+9606	209	1	hs_chr10	Homo sapiens chromosome 10
+9606	210	1	hs_chr11	Homo sapiens chromosome 11
+9606	211	1	hs_chr12	Homo sapiens chromosome 12
+9606	212	1	hs_chr13	Homo sapiens chromosome 13
+9606	213	1	hs_chr14	Homo sapiens chromosome 14
+9606	214	1	hs_chr15	Homo sapiens chromosome 15
+9606	215	1	hs_chr16	Homo sapiens chromosome 16
+9606	216	1	hs_chr17	Homo sapiens chromosome 17
+9606	217	1	hs_chr18	Homo sapiens chromosome 18
+9606	218	1	hs_chr19	Homo sapiens chromosome 19
+9606	219	1	hs_chr20	Homo sapiens chromosome 20
+9606	220	1	hs_chr21	Homo sapiens chromosome 21
+9606	221	1	hs_chr22	Homo sapiens chromosome 22
+9606	222	1	hs_chrX		Homo sapiens chromosome X
+9606	223	1	hs_chrY		Homo sapiens chromosome Y
+10090	224	1	mm_chr1		Mus musculus chromosome 1
+10090	225	1	mm_chr2		Mus musculus chromosome 2
+10090	226	1	mm_chr3		Mus musculus chromosome 3
+10090	227	1	mm_chr4		Mus musculus chromosome 4
+10090	228	1	mm_chr5		Mus musculus chromosome 5
+10090	229	1	mm_chr6		Mus musculus chromosome 6
+10090	230	1	mm_chr7		Mus musculus chromosome 7
+10090	231	1	mm_chr8		Mus musculus chromosome 8
+10090	232	1	mm_chr9		Mus musculus chromosome 9
+10090	233	1	mm_chr10	Mus musculus chromosome 10
+10090	234	1	mm_chr11	Mus musculus chromosome 11
+10090	235	1	mm_chr12	Mus musculus chromosome 12
+10090	236	1	mm_chr13	Mus musculus chromosome 13
+10090	237	1	mm_chr14	Mus musculus chromosome 14
+10090	238	1	mm_chr15	Mus musculus chromosome 15
+10090	239	1	mm_chr16	Mus musculus chromosome 16
+10090	240	1	mm_chr17	Mus musculus chromosome 17
+10090	241	1	mm_chr18	Mus musculus chromosome 18
+10090	242	1	mm_chr19	Mus musculus chromosome 19
+10090	243	1	mm_chrX		Mus musculus chromosome X
+10090	244	1	mm_chrY		Mus musculus chromosome Y
+10090	245	1	mm_chrUn	Mus musculus chromosome Un
+36329	308	1	NC_004325	Plasmodium falciparum chromosome 1
+36329	309	1	NC_000910	Plasmodium falciparum chromosome 2
+36329	310	1	NC_000521	Plasmodium falciparum chromosome 3
+36329	311	1	NC_004318	Plasmodium falciparum chromosome 4
+36329	312	1	NC_004326	Plasmodium falciparum chromosome 5
+36329	313	1	NC_004327	Plasmodium falciparum chromosome 6
+36329	314	1	NC_004328	Plasmodium falciparum chromosome 7
+36329	315	1	NC_004329	Plasmodium falciparum chromosome 8
+36329	316	1	NC_004330	Plasmodium falciparum chromosome 9
+36329	317	1	NC_004314	Plasmodium falciparum chromosome 10
+36329	318	1	NC_004315	Plasmodium falciparum chromosome 11
+36329	319	1	NC_004316	Plasmodium falciparum chromosome 12
+36329	320	1	NC_004331	Plasmodium falciparum chromosome 13
+36329	321	1	NC_004317	Plasmodium falciparum chromosome 14
+10116	322	1	rn_chr1	Rattus norvegicus chromosome 1
+10116	323	1	rn_chr2	Rattus norvegicus chromosome 2
+10116	324	1	rn_chr3	Rattus norvegicus chromosome 3
+10116	325	1	rn_chr4	Rattus norvegicus chromosome 4
+10116	326	1	rn_chr5	Rattus norvegicus chromosome 5
+10116	327	1	rn_chr6	Rattus norvegicus chromosome 6
+10116	328	1	rn_chr7	Rattus norvegicus chromosome 7
+10116	329	1	rn_chr8	Rattus norvegicus chromosome 8
+10116	330	1	rn_chr9	Rattus norvegicus chromosome 9
+10116	331	1	rn_chr10	Rattus norvegicus chromosome 10
+10116	332	1	rn_chr11	Rattus norvegicus chromosome 11
+10116	333	1	rn_chr12	Rattus norvegicus chromosome 12
+10116	334	1	rn_chr13	Rattus norvegicus chromosome 13
+10116	335	1	rn_chr14	Rattus norvegicus chromosome 14
+10116	336	1	rn_chr15	Rattus norvegicus chromosome 15
+10116	337	1	rn_chr16	Rattus norvegicus chromosome 16
+10116	338	1	rn_chr17	Rattus norvegicus chromosome 17
+10116	339	1	rn_chr18	Rattus norvegicus chromosome 18
+10116	340	1	rn_chr19	Rattus norvegicus chromosome 19
+10116	341	1	rn_chr20	Rattus norvegicus chromosome 20
+10116	342	1	rn_chrX	Rattus norvegicus chromosome X
+10116	343	1	rn_chrUn	Rattus norvegicus chromosome Un
+4932	180	1	NC_001133	Saccharomyces cerevisiae chromosome I
+4932	181	1	NC_001134	Saccharomyces cerevisiae chromosome II
+4932	182	1	NC_001135	Saccharomyces cerevisiae chromosome III
+4932	183	1	NC_001136	Saccharomyces cerevisiae chromosome IV
+4932	184	1	NC_001137	Saccharomyces cerevisiae chromosome V
+4932	185	1	NC_001138	Saccharomyces cerevisiae chromosome VI
+4932	186	1	NC_001139	Saccharomyces cerevisiae chromosome VII
+4932	187	1	NC_001140	Saccharomyces cerevisiae chromosome VIII
+4932	188	1	NC_001141	Saccharomyces cerevisiae chromosome IX
+4932	189	1	NC_001142	Saccharomyces cerevisiae chromosome X
+4932	190	1	NC_001143	Saccharomyces cerevisiae chromosome XI
+4932	191	1	NC_001144	Saccharomyces cerevisiae chromosome XII
+4932	192	1	NC_001145	Saccharomyces cerevisiae chromosome XIII
+4932	193	1	NC_001146	Saccharomyces cerevisiae chromosome XIV
+4932	194	1	NC_001147	Saccharomyces cerevisiae chromosome XV
+4932	195	1	NC_001148	Saccharomyces cerevisiae chromosome XVI
+4932	196	2	NC_001224	Saccharomyces cerevisiae mitochondrion
+4896 	197	1	NC_003424	Schizosaccharomyces pombe chromosome I
+4896 	198	1	NC_003423	Schizosaccharomyces pombe chromosome II
+4896 	199	1	NC_003421	Schizosaccharomyces pombe chromosome III
+191218	344	1	NC_003995	Bacillus anthracis A2012
+1717	345	1	NC_002935	Corynebacterium diphtheriae
+196600	346	8	NC_005128	Vibrio vulnificus YJ016 plasmid
+196600	347	1	NC_005139	Vibrio vulnificus YJ016 chromosome I
+196600	348	1	NC_005140	Vibrio vulnificus YJ016 chromosome II
+243231	349	1	NC_002939	Geobacter sulfurreducens
+33072	350	1	NC_005125	Gloeobacter violaceus
+228908	351	1	NC_005213	Nanoarchaeum equitans
+100379	352	1	NC_005303	Onion yellows phytoplasma
+243265	353	1	NC_005126	Photorhabdus luminescens
+258594	354	1	NC_005296	Rhodopseudomonas palustris CGA009

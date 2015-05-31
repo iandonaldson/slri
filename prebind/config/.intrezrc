@@ -1,0 +1,44 @@
+[datab]
+;databases in directory "path".
+path=/export/seqhound/datab/
+pathsen=/export/seqhound/sendatab/
+pathmm=/export/seqhound/mmdb/
+pathnbr=/export/seqhound/neighbours/
+pathrps=/export/seqhound/rps/
+
+[config]
+;the executable the cgi runs off of.
+CGI=wwwseekgi
+
+[precompute]
+MaxQueries = 17
+MaxQueryTime = 10
+QueryCount = 17
+path = /seqhound/precomputed/
+indexfile = /seqhound/precomputed/index
+
+
+[sections]
+;indicated what modules are available in SeqHound 
+;1 for available, 0 for not available
+;gene ontology hierarchy
+godb = 1
+;locus link functional annotations
+lldb = 1
+;taxonomy hierarchy
+taxdb = 1
+;protein sequence neighbours
+neigdb = 1
+;structural databases
+strucdb = 1
+;complete genomes tracking
+gendb = 1
+;redundant protein sequences
+redundb = 1
+;open reading frame database
+cddb = 1
+;RPS-BLAST domains
+rpsdb = 1
+
+
+

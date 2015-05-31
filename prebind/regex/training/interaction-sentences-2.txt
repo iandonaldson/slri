@@ -1,0 +1,300 @@
+PUBMED10049917-8|2|Cdc28p Cln2p|Strikingly, Fus3p promotes proliferation by a novel function that is not linked to reduced Ste12p activity or increased levels of Cln2p/Cdc28p kinase.
+PUBMED10213692-5|1|Cdc34 Cdc53|Rbx1 promotes association of Cdc34 with Cdc53 and stimulates Cdc34 auto-ubiquitination in the context of Cdc53 or SCF complexes.
+PUBMED10220464-3|2|SNF1 snf4|AKIN10 and AKIN11 suppress the yeast Deltasnf4 mutation and interact with the SNF4p-activating subunit of SNF1.
+PUBMED10385629-5|0|Cdc53 Skp1|Hrt1 assembles into recombinant SCF complexes and individually binds Cdc4, Cdc53 and Cdc34, but not Skp1.
+PUBMED10397774-6|1|Ste11p Ste5|The Ste50p/Ste11p interaction is also important (but not essential) for Ste11p function in the mating pathway; in this pathway binding of the Ste11p N terminus with both Ste50p and Ste5p is required, with the Ste5p association playing the major role in Ste11p function.
+PUBMED10397776-3|1|Tim22 Tim54|Preproteins with internal signals such as inner membrane carriers use Tom70, the GIP complex, and the special Tim pathway, involving small Tims of the intermembrane space and Tim22-Tim54 of the inner membrane.
+PUBMED10402465-7|1|Sro7p Sec9p|Analysis of the association of Sro7p and Sec9p demonstrates that Sro7p directly interacts with Sec9p both in the cytosol and in the plasma membrane and can associate with Sec9p in the context of a SNAP receptor complex.
+PUBMED10490601-16|1|Ada2 Gcn5|These results indicate that Gcn5, Ada2, and Ada3 function as part of a unique HAT complex (ADA) and represent shared subunits between this complex and SAGA..
+PUBMED10490603-3|0|CCR4 CAF1|The CAF1 protein was found to be absolutely required for CCR4 association with the NOT proteins, and CCR4 and CAF1, in turn, physically interacted with NOT1 through its central amino acid region from positions 667 to 1152.
+PUBMED10525531-8|2|Kap122p Toa1p|Consistent with Kap122p being the principal Kap for import of the Toa1p-Toa2p complex, we found that deletion of KAP122 results in increased cytoplasmic localization of both Toa1p and Toa2p.
+PUBMED10536147-6|2|Ino2 Ino4|In vitro experiments showed Adr1 and Ino2/Ino4 protein-dependent binding to UAS(ADR1) and UAS INO.
+PUBMED10545448-2|1|Ime1p Rim11p|Ime1p-Ume6p complex formation depends upon the protein kinase Rim11p, which interacts with and phosphorylates both Ime1p and Ume6p in vitro.
+PUBMED10594004-4|1|End3p Pan1p|Sla1p interacts with the first long repeat region of Pan1p and the N-terminal EH domain of End3p, thus leaving the Pan1p-End3p interaction, which requires the second long repeat of Pan1p and the C-terminal repeat region of End3p, undisturbed.
+PUBMED10615127-5|2|Msh2p MSH6|We have identified novel missense mutations in Saccharomyces cerevisiae MSH6 that appear to inactivate both Msh2p-Msh6p- and Msh2p-Msh3p-dependent MMR.
+PUBMED10675030-6|1|Rad23 Rad4|XPC-hHR23B has the strongest affinity for damaged DNA in some assays, as does the similar budding yeast complex Rad4-Rad23.
+PUBMED10712901-7|0|CDC4 Cdc6p|This degradation required the SCF(CDC4) and Cdc28p consensus sites in Cdc6p, but did not require Clb5 and Clb6.
+PUBMED10775272-4|1|GCN1 GCN20|Overexpression of N-terminal GCN2 segments had a dominant-negative phenotype that correlated with their ability to interact with GCN1-GCN20 and impede association between GCN1 and native GCN2.
+PUBMED10779558-3|1|Gcd10p Gcd14p|Gcd10p is found in a complex with Gcd14p, which contains conserved motifs for binding S-adenosylmethionine AdoMet.
+PUBMED10801867-8|1|Rpd3 Sin3|These results suggest that although repressors such as Ssn6-Tup1 and Sin3-Rpd3 prevent activation of gene expression, other mechanisms of repression return promoters to inactive states following the dissociation or inactivation of a transcriptional activator..
+PUBMED10811609-3|1|Npl4 Ufd1|We now describe another binding complex comprising mammalian Ufd1 and Npl4.
+PUBMED10811629-6|2|Mre11p Xrs2p|Both effects are dependent on the integrity of the Mre11p-Rad50p-Xrs2p complex.
+PUBMED10837477-9|2|Apg13p Vac8p|Vac8p and Apg13p may be part of a larger protein complex that includes Apg1p and additional interacting proteins.
+PUBMED10848588-3|1|Cdc20p Hsl1p|Here we identify the Hsl1p protein kinase as an APC substrate that interacts with Cdc20p and Cdh1p, proteins that mediate APC ubiquitination of protein substrates.
+PUBMED10915862-5|1|Rad16 Rad7|Addition of the Rad7-Rad16 complex to this reconstituted system stimulates the incision reaction many fold.
+PUBMED11029422-3|1|Mre11 Rad50|The core component involved in double-strand break repair in eukaryotic cells is the Mre11-Rad50 protein complex, which includes a third protein, p95, in humans and Xrs2 in yeasts.
+PUBMED11030345-3|1|Vam3 Vti1|Vam3 pairs with the SNAP-25 homolog Vam7 and VAMP homolog Vti1 to form SNARE complexes during vesicle docking/fusion with the vacuole.
+PUBMED11035037-7|1|spt15 taf145|Several other previously characterized activation-deficient spt15 alleles also displayed synthetic lethal interactions with taf145 Delta TAND, indicating that TAND and TBP carry an overlapping but as yet unidentified function that is specifically required for transcriptional regulation..
+PUBMED11046143-10|0|Cse1p Srp1p|Cse1p and Gsp1p-GTP release Srp1p from Nup2p, which suggests that the Srp1p export complex can be formed directly at the NPC.
+PUBMED11071920-10|1|Pex13 Pex5p|In vitro binding studies showed that these Pex5p mutants failed to interact with Pex13-SH3 in the absence of Pex14p, but regained their ability to bind in the presence of Pex14p, suggesting the formation of a heterotrimeric complex consisting of Pex5p, Pex14p, and Pex13-SH3.
+PUBMED11087726-1|1|Rpb4 Rpb7|The Rpb4 and Rpb7 subunits of yeast RNA polymerase II form a heterodimeric complex essential for promoter-directed transcription initiation in a reconstituted system.
+PUBMED11106754-2|0|Bem1 Cdc42|Here, we show that in S. cerevisiae, activation of the CDK Cdc28-Cln2 at bud emergence triggers relocalization of Cdc24, the GEF for Cdc42, from the nucleus to the polarization site, where it is stably maintained by binding to the adaptor Bem1.
+PUBMED11230149-4|1|cdc13 Stn1|Both the cdc13-5 mutation and DNA polymerase alpha mutations (which also exhibit elongated telomeres) are suppressed by increased expression of the Cdc13-interacting protein Stn1, indicating that Stn1 coordinates action of the lagging strand replication complex with the regulatory activity of CDC13.
+PUBMED11252725-4|0|SNF1 SNF4|Here we demonstrate that plant SNF1-related protein kinases (SnRKs) interact with an adaptor-regulator protein, AKINbetagamma, in which an N-terminal KIS domain characteristic of beta-subunits is fused with a C-terminal region related to the SNF4/AMPKgamma proteins.
+PUBMED11282395-5|1|Mre11 Rad50|Recently, it was shown that purified RAG1/2 proteins can cleave DNA hairpins in vitro, but the same activity was also described for a protein complex of the DNA repair proteins Nbs1/Mre11/Rad50.
+PUBMED11331606-3|1|Sip1 Snf4|Snf1 kinase complexes contain the alpha (catalytic) subunit Snf1, one of the three related beta subunits Gal83, Sip1, or Sip2, and the gamma subunit Snf4.
+PUBMED11387228-8|1|PRT1 TIF32|Thus, several key functions of eIF3 can be carried out by the PRT1-TIF32-NIP1 subcomplex..
+PUBMED11432837-3|1|Pob3 Spt16|We show that Spt16-Pob3 enhances HO transcription through a mechanism that is affected by chromatin modification, since some of the defects caused by mutations can be suppressed by deleting the histone deacetylase Rpd3.
+PUBMED11438675-5|0|Mre11 Rad50|Importantly, these defects in NBS cells can be complemented by reintroduction of wild-type Nbs1, but neither by a carboxy-terminal deletion mutant of Nbs1 at amino acid 590, unable to form a complex with and to transport Mre11 and Rad50 in the nucleus, nor by an Nbs1 mutated at Ser343 (S343A), the ATM phosphorylation site.
+PUBMED11533665-2|1|Mre11 Rad50|We have studied the role of the homologous budding yeast complex, Mre11/Rad50/Xrs2, in checkpoint activation in response to DSB-inducing agents.
+PUBMED11533665-7|1|Mre11 Xrs2|Thus, the integrity of the Mre11/Rad50/Xrs2 complex is specifically required for checkpoint activation after the formation of DSBs..
+PUBMED1483346-5|2|CDC28 CLN2|A model of START regulation involves activation of CDC28 kinase by any CLN protein, leading to activation of CLN1 and CLN2 transcription in a positive feedback loop and passage through START.
+PUBMED2123465-8|0|HAP2 HAP3|The roles of HAP3 and HAP4 in the heterotrimeric complex are also assessed by using lexA fusions and a fusion of the GAL4 acidic activation domain to HAP2, which partially bypasses a deletion of HAP4 but not HAP3.
+PUBMED2676721-1|1|HAP2 HAP3|The CYC1 gene of Saccharomyces cerevisiae is positively regulated by the HAP2 and HAP3 proteins, which form a heteromeric complex that binds to a CCAAT box in the upstream activation site, UAS2, and which activate transcription in a nonfermentable carbon source.
+PUBMED7623818-10|1|SNF11 SNF2|SNF11 interacts with a 40-residue sequence of SNF2 that is highly conserved, suggesting that SNF11 homologs exist in other organisms..
+PUBMED7744969-5|2|Kar2p Sec63p|The region common to all DnaJ homologues (termed the J domain) from Scj1p can be swapped for a similar region in Sec63p, which is known to interact with Kar2p in the ER lumen, to form a functional transmembrane protein component of the secretory machinery.
+PUBMED7828598-4|2|Nic96p Nup57p|The domain organization of Nic96p is more complex: N-terminally located heptad repeats mediate binding to a trimeric Nsp1p-Nup49p-Nup57p complex, but are not required for the formation of this core complex; single amino acid substitutions in the central domain yield thermosensitive mutants, which do not impair interaction with the Nsp1 complex; the C-terminal domain is neither essential nor required for binding to the nucleoporin complex, but strikingly mutations in this part cause synthetic lethality with nsp1 and nup57 mutant alleles.
+PUBMED7862153-9|1|Rad52 Rfa1|Presented is a model accounting for this genetic interaction in which Rfa1, in a complex with Rad52, serves to assemble other proteins of the recombination-repair machinery at the site of DSBs and other kinds of DNA damage.
+PUBMED7925276-3|1|Cdc23p Cdc27p|Using two independent assays, two-hybrid analysis in vivo and co-immunoprecipitation in vitro, we demonstrate that Cdc16p, Cdc23p and Cdc27p self associate and interact with one another to form a macromolecular complex.
+PUBMED8108735-3|1|PHO80 PHO85|Here it is reported that PHO80 has homology to yeast cyclins and interacts with PHO85, a p34cdc2/CDC28-related protein kinase.
+PUBMED8195172-10|1|Ino2p Ino4p|Immunoprecipitation experiments demonstrate that Ino2p and Ino4p interact in the absence of DNA.
+PUBMED8195172-11|1|Ino2p Ino4p|Ino2p and Ino4p are, thus, both necessary and sufficient for formation of a complex with the INO1 promoter..
+PUBMED8289786-6|0|ste18 ste4|However, the phenotypes of the STE5Hyp mutations were less pronounced in ste4 and ste18 mutants, suggesting that the STE5Hyp-generated signal partially depends on the proposed G beta gamma complex.
+PUBMED8626060-1|1|Pho80 Pho85|The PH081 gene product functions as an inhibitor of the cyclin-cyclin-dependent kinase pair, Pho80-Pho85, and is required for derepression of acid phosphatase-encoding gene (PH05) expression.
+PUBMED8647883-7|1|Kar2p Sec63p|There is both genetic and biochemical evidence that Kar2p interacts with Sec63p, an ER membrane protein containing both luminal and cytosolic domains that is involved in protein translocation across the membrane.
+PUBMED8649372-5|0|Swi4 Swi6|Mbp1, a transcription factor related to Swi4, forms the MCB-binding factor complex with Swi6, which activates DNA synthesis genes and S-phase cyclin genes CLB5 and CLB6 in late G1.
+PUBMED8702872-9|2|Rrn6p Rrn7p|These results are consistent with the fact that one can purify CF consisting of Rrn6p, Rrn7p, and Rrn11p from yeast cell extracts, but the purified complex does not contain TATA-binding protein.
+PUBMED8744951-8|2|Cdc16 Cdc27|The Cdc16, Cdc23, and Cdc27 proteins all contain several copies of the tetratricopeptide repeat and are subunits of a complex that is required for the onset of anaphase.
+PUBMED8887684-3|1|Rad1 Rad10|The ERCC1-ERCC4 heterodimer, like the homologous Rad10-Rad1 complex, was recently found to possess an endonucleolytic activity that incises on the 5' side of damage.
+PUBMED8943299-3|0|GCN5 ADR1|Similarly, the ability of the wild-type ADR1 gene to activate an ADH2-driven promoter was compromised in strains deleted for ADA2 or GCN5.
+PUBMED8943299-6|0|ADA2 GCN5|ADA2 could bind TAD II, and GCN5 physically interacted with all four TADs.
+PUBMED9000052-6|0|SIR3 SIR4|Our data demonstrate that SIR2 and SIR4 interact in a protein complex and that SIR2, SIR3, SIR4, and RAP1 map to the same sites along telomeric heterochromatin in wild-type cells.
+PUBMED9012827-8|0|hrr25 swi6|Both the sensitivity of swi6 mutants to methyl methanesulfonate and hydroxyurea and the transcriptional defect of hrr25 mutants are rescued by overexpression of SWI4, implicating the SBF complex in the Hrr25/Swi6-dependent response to DNA damage..
+PUBMED9017593-4|0|Nsp1p Nup49p|In this trimeric complex, Nup57p fulfills the role of an organizing center, to which Nup49p and Nsp1p individually bind.
+PUBMED9017593-8|2|Nsp1p Nup49p|We conclude that Nsp1p, Nup49p, and Nup57p can reconstitute a complex in vitro which is competent for further assembly with other components of nuclear pores..
+PUBMED9017593-8|2|Nup49p Nup57p|We conclude that Nsp1p, Nup49p, and Nup57p can reconstitute a complex in vitro which is competent for further assembly with other components of nuclear pores..
+PUBMED9023343-2|2|Sec13p Sec31p|The formation of transport vesicles in vitro requires the incubation of an ER-membrane fraction with three protein fractions collectively known as coat protein II COPII; Sar1p, Sec23p/Sec24p, and Sec13p/Sec31p.
+PUBMED9047390-8|2|CDC25 RAS1|The latter findings suggest that the CDC25R1489E protein bound the mutant RAS2 protein thereby releasing the wild-type CDC25 protein for activation of the wild-type RAS1 protein.
+PUBMED9079889-1|2|Ada2 Gcn5|The yeast transcriptional activator Gcn4 requires the Ada2/Gcn5/Ada3 co-activator complex to exert part of its activation potential.
+PUBMED9130700-5|2|Spc97p Tub4p|Finally, immunoprecipitation and fractionation studies revealed complexes containing Tub4p, Spc98p and Spc97p.
+PUBMED9218467-4|1|Dss4p Sec4p|Dss4p, like its mammalian counterpart, Mss4, binds zinc, and disruption of the zinc-binding site disrupts the ability of the protein to interact with Sec4p.
+PUBMED9224714-6|2|Ada2 spt20|This complex is lost in spt20/ada5delta and spt7delta strains and Spt3, Spt7, Spt20/Ada5, Ada2, and Gcn5 all copurify with this nucleosomal HAT complex.
+PUBMED9234705-10|1|GCN1 GCN20|The physical interaction between GCN20 and the EF3-like domain in GCN1 could allow for modulation of GCN1 activity, and the ABC domains in GCN20 may be involved in this regulatory function.
+PUBMED9271199-4|1|Sed5p Sly1p|Using surface plasmon resonance spectroscopy, we found that Sed5p binds Sly1p and Sly1-20p with equally high affinity K(D) = 5.13 x 10(-9) M and 4.74 x 10(-9) M, respectively.
+PUBMED9325247-1|1|Sec23p Sec24p|In vitro analysis of COPII vesicle formation in the yeast Saccharomyces cerevisiae has demonstrated the requirement for three cytosolic factors: Sec31p-Sec13p, Sec23p-Sec24p, and Sar1p.
+PUBMED9335334-5|1|Mcd1p Smc1p|The physical association between Mcd1p and Smc1p, one of the SMC family of chromosomal proteins, further suggests that Mcd1p functions directly on chromosomes.
+PUBMED9335587-4|1|Ste4 Ste5|Co-immunoprecipitation analysis, examining the binding in vitro of Ste5 to Ste11, Ste7, Ste4 (G protein beta subunit), and Fus3 (MAPK), confirmed that each mutation specifically affects the interaction of Ste5 with only one protein.
+PUBMED9346238-4|0|Cdc53 Skp1|Grr1, an F-box protein involved in Cln destruction, forms complexes with Skp1 and Cdc53 and binds phosphorylated Cln1 and Cln2, but not Sic1.
+PUBMED9367986-5|2|Cdc34p Skp1p|Biochemical and genetic evidence indicate that its degradation required the components of the G1-S ubiquitination system, Cdc34p, Cdc4p, Cdc53p, and Skp1p.
+PUBMED9372955-6|0|Ime1p Rim11p|Therefore, interaction between Rim11p and Ume6p, resulting in phosphorylation of Ume6p, is required for Ime1p-Ume6p complex formation.
+PUBMED9391130-7|1|Hsp104 Sup35|Our observations suggest that (i) previously described genetic interactions between Hsp104 and PSI+ are caused by direct interaction between Hsp104 and Sup35; (ii) Sup35 and PrP, the determinants of the yeast and mammalian prions, respectively, share structural features that lead to a specific interaction with Hsp104; and (iii) these interactions couple a change in structure to the ATPase activity of Hsp104..
+PUBMED9398325-3|2|GCN5 ADA3|Genetic and biochemical studies in yeast suggest that GCN5 functions with the adapter proteins ADA1, ADA2, ADA3, and ADA5 in a heteromeric complex.
+PUBMED9405394-9|0|CDC16 CDC27|The direct interaction of PP5 with CDC16 and CDC27, as well as its overlapping spindle localization in mitosis, suggests that PP5 may be involved in the regulation of the activity of the anaphase-promoting complex..
+PUBMED9461595-7|2|Cdc34p Cdc4p|Finally, we demonstrate that Cdc4p, Cdc34p, and Cdc53p are stable throughout the cell cycle and that Cdc34p permanently resides as part of a complex throughout the cell cycle.
+PUBMED9463387-1|1|CCR4 CAF1|The CCR4 transcriptional regulatory complex consisting of CCR4, CAF1, DBF2 and other unidentified factors is one of several groups of proteins that affect gene expression.
+PUBMED9545323-1|1|MSH2 MSH6|MSH2 and MSH6 proteins exist as a stable complex, as do the MLH1 and PMS1 proteins.
+PUBMED9658167-6|1|Sec10p Sec15p|One domain, consisting of the amino-terminal two-thirds of Sec10p directly interacts with Sec15p, another exocyst component.
+PUBMED9671501-6|2|Nip1p Prt1p|These findings suggest that Tif32p, Nip1p, Prt1p, Tif34p, and Tif35p comprise an eIF3 core complex, conserved between yeast and mammals, that stably interacts with eIF5.
+PUBMED9722633-2|1|Rad1 Rad10|Like its homologous complex in Saccharomyces cerevisiae , Rad10-Rad1, it acts as a structure-specific DNA endonuclease, cleaving at duplex-single-stranded DNA junctions.
+PUBMED9737966-4|1|Cdc28 Cln2|This epistatic analysis indicates that repression of pheromone signaling pathway by Cln2-Cdc28 kinase takes place at a level around STE20.
+PUBMED9738877-6|1|Ste11p Ste50p|We have analysed the physical association between Ste50p and Ste11p in extracts of cells harvested under various conditions.
+PUBMED9742096-3|2|SSK1 SSK22|The SLN1-YPD1-SSK1 two-component osmosensor activates the SSK2 and SSK22 MAPKKKs by direct interaction of the SSK1 response regulator with these MAPKKKs.
+PUBMED9774667-3|1|Tom22 Tom40|The receptor Tom22 stably associates with Tom40, the main component of the GIP, in a complex with a molecular weight of approximately 400,000 ( approximately 400K), while the other receptors, Tom20 and Tom70, are more loosely associated with this GIP complex and can be found in distinct subcomplexes.
+PUBMED9774667-7|1|Tom22 Tom40|Tom6 is required to promote but not to maintain a stable association between Tom22 and Tom40.
+PUBMED9813095-3|1|Kic1p Cdc31p|To elucidate the functions of yeast centrin, we carried out a two-hybrid screen for Cdc31p-interacting proteins and identified a novel essential protein kinase of 1,080 residues, Kic1p kinase that interacts with Cdc31p.
+PUBMED9819356-2|1|Grr1 Skp1|Grr1, which is required for degradation of G1 cyclins Cln1 and Cln2 as well as for regulation of glucose repression, is an F-box protein and interacts with Skp1 through the F-box motif.
+PUBMED9853758-5|1|Pho80 Pho85|We show that phosphorylation of Pho4 by a nuclear complex of a cyclin with a cyclin-dependent kinase, Pho80-Pho85, triggers its export from the nucleus.
+PUBMED9858534-4|0|Ada2 Spt8|Specifically, null mutations in the Gcn5/Ada2/Ada3 or Spt3/Spt8 classes cause moderate phenotypes and subtle structural alterations, while mutations in a third subgroup, Spt7/Spt20, as well as Ada1, disrupt the complex and cause severe phenotypes.
+PUBMED9867831-6|1|Cyc8 Tup1|First, we show that Cyc8-Tup1 is tethered to CIT2 promoter by interacting with the activation domain of Rtg3, a bHLH/L-Zip DNA-binding transactivator of CIT2.
+PUBMED9872946-4|1|Orc1p Sir1p|The eight missense mutations all map within a 17-amino-acid segment of Sir1p, and this segment was also required for Sir1p's interaction with Orc1p.
+PUBMED9930650-9|1|tlg2 vps45|Since a deltavps45 deltatlg2 double mutant has a more severe vacuolar protein sorting defect than a deltatlg2 mutant, Vps45p cannot only interact with Tlg2p.
+PUBMED10022863-4|0|Cdc34p Cdc53p|Among the domains of Cdc4p that are crucial for function are the F-box, which links Cdc4p to Cdc53p through Skp1p, and the WD-40 repeats, which are required for binding the substrate for Cdc34p.
+PUBMED10196216-5|0|Mge1 Ssc1|K108A/R213A Mge1 was able to stimulate nucleotide release from Ssc1 and function in refolding of denatured luciferase, albeit higher concentrations of mutant protein than wild-type protein were required.
+PUBMED10224245-5|0|ino2 ino4|The suppressor mutation, sia1-1, identified as an allele of REG1, caused constitutive INO1 expression and was capable of suppressing the inositol auxotrophy of a second ino4 missense mutant, ino4-26, as well as ino2-419, a missense mutation of INO2.
+PUBMED10388812-2|0|RPD3 SIN3|SIN3 and RPD3 also affect transcriptional silencing at the HM mating loci and at telomeres in yeast.
+PUBMED10394905-4|0|PKC1 RHO1|This cell lysis defect can be rescued by adding osmotic stabilizers, such as 1 M sorbitol, to the medium, and by overexpressing PKC1 or RHO1.
+PUBMED10400679-3|0|Sec23p Sec24p|Using a glutathione S-transferase fusion protein with mouse Sec23p, we identified a novel mammalian Sec23p-interacting protein, p125, which is clearly distinct from Sec24p.
+PUBMED10406794-3|1|Apg12p Apg5p|We recently found that a protein conjugation system, in which Apg12p is covalently attached to Apg5p, is indispensable for autophagy in yeast.
+PUBMED10409718-7|0|Cdc28 CLN3|In vivo accumulation of Stb1 phosphoforms was dependent on CLN1, CLN2, and CLN3, which encode G(1)-specific cyclins for the cyclin-dependent kinase Cdc28, and Stb1 was phosphorylated by Cln-Cdc28 kinases in vitro.
+PUBMED10409732-8|1|smc1 smc2|Overexpression of either hsHEC1 or scHEC1 suppressed the lethal phenotype of smc1-2 and smc2-6 at nonpermissive temperatures, suggesting that the interactions between Hec1p and Smc1p and -2p are biologically significant.
+PUBMED10446280-2|0|CDC11 CDC3|Its predicted amino acid sequence shares significant homology to that of Saccharomyces cerevisiae CDC3, CDC10, CDC11, CDC12, the Drosophila genes Pnut, Sep1, Sep2, and the mammalian genes BH5, CDC10, Nedd5, Diff6, and Sep2, which are implicated in cytokinesis and cell polarity.
+PUBMED10490639-9|0|Pcl10p Pho85p|Gel filtration of yeast cell lysates demonstrated that most Pho85p was present as a monomer, although a portion coeluted in high-molecular-weight fractions with Pcl10p and Gsy2p.
+PUBMED10523319-11|0|Gle1p Rip1p|Gfd1p is not essential, interacts with Gle1p and Rip1p/Nup42p, and is found in the cytoplasm and at the nuclear rim..
+PUBMED10523662-2|0|Cft2 Ysh1|The three largest subunits, Cft1/Yhh1, Cft2/Ydh1, and Brr5/Ysh1, are homologs of the three largest subunits of mammalian cleavage-polyadenylation specificity factor (CPSF), an activity needed for both cleavage and poly(A) addition.
+PUBMED10525531-10|0|Kap122p Toa1p|Together these data suggest that Kap122p is the major Kap for the import of Toa1p-Toa2p into the nucleus.
+PUBMED10531032-9|2|Cdc24p Cdc42p|These data are consistent with a temporal and spatial regulation of Cdc24p-dependent activation of Cdc42p during the cell cycle..
+PUBMED10531037-4|0|Cdc34 Skp1|Skp1 binding links the F-box protein with a core ubiquitin ligase composed of the proteins Cdc53/Cul1, Rbx1 (also called Hrt1 and Roc1) and the E2 ubiquitin-conjugating enzyme Cdc34 8 9 10 11.
+PUBMED10542277-10|1|Nup2p Srp1p|RanGTP export complex releases Srp1p from its binding site in Nup2p.
+PUBMED10542277-8|0|Nup2p Srp1p|This region of Nup2p is sufficient to allow accumulation of an Srp1p fusion protein at the nuclear rim, but the C-terminal Ran-binding domain of Nup2p is required for efficient Srp1p export.
+PUBMED10544223-5|0|MLH1 MSH2|Among these, some 3% are mutation positive, that is, caused by germline mutations in the DNA mismatch repair genes that have so far been implicated MLH1, MSH2, MSH6, PMS1, and PMS2.
+PUBMED10545444-9|0|KSS1 STE7|Additionally, the cellular projections formed by a pbs2-3 mutant on high osmolarity are absent in strains lacking KSS1 or STE7.
+PUBMED10579717-3|0|Tom22 Tom40|It consists of Tom40, Tom22, and the small Tom components, Tom6 and Tom7.
+PUBMED10582243-10|0|Apg5p apg7|We also found that apg7 and apg10 mutants were unable to form an Apg12p-Apg5p conjugate.
+PUBMED10582244-7|0|CDC20 MAD2|Counteracting the effect of CDC20, the checkpoint protein MAD2 acts as an inhibitor of APC.
+PUBMED10593933-6|0|STE11 STE18|Phosphorylation is blocked by mutations in the MAP kinase genes (FUS3, KSS1), as well as by mutations in components needed for MAP kinase activation STE11, STE7, STE4, STE18.
+PUBMED10595551-6|0|Pep12p Vti1p|This paper describes circular dichroism, Fourier transform infrared spectroscopy, and dynamic light scattering data for a set of yeast v- and t-SNARE proteins, Vti1p and Pep12p, that are Q-SNAREs involved in intracellular trafficking.
+PUBMED10600443-3|0|Hsp10 Hsp60|Hsp60 is found in eubacteria, mitochondria, and chloroplasts, where, in cooperation with Hsp10, it participates in protein folding and translocation of proteins to the organelles.
+PUBMED10608896-2|0|SMC1 SMC3|Analysis of bovine SMC1 and SMC3 protein domains now reveals that not only the C-terminal domains, but also the coiled-coil region, binds DNA, while the N terminus is inactive.
+PUBMED10633104-2|0|CDC43 RAM2|The alpha and beta subunits of GGTase I from Saccharomyces cerevisiae are encoded by RAM2 and CDC43, respectively, and each is essential for viability.
+PUBMED10637226-7|0|Pex19p Pex3p|Our results show that Pex3p and Pex19p are required for the proper localization of all PMPs tested, including Pex15p, whereas the other Pex proteins might only be required for targeting/import of matrix proteins..
+PUBMED10639337-6|0|MKK1 MPK1|Although neither activation of BCK1 (MEKK) by the dominant BCK1-20 mutation nor increased dosage of MKK1 (MEK) or MPK1 (MAP kinase) mimicked PKC1 as a glc7-10 dosage suppressor, extra copies of genes encoding upstream components of the Pkc1p pathway such as ROM2, RHO2, HCS77/WSC1/SLG1 and MID2 also suppressed glc7-10 effectively.
+PUBMED10660573-1|1|Pex13p Pex5p|Pex5p, a receptor for peroxisomal matrix proteins with a type 1 peroxisome targeting signal (PTS1), has been proposed to cycle from the cytoplasm to the peroxisomal membrane where it docks with Pex14p and Pex13p, the latter an SH3 domain-containing protein.
+PUBMED10679030-9|0|BNI1 Cdc42p|From previous work, the BNI1, GIC1, and GIC2 gene products also appear to be involved in linking Cdc42p to the actin cytoskeleton.
+PUBMED10751599-2|0|MSH2 MSH6|We have established an MSH3-deficient HHUA/chr.2 cell line by introducing human chromosome 2, which carries wild-type MSH6 and MSH2 genes, to HHUA cells.
+PUBMED10805747-11|0|Swe1p Hsl7p|In contrast, treatments that perturb actin organization have little effect on Hsl1p and Hsl7p localization, suggesting that such treatments must stabilize Swe1p by another mechanism.
+PUBMED10806066-7|0|Sir3p Sir4p|A partial release of Sir3p and Sir4p during mitosis also occurs.
+PUBMED10809234-2|0|GCN5 ADA3|Here, we show that in vivo activation of a T3/GRIP1 or SRC-1 coactivator-dependent T3 hormone response element by hTRbeta1 is dependent upon the presence of yeast GCN5, ADA2, ADA1, or ADA3 adaptor proteins and that the histone acetyltransferase (HAT) domains and bromodomain (BrD) of yGCN5 must be intact for maximal activation of transcription.
+PUBMED10816574-2|0|Cox2p Oxa1p|In the absence of Oxa1p, the translocation of the mitochondrially encoded subunit Cox2p to the intermembrane space (also referred to as export) is prevented, and it has been proposed that Oxa1p could be a component of a general mitochondrial export machinery.
+PUBMED10835383-1|0|Msh2p Msh6p|In Saccharomyces cerevisiae, Msh2p, a central component in mismatch repair, forms a heterodimer with Msh3p to repair small insertion/deletion mismatches and with Msh6p to repair base pair mismatches and single-nucleotide insertion/deletion mismatches.
+PUBMED10848609-7|0|Hop1 Red1|These results suggest that meiotic chromosomal proteins function in the signaling of meiotic prophase defects and that the correct stoichiometry of Red1, Mek1, and Hop1 is needed to achieve checkpoint-mediated cell cycle arrest at pachytene..
+PUBMED10866670-11|0|Gal3 Gal80|These results are the first indication that the subcellular distribution dynamics of the Gal3 and Gal80 proteins play a role in regulating Gal4p-mediated GAL gene expression in vivo..
+PUBMED10866686-12|0|msh2 msh3|Deltarad59 affected DSB-induced gene conversion differently from msh3 and msh2, which are also defective in removing nonhomologous ends in both DSB-induced gene conversion and SSA.
+PUBMED10871279-4|0|Cdc23 Cdc27|Mutating putative Cdc28 phosphorylation sites in three components of the APC, Cdc16, Cdc23, and Cdc27, makes the APC resistant to phosphorylation both in vivo and in vitro.
+PUBMED10901168-3|2|Fus3 Ste5|The Ste5 is a scaffold protein of the MAPK module and is essential for the activation of Fus3.
+PUBMED10912630-6|0|ADA2 ADA1|ADA1 is ubiquitous in all cells, including lymphocytes and monocytes, whereas ADA2 is found only in monocytes.
+PUBMED10913169-7|0|cks1 Cln2|The levels of Cln2-Cdc28 and Cln3-Cdc28 protein kinase activity are severely reduced in cks1-38 cell extracts.
+PUBMED10913172-2|1|Rad24 Rfc2|Rad24 is structurally related to replication factor C (RFC) subunits and associates with RFC subunits Rfc2, Rfc3, Rfc4, and Rfc5.
+PUBMED10921930-3|0|Gsp1p Mog1p|This study found that Mog1p releases a nucleotide from GTP-Gsp1p but not from GDP-Gsp1p.
+PUBMED10982824-1|0|BUR2 BUR1|BUR1 and BUR2 were previously identified by a genetic selection for mutations that increase transcription from basal promoters in vivo.
+PUBMED11030144-8|1|CDC16 CDC27|In nocodazole-arrested mitotic cells, both CDC16 and hyperphosphorylated CDC27, two APC components, preferentially associate with His6-BUBR1 resins, but not the control resins.
+PUBMED11030338-1|0|Rad51 Rad54|Rad51 and Rad54 proteins are important for the repair of double-stranded DNA (dsDNA) breaks by homologous recombination in eukaryotes.
+PUBMED11062157-3|0|MSH2 MSH6|MLH1, MSH2 and MSH6 are known to predispose to cancer.
+PUBMED11071920-12|0|Pex13 Pex14p|Taken together, this indicates that in the absence of Pex13-SH3 interaction, other protein(s) is able to bind Pex5p at the peroxisome; Pex14p is a likely candidate for this function..
+PUBMED11071933-10|1|Ino4p YMR317W|Interestingly, one of these reports identified five proteins that interact with Ino4p: Ino2p, Hcs1p, Apl2p, YMR317W and YNL279W.
+PUBMED11102533-5|1|Bet3p Bet5p|GST-tagged Bet3p or Bet5p, two of the TRAPP subunits, were expressed in yeast cells and were precipitated by glutathione-agarose (GA) beads.
+PUBMED11121520-3|0|MLH1 MSH3|Six different MMR genes, MSH2, MSH3, MSH6, MLH1, MLH3 and PMS2, have been identified in the human genome.
+PUBMED11139490-4|1|PCL1 Pho85|We found that mutations in the EFR genes involved in morphogenesis are specifically inviable when the Pho85-associated G1 cyclins encoded by PCL1 and PCL2 are absent.
+PUBMED11154270-10|0|Bni1p Bud6p|These results indicate that Bni1p regulates polarized growth within the bud through its unique and dynamic pattern of localization, dependent on multiple factors, including Cdc42p, Spa2p, Bud6p, and the actin cytoskeleton..
+PUBMED11179233-5|0|PRT1 TIF32|PRT1, HCR1 and TIF32 were also functionally linked by genetic suppressor analysis.
+PUBMED11206552-3|1|Swi4 Swi6|SBF is a heterodimer of Swi4 and Swi6, and MBF is a heterodimer of Mbpl and Swi6 refs 1, 3.
+PUBMED11239395-2|2|CCR4 CAF1|We demonstrate by several criteria that CCR4 and CAF1 encode critical components of the major cytoplasmic deadenylase in yeast.
+PUBMED11250080-1|1|Cdc7 Dbf4|The Dbf4 protein is the regulatory subunit of Cdc7 serine/threonine kinase, which is essential for entry into S phase.
+PUBMED11251069-9|1|Gsp1p Yrb2p|A similar complex with Xpo1p and Gsp1p-GTP can be formed by Yrb2p, a relative of Yrb1p predominantly located in the nucleus.
+PUBMED11276426-7|0|Smc1 Smc2|A phylogenetic tree of SMC homologs reveals five families: Smc1, Smc2, Smc3, Smc4 and an ancestral family that includes the sequences from the Archaea and Eubacteria.
+PUBMED11282911-5|0|HSP10 HSP60|METHODS AND RESULTS: We overexpressed HSP60 and HSP10 together or separately in rat neonatal cardiac myocytes using an adenoviral vector and then subjected the myocytes to SI/RO.
+PUBMED11306449-3|0|MLH1 MSH2|Among MSH2 mutation carriers, MLH1 was expressed in both tumor types, whereas MSH2 and, in many cases, also MSH6, were absent.
+PUBMED11344258-5|0|Hrp1 Rna15|Analysis of the individual protein-protein interactions supports an architectural model for CF I in which Pcf11 simultaneously interacts with Rna14, Rna15, and Clp1, whereas Rna14 bridges Rna15 and Hrp1..
+PUBMED11352936-5|0|Sec65p Srp54p|Sec65p, on the other hand, was found in both the nucleoplasm and the nucleolus, whereas Srp54p was predominantly cytoplasmic.
+PUBMED11404483-6|1|Dbf2 Mob1|In vitro, recombinant protein kinase Cdc15 activated recombinant Dbf2, but only when Dbf2 was bound to Mob1.
+PUBMED11405098-8|2|Sip4 Cat1|This finding agrees with the idea that phosphorylation by Cat1 may convert Sip4 into a functional activator..
+PUBMED11454871-1|0|MRE11 RAD50|Saccharomyces cerevisiae RAD50 and MRE11 genes are required for the nucleolytic processing of DNA double-strand breaks.
+PUBMED11485989-2|0|Gcn5 Spt20|TBP binding was shown to require the SAGA components Spt3 and Spt20/Ada5, but not the SAGA component Gcn5.
+PUBMED11514438-10|0|lsm1 pat1|These results raise the possibility that the temperature-sensitive growth of the lsm1-7 and pat1 mutants is at least partially due to mRNA trimming, which either inactivates the function of the mRNAs or makes them available for premature 3' to 5' degradation by the exosome..
+PUBMED11553789-3|0|Sgs1 Top3|We show in this work that the functionality of a truncated Sgs1 lacking its N-terminal 106 residues can be restored by replacing the truncated region with Top3.
+PUBMED1310523-3|0|HAP2 HAP3|Here we report that transcription of LPD1 requires HAP2, HAP3 and HAP4 for release from glucose repression.
+PUBMED1406691-7|0|PRP18 slu7|Furthermore, slu4-1 and slu7-1 are lethal in combination with mutations in PRP16 and PRP18, which also function in the second step, but not with mutations in factors required for the first catalytic step, such as PRP8 and PRP4.
+PUBMED1934633-3|0|CDC12 CDC3|We showed previously that the CDC3 and CDC12 gene products localize to the region of the mother-bud neck and are probably constituents of the ring of 10 nm filaments.
+PUBMED1996092-3|0|cdc24 cdc42|MSB1 was identified previously as a multicopy suppressor of Ts- cdc24 and cdc42 mutations.
+PUBMED2161538-4|0|gpa1 STE4|By using gpa1, STE4, and ste18 mutations, it was found that all three G protein subunits were required for functional coupling, as judged by the absence of high-affinity receptors when any of the three gene products was altered.
+PUBMED2167444-5|0|PEA2 PEA1|Using these cells, we show that the individual or tandem binding sites for several unrelated trans-acting factors which are generally subfunctional as transcriptional enhancers simian virus 40 A core, TGTGGAATG; EBP20, TGTGGTTTT; PEA1 an AP-1 analog , GTGACTAA; PEA2, GACCGCAG; and PEA3, AGGAAG stimulated low levels of Py DNA replication.
+PUBMED2407613-4|0|ste5 ste7|The dac2 mutation was closely linked to gal1 and was different from the previously identified cell type nonspecific sterile mutations ste4, ste5, ste7, ste11, ste12, ste18 and dac1.
+PUBMED2690082-8|0|cdc24 cdc42|However, one of the other genes that was isolated by virtue of its ability to suppress cdc24 can also suppress cdc42.
+PUBMED2833749-1|0|PET122 PET54|Translation of the yeast mitochondrial mRNA encoding cytochrome c oxidase subunit III (coxIII) is specifically activated by the products of at least three nuclear genes, PET494, PET54, and PET122.
+PUBMED3547108-6|0|rad4 rad7|Furthermore, the purified UV endonuclease reduced transformation of rad7-1 and rad14 mutants to levels seen in rad1-1 and rad4-4 cells.
+PUBMED3827201-3|0|TfC3 TfC6|In the Tf system six alleles were found, TfC1 = 0.761, TfC2 = 0.176, TfC3 = 0.054, TfC6 = 0.002, TfB = 0.006 and TfD = 0.002.
+PUBMED7556078-3|1|Sup35p Sup45p|The ability of Sup45p C-terminally tagged with (His)6 to specifically precipitate Sup35p from a cell lysate was used to confirm this interaction in vitro.
+PUBMED7565726-6|0|rlm1 MPK1|Although rlm1 delta cells grow normally at any temperature, they display a caffeine-sensitive phenotype similar to that observed in mutants defective in BCK1, MKK1/MKK2, or MPK1.
+PUBMED7642701-6|0|Pho2p Pho4p|The vacuole inheritance defect in vac5-1 cells is dependent on the presence of the Pho85 kinase and its targets Pho4p and Pho2p.
+PUBMED7688296-4|0|NIC96 NSP49|Conversely, affinity purification of tagged NSP49 enriches for NSP1, the p54 and the NIC96 component.
+PUBMED7785324-7|0|Sip1p SNF1|The MIG1 gene, acting through SNF1-dependent and SNF1-independent pathways, is required for some Sip1p phosphorylations.
+PUBMED7822288-3|1|Cdc24 Rsr1|Here, we demonstrate, using recombinant proteins, that Cdc24 can also bind directly to Rsr1.
+PUBMED7862153-5|0|RAD52 rfa1|Characterization of rfa1-44 revealed that it is, like members of the RAD52 epistasis group, sensitive to X rays, high doses of UV, and HO-induced DSBs.
+PUBMED7867933-4|0|RAP1 SIR3|Silencing by GBD/RAP1 hybrids, like normal silencing at HMR, requires the trans-acting factors SIR2, SIR3, and SIR4.
+PUBMED7925276-1|0|Cdc16p Cdc27p|Cdc16p, Cdc23p and Cdc27p are all essential proteins required for cell cycle progression through mitosis in Saccharomyces cerevisiae.
+PUBMED7925276-1|0|Cdc16p Cdc23p|Cdc16p, Cdc23p and Cdc27p are all essential proteins required for cell cycle progression through mitosis in Saccharomyces cerevisiae.
+PUBMED7969174-5|0|Sgs1 Top3|These results imply that Sgs1 creates a deleterious topological substrate that Top3 preferentially resolves.
+PUBMED8022796-2|0|PRP11 PRP9|These proteins also compose the essential heterotrimeric splicing factor SF3a, and products of yeast pre-mRNA processing genes PRP9, PRP11, and PRP21 are their likely yeast counterparts.
+PUBMED8035801-3|0|HHF1 HHT2|The other two loci, HHT1-HHF1 and HHT2-HHF2, each encode histones H3 and H4.
+PUBMED8061317-15|0|CKA1 CKB1|Cells with disruptions in CKA1 and CKA2 are not rescued by expression of CKB1..
+PUBMED8062390-1|0|Ste5 Ste7|Ste5 is a Zn2+ finger-like protein thought to function before three kinases, Ste11 (a MEKK), Ste7 (a MEK), and Fus3 (a MAPK), in a conserved MAP kinase cascade required for mating in S. cerevisiae.
+PUBMED8062390-3|0|Kss1 Ste5|By two-hybrid analysis, Ste11, Ste7, and Fus3 associate with different domains of Ste5, while Kss1, another MAPK, associates with the same domain as Fus3, thus implying that Ste5 simultaneously binds a MEKK, MEK, and MAPK.
+PUBMED8108735-1|0|PHO2 PHO4|Induction of the yeast gene PHO5 is mediated by the transcription factors PHO2 and PHO4.
+PUBMED8135282-8|0|HIR1 HIR2|Although HIR2 and CON2 datasets indicated no familiality, statistical evidence of heterogeneity between the results of HIR1 and HIR2, or between CON1 and CON2 was lacking.
+PUBMED8135791-1|0|CDC25 RAS2|Two C-terminal fragments (334 and 509 amino acid residues) of CDC25, a Saccharomyces cerevisiae GDP/GTP exchange factor, and the RAS2 protein were purified from E. coli, using the pGEX system.
+PUBMED8157010-6|0|Gdi1p Sec4|These results establish that Gdi1p plays an essential function in membrane traffic and are consistent with a role for Gdi1p in the recycling of proteins of the Sec4/Ypt/rab family from their target membranes back to their vesicular pools..
+PUBMED8164670-8|0|CDC39 MOT2|Overexpression of MOT2 suppresses the growth defect of temperature-sensitive mutations in CDC36 and CDC39.
+PUBMED8195227-5|0|CDC25 RAS2|CDC25 restored both growth and glucose-induced cyclic AMP signaling in the presence, but not in the absence of wild-type RAS2.
+PUBMED8223426-2|0|SEC9 SSO2|We have cloned two yeast genes, SSO1 and SSO2, which in high copy number can suppress sec1 mutations and also mutations in several other late acting SEC genes, such as SEC3, SEC5, SEC9 and SEC15.
+PUBMED8289786-7|0|kss1 STE5|The STE5Hyp alleles did not suppress ste7, ste11, ste12, or fus3 kss1 null mutants, consistent with previous findings that the STE5 product acts before the protein kinases encoded by STE7, STE11, FUS3, and KSS1 and the transcription factor encoded by STE12.
+PUBMED8417350-2|0|GCR1 RAP1|Using in vitro and in vivo footprinting techniques, we have identified four binding sites for three factors in the 5' noncoding region of TPI: a REB1-binding site located at positions -401 to -392, two GCR1-binding sites located at positions -381 to -366 and -341 to -326, and a RAP1-binding site located at positions -358 to -346.
+PUBMED8524265-1|0|RNA14 RNA15|The RNA14 and RNA15 gene products have been implicated in a variety of cellular processes.
+PUBMED8641278-6|0|Tom22 Tom7|A lack of Tom7 stabilized the interaction between the receptors Tom20 and Tom22 and the import pore component Tom40.
+PUBMED8649431-2|0|SPT3 SPT7|One of these gens, SPT15, encodes the TATA-binding protein, and three others, SPT3, SPT7, and SPT8, encode proteins functionally related to the TATA-binding protein.
+PUBMED8654364-8|1|Ssc1 Tim44|Two explanations are possible: a trapping mechanism by soluble mtHsp70, or a weak/very transient interaction of Ssc1-2p with Tim44 that leads to a weak force generation sufficient for import of loosely folded, but not folded, polypeptides.
+PUBMED8660466-8|0|Rap1p sir3|The activities of the wild-type promoter, and the promoter with mutations in the three Rap1p-binding sites, were compared in sir1, sir2, sir3 and sir4 mutant strains.
+PUBMED8730097-1|0|CDC25 SDC25|The SDC25 gene of Saccharomyces cerevisiae is homologous to CDC25.
+PUBMED8752220-2|1|SIR2 SIR4|Using protein affinity chromatography, we show that SIR2, SIR3, and two proteins of 69 and 110 kDa tightly associate with SIR4.
+PUBMED8754797-3|0|CIK1 KAR3|During mating, kar4 mutants were defective for the microtubule-dependent movement of nuclei, a phenotype identical to that of mutations in KAR3 and CIK1.
+PUBMED8754801-2|0|Tom20 Tom22|The N-terminal domain of Tom22 functions as a preprotein receptor in cooperation with Tom20.
+PUBMED8816488-13|1|Pan2 Pan3|We show by coimmunoprecipitation and directed two-hybrid studies that the Pan2 and Pan3 proteins physically interact.
+PUBMED8816488-15|2|Pan2p Pan3p|These data strongly suggest that both Pan2p and Pan3p are required subunits of the PAN enzyme and that PAN functions in vivo to shorten mRNA poly(A) tails..
+PUBMED8876235-9|1|Pxa1p Pxa2p|These genetic and physical data suggest that Pxa1p and Pxa2p heterodimerize to form a complete peroxisomal ABC transporter involved in fatty acid beta-oxidation.
+PUBMED8878674-5|0|hop1 red1|These two different results can be explained because the data presented here indicate that a rad50S mutation does not diminish meiotic intrachromosomal recombination, similar to the mutant phenotypes conferred by red1 or hop1.
+PUBMED8878674-6|0|HOP1 RED1|Of course, RED1 and HOP1 do act in the normal meiotic interchromosomal recombination pathway; they reduce interchromosomal recombination to approximately 10% of normal levels.
+PUBMED8879249-4|2|TPS1 TPS3|In this work, we have examined the expression of four genes encoding subunits of the trehalose synthase complex, GGS1/TPS1, TPS2, TPS3 and TSL1.
+PUBMED8895470-4|0|CDC23 CDC27|In addition to CDC27, CDC16, and CDC23, APC contained a homolog of Aspergillus nidulans BIME, a protein essential for anaphase.
+PUBMED8914522-9|0|BEM1 STE20|Elevated levels of STE20 and BEM1 are capable of suppressing a temperature-sensitive mutation in CDC42.
+PUBMED8943299-5|0|GCN5 ADR1|Using an in vitro protein binding assay, ADA2 and GCN5 were found to specifically contact individual ADR1 TADs.
+PUBMED8943317-4|1|cdc34 CDC53|Mutations in CDC53 cause a phenotype indistinguishable from those of cdc4 and cdc34 mutations, numerous genetic interactions are seen between these genes, and the encoded proteins are found physically associated in vivo.
+PUBMED8969185-10|0|Prp11 Prp21|We present a model, based on the data presented here and in the accompanying paper, for a combined role of Prp9, Prp11, Prp21, and Prp5 in activating the U2 snRNP for assembly into the pre-spliceosome..
+PUBMED9023343-8|0|Emp24p Sar1p|Addition of Sar1p to these microsomes leads to increased packaging of v-SNAREs and Emp24p with no increase in the packaging of gp alphaF.
+PUBMED9032237-2|1|RNA14 RNA15|Two protein components of this factor, encoded by genes RNA14 and RNA15, have already been identified.
+PUBMED9060462-6|0|Hop1 Red1|The localization of Red1 has been compared with two other meiosis-specific components of chromosomes, Hop1 and Zip1; Zip1 serves as a marker for synapsed chromosomes.
+PUBMED9087429-9|1|Rif1p Rif2p|Finally, we show that Rif1p and Rif2p can interact with each other in vivo.
+PUBMED9105038-10|0|VPS29 VPS35|Together, the data indicate that the VPS29, VPS30, and VPS35 gene products are required for the normal recycling of Vps10p from the prevacuolar endosome back to the Golgi where it can initiate additional rounds of vacuolar hydrolase sorting..
+PUBMED9111331-7|0|Rlm1 Mpk1|We identified a Mpk1-like protein kinase, Mlp1, as an Rlm1-associated protein by using the yeast two-hybrid system.
+PUBMED9121462-6|0|dna2 rad27|dna2-1 rad27/rth1 delta double mutants are inviable, indicating that the mutations are synthetically lethal.
+PUBMED9171357-2|0|Met28 Met4|Cbf1 belongs to the basic helix-loop-helix DNA-binding protein family while Met4 and Met28 are two basic leucine zipper (bZIP) factors.
+PUBMED9171357-2|0|Cbf1 Met28|Cbf1 belongs to the basic helix-loop-helix DNA-binding protein family while Met4 and Met28 are two basic leucine zipper (bZIP) factors.
+PUBMED9175268-5|0|sec17 sec18|No suppression was observed when synaptotagmin II was expressed in sec1, sec2, sec4, sec5, sec6, sec8, sec9, sec14, sec17, or sec18.
+PUBMED9178000-4|0|msh2 msh3|Most of the microsatellite alterations in the pms1, msh2 and msh3 strains were additions or deletions of single GT repeats, but about half of the alterations in the wild-type and msh6 strains were large (> 8 bp) deletions or additions..
+PUBMED9184220-3|1|Bni1p Rho1p|We have recently shown that Bni1p is a potential target of Rho1p.
+PUBMED9190214-4|0|ABP1 Srv2p|Immunofluorescence analysis of Srv2p subcellular localization in strains carrying mutations in either ABP1 or SRV2 reveals that the Abp1p SH3 domain mediates the normal association of Srv2p with the cortical actin cytoskeleton.
+PUBMED9195974-6|1|Snc1 Sso1|However, as a hetero-oligomeric complex, Sec9 and Sso1 show strong binding to Snc1.
+PUBMED9199167-9|0|Sed5p Vti1p|Overexpression of Sed5p allowed growth in the absence of Vti1p.
+PUBMED9218467-9|0|GDI1 SEC4|We examined the relationship of GDI1 and DSS4 with SEC4 both genetically and biochemically.
+PUBMED9219123-6|0|KEL1 KEL2|Forty-eight of them were determined to be KEL2, 17 were KEL1/2, and 1 was KEL1.
+PUBMED9223284-6|0|Pcf11p Rna15p|They include Rna14p, Rna15p, Pcf11p, a new protein called Clp1p, and remarkably, the major poly(A)-binding protein Pab1p.
+PUBMED9252394-7|0|Tom20 Tom70|A chemically synthesized presequence peptide competes with preproteins for binding to Tom20 and Tom22 but not to Tom70.
+PUBMED9285816-2|0|CDC4 CDC53|Genetic data suggest that SIC1 proteolysis is mediated by the ubiquitin pathway and requires the action of CDC34, CDC4, CDC53, SKP1, and CLN/CDC28.
+PUBMED9285823-2|0|vps17 vps5|Unlike wild-type cells that contain 1-3 large vacuolar structures, the class B vps5 and vps17 mutant cells contain 10-20 smaller vacuole-like compartments.
+PUBMED9285823-8|1|Vps17p Vps5p|Biochemical cross-linking studies demonstrated that Vps5p and Vps17p physically interact.
+PUBMED9288897-1|0|Oaf1p Pip2p|In the yeast Saccharomyces cerevisiae, two transcriptional activators belonging to the Zn2Cys6 protein family, Pip2p and Oaf1p, are involved in fatty-acid-dependent induction of genes encoding peroxisomal proteins.
+PUBMED9315678-9|0|CBF2 MCK1|Cbf5p also binds microtubules in vitro and interacts genetically with two known centromere-related protein genes NDC10/CBF2 and MCK1.
+PUBMED9326367-3|0|Snc1 Sso1|Individually, all three SNAREs are monomeric; Sso1 shows significant secondary structure while Snc1 and Sec9 are largely unstructured.
+PUBMED9346239-1|0|Cdc53p Skp1p|In S. cerevisiae, the G1/S transition requires Cdc4p, Cdc34p, Cdc53p, Skp1p, and the Cln/Cdc28p cyclin-dependent kinase Cdk.
+PUBMED9367980-3|0|Cdc42p Gic1p|Gic1p and Gic2p colocalize with Cdc42p as cell polarity is established during the cell cycle and during mating in response to pheromones.
+PUBMED9412462-6|0|Tim22 tim54|Finally, the tim54-1 mutation destabilizes the Tim22 protein, but not Tim23p or Tim17p.
+PUBMED9418876-9|0|CDC28 Cln2|We performed a complementary screen for CDC28 mutants that could cause efficient Cln2-dependent mating-factor resistance but not complement a cdc28 null allele.
+PUBMED9427398-5|0|OAF1 PIP2|In addition, diploids deleted at either PIP2 or OAF1 demonstrated abundant ascosporogenesis, indicating that these genes are not essential for sporulation.
+PUBMED9430641-10|2|Apc2p Cdc23p|Finally, we find that Rsi1p/Apc2p co-immunoprecipitates with Cdc23p.
+PUBMED9443897-10|1|SPH1 STE11|Moreover, two-hybrid interactions between SPH1 and STE7 and STE11 occur independently of STE5, a proposed scaffolding protein which interacts with several members of this MAP kinase module.
+PUBMED9469815-2|0|APC5 CDC23|The remaining four human APC subunits, APC2, APC4, APC5, and APC7, as well as human CDC23, were cloned.
+PUBMED9488461-5|0|Kap104p Nab2p|A yeast homolog of karyopherin beta2, termed Kap104p, has also been described and proposed to play a role in the nuclear import of a yeast hnRNP-like protein termed Nab2p.
+PUBMED9537389-11|0|pho80 pho85|pho80 and pho85 mutants were rendered resistant by deletion of PHO4, indicating that activation of the Pho4p transcription factor is required for increased aminoglycoside sensitivity.
+PUBMED9566871-9|0|Ste11 Ste4|Moreover, epistasis analyses revealed that components of the pheromone response pathway that act upstream of Fus3, including Ste4, Ste5, Ste7, and Ste11, are required for the posttranslational suppression of Ty1 transposition by Fus3.
+PUBMED9584169-12|0|Pcl10 Pho85|This genetic result suggests an additional role for Pho85 in the negative regulation of glycogen accumulation that is independent of Pcl8 and Pcl10..
+PUBMED9606181-7|0|VPS4 Snf7p|Membrane association of two previously uncharacterized class E Vps proteins, Vps24p and Vps32p/Snf7p, was also affected by mutations in VPS4.
+PUBMED9613568-1|0|RNA14 RNA15|In the yeast Saccharomyces cerevisiae, the RNA14 and RNA15 gene products have been implicated in RNA cleavage and polyadenylation in vitro and in the choice of polyadenylation site of ACT1 mRNA in vivo.
+PUBMED9613568-3|0|RNA14 rna15|The appearance of the three RNA14 transcripts was examined in different rna14 and/or rna15 mutant strains.
+PUBMED9651585-4|0|Rpd3 Sin3|Moreover, we describe a SAP30 homolog in yeast that is functionally related to Sin3 and the histone deacetylase Rpd3.
+PUBMED9651679-6|0|CDC23 CDC27|The instability of Cdc20 depends on CDC23 and CDC27, which encode components of the APC.
+PUBMED9651685-1|2|Sir2p Sir4p|Several regions of the Saccharomyces cerevisiae genome are subject to position-dependent transcriptional repression mediated by a multi-component nucleosome-binding complex of silent information regulator proteins Sir2p, Sir3p and Sir4p.
+PUBMED9660964-3|0|FUS3 STE7|The pathway activated by osmotin includes the regulatory elements of the mating pheromone response STE4, STE18, STE20, STE5, STE11, STE7, FUS3, KSS1, and STE12.
+PUBMED9671501-3|0|Tif34p Tif35p|All five polypeptides associated with His-Prt1p were identified by mass spectrometry, and four were found to be the other putative homologs of human eIF3 subunits encoded in S. cerevisiae: YBR079c/Tif32p, Nip1p, Tif34p, and YDR429c/Tif35p.
+PUBMED9691035-2|0|SUP35 SUP45|We show that these genes are the equivalents of the SUP35 and SUP45 genes of Saccharomyces cerevisiae, which encode the cytosolic translation termination factors eRF3 and eRF1, respectively.
+PUBMED9700157-8|2|Vps29p Vps35p|This complex, designated here as the retromer complex, assembles from two distinct subcomplexes comprising (a) Vps35p, Vps29p, and Vps26p; and (b) Vps5p and Vps17p.
+PUBMED9710610-5|0|Tom22 Tom40|The Tom40 assembly is influenced by a block of negatively charged amino acid residues in the cytosolic domain of Tom22, indicating a cross-talk between preprotein receptors and the translocation pore.
+PUBMED9710643-9|0|Rap1p Rif1p|Rap1p, Rif1p, Rif2p, Sir4p, and Cdc13p activated the telomeric reporter gene in a strain lacking Sir3p, which is essential for telomere position effect TPE.
+PUBMED9738503-2|0|Cdc28 Cln2|Start is triggered by the cyclin-dependent kinase Cdc28 and three rate-limiting activators, the G1 cyclins Cln1, Cln2 and Cln3.
+PUBMED9738888-1|0|Rpb2 Rpb3|Rpb1 and Rpb2 Mapping of the contact sites on two large subunits of the fission yeast Schizosaccharomyces pombe RNA polymerase II with two small subunits, Rpb3 and Rpb5, was carried out using the two-hybrid screening system in the budding yeast Saccharomyces cerevisiae.
+PUBMED9742127-4|0|SLD2 dpb11|High-copy SLD2 suppressed the thermosensitive growth defect caused by dpb11-1.
+PUBMED9742399-4|0|cdc42 Cla4|Here, we show that mutants of the budding yeast Saccharomyces cerevisiae lacking the PAK homologs Ste20 and Cla4 exhibit actin cytoskeletal defects, in vivo and in vitro, that resemble those of cdc42-1 mutants.
+PUBMED9755168-8|0|MEC3 RAD17|In G1-arrested cells, damage-dependent hyperphosphorylation required functional MEC1 in addition to RAD17, RAD24, MEC3 and DDC1, demonstrating cell-cycle stage specificity of the checkpoint genes in this response to DNA damage.
+PUBMED9759731-6|1|Apg12 Apg5|The carboxy-terminal glycine residue of Apg12, a 186-amino-acid protein, is conjugated to a lysine at residue 149 of Apg5, a 294-amino-acid protein.
+PUBMED9779308-2|0|ADA2 ADA1|The patterns of two ADA isoenzymes, ADA1 and ADA2, were also analysed in healthy controls and patients to determine the source of increased ADA activity in patients.
+PUBMED9790591-1|0|Sln1p Ypd1p|Activation and control of the yeast HOG (High Osmolarity Glycerol) MAP kinase cascade is accomplished, in part, by a two-component sensory-response circuit comprised of the osmosensing histidine protein kinase Sln1p, the phospho-relay protein Ypd1p, and the response regulator protein Ssk1p.
+PUBMED9792654-3|0|rad16 rad7|Extracts prepared from rad7 or rad16 mutant cells are deficient, but not totally defective, in both oligonucleotide excision and repair synthesis of damaged plasmid DNA.
+PUBMED9799240-1|0|Cbf1p Met4p|The transcriptional regulation of the sulfur amino acid pathway in Saccharomyces cerevisiae depends on a single activator, Met4p, whose function requires different combinations of the auxiliary factors Cbf1p, Met28p, Met31p and Met32p.
+PUBMED9817759-1|0|Dam1p Duo1p|In this paper, we describe the identification and characterization of two novel and essential mitotic spindle proteins, Duo1p and Dam1p.
+PUBMED9818725-1|0|CMD1 spc110|The KlCMD1 gene was isolated from a Kluyveromyces lactis genomic library as a suppressor of the Saccharomyces cerevisiae temperature-sensitive mutant spc110-124, an allele previously shown to be suppressed by elevated copy number of the S. cerevisiae calmodulin gene CMD1.
+PUBMED9819425-7|0|Pab1p Pbp1p|We determined that a fraction of Pbp1p cosediments with polysomes in sucrose gradients and that its distribution is very similar to that of Pab1p.
+PUBMED9837987-4|0|RAD51 RAD54|Dependence of viability of rad27 strains on recombination was determined by crossing a strain containing a null allele of RAD27 to strains containing a mutation in either the RAD1, RAD50, RAD51, RAD52, RAD54, RAD55, RAD57, MRE11, XRS2 or RAD59 gene.
+PUBMED9843512-8|0|Nhp2p Nop10p|Nhp2p and Nop10p are specifically associated with all H/ACA snoRNAs and are essential to the function of H/ACA snoRNPs.
+PUBMED9843582-3|0|Nsp1p Nup82p|In this study, we demonstrate that Nup159p specifically interacts through this domain with both Nsp1p and Nup82p.
+PUBMED9860978-7|-1|gsp1 Mog1p|Consistent with the high efficiency of gsp1 suppression, Mog1p directly bound to GTP, but not to GDP-Gsp1p.
+PUBMED9860980-2|0|Dig2 Kss1|Herein we show that two nuclear proteins, Dig1 and Dig2, are required cofactors in Kss1-imposed repression.
+PUBMED9871115-7|0|exo1 msh2|Furthermore, msh2 delta was epistatic over exo1 delta, and the ExoI enzyme is likely to be redundant with other exonucleases..
+PUBMED9885245-7|0|end3 pan1|Overexpression of the PRK1 gene in wild-type cells leads to lethality and actin cytoskeleton abnormalities similar to those exhibited by the pan1 and end3 mutants.
+PUBMED9916805-2|0|MLH1 MSH2|Germline mutations in MSH2, MLH1 and GTBP (also known as MSH6) cause hereditary non-polyposis colon cancer (HNPCC) or Lynch syndrome.
+PUBMED9918781-1|1|Tom20 Tom70|We studied the interaction between mitochondrial precursor proteins and postulated mitochondrial surface receptor proteins, Tom20 and Tom70, by using a methodology of surface plasmon resonance.

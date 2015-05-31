@@ -1,0 +1,6 @@
+/createSeqhoundPK.ddl////
+/createSeqhoundTables.ddl////
+/create_seqhound_tablespaces.ddl////
+/db2_create_db.ksh////
+/db2redund.c////
+/make.db2redund////

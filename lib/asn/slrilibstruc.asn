@@ -1,0 +1,187 @@
+-- $Id: slrilibstruc.asn,v 1.1.1.3 2003/02/14 09:32:12 root Exp $
+--*******************************************************************************************
+--  Copyright (C) 2000 Mount Sinai Hospital (MSH)
+--
+--  This program is free software; you can redistribute it and/or
+--  modify it under the terms of the GNU General Public License as
+--  published by the Free Software Foundation; either version 2 of
+--  the License, or any later version.
+--
+--  This program is distributed in the hope that it will be useful,
+--  but WITHOUT ANY WARRANTY; without even the implied warranty of
+--  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+--
+--  See the GNU General Public License for more details.
+--
+--  You should have received a copy of the GNU General Public License
+--  along with this program; if not, write to the
+--         Free Software Foundation, Inc.,
+--         59 Temple Place, Suite 330, Boston, MA
+--         02111-1307  USA
+--  or visit http://www.gnu.org/copyleft/gpl.html
+--
+--  SPECIAL EXCEPTIONS
+--
+--  As a special exception, Mount Sinai Hospital gives permission to
+--  link this program with the following non-GPL programs or libraries,
+--  and distribute the resulting executable, without including the source
+--  code for these in the source distribution:
+--
+--  a) CodeBase 6.5 or greater from Sequiter Software Inc.
+--
+--  b) The C or C++ interface to Oracle 8.x or greater, from
+--     Oracle Corporation or IBM DB2 UDB.
+--
+--
+--  PROGRAM:
+--
+--
+--  AUTHORS:
+--           Katerina Michalickova and Christopher W.V. Hogue hogue@mshri.on.ca
+--
+--
+--  REVISION/CONTRIBUTION NOTES:
+--
+--  June 1, 2000  Original MSH Revision.
+--                Hogue Lab - University of Toronto Biochemistry
+--                Department and the Samuel Lunenfeld Research
+--                Institute, Mount Sinai Hospital
+--                http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+--                ftp://ftp.mshri.on.ca/
+--
+--
+--  PUBLICATION TO CITE:
+--
+--
+--******************************************************************************************
+
+--$Revision 0.0 $
+--**********************************************************************************
+--
+--
+-- SLRI domestic structures including
+-- ValNode Asn.1 read and write mock-up
+-- by Katerina Michalickova, November 1999
+-- 
+-- Version 0.1 - 1998
+--
+--
+--
+--**********************************************************************************
+SLRILIB-struc DEFINITIONS ::=
+BEGIN
+ 
+EXPORTS SLRISeq-id, SLRIValNode, SLRIFasta, SLRIDomain;
+
+IMPORTS Bioseq FROM NCBI-Sequence
+Biostruc FROM MMDB
+Seq-id FROM NCBI-Seqloc
+Seq-align FROM NCBI-Seqalign
+Bioseq-set FROM NCBI-Seqset
+Seq-entry FROM NCBI-Seqset;
+--Biostruc-feature-set FROM MMDB-Features;
+
+--*********************************
+--  SeqId linked list
+--*********************************
+
+SLRISeq-id ::= SEQUENCE OF Seq-id
+
+
+--*********************************
+--  ValNode look-alike
+--*********************************
+SLRINode ::= CHOICE {
+   gi INTEGER,
+   accession VisibleString,
+   bioseq Bioseq,
+   biostruc Biostruc,
+   fasta SLRIFasta,
+   seqid SLRISeq-id,
+   domain SLRIDomain,
+   seqalign Seq-align,
+   bioseqset Bioseq-set,
+   seqentry Seq-entry
+}
+
+SLRIValNode ::= SEQUENCE OF SLRINode
+
+--*********************************
+--  SLRI Fasta
+--*********************************
+
+SLRIFasta ::= SEQUENCE {
+defline VisibleString,
+sequence VisibleString
+}
+
+
+--********************************
+-- Protein Domain
+--********************************
+
+SLRIDomain ::= SEQUENCE {
+   gi INTEGER,
+   from INTEGER,
+   to INTEGER
+}
+
+
+--********************************
+-- DAGTree
+--********************************
+DTree ::= SEQUENCE OF DNode
+
+DNode ::= SEQUENCE {
+	key DKey, 
+	data DData OPTIONAL,
+	num INTEGER OPTIONAL,
+	state ENUMERATED {
+		none (0),
+		vis (1)
+	} DEFAULT none ,
+	p SEQUENCE OF DNode OPTIONAL,
+	c SEQUENCE OF DNode OPTIONAL
+}
+
+DKey ::= CHOICE {
+	id INTEGER,
+	str VisibleString,
+	real REAL
+}
+DData ::= CHOICE {
+	id INTEGER,
+	str VisibleString,
+	real REAL,
+	bool BOOLEAN,
+	os OCTET STRING,
+	strs SEQUENCE OF VisibleString,
+	ids SEQUENCE OF INTEGER,
+	reals SEQUENCE OF REAL,
+	oss SEQUENCE OF OCTET STRING,
+	gen-memfree VisibleString,
+	data-list SEQUENCE OF DData,
+	user-def NULL
+}
+
+
+
+END
+
+--
+-- $Log: slrilibstruc.asn,v $
+-- Revision 1.1.1.3  2003/02/14 09:32:12  root
+-- Automated import from Sourceforge.net
+--
+-- Revision 1.3  2003/02/13 16:44:27  micheld
+-- Added basic integer array vector(1D) and matrix(2D) types
+--
+-- Revision 1.2  2002/07/02 18:12:30  haocl
+-- fixed a scoping mistake, from NCBI-Sequence to NCBI-Seqset
+--
+-- Revision 1.1  2002/02/11 19:24:10  micheld
+-- Moved asn out of seqhound and into library (this file should generate all future slrilib asn structs)
+-- Added asn auto-generator script files
+-- Added slri.h to be all-inclusive include file (does not include database specific files)
+--
+--

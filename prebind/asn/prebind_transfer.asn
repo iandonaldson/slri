@@ -1,0 +1,268 @@
+--*********************************************************************
+--
+--  PreBIND Transfer Specification 
+--
+--  File: PBT_spec.asn
+--  Description: PreBIND transfer specification
+--				 
+--
+--  Authors: 	Marc Dumontier 
+--		Ian Donaldson 
+--			 
+--
+--  Date: June 1, 2004
+--
+--  Hogue Lab - University of Toronto Biochemistry Department
+--  Samuel Lunenfeld Research Institute, Mount Sinai Hospital
+--  Blueprint Initiative
+--  REVISION/CONTRIBUTION NOTES:
+--
+--  June 1, 2004  Original Revision.
+--          	Hogue Lab - University of Toronto Biochemistry 
+--		Department 
+--              and the Samuel Lunenfeld Research Institute, Mount
+--		 Sinai Hospital
+--              http://blueprint.org  hogue@mshri.on.ca
+--             
+--
+--
+--  Copyright Notice:
+--
+--  Copyright 2004 Mount Sinai Hospital (MSH)
+--
+--  This program is free software; you can redistribute it and/or
+--  modify it under the terms of the GNU General Public License as
+--  published by the Free Software Foundation; either version 2 of
+--  the License, or any later version.
+--
+--  This program is distributed in the hope that it will be useful,
+--  but WITHOUT ANY WARRANTY; without even the implied warranty of
+--  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+--
+--  See the GNU General Public License for more details.
+--
+--  You should have received a copy of the GNU General Public License
+--  along with this program; if not, write to the
+--         Free Software Foundation, Inc.,
+--         59 Temple Place, Suite 330, Boston, MA
+--         02111-1307  USA
+--  or visit http://www.gnu.org/copyleft/gpl.html
+--
+--  SPECIAL EXCEPTIONS
+--
+--  As a special exception, Mount Sinai Hospital gives permission to
+--  link this program with the following non-GPL programs or libraries,
+--  and distribute the resulting executable, without including the 
+-- source code for these in the source distribution:
+--  a) CodeBase 6.5 or greater from Sequiter Software Inc.
+--  b) The C or C++ interface to Oracle 8.x or greater, from
+--     Oracle Corporation or IBM DB2 UDB.
+--
+--*********************************************************************
+
+
+
+
+
+PBT DEFINITIONS ::=
+BEGIN
+
+EXPORTS 	PBT-Interaction-set, 
+PBT-Interactor, 
+PBT-Interaction, 
+PBT-Int-Evidence, 
+PBT-Score, 
+PBT-Name-occur, 
+PBT-Name, 
+PBT-Dbref;
+
+
+IMPORTS 	Date 	FROM 	NCBI-General;
+
+
+
+
+--********************************************************************
+-- A set of potential interactions from PreBIND
+--
+-- Field description for PBT-Interaction-set
+-- ******************************************
+-- date      	= date this set of records was collected
+-- desc		= brief description of dataset
+-- interactors = a non-redundant set of interactors used by this 
+--		  set of interactions
+-- interactions = prebind potential interaction records
+-- ********************************************************************
+
+
+PBT-Interaction-set ::= SEQUENCE {
+	date Date OPTIONAL,
+	desc VisibleString OPTIONAL,
+	interactors SEQUENCE OF PBT-Interactor,
+	interactions SEQUENCE OF PBT-Interaction
+	}
+
+--********************************************************************
+-- A prebind interactor
+--
+-- Field description for PreBIND-Interactor
+-- ******************************************
+-- objid   = unique identifier for this object (used in PBT-Interaction)
+-- source = source of the biomolecular object
+-- taxid = taxid 
+-- names = set of names collected for this object
+-- xrefs = cross-references from other databases that refer to the same 
+--		object
+-- ********************************************************************
+
+PBT-Interactor ::= SEQUENCE {
+	objid INTEGER,
+	source PBT-Dbref,
+	type ENUMERATED {
+		protein (0),
+		dna	(1)
+	},
+	taxid INTEGER OPTIONAL,
+	names SEQUENCE OF PBT-Name,
+	xrefs SEQUENCE OF PBT-Dbref OPTIONAL
+	}
+
+
+--********************************************************************
+-- PBT-Interaction: A potential interaction 
+--
+-- Field description for PBT-Interaction
+-- ******************************************
+-- objid-a = unique identifier (see PBT-Interactor)
+-- objid-b = unique identifier (see PBT-Interactor)
+-- evidence = list of evidence that supports these interactions
+-- ********************************************************************
+
+PBT-Interaction ::= SEQUENCE {
+	objid-a INTEGER,
+	objid-b INTEGER,
+	evidence SEQUENCE OF PBT-Int-Evidence
+	}
+
+
+--********************************************************************
+-- PBT-Int-Evidence: Evidence for a potential interaction 
+--
+-- Field description for PBT-Int-Evidence
+-- ******************************************
+-- doc = document where this evidence occurs
+-- names-a = names that refer to object a in this document
+-- names-b = names that refer to object b in this document
+-- score = score for this interaction
+-- ********************************************************************
+
+PBT-Int-Evidence ::= SEQUENCE {
+	doc PBT-Dbref,
+	names-a SEQUENCE OF PBT-Name-occur,
+	names-b SEQUENCE OF PBT-Name-occur,
+	score PBT-Score
+	}
+
+--********************************************************************
+-- PBT-Score: A general object to hold scores for anything 
+--
+-- Field description for PBT-Score
+-- ******************************************
+-- hypoth = hypothesis being tested by method
+-- method = a for the method being used to test the hypothesis
+-- score = score for this hypothesis according to method
+-- ********************************************************************
+PBT-Score ::= SEQUENCE {
+	hypoth VisibleString,
+	method VisibleString,
+	score REAL
+}
+
+
+--********************************************************************
+-- PBT-Name-occur: Occurrence of a name in some document 
+--
+-- Field description for PBT-Score
+-- ******************************************
+-- name = name occurring in document
+-- method = a for the method being used to test the hypothesis
+-- score = score for this name applying to object in this document
+-- ********************************************************************
+PBT-Name-occur ::= SEQUENCE {
+	name VisibleString,
+	score PBT-Score OPTIONAL
+}
+
+
+
+
+--********************************************************************
+-- PBT-name
+--
+-- Field description for PBT-Name
+-- ******************************************
+-- name-id = unique identifier for this name applying to this object
+-- objid = object id to which this name applies
+-- name	= a name by which the object is referred (from SRCH name field)
+-- name-type = type of name (eg. Gene name, family name, protein name)
+-- source = source of the name (1, 2 or 3) (see SRCH source field)
+--          (this could be broken out into an ENUMERTAED type)
+-- rule-id = if the name is derived, by what rule? 
+-- deprecated = is this name retired?
+-- date-dep = when was this name retired?
+-- searched = date that this name was last used to search abstracts 
+-- namered = number of times that name is used to describe a 
+--            object in this organism
+-- results = number of abstracts that this name and taxon return 
+--           from PubMed
+--
+-- ********************************************************************
+
+
+PBT-Name ::= SEQUENCE {
+	name-id INTEGER,
+	objid INTEGER,
+	name VisibleString,
+	name-type VisibleString,
+	source PBT-Dbref OPTIONAL,
+	rule-id INTEGER OPTIONAL,
+	deprecated BOOLEAN OPTIONAL,
+	date-dep Date OPTIONAL,
+	searched Date OPTIONAL,
+	namered INTEGER OPTIONAL,
+	results INTEGER OPTIONAL
+	
+		
+	}
+
+
+
+--********************************************************************
+-- PBT-Dbref
+--
+-- Field description for PBT-dbref
+-- ******************************************
+-- dbname	= name of the database
+-- acc = accession number for the record
+-- id = numerical identifier for the record 
+-- field = specific field in the record
+-- score = allows the record to be scored (i.e. is the document 
+--		describing a biomolecular interaction 
+-- ********************************************************************
+
+
+PBT-Dbref ::= SEQUENCE {
+	dbname VisibleString,
+	acc VisibleString,
+	id INTEGER,	
+	field 	VisibleString OPTIONAL,
+	score PBT-Score OPTIONAL
+	}
+
+
+
+END
+
+
+--$LOG$
+

@@ -1,0 +1,35 @@
+#######################################################################
+#
+# odbc_layer_test
+#
+#######################################################################
+include $(SLRI)/seqhound/seqhound.mk
+
+DEF =
+SRC = report_test.c
+EXE = reporttest
+EXE_CB = $(EXE)
+
+## Default thing to make will be "all"
+all : $(EXE_CB)
+
+#############################
+# Database specific Targets #
+#############################
+cb  : dep_sh_cb  $(EXE_CB)
+
+$(EXE_CB) : $(SRC)
+	$(CC) -o $(EXE_CB) -ggdb -g -pg -p -DX11 $(LDFLAGS_CB) $(SRC) $(SEQH_LOCL_LIBS_CB)
+	
+#-mkdir -p $(BUILDDIR_CB)	
+#mv $(EXE_CB) $(BUILDDIR_CB)/$(EXE)
+#$(SEQH_LOCL_LIBS_CB)
+
+dep_sh_cb :
+	cd $(SEQH_SRC);make -f $(SEQH_LOCL_MAKE) cb
+
+clean:
+	rm -f $(BUILDDIR_CB)/$(EXE)
+	rm -f $(BUILDDIR_DB2)/$(EXE)
+	rm -f $(EXE)
+

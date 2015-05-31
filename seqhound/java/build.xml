@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<project name="seqhound java" basedir="." default="run">
+
+   <!-- ===============================================================   -->
+   <!-- The version number of this release. This should be incremented    -->
+   <!-- for each release. Other variables include the source directory,   -->
+   <!-- the binary directory, the javadocs generated documents directory, -->
+   <!-- the configuration file.                                           -->
+   <!-- ===============================================================   -->
+   <property file="build.properties"/>
+   <property name="ver" value="3.0"/>
+   <property name="src" location="src" />
+   <property name="bin" location="bin" />
+   <property name="docs" location="docs" />
+   <property name="config" value=".shoundremrc"/>
+   <property name="common.libs" location="lib" />
+   <property name="seqhound.release" value="seqhound-java-${ver}"/>
+   <property name="junit" location="lib"/>
+
+   <!-- ========================================================== -->
+   <!-- The classpath.                                             -->
+   <!--                                                            -->
+   <!-- NOTE: The classpath points to the common libs where the    -->
+   <!--       auxiliary jar files used by SeqHound is stored.      -->
+   <!--       If you changed the location of the jar files, you    -->
+   <!--       have to change the setting of 'common.libs' above.   -->
+   <!-- ========================================================== -->
+   <path id="classpath">
+        <pathelement path="." />
+        <fileset dir="${common.libs}" includes="*.jar" />
+        <fileset dir="${junit}" includes="junit.jar"/>
+   </path>
+   
+   <!-- ========================================================== -->
+   <!-- Prepare the build directory                                -->
+   <!-- ========================================================== -->
+   <target name="internal" description="For Blueprint internal use">
+      <mkdir dir="${src}"/>
+      <copy todir="${src}" >
+         <fileset dir="${jshoundsrc}/src">
+			<include name="org/blueprint/seqhound/SeqHound.java"/>
+			<include name="org/blueprint/seqhound/ConfigFileReader.java"/>
+			<include name="org/blueprint/seqhound/GoAnnotation.java"/>
+			<include name="org/blueprint/seqhound/SLRIMisc.java"/>
+            <exclude name="org/blueprint/seqhound/formbeans/**"/>
+         </fileset>
+      </copy>
+      <move file="SeqHoundClient.java" todir="${src}"/>
+      <move file="SeqHoundTest.java" todir="${src}"/>
+   </target>
+
+
+   <target name="init" description="Create auxiliary directories">
+      <mkdir dir="${bin}" />
+      <mkdir dir="${docs}" />
+   </target>
+
+   <!-- ========================================================== -->
+   <!-- Compile the source code                                    -->
+   <!-- ========================================================== -->
+   <target name="compile" depends="init" description="Compile source codes">
+      <echo message="Compiling the source code..." />
+      <javac srcdir="${src}" destdir="${bin}" debug="on">
+          <classpath refid="classpath" />
+      </javac>
+   </target>
+   
+   <!-- ========================================================== -->
+   <!-- Making the java docs documentation                         -->
+   <!-- ========================================================== -->
+   <target name="document" depends="init" 
+           description="Running the documentation">
+      <echo message="Making the documentation.." />
+      <javadoc   sourcepath="${src}"
+                 destdir="${docs}/api">
+          <classpath refid="classpath" />
+          <fileset dir="${src}">
+             <include name="**"/>
+             <exclude name="**/${config}"/>
+          </fileset>
+      </javadoc>
+   </target>
+
+   <!-- ========================================================= 
+        Runs the test case. Not the best way, use JUNIT to run.    
+        To use JUNIT, must set junit in build.properties file.
+        ========================================================= -->
+   <target name="test" depends="compile">
+        <echo message="Running the test suite..." />
+        <java classname="SeqHoundTest" classpath="${bin}">
+           <classpath refid="classpath" />
+        </java>
+   </target>
+   <!-- ========================================================== -->
+   <!-- Run the source code, in this case, does nothing            -->
+   <!-- ========================================================== -->
+   <target name="run" depends="compile">
+        <echo message="Running the executable..." />
+        <java classname="SeqHoundClient" classpath="${bin}">
+           <classpath refid="classpath" />
+        </java>
+   </target>
+
+   <!-- ========================================================== -->
+   <!-- Create the jar file for distribution, set version above    -->
+   <!-- ========================================================== -->
+   <target name="jar" depends="compile">
+        <jar destfile="seqhound-${ver}.jar">
+             <fileset dir="${bin}" excludes="*.class" />
+		 </jar> 
+   </target>
+
+   <!-- ========================================================== -->
+   <!-- Create the release tarball for distribution                -->
+   <!-- the release will consist of the binary, source code and     -->
+   <!-- the jar files                                              -->
+   <!-- ========================================================== -->
+   <target name="distribute" depends="jar,document">
+        <mkdir dir="release"/>
+        <mkdir dir="release/${seqhound.release}"/>
+        <copy file="seqhound-${ver}.jar" todir="release/${seqhound.release}/lib">
+           <fileset dir="${common.libs}"/>
+        </copy>
+        <copy todir="release/${seqhound.release}/docs">
+           <fileset dir="${docs}"/>
+        </copy>
+        <copy todir="release/${seqhound.release}/src">
+           <fileset dir="${src}"/>
+        </copy>
+		<copy todir="release/${seqhound.release}/bin">
+		   <fileset dir="${bin}"/>
+		</copy>
+        <copy file="README" todir="release/${seqhound.release}"/>
+        <copy todir="release/${seqhound.release}" 
+              file=".shoundremrc"/>
+   	<copy tofile="release/${seqhound.release}/build.xml"
+   	          file="build.xml.client"/>
+   	<!--<copy todir="release/${seqhound.release}"
+   	          file="build.properties"/>
+	-->
+        <tar  destfile="${seqhound.release}.tar" basedir="release/${seqhound.release}"/>
+        <gzip src="${seqhound.release}.tar" zipfile="${seqhound.release}.tar.gz"/>
+	
+        <!-- 
+          Just getting rid of redundant files and directories.
+        -->
+        <delete file="seqhound-${ver}.jar"/>
+        <delete file="${seqhound.release}.tar"/>
+        <delete dir="release"/>
+   </target>
+   
+   <!-- =============================================================== -->
+   <!-- clean everthing except the source code, the auxiliary libraries -->
+   <!-- the configuration file and README and ant script                -->
+   <!-- =============================================================== -->
+   <target name="clean">
+        <echo message="Cleaning..."/>
+        <delete dir="${bin}"/>
+        <delete dir="${docs}"/>
+	<delete dir="${src}"/>
+        <delete dir="seqhound-${ver}"/>
+        <delete dir="release"/>
+        <delete file="seqhound-${ver}.tar"/>
+        <delete file="seqhound-${ver}.tar.gz"/>
+        <delete file="seqhound-${ver}.jar"/>
+   </target>
+</project>

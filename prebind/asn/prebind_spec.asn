@@ -1,0 +1,333 @@
+--$Id: prebind_spec.asn,v 1.4 2003/02/20 22:30:18 janicek Exp $
+
+-- ***************************************************************************
+--
+--  Pre Biomolecular Interaction Network Database (PreBIND)
+--
+--  File: PreBIND_spec.asn
+--  Description: PreBIND database specification
+--				 
+--
+--  Authors: Ian Donaldson (ian.donaldson@utoronto.ca)
+--			 and Christopher W.V. Hogue (hogue@mshri.on.ca)
+--
+--  Date: June 2002
+--
+--  Hogue Lab - University of Toronto Biochemistry Department
+--  Samuel Lunenfeld Research Institute, Mount Sinai Hospital
+--
+--  REVISION/CONTRIBUTION NOTES:
+--
+--  June 1, 2000  Original MSH Revision.
+--              Hogue Lab - University of Toronto Biochemistry Department 
+--              and the Samuel Lunenfeld Research Institute, Mount Sinai Hospital
+--              http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+--              ftp://ftp.mshri.on.ca/
+--
+--
+--  Copyright Notice:
+--
+--  Copyright ©2000 Mount Sinai Hospital (MSH)
+--
+--  This program is free software; you can redistribute it and/or
+--  modify it under the terms of the GNU General Public License as
+--  published by the Free Software Foundation; either version 2 of
+--  the License, or any later version.
+--
+--  This program is distributed in the hope that it will be useful,
+--  but WITHOUT ANY WARRANTY; without even the implied warranty of
+--  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+--
+--  See the GNU General Public License for more details.
+--
+--  You should have received a copy of the GNU General Public License
+--  along with this program; if not, write to the
+--         Free Software Foundation, Inc.,
+--         59 Temple Place, Suite 330, Boston, MA
+--         02111-1307  USA
+--  or visit http://www.gnu.org/copyleft/gpl.html
+--
+--  SPECIAL EXCEPTIONS
+--
+--  As a special exception, Mount Sinai Hospital gives permission to
+--  link this program with the following non-GPL programs or libraries,
+--  and distribute the resulting executable, without including the source
+--  code for these in the source distribution:
+--
+--  a) CodeBase 6.5 or greater from Sequiter Software Inc.
+--
+--  b) The C or C++ interface to Oracle 8.x or greater, from
+--     Oracle Corporation or IBM DB2 UDB.
+--
+-- ***************************************************************************
+
+
+PREBIND DEFINITIONS ::=
+BEGIN
+
+-- **************************************************************************
+-- PREBIND exports.
+--
+-- PREBIND structs and how they correspond to databases
+--*****************************************************
+--PREBIND-ACC-set    = ACCession database
+--PREBIND-Search-set = SeaRCH database
+--PREBIND-Result-set = RESULTS database and ISVM database
+--PREBIND-Point-set  = POtential INTeraction database and CoDing Region 
+--		       database
+-- ***************************************************************************
+
+
+EXPORTS PREBIND-Acc,		PREBIND-Acc-set,	
+	PREBIND-Search, 	PREBIND-Search-set,	
+	PREBIND-Result, 	PREBIND-Result-set,
+	PREBIND-Isvm,		PREBIND-Isvm-set,	
+	PREBIND-Point,  	PREBIND-Point-set,
+	PREBIND-Interactor,	PREBIND-Interactor-set;
+	
+
+
+
+PREBIND-Acc-set ::= SEQUENCE {
+        records SEQUENCE OF PREBIND-Acc
+	}
+-- ***************************************************************************
+-- An ACCession database record.
+--
+-- Field description for PREBIND-Acc
+--**********************************
+--acc    = accession of gene product
+--gi     = gi of gene product
+--db     = source database
+--locus  = encoding gene locus name
+--pprod  = preferred product name
+--tax    = taxon identifier
+--update = date when last updated
+-- ***************************************************************************
+PREBIND-Acc ::= SEQUENCE {
+	acc VisibleString,			
+        gi INTEGER,				
+        db VisibleString,			
+        locus VisibleString,			
+	pprod VisibleString,			
+        tax INTEGER,				
+	update VisibleString			
+        }
+
+
+PREBIND-Search-set ::= SEQUENCE {
+        records SEQUENCE OF PREBIND-Search
+	}
+-- ***************************************************************************
+-- A SeaRCH database record.
+--
+-- Field description for PREBIND-Search
+--**********************************
+--gi     	= gi of gene product
+--name	 	= name used to search PubMed
+--source	= source database of name
+--taxid  	= taxon identifier of source organism
+--searched	= date that the PubMed search was last performed
+--status	= status of the search (used to determine which searches to 
+--		  perform)
+--namered	= name redundancy (number of times this name describes a 
+--		  protein in this taxon)
+--results	= number of results (PubMed Identifiers) returned by this search
+-- ***************************************************************************
+PREBIND-Search ::= SEQUENCE {
+        gi INTEGER,
+        name VisibleString,
+	source INTEGER,
+        taxid INTEGER,
+        searched VisibleString,
+        status ENUMERATED {
+                          not-approved (0),
+                          approved (1),
+                          search-queued (2),
+                          search-completed (3) },
+        namered INTEGER OPTIONAL,
+	results INTEGER OPTIONAL
+        }
+
+
+PREBIND-Result-set ::=SEQUENCE{
+	records SEQUENCE OF PREBIND-Result
+	}
+-- ***************************************************************************
+-- A RESULT table record with corresponding data from the ISVM table
+-- 
+-- Field description for PREBIND-Result
+--*************************************
+--gi     	= gi of gene product
+--name	 	= name used to search PubMed
+--pmid	 	= PubMed Identifier of paper returned by name search
+--iscore*	= interaction score from svm- does the paper describe 
+--		  interaction information?
+--iscore2*	=interaction score from separate svm/method- does this paper
+--		  descibe interaction information?
+--itruth*	= does the paper really desribe interaction information
+--opno*		= opinion count (no this paper does not descibe interaction 
+--		  information)
+--opyes*		= opinion count (yes this paper does descibe interaction
+--		  information)
+--
+-- * the value of these fields is from the isvm database (all other values are 
+--   from the RESULT database)
+-- ***************************************************************************
+PREBIND-Result ::= SEQUENCE {
+	gi INTEGER,
+	name VisibleString,
+	pmid INTEGER,
+	iscore REAL,
+	iscore2 REAL,
+	itruth INTEGER,
+	opno INTEGER,
+	opyes INTEGER
+	}
+
+
+
+PREBIND-Isvm-set ::=SEQUENCE{
+	records SEQUENCE OF PREBIND-Isvm
+	}
+-- ***************************************************************************
+-- A ISVM database record.
+-- 
+-- Field description for PREBIND-Isvm
+--*************************************
+--pmid     	= PubMed Identifier for this paper
+--muid	 	= MedLine Identifier for this paper
+--iscore	= interaction score from svm- does the paper describe 
+--		  interaction information?
+--iscore2	=interaction score from separate svm/method- does this paper
+--		  descibe interaction information?
+--itruth	= does the paper really desribe interaction information
+--opno		= opinion count (no this paper does not descibe interaction 
+--		  information)
+--opyes		= opinion count (yes this paper does descibe interaction
+--		  information)
+-- ***************************************************************************
+PREBIND-Isvm ::= SEQUENCE {
+	pmid INTEGER,
+	muid INTEGER,
+	iscore REAL,
+	iscore2 REAL,
+	itruth INTEGER,
+	opno INTEGER,
+	opyes INTEGER
+	}
+
+
+PREBIND-Point-set ::=SEQUENCE{
+	records SEQUENCE OF PREBIND-Point
+	}
+-- ***************************************************************************
+-- A POINT database record (includes values from CoDing Region Database)
+--
+-- Field description for PREBIND-Result
+--*************************************
+--pmid		= PubMed Identifier of paper returned by name search
+--muid		= Medline Identifier of paper returned by name search
+--
+--gia     	= gi of gene product A
+--nama	 	= list of names that molecule A is referred to by in the paper
+--atype		= Molecule A type (1- A is DNA, 2- A is protein)
+--adgi		= A gene product source DNA gi
+--adf		= A gene product source DNA gi from location
+--adt		= A gene product source DNA gi to location
+--
+--gib     	= gi of gene product B
+--namb	 	= list of names that molecule B is referred to by in the paper
+--btype		= Molecule B type (1- B is DNA, 2- B is protein)
+--bdgi		= B gene product source DNA gi
+--bdf		= B gene product source DNA gi from location
+--bdt		= B gene product source DNA gi to location
+--
+--opno		= opinion count (no this is not an interaction)
+--opyes		= opinion count (yes this is an interaction)
+--piscore	= potential interaction score from natural language processing
+--		  Is this protein::protein interaction mentioned in the 
+--		  abstract?
+--piscore2	= potential interaction score from natural language processing
+--		  Is this protein::DNA interaction mentioned in the 
+--		  abstract?
+--itruth	= does the paper really desribe this interaction 
+-- ***************************************************************************
+PREBIND-Point ::= SEQUENCE {
+	pmid 	INTEGER,
+	muid 	INTEGER,
+	gia  	INTEGER,
+	nama 	VisibleString,
+	atype	INTEGER,
+	adgi	INTEGER,
+	adf	INTEGER,
+	adt	INTEGER,
+	gib  	INTEGER,
+	namb 	VisibleString,
+	btype	INTEGER,
+	bdgi	INTEGER,
+	bdf	INTEGER,
+	bdt	INTEGER,
+	opno	INTEGER,
+	opyes	INTEGER,
+	piscore INTEGER,
+	piscore2 INTEGER,
+	pitruth INTEGER
+	}
+
+
+
+PREBIND-Interactor-set ::=SEQUENCE{
+	num INTEGER,
+	records SEQUENCE OF PREBIND-Interactor
+	}
+-- ***************************************************************************
+-- An Interactor describes a potential interacting partner with some
+-- protein (not specified in this structure) along with the 
+-- the evidence that backes up this interaction.  This list of objects is 
+-- primarily meant to be used for sorting purposes.
+-- 
+-- Field description for PREBIND-Interactor
+--*****************************************
+--gi     	= gi of gene product (interactor)
+--pitruth	= is the interaction real (1) or not (-1) or unknown (0)
+--opyes		= number of opinions counted (yes this is an interaction)
+--opno		= number of opinions counted (no this is not an interaction)
+--piscore	= score for "this is a protein-protein interaction"
+--piscore2  	= score for "this is a protein-DNA interaction"
+--num-pmids	= number of pmids containing this pair of proteins
+--known-pmids	= number of pmids known to describe an interaction (from isvm-itruth)
+--opyes-pmids	= number of pmids where counted opinion says they describe an interaction (from opyes-opno)
+--prob-pmids    = number of pmids that are likely to describe interactions (from iscore)
+-- ***************************************************************************
+PREBIND-Interactor ::= SEQUENCE {
+	gi INTEGER,
+	pitruth INTEGER,
+	opyes INTEGER,
+	opno INTEGER,
+	piscore INTEGER,
+	piscore2 INTEGER,
+	num-pmids INTEGER,
+	known-pmids INTEGER,
+	opyes-pmids INTEGER,
+	prob-pmids INTEGER
+	}
+
+
+
+END
+
+--$Log: prebind_spec.asn,v $
+--Revision 1.4  2003/02/20 22:30:18  janicek
+--Added PREBINDIsvm and PREBINDIsvmSet
+--
+--Revision 1.3  2003/02/14 21:49:37  janicek
+--Simplified PREBINDInteractor
+--
+--Revision 1.2  2003/02/12 23:04:24  janicek
+--Added PREBINDInteractorSet structures
+--
+--Revision 1.1.1.1  2002/07/17 19:36:35  janicek
+--initial import
+--
+

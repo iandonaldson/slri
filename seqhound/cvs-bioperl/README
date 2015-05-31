@@ -1,0 +1,12 @@
+Four files included:
+
+SeqHound.pm  SeqHound module. Place in Bioperl CVS location:
+             bioperl-live/Bio/DB
+
+SeqHound.pm.html SeqHound module documentation in HTML format
+
+SeqHound_DB.t test for SeqHound module. Place in Bioperl CVS location:
+              bioperl-live/t/
+
+shtest.pl    an intensive test driver for the SeqHound module. Includes
+             test inputs from GenBank, EMBL, RefSeq and SwissProt.

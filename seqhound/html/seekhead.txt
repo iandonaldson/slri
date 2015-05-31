@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>SeqHound</title>
+</head>
+<body bgcolor = "white">
+
+<FORM ACTION="/cgi-bin/wwwseekgi"
+METHOD="GET">
+<table cellpadding="3" width="100%%">
+<tr>
+<td bgcolor = "f7f7f7" align=center>
+<b>Field:
+<SELECT NAME="field">
+<OPTION SELECTED>GI identifier
+<OPTION>Accession
+<OPTION>Non-GenBank Identifier
+<OPTION>Taxonomy ID
+<OPTION>Taxonomy ID proteins
+<OPTION>Taxonomy ID NA
+<OPTION>Medline ID
+</SELECT></b>
+</td>
+<td bgcolor = "f7f7f7" align=center>
+<b>Format:
+<SELECT NAME="format">
+<OPTION SELECTED>defline
+<OPTION>FASTA
+<OPTION>ASN.1
+<OPTION>GenBank
+<OPTION>XML
+</SELECT></b>
+</td>
+<td bgcolor = "f7f7f7" align=center><b>
+<!-- <INPUT TYPE="reset" VALUE="Reset"> -->
+<INPUT NAME="GI" SIZE=15 VALUE="">
+<INPUT TYPE="submit"  VALUE="Fetch"></b>
+</td>
+<td bgcolor = "f7f7f7"  align=center><b>Records
+per page:<SELECT NAME="npp">
+<OPTION>1
+<OPTION>5
+<OPTION>10
+<OPTION SELECTED>20
+<OPTION>50
+<OPTION>75
+<OPTION>100
+</SELECT></b>
+</td>
+</tr>
+</table>
+</FORM> 
+
+<p>
+
+<center><h2>SeqHound search results.</h2></center>
+
+

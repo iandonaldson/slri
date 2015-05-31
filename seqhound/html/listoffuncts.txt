@@ -1,0 +1,159 @@
+SYSTEM INITIALIZATION, FINISHING AND TESTING
+SHoundInit
+SHoundIsNetEntrezOn
+SHoundNetEntrezInit
+SHoundFini
+SHoundIsInited
+SEQUENCE IDENTIFIER CONVERSIONS
+SHoundFindAcc
+SHoundFindAccList
+SHoundFindName
+SHoundFindNameList
+SHoundAccFromGi
+SHoundAccFromGiList
+SHoundSeqIdFromGi
+SHoundSeqIdFromGiList
+SEQUENCE AND STRUCTURE CHECKS
+SHoundIsProtein
+SHoundIsNRFirst
+SHoundExists
+SHound3DbWhat
+SHound3DExists
+SEQUENCE FETCH - ASN.1 BIOSEQ
+SHoundGetBioseq
+SHoundGetBioseqList
+SHoundGetXMLBioseq
+SEQUENCE FETCH - ASN.1 BIOSEQSET
+SHoundGetBioseqSet
+SHoundGetBioseqSetList
+SEQUENCE FETCH - ASN.1 SEQENTRY
+SHoundGetSeqEntry
+SHoundGetSeqEntryList
+SHoundGetXMLSeqEntry
+SEQUENCE FETCH - FASTA
+SHoundGetFasta
+SHoundGetFastaList
+DEFLINE FETCH
+SHoundGetDefline
+SHoundGetDeflineList
+SEQUENCE FETCH - GENBANK FLAT FILE
+SHoundGetGenBankff
+SHoundGetGenBankffList
+SEQHOUND LINKS
+SHoundGet3D
+SHoundGet3DfromPdbId
+SHoundGetXML3D
+SHoundGetPDB3D
+SHoundGiFrom3D
+SHoundGiFrom3DList
+SHoundGiFromPDBchain
+SHound3DFromGi
+SHound3DFromGiList
+SHoundDNAFromProtein
+SHoundDNAFromProteinList
+SHoundProteinFromDNA
+SHoundProteinFromDNAList
+SHoundMuidFromGi
+SHoundMuidFromGiList
+SHoundMuidFrom3D
+SHoundMuidFrom3DList
+SHoundTaxIDFromGi
+SHoundTaxIDFromGiList
+SHoundTaxIDFrom3D
+SHoundTaxIDFrom3DList
+SHoundProteinsFromTaxID
+SHoundProteinsFromTaxIDIII
+SHoundProteinsFromTaxIDList
+SHoundDNAFromTaxID
+SHoundDNAFromTaxIDIII
+SHoundDNAFromTaxIDList
+COMPLETE GENOME ITERATORS
+SHoundProteinsFromOrganism
+SHoundProteinsFromOrganismList
+SHoundProteinsFromChromosome
+SHoundProteinsFromChromosomeList
+SHoundAllGenomes
+SHoundChromosomeFromGenome
+SHoundChromosomeFromGenomeList
+SHoundDNAFromOrganism
+SHoundDNAFromOrganismList
+SHoundDNAFromChromosome
+SHoundDNAFromChromosomeList
+REDUNDANT (EQUIVALENT) SEQUENCES
+SHoundRedundantGroup
+SHoundRedundantGroupList
+SHoundRedundantGroupIDFromGI
+SHoundRedundantGroupIDFromGIList
+SHoundRedundantGroupFromID
+SHoundRedundantGroupFromIDList
+SHoundFirstOfRedundantGroupFromID
+SHoundFirstOfRedundantGroupFromIDList
+TAXONOMY
+SHoundGetTaxChildNodes
+SHoundGetTaxChildNodesList
+SHoundGetAllTaxProgeny
+SHoundGetTaxParent
+SHoundGetAllTaxAncestors
+SHoundIsTaxMerged
+SHoundIsTaxDeleted
+SHoundGetTaxNameFromTaxIDByClass
+SHoundGetTaxNameFromTaxID
+SHoundGetTaxLineageFromTaxID
+SEQUENCE NEIGHBOURS
+SHoundGetBlastResult
+SHoundGetBlastSeqAlign
+SHoundNeighboursFromGiEx
+SHoundNeighboursFromGi
+SHoundNeighboursFromGiList
+SHoundNeighboursFromTaxID
+SHoundNeighboursOfNeighbours
+SHoundNeighboursOfNeighboursList
+SHoundNeighboursOfNeighboursFromTaxID
+SHound3DNeighboursFromGi
+SHound3DNeighboursFromGiList
+SHound3DNeighboursFromTaxID
+SHoundGiAndNumNeighboursList
+SHoundNumNeighboursInDB
+COMPLETE GENOMES ANALYSIS
+SHoundAllGenomesWithScientificNames
+SHoundAllGenomesWithNumProteins
+SHound3DListFromTaxID
+FUNCTIONAL ANNOTATION
+SHoundGiFromGOID
+SHoundGiFromGOIDList
+SHoundGOIDFromGi
+SHoundGOIDFromGiList
+SHoundGOIDFromRedundantGi
+SHoundGOIDFromRedundantGiList
+SHoundGOECodeFromGi
+SHoundGOPMIDFromGi
+SHoundGiFromOMIM
+SHoundGiFromOMIMList
+SHoundOMIMFromGi
+SHoundOMIMFromGiList
+SHoundGiFromCDDID
+SHoundGiFromCDDIDList
+SHoundCDDIDFromGi
+SHoundCDDIDFromGiList
+SHoundCDDScoreFromGi
+SHoundGiFromLLID
+SHoundGiFromLLIDList
+SHoundLLIDFromGi
+SHoundLLIDFromGiList
+SHoundLocusFromGi
+GO HIERARCHY
+SHoundGODBGetChildrenOf
+SHoundGODBGetParentOf
+SHoundGODBGetAllAncestors
+SHoundGODBGetAllChildren
+SHoundGODBGetNameByID
+SHoundGODBGetClassification
+RPS BLAST DOMAINS
+SHoundGetDomainsFromGi
+SHoundGetDomainsFromGiWithEvalue
+SHoundGetGisByDomainId
+SHoundGetGisByDomainIdAndEvalue
+SHoundGetGisByNumberOfDomains
+SHoundGetDomainLabelFromDomainId
+SHoundGetDomainIdFromLabel
+

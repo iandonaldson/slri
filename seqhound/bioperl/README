@@ -1,0 +1,400 @@
+NAME
+    README for SeqHound Bioperl
+
+SYNOPSIS
+      use Bio::SeqHound::SeqHound;
+      use Bio::SeqIO;
+      use IO::String;
+
+      my $seqhound = new Bio::SeqHound::SeqHound("seqhound.blueprint.org",
+                     "cgi-bin/seqrem");
+
+      # initialize the SeqHound system
+      $seqhound->SHoundInit("FALSE", "my-application-name");
+
+      # do processing
+      # For example, find out whether a given structural
+      # identifier (MMDB ID) exists in the SeqHound system.
+
+      $test = $seqhound->SHound3DExists(4534);
+      @reply = $test->getValues();
+      print "\nVAL: ";
+      foreach $val (@reply){
+          print "$val ";
+      }
+      print "\nKEY: ";
+      @data = $test->getKeys();
+      foreach $val (@data){
+          print "$val ";
+      }
+      print "\n";
+ 
+      # close the SeqHound system
+      $seqhound->SHoundFini();
+
+DESCRIPTION
+    SeqHound is intended to be a high performance server platform for
+    bioinformatics research. SeqHound is over 600GB (and growing) of high
+    quality annotated biological data that researchers can use to support
+    their in-house research. It is a collection of biological sequences,
+    taxonomy, annotation and 3-D structure database system.
+
+    SeqHound.pm is a Bioperl module to support remote access to SeqHound
+    through a collection of well-defined API functions. Users can develop
+    sophisticated applications that retrieve data using the API and then
+    process those raw data as appropriate.
+
+    SeqHound is also available in C++, C, Java and Perl. You can also build
+    SeqHound locally on your internal servers. See
+    http://www.blueprint.org/seqhound/seqhound.html for details.
+
+    The README.pod can be converted to various formats such as html or man
+    pages using POD utilities such as pod2html and pod2man. See Perl
+    documentation for usage. A text version, README, is provided.
+
+DIRECTORY
+       Changes
+       Makefile.PL
+       MANIFEST
+       README
+       README.pod
+       SeqHound.pm
+       SeqHoundGB.pm
+       SeqHoundLOB.pm
+       SeqHoundTextOb.pm
+       SLRIMisc.pm
+       _SeqHoundI.pm
+       test.pl
+       VERSION
+
+LICENSE
+    See LICENSE
+
+PUBLICATION TO CITE
+    If you use SeqHound in your work or research, please cite:
+
+    SeqHound: Biological sequence and structure database as a platform for
+    bioinformatics research: Michalickova, K. et al, BMC Bioinformatics
+    2002, 3:32
+
+    available online for free at BioMed Central:
+    http://www.biomedcentral.com/1471-2105/3/32
+
+VERSION
+    4.0
+
+RECENT CHANGES
+    See CHANGES
+
+BUGS
+    Please send bug reports to seqhound@blueprint.org
+
+MAILING LISTS
+    Please see
+
+    http://lists.blueprint.org/mailman/listinfo/seqhound.usergroup
+
+EXPORT
+    The subroutines available, listed in alphabetical order, are:
+
+      SHound3DbWhat()
+      SHound3DExists()
+      SHound3DFromGi()
+      SHound3DFromGiList()
+      SHound3DListFromTaxID()
+      SHound3DNeighboursFromGi()
+      SHound3DNeighboursFromGiList()
+      SHound3DNeighboursFromTaxID()
+      SHoundAccFromGi()
+      SHoundAccFromGiList()
+      SHoundAllGenomes()
+      SHoundAllGenomesWithNumProteins()
+      SHoundAllGenomesWithScientificNames()
+      SHoundCDDIDFromGi()
+      SHoundCDDIDFromGiList()
+      SHoundCDDIDFromLLID()
+      SHoundCDDScoreFromGi()
+      SHoundChromosomeFromGenome()
+      SHoundChromosomeFromGenomeList()
+      SHoundDNAFromChromosome()
+      SHoundDNAFromChromosomeList()
+      SHoundDNAFromOrganism()
+      SHoundDNAFromOrganismList()
+      SHoundDNAFromProtein()
+      SHoundDNAFromProteinList()
+      SHoundDNAFromTaxID()
+      SHoundDNAFromTaxIDIII()
+      SHoundDNAFromTaxIDList()
+      SHoundDNAFromUnknownChromosome()
+      SHoundExists()
+      SHoundFindAcc()
+      SHoundFindAccList()
+      SHoundFindName()
+      SHoundFindNameList()
+      SHoundFini()
+      SHoundFirstOfRedundantGroupFromID()
+      SHoundFirstOfRedundantGroupFromIDList()
+      SHoundGet3D()
+      SHoundGet3DfromPdbId()
+      SHoundGetAccFromRetiredGi()
+      SHoundGetAllTaxAncestors()
+      SHoundGetAllTaxProgeny()
+      SHoundGetBioseq()
+      SHoundGetBioseqList()
+      SHoundGetBioseqSet()
+      SHoundGetBioseqSetList()
+      SHoundGetDefline()
+      SHoundGetDeflineList()
+      SHoundGetDomainIdFromLabel()
+      SHoundGetDomainLabelFromDomainId()
+      SHoundGetDomainsFromGi()
+      SHoundGetDomainsFromGiWithEvalue
+      SHoundGetFasta()
+      SHoundGetFastaFromRedundantGroupID()
+      SHoundGetFastaFromRedundantGroupIDKeyedList()
+      SHoundGetFastaKeyedList()
+      SHoundGetFastaList()
+      SHoundGetGenBankff()
+      SHoundGetGenBankffList()
+      SHoundGetGisByDomainId()
+      SHoundGetGisByDomainIdAndEvalue()
+      SHoundGetGisByNumberOfDomains()
+      SHoundGetLargestMMDBID()
+      SHoundGetNameByGi()
+      SHoundGetNewTaxIDFromMergedTaxID()
+      SHoundGetPDB3D()
+      SHoundGetReferenceIDFromGi()
+      SHoundGetReferenceIDFromGiList()
+      SHoundGetSeqEntry()
+      SHoundGetSeqEntryList()
+      SHoundGetSeqFromGenBank()
+      SHoundGetTaxChildNodes()
+      SHoundGetTaxChildNodesList()
+      SHoundGetTaxLineageFromTaxID()
+      SHoundGetTaxNameFromTaxID()
+      SHoundGetTaxNameFromTaxIDByClass()
+      SHoundGetTaxParent()
+      SHoundGetXML3D()
+      SHoundGetXMLBioseq()
+      SHoundGetXMLSeqEntry()
+      SHoundGiFrom3D()
+      SHoundGiFrom3DList()
+      SHoundGiFromCDDID()
+      SHoundGiFromCDDIDList()
+      SHoundGiFromGOID()
+      SHoundGiFromGOIDAndECode()
+      SHoundGiFromGOIDList()
+      SHoundGiFromGOIDListAndECode()
+      SHoundGiFromLLID()
+      SHoundGiFromLLIDList()
+      SHoundGiFromOMIM()
+      SHoundGiFromOMIMList()
+      SHoundGiFromPDBchain()
+      SHoundGiFromReferenceID()
+      SHoundGiFromReferenceList()
+      SHoundGODBGetAllAncestors()
+      SHoundGODBGetAllChildren()
+      SHoundGODBGetChildrenOf()
+      SHoundGODBGetClassification()
+      SHoundGODBGetNameByID()
+      SHoundGODBGetParentOf()
+      SHoundGODBGetRecordByReference()
+      SHoundGOECodeFromGiAndGOID()
+      SHoundGOIDFromGi()
+      SHoundGOIDFromGiList()
+      SHoundGOIDFromLLID()
+      SHoundGOIDFromRedundantGi()
+      SHoundGOIDFromRedundantGiList()
+      SHoundGOPMIDFromGiAndGOID()
+      SHoundInit()
+      SHoundIsInited()
+      SHoundIsNetEntrezOn()
+      SHoundIsNRFirst()
+      SHoundIsProtein()
+      SHoundIsTaxDeleted()
+      SHoundIsTaxMerged()
+      SHoundLLIDFromCDDID()
+      SHoundLLIDFromGi()
+      SHoundLLIDFromGiList()
+      SHoundLLIDFromGOIDAndECode()
+      SHoundLLIDFromOMIM()
+      SHoundLocusFromGi()
+      SHoundMoleculeType()
+      SHoundMuidFrom3D()
+      SHoundMuidFrom3DList()
+      SHoundMuidFromGi()
+      SHoundMuidFromGiList()
+      SHoundNeighboursFromGi()
+      SHoundNeighboursFromGiList()
+      SHoundNeighboursFromTaxID()
+      SHoundNetEntrezInit()
+      SHoundOMIMFromGi()
+      SHoundOMIMFromGiList()
+      SHoundOMIMFromLLID()
+      SHoundProteinFromDNA()
+      SHoundProteinFromDNAList()
+      SHoundProteinsFromChromosome()
+      SHoundProteinsFromChromosomeList()
+      SHoundProteinsFromOrganism()
+      SHoundProteinsFromOrganismList()
+      SHoundProteinsFromTaxID()
+      SHoundProteinsFromTaxIDIII()
+      SHoundProteinsFromTaxIDList()
+      SHoundProteinsFromUnknownChromosome
+      SHoundRedundantGroup()
+      SHoundRedundantGroupFromID()
+      SHoundRedundantGroupFromIDList()
+      SHoundRedundantGroupIDFromGI()
+      SHoundRedundantGroupIDFromGIList()
+      ShoundRedundantGroupKeyedList()
+      SHoundRedundantGroupList()
+      SHoundRNAFromChromosome()
+      SHoundRNAFromOrganism()
+      SHoundRNAFromUnknownChromosome()
+      SHoundSeqIdFromGi()
+      SHoundSeqIdFromGiList()
+      SHoundSequenceLength()
+      SHoundTaxIDFrom3D()
+      SHoundTaxIDFrom3DList()
+      SHoundTaxIDFromGi()
+      SHoundTaxIDFromGiList()
+
+PREREQUISITES
+    The SeqHound Bioperl module requires the following additional modules
+    and libraries:
+
+    1 Perl 5.006 or above
+    2 LWP::UserAgent
+    3 The Bioperl collection
+INSTALLATION
+    1 Perl 5.006 & LWP::UserAgent can be downloaded at http://www.cpan.org/.
+      For installation instructions please consult the documentation
+      available on the cpan website.
+
+    2 The Bioperl collection can be downloaded at http://www.bioperl.org/
+      For example on UNIX
+
+        wget http://bioperl.org/DIST/current_core_stable.tar.gz
+        tar zxvf current_core_stable.tar.gz
+
+      Bioperl is dependent on several non-Perl applications. These may be
+      installed using the Perl command:
+
+        perl -MCPAN -e "install Bundle::BioPerl"
+
+      You will be prompted on customizing the install packages. You can use
+      the defaults by hitting RETURN at each prompt.
+
+      a To install Bioperl in the default location you must have
+      root/administrator access.
+          cd bioperl-X.X
+          perl Makefile.PL
+          make
+          make test
+          make install
+
+      b Install Bioperl in a non-default location (optional)
+        This still requires the Bioperl dependencies (which requires you to
+        have root/administrator access). Once the dependencies are
+        installed, you can install the Bioperl packages anywhere.
+
+          cd bioperl-X.X
+          perl Makefile.PL LIB=/home/your/local/bioperl/lib PREFIX=/home/your/local/bioperl
+          make
+          make install
+
+        You can skip the make test step since this will likely fail.
+
+        For more detailed instructions regarding Bioperl please see the
+        documentation on the Bioperl website.
+
+    3 SeqHound Bioperl module is available from SourceForge:
+    http://sourceforge.net/project/showfiles.php?group_id=17918&package_id=3
+    9608 and the SeqHound Blueprint ftp site:
+    ftp://ftp.blueprint.org/pub/SeqHound/
+      For example on UNIX
+
+        wget ftp://ftp.blueprint.org/pub/SeqHound/seqhound-bioperl-x.xx.tar.gz
+        tar zxvf seqhound-bioperl-x.xx.tar.gz
+
+      a To install in the default location you must have root/administrator
+      access.
+          cd seqhound-bioperl-x.xx
+          perl Makefile.PL
+          make
+          make test
+          make install
+
+      b To install in a non-default location (optional)
+          cd seqhound-bioperl-x.xx
+          perl Makefile.PL LIB=/home/your/local/bioperl/lib PREFIX=/home/your/local/bioperl
+          make
+          make test
+          make install
+
+        You can skip the make test step since this will likely fail.
+
+        NOTE: If you install Bioperl and SeqHound in a non-default location,
+        you must add the following statement to your Perl scripts:
+
+          #!/usr/bin/perl
+  
+          use lib "/home/your/local/bioperl/lib";
+          use Bio::SeqHound::SeqHound;
+
+          # your code here 
+
+        Alternatively, in your configuration file
+
+          setenv PERL5LIB /home/your/local/bioperl/lib
+
+    4 For Windows platforms. Need install NMake from Microsoft
+    http://download.microsoft.com/download/vc15/Patch/1.52/W95/EN-US/Nmake15
+    .exe
+      a Run the downloaded exe to extract it.
+      b Copy both the NMAKE.EXE and the NMAKE.ERR file to your Perl bin
+      directory, normally C:\Perl\bin.
+           cd bioperl-X.X
+           perl Makefile.PL
+           nmake
+           nmake test
+           nmake install 
+
+AUTHORS
+      Hao Lieu
+      Software Developer
+      The Blueprint Initiative
+      seqhound@blueprint.org
+
+      Katerina Michalickova
+      The Blueprint Initiative
+      Samuel Lunenfeld Research Institute,  
+      Mount Sinai Hospital
+      katerina@mshri.on.ca
+
+      Rong Yao
+      Software Developer
+      The Blueprint Initiative
+      ryao@blueprint.org
+
+INSTITUTE
+      The Blueprint Initiative
+      Samuel Lunenfeld Research Institute
+      Mount Sinai Hospital
+      522 University Avenue,
+      9th Floor, Suite 900
+      Toronto, ON, Canada
+      M5G 1W7
+      Phone: (416) 596-8505
+      Fax  : (416) 596-8077
+
+      SeqHound inquiries:    seqhound@blueprint.org
+      Other inquiries:       info@blueprint.org
+
+COPYRIGHT
+      (c) 2004 The Blueprint Initiative of Mount Sinai Hospital.
+      All Rights Reserved.
+
+UPDATED
+    April, 2005
+

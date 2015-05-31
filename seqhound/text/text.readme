@@ -1,0 +1,22 @@
+
+#-- in development server
+#-- run text_backup.sh on marge
+# run text_dump.sh on marge
+text_dump.sh textdev
+
+#-- in production server
+# cvs check out slri/seqhound/text to $textdir
+cvs co slri/seqhound/text
+
+# copy dump data to $textdir
+cp -r dumpdir .
+
+# run text_create.sh on current server
+text_create.sh biocreative
+
+# configure property file text.ini
+
+# run text_updatecron.sh
+
+# create cronjob: $textdir/text_updatecron.sh 2>>$textdir/text.err.log
+

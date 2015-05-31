@@ -1,0 +1,17 @@
+asntool -m slrilibstruc.asn -o slrilibstruc.h -w 120 -b 10000
+asntool -m slrilibstruc.asn -G t -M $NCBI/asn/asn.all,$NCBI/biostruc/mmdb2.asn,$NCBI/biostruc/mmdb3.asn,$NCBI/biostruc/mmdb1.asn -B objslrilibstruc -w 100 -b 10000
+echo "#include <objsset.h>" > temp1
+echo "#include <mmdbapi.h>" >> temp1
+mv objslrilibstruc.c temp3
+cat temp1 temp3 > objslrilibstruc.c
+echo "#define NLM_GENERATED_CODE_PROTO" > temp2
+mv objslrilibstruc.h temp4
+cat temp2 temp4 > objslrilibstruc.h
+echo "#define struct_Bioseq bioseq" > temp5
+mv objslrilibstruc.h temp6
+cat temp5 temp6 > objslrilibstruc.h
+rm -f temp*
+mv objslrilibstruc.c ../
+mv objslrilibstruc.h ../
+mv slrilibstruc.h ../
+

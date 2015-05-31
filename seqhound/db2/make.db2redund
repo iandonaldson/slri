@@ -1,0 +1,40 @@
+#######################################################################
+#
+# SeqHound DB2 redund
+#
+#######################################################################
+include ../seqhound.mk
+
+DEF =
+SRC = db2redund.c
+EXE = db2redund
+EXE_CB = db2redund_cb
+EXE_DB2 = db2redund_db2
+
+## Default thing to make will be "all"
+all : cb
+#echo You must pick a target: cb or db2
+
+#############################
+# Database specific Targets #
+#############################
+cb : $(EXE_CB)
+
+db2 : $(EXE_DB2)
+
+$(EXE_CB) : $(SRC)
+	$(CC) -o $(EXE_CB) -DX11 $(LDFLAGS_CB) $(SRC) \
+	$(SEQH_LOCL_LIBS) $(CBLIB) $(CLIBS)
+	-mkdir $(BUILDDIR)
+	mv $(EXE_CB) $(BUILDDIR)/$(EXE)
+
+$(EXE_DB2) : $(SRC)
+	$(CC) -o $(EXE_DB2) -DX11 $(LDFLAGS_DB2) $(SRC) \
+	$(SEQH_LOCL_LIBS) $(DB2LIB) $(CLIBS)
+	-mkdir $(BUILDDIR)
+	mv $(EXE_DB2) $(BUILDDIR)/$(EXE)
+
+CLIBS = $(LIB22) $(LIB8) $(LIB7) $(LIB6) $(LIB3) $(LIB2) $(LIB1) $(OTHERLIBS)
+
+clean:
+	rm -f $(BUILDDIR)/$(EXE)

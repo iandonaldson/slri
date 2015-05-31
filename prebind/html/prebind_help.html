@@ -1,0 +1,381 @@
+<html>
+<head>
+	<title>prebind_help</title>
+	<meta NAME="keywords"CONTENT="SLRI, PreBIND, BIND, Interaction database,PubMed, MEDLINE,Bioinformatics, data mining">
+	<meta NAME="description" CONTENT="PreBIND is an information mining tool designed for BIND to locate biomolecular interaction information in the scientific literature.  BIND is the Biomolecular Interaction Network Database">
+	<meta name="Author" content="Ian Donaldson">
+</head>
+
+<body bgcolor="white">
+
+<basefont face="arial, verdana">
+
+<font size=+2>PreBIND Help</font>
+<br>
+
+<p>
+PreBIND is a data mining tool that helps researchers locate biomolecular interaction information 
+in the scientific literature.  PreBIND was designed to find information that can be entered (after human inspection)
+into the Biomolecular Interaction Network Database (BIND).  
+This help page will take you through the process of using this site to find interaction information 
+and submit preliminary records to the Biomolecular Interaction Network Database (BIND).<br>  
+<p>
+The entire PreBIND site is made up of four major page types:<br>
+The Search page<br>
+The Results page<br>
+The Abstract Review page<br>
+The potential interaction review and submission page<br>
+<p>
+Each of these page types are described below in the order that they would be used.<br>
+<p>
+<p>
+<a name=search><font size=+2>Step 1: The search page</font><br>
+<p>
+You can get to this page by clicking on "Search PreBIND" in the Site Map menu on the left hand side of this window.
+<p>
+There are currently two ways to find a protein in PreBIND: 1) by using the name search or 2) by using the accession search.  
+Remember that only proteins present in the NCBI RefSeq database will be present in the database (and even some of these may 
+be missing in the PreBIND prototype version depending on when the PreBIND lexicon was last updated).    
+<p>
+You may also retrieve a specific abstract using a PubMed Identifier.
+<p>
+Name searches are case insensitive.  Search results can be for "any organism" or limited to "yeast, human or mouse" (right now).
+<p>
+As an example, enter "rad1" in the name search text box and press submit.  The results of the search are shown on the next page. 
+If there is only one protein known by the name you entered, you will be taken directly to the results page (see below). 
+<p> 
+Otherwise, you will be presented with a "disambiguation page" where you will be asked what protein you are referring to. 
+Clicking on one of the "go" buttons will take you to the "results page".  
+The definition line beside the GO button lists the RefSeq accession number, the gene product name, it's gi number 
+and the taxon (organism) that the gene product belongs to.  
+<p>
+If you had searched for "rad1" in "all organisms" you will see links to the "rad1" gene product for several organisms. 
+Alternatively, if you limited the search to yeast, you will only get one result.  
+
+
+<p>
+<font size=+2>Step 2: The results page</font><br>
+<p> 
+This page is divided into four sections (by default) and up to six if you choose to redraw the results page with additional sections.  
+Each section starts with a wide blue bar.<br>
+
+<p>  
+<b>First section: Protein description and name list.</b><br>
+This section lists the information for the gene product.  The rest of the information on the page applies to this gene product.  
+This section shows the RefSeq accession number in the blue bar at the top followed by the protein name, encoding locus name, 
+the source database (always REFSEQ right now), the GenInfo number (gi) and the taxon identifier.  
+A table follows this that lists all of the names that the gene or gene product might be referred to by in the literature.  
+Each of these names was used to search the literature specific to the organism.  
+For example, the name "ras1" in yeast would spawn the MedLine search:<br><p>
+
+ras1[WORD] AND Saccharomyces cerevisiae[MESH]<br><p>
+
+The date that this search was last performed and the number of results that it returned are listed in the table.  
+All of the PubMed Identifiers that were returned by the search are listed in the secion of this page entitled 
+"All results for literature searches" regardless of whether the paper describes molecular interaction information.
+This section is not presented by default and must be requested by the user (see output options).<br>
+
+<p>  
+<b>Second section: Output options</b><br>
+Clicking on "Redraw this results page" will do just that with the selected options applied.
+The sections that can be drawn on this page are: <br>
+<p>
+1. Protein description and name list (always shown by default).<br>
+2. Output options (always shown by default).<br>
+3. Summary of all potential interactors (shown by default but you may unselect this with the first check box in the Output options section).<br>
+4. Potential interactors with evidence (shown by default but you may unselect this with the first check box in the Output options section).<br>
+5. Interaction literature and intersecting names (not shown by default but you may select this with the second check box in the Output options section).<br> 
+6. All results for literature search(es) (not shown by default but you may select this with the third check box in the Output options section).<br>
+<p>
+If you choose to draw the third and fourth sections, two other options may be specified (to the left of the first check box) that apply to 
+these sections.<br>
+You may choose to use only interaction papers (as scored by the SVM) to compose the list of interactors.  
+<p>
+Obviously, the list of potential interactors will be longer if this option is de-selected.  
+However, this may be useful if you are looking for co-occurences of two protein names in the literature in the context of some relationship other than 
+a physical interaction.  
+<p>
+When composing the list of potential interactors, you may also choose to omit search names that found more than a certain number of abstracts.  
+This is useful if you want to filter out names that obviously are finding a lot of abstracts that do not apply to the protein (for example 
+the name "light" refers to the protein "tumor necrosis factor (ligand) superfamily, member 14" but obviously refers to other things talked about
+in abstracts.  Note that all search results are capped at 10000.  This is a stopgap measure.  
+<br>
+
+
+<p>  
+<b>Third section: Summary of all potential interactors</b><br>
+This list shows all other proteins that co-occur in the literature with your query protein. 
+These co-occurences are in abstracts that describe interaction information (as judged by an SVM).  
+<p>
+All co-occurences in all papers (interaction or not) may be viewed if you choose to do so(see Output options).  
+<p>
+The number of co-occurence papers are listed under the column "View supporting papers". 
+Clicking on this number will take you to a more detailed view of these co-occurences in the next section (Potential interactors and evidence). 
+<p>
+The table also lists a name, short description of the interactor and links to more info on this interactor in SeqHound and PreBIND.  
+The column "Is this interactor real" may have one of several values.  Note this value represents the collective assessment of all papers that talk about 
+this interactor (see the section: Potential interactors and evidence).  If the interactor is thought to be an interactor (from at least one paper) 
+then this fact is reported rather than the fact that the interaction does not occur in several other papers where the query protein and interactor co-oocur.
+<br>
+<p>
+<table border=2>
+<tr>
+<td>Yes. Reviewed.
+<td>There is an interaction (found in at least one of the papers) that has been reviewed and appears in the BIND database.
+
+<tr>
+<td>No.  Reviewed.
+<td>There is not an interaction.
+
+<tr>
+<td>Yes. 
+<td>Another person looking at the PreBIND site has reviewed this interaction (for at least one of the papers) and submitted it to 
+PreBIND (see below).
+
+<tr>
+<td>No.
+<td>Another person looking at the PreBIND site has reviewed this potential interaction (for at least one paper) and 
+is of the opinion that it is not talked about in this abstract and has submitted this opinion to PreBIND (see below).  
+No one has entered the opinion that this interactor really interacts with the query protein (in any paper).
+
+<tr>
+<td>Probably 	
+<td>The names of the proteins (and only these names) appear in a single sentence that talks about an interaction for at least one paper.
+
+<tr>
+<td>Unknown. 
+<td>No opinion has been submitted either by a person or by automatic analysis of any of the papers where this interactor co-occurs with the 
+query protein.  However, there is still a possibility that an interaction is talked about especially if the paper is classified as an 
+"interaction paper" by the SVM. 
+	
+</table>
+
+
+<br>
+
+
+<p>  
+<b>Fourth section: Potential interactors and evidence</b><br>
+This section expands on the previous section (Summary of potential interactors). Each section beginning with a blue bar 
+represents another potential interactor.  Each row in the table below the blue bar represents another abstract where your query protein 
+co-occurs with the potential interactor. Each potential co-occurence is rated as to its likelihood of representing a real interaction. 
+In addition, the likelihood that the paper itself contains interaction information is listed; this likelihood is based on the svm score 
+in the last column. Click on any one of the "GO" buttons to review that particular abstract. 
+
+<p>
+The values in the column "Is this interaction real?" describe whether an interaction between your query protein and this potential interactor 
+is really talked about in this particular paper.  
+The different possible values in this column are:
+<p>
+
+<table border=2>
+<tr>
+<td>Yes. Reviewed.
+<td>There is an interaction (found in this abstract) that has been reviewed and appears in the BIND database.
+
+<tr>
+<td>No.  Reviewed.
+<td>There is not an interaction.
+
+<tr>
+<td>Yes. 
+<td>Another person looking at the PreBIND site has reviewed this interaction in this abstract and has submitted it to 
+PreBIND (see below).
+
+<tr>
+<td>No.
+<td>Another person looking at the PreBIND site has reviewed this potential interaction (in this abstract) and 
+is of the opinion that it is not talked about in this abstract and has submitted this opinion to PreBIND (see below).  
+
+
+<tr>
+<td>Probably 	
+<td>The names of the proteins (and only these names) appear in a single sentence that talks about an interaction in this abstract.
+
+<tr>
+<td>Unknown. 
+<td>No opinion has been submitted either by a person or by automatic analysis of any of the papers where this interactor co-occurs with the 
+query protein.  However, there is still a possibility that an interaction is talked about especially if the paper is classified as an 
+"interaction paper" by the SVM. Alternatively, "unknown" may mean that conflicting opinions have been submitted about whether this interaction 
+appears in this abstract.
+</table>
+
+<p>
+Likewise, the column entitled "Is this an interaction paper" may list one of several values:
+<p>
+
+<table border=2>
+<tr>
+<td>Yes. Reviewed.
+<td>This abstract does describe biomolecular interaction information.  This fact has been reviewed by a curator.
+
+<tr>
+<td>No.  Reviewed.
+<td>This abstract does NOT describe biomolecular interaction information.  This fact has been reviewed by a curator.
+
+
+<tr>
+<td>Yes. 
+<td>Another person looking at the PreBIND site has reviewed this abstract and thinks that it contains interaction information.
+
+<tr>
+<td>No.
+<td>Another person looking at the PreBIND site has reviewed this abstract and does NOT think that it contains interaction information.
+
+
+<tr>
+<td>Unknown 	
+<td>Conflicting opinions have been submitted on whether this abstract describes interaction information.
+
+<tr>
+<td>Highly possible. 
+<td>SVM assigned interaction score for this abstract is greater than +1.
+
+<tr>
+<td>Possible. 
+<td>SVM assigned interaction score for this abstract is greater than 0.
+
+<tr>
+<td>Unlikely
+<td>SVM assigned interaction score for this abstract is between 0 and -1.
+
+<tr>
+<td>Highly unlikely
+<td>SVM assigned interaction score for this abstract is less than -1.
+
+
+</table>
+
+
+
+<br>
+
+
+
+<p>
+<b>Fifth section: Interaction literature and intersecting names.</b><br> 
+This section is divided into sub-sections headed by a narrow blue bar.  
+Each of these sub-sections represents a PubMed abstract that has been classified by a Support Vector Machine (SVM) as being 
+an "interaction paper" (see the description of Support Vector Machine scores below).  
+For each "interaction" paper a table is presented that lists the other names that appear in the abstract.  
+For each of these names, a description of the gene product is given as well as the likelihood that it interacts with the 
+gene product that this page is about. This "likelihood" (see the "Involved in an Interaction?" column) is based on 
+simple language processing of the abstract or human review.  There are several possibilites for the descriptions in this column.<br><p>
+<table border=2>
+<tr>
+<td>Yes. Reviewed.
+<td>There is an interaction that has been reviewed and appears in the BIND database.
+
+<tr>
+<td>No.  Reviewed.
+<td>There is not an interaction.
+
+<tr>
+<td>Possible (protein-protein)	
+<td>The names of the proteins (and only these names) appear in a single sentence that talks about an interaction.
+
+<tr>
+<td>Yes. Under review.
+<td>Another person looking at the PreBIND site has reviewed this interaction and submitted it to PreBIND (see below).
+
+<tr>
+<td>No. Under review.
+<td>Another person looking at the PreBIND site has reviewed this potential interaction, is of the opinion that it is not talked about in this abstract and has submitted this opinion to PreBIND (see below).
+
+<tr>
+<td>Unknown. Under review.
+<td>There are conflicting opinions as to whether this interaction is talked about in this abstract.  
+These opinions have been submitted to PreBIND (see below).
+
+<tr>
+<td>Unknown
+<td>Analysis of the text provides no evidence of an interaction.  However, there is still a possibility that an 
+interaction is talked about especially if the paper is classified as an "interaction paper" by the SVM.  
+This potential interaction has not been reviewed.	
+</table>
+
+
+<p>
+<b>Sixth section: All results for literature searches.</b><br><p>
+
+<p>
+All of the PubMed Identifiers that were returned by PubMed searches are listed in this secion regardless of 
+whether the paper describes molecular interaction information.<br><p>
+A yellow bar divides the results of each search into its own section.  For each search result, the table lists 
+the search name, the PubMed Identifier of the returned abstract and an "interaction" score that was generated 
+by a Support Vector Machine trained to recognize interaction papers.<br>
+<p>
+Each PubMed identifier is a hyperlink to the abstract.  Asterisks help identify PubMed abstracts that have interaction 
+scores (in the next column) that are greater than zero.  Exclamation points indicates that the  abstract contains a 
+member of one of the following word families:<br><p>
+bind<br>
+binds<br>
+bind<br>
+bound<br>
+binding<br>
+interacts<br>
+interacting<br>
+co-immunoprecipitate<br>
+co-immunoprecipitates<br>
+coprecipitation<br>
+co-precipitation<br>
+coprecipitates<br>
+co-precipitates<br>
+two-hybrid<br>
+2-hybrid<br>
+
+<p>
+The interaction scores in the column "An interaction paper? (score)" were generated by a Support Vector Machine (SVM) 
+trained to recognize interaction papers.  Scores of 0.000000 indicate that the abstract has not been classified by the SVM yet.  
+Negative scores indicate papers that are not likely to contain interaction information while papers scored positively most 
+likely do contain interaction information.  Scores range between +2 and -2.  The "GO" button to the left of each score 
+takes you to the "Abstract review page" where you can see all of the potential pairwise interactions that might be discussed 
+in that paper.<br>
+
+<p>
+<font size=+2>Step 3: The abstract review page</font><br>
+
+<p> 
+This page is divided into two frames: the top frame shows the abstract and the bottom shows all of the potential 
+interactions that may be discussed in that paper.<br>
+<p>  
+The table describes molecule A and B for each potential interaction.  The column "Involved in an interaction?" 
+contains the same type of information described in the column by the same name on the results page (see above).<br>
+
+<p>
+You can review any one of these interactions and submit feedback to PreBIND by clicking on the "GO" button.<br>
+
+<p>
+<font size=+2>Step 4: The interaction review and submission page</font><br><p>
+
+Follow the instructions on the page.<br><p>  
+
+If you submit an interaction, the text in the column "Involved in an interaction?" will change from (for example)<br>
+
+<p> 
+"Possible (protein-protein) Not reviewed."   TO   "Yes. Under review."  OR     "No. Under Review."<br>
+
+<p>
+So, SUBMIT DATA RESPONSIBLY it has an affect on what others will see.<br><p>
+
+Your submitted record will be reviewed by a curator and you will be notified when it has been submitted to BIND. 
+You will be able to add more information to the record once it has been submitted to BIND. 
+Note that this interface only allows you to submit very simple BIND records. Other information such as 
+binding site location and experimental evidence cannot be entered here. If you cannot describe the interaction using the 
+above gene info ("gi") numbers or if you want to describe an interaction involving a molecular complex, 
+small molecule or RNA then you must enter this information directly at the BIND site.<br>
+
+<p>
+<hr>  
+
+<address>Comments and suggestions to: 
+< <a href="mailto:ian.donaldson@utoronto.ca">ian.donaldson@utoronto.ca</a> >
+</address>
+<a href="http://bind.ca" target = "_top">Biomolecular Interaction Network Database</a>
+
+<p>
+</html>
+
+
+</body>
+</html>

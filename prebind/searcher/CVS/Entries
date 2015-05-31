@@ -1,0 +1,20 @@
+/Pattern.pm/1.1/Thu Sep  2 20:37:30 2004//
+/PreBIND.ini/1.2/Mon Nov 29 16:14:48 2004//
+/PreBIND.pm/1.5/Mon Nov 29 16:14:48 2004//
+/Tee.pm/1.1/Mon Nov 29 16:21:18 2004//
+/copyNameTables.sh/1.2/Mon Nov 29 16:14:48 2004//
+D/msvc////
+/newSrchTables.sql/1.11/Mon Nov 29 16:14:48 2004//
+/prebind_count.pl/1.2/Thu Sep  2 20:35:58 2004//
+/prebind_db2.pl/1.1/Fri Mar 26 22:08:02 2004//
+/prebind_import.c/1.3/Wed May 26 21:52:00 2004//
+/prebind_init.sh/1.1/Mon Nov 29 16:21:18 2004//
+/prebind_mymed.pl/1.3/Mon Nov 29 16:14:48 2004//
+/prebind_mysql.pl/1.2/Wed Sep  1 22:19:22 2004//
+/prebind_patterns.txt/1.1/Mon Nov 29 16:21:18 2004//
+/prebind_regex.pl/1.2/Fri Oct 29 22:32:48 2004//
+/prebind_searcher.c/1.24/Fri Mar 26 22:08:04 2004//
+/prebind_searcher.pl/1.2/Mon Nov 29 16:14:50 2004//
+/words.english.apple/1.1/Mon Nov 29 16:16:32 2004//
+/words.stop.pubmed/1.1/Mon Nov 29 16:16:32 2004//
+/words.stop.smart/1.1/Mon Nov 29 16:16:32 2004//

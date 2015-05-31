@@ -1,0 +1,221 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "bzlib"=..\..\..\..\bzip2\bzlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "c4lib"=..\..\..\..\codebase\windows\C\MSC60\C4LIB.DSP - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "doc"=.\doc.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "fseqrem"=.\fseqrem.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "fwwwseekgi"=.\fwwwseekgi.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "goparser"=.\goparser.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "perl"=.\perl.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "seqrem"=.\seqrem.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "shoundlocllib"=.\shoundlocllib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "shoundremlib"=.\shoundremlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "shtest"=.\shtest.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundremlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "slrilib"=..\..\..\lib\msvc\slrilib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "wwwseekgi"=.\wwwseekgi.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name shoundlocllib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name shoundremlib
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name slrilib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

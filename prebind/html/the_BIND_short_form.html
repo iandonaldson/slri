@@ -1,0 +1,311 @@
+<html>
+<head>
+	<title> the BIND short form </title>
+	<meta NAME="keywords"CONTENT="SLRI, PreBIND, BIND, Interaction database, PubMed, MEDLINE,Bioinformatics, data mining">
+	<meta NAME="description" CONTENT="PreBIND is an information mining tool designed for BIND to locate biomolecular interaction information in the scientific literature.  BIND is the Biomolecular Interaction Network Database">
+</head>
+
+<body bgcolor="white">
+<form method="POST" action="prebind.exe">
+<table width=95% border=0 cellspacing=2 cellpadding=2 cols=4>	
+	<tr bgcolor="lightsteelblue">		
+		<td colspan=4 height="20">			
+			<h2>The BIND short form</h2>
+		</td>	
+	</tr>
+	<tr>		
+		<td colspan=4 height="20">			
+			<p>This form allows you to submit a simple Biomolecular Interaction Network Database (BIND) record.  Information such as binding site location and experimental evidence cannot be entered using this form.  This form can only be used to enter protein-protein or protein-DNA interactions.  If you want to describe an interaction involving a molecular complex, small molecule or RNA then you must enter this information directly at the <a href="http://bioinfo.mshri.on.ca/cgi-bin/bind/dataman" target="new" onmouseover="window.status='BIND'">BIND site</a>.</p>
+		</td>
+	</tr>
+	<tr><td></tr>
+</table>
+
+<table width=95% border=0 cellspacing=2 cellpadding=2 cols=4>
+	<tr bgcolor="lightsteelblue">
+		<td colspan=4 height="20">
+			<b>Step 1:</b> Enter a PubMed Identifier for the paper that describes the interaction
+		</td>
+	</tr>
+	<tr><td colspan=4 height="20"><br></td></tr>
+	<tr>
+		<td colspan=4 height="20">
+			<input type="text" name="pmid" size=15 maxlength=40> 
+		</td>
+	</tr>
+	<tr>
+		<td colspan=4 height="20">
+			Look for PubMed identifier (pmid) numbers  <a href = "http://www.ncbi.nlm.nih.gov/">here.</a><br>	
+		</td>
+	</tr>
+	<tr><td colspan=4 height="20"><br></td></tr>
+</table>
+
+<table width=95% border=0 cellspacing=2 cellpadding=2 cols=4>
+	<tr bgcolor="lightsteelblue">
+		<td colspan=4 height="20">
+			<b>Step 2:</b> Describe Molecule A
+		</td>
+	</tr>
+	<tr><td colspan=4 height="20"><br></td></tr>
+	<tr>
+		<td bgcolor="lightgoldenrodyellow" colspan=4 height="20">
+			<b>Enter a short label for molecule A:</b>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=4 height="20">
+			<input type="text" name="nama" size=40 maxlength=60> 
+		</td>
+	</tr>
+	<tr><td colspan=4 height="20"><br></td></tr>
+	<tr>
+		<td bgcolor="lightgoldenrodyellow" colspan=4 height="20">
+			<b>Description of Molecule A:</b>
+		</td>
+	</tr>
+**********************************************continue here
+<tr>
+<td colspan=4 height="20">
+You may edit this text or leave it as is.<br><textarea name="adesc" cols=40 rows=3 wrap=virtual>encodes a protein with three regions (ABC) that is spliced to yield the extein AC and the intein B; AC is a 69K vacuolar (H+)-ATPase, and B is a 50K site-specfic endonuclease named VDE (PI-SceI) that is homologous to HO. Cleavage is meiosis-specific and induces gene conversion at the TFP1 locus.</textarea>
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+<tr bgcolor="lightgoldenrodyellow">
+<td colspan=4 height="20">
+<b>Is Molecule A a protein or a DNA?</b>
+</td>
+</tr>
+<tr>
+<td colspan=4 height="20">
+Select one of the following:
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+</table><table width=95% border=0 cellspacing=2 cellpadding=2 cols=8><tr>
+<td width="15%" valign=top colspan=1 height="20">
+	<input type=radio checked name=atype value="2"> <b>Protein.</b>
+</td>
+<td colspan=7 height="20">
+Molecule A is a protein. 
+See the sequence in 
+<a href="javascript:void window.open('http://zaphod.mshri.on.ca/cgi-bin/seqhound/wwwseekgi?field=GI+identifier&GI=6320016&format=defline', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to SeqHound';return(true);" onmouseout="window.status=''">SeqHound</a>
+ or at the <a href="javascript:void window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Protein&dopt=DocSum&list_uids=6320016', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to Entrez';return(true);" onmouseout="window.status=''">NCBI</a>.
+The Gene Info number (gi) is 6320016.
+</td>
+</tr>
+<tr>
+<td width="15%" valign=top colspan=1 height="20">
+<input type=radio name=atype value="1"> <b>DNA.</b>
+</td>
+<td colspan=7 height="20">
+Molecule A is a DNA bound by Molecule B (a protein).  The binding site on Molecule A is somewhere in or around the sequence location: 126788 to 130003 in the following sequence: 
+View the sequence in 
+<a href="javascript:void window.open('http://zaphod.mshri.on.ca/cgi-bin/seqhound/wwwseekgi?field=GI+identifier&GI=6319952&format=defline', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to SeqHound';return(true);" onmouseout="window.status=''">SeqHound</a>
+ or at the <a href="javascript:void window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Nucleotide&list_uids=6319952', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to Entrez';return(true);" onmouseout="window.status=''">NCBI</a>.
+The Gene Info number (gi) is 6324406.
+</td>
+</tr>
+<tr><td colspan=8 height="20"><br></td></tr>
+</table><table width=95% border=0 cellspacing=2 cellpadding=2 cols="4"><tr><td colspan=4 height="20"><br></td></tr>
+<tr bgcolor="lightgoldenrodyellow">
+<td colspan=4 height="20">
+<b>If Molecule A is a protein, is it post-translationally modified? </b>
+</td>
+</tr>
+<tr>
+<td colspan="4" height="20">
+Select one of the following:
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+</table><table width=95% border=0 cellspacing=2 cellpadding=2 cols=8><tr>
+<td width="15%" valign=top colspan=1 height="20">
+<input type=radio checked name=aok value="0"> <b>Unknown.</b>
+</td>
+<td colspan=7 height="20">
+Molecule A may or may not be a modified.
+</td>
+</tr>
+<tr>
+<td valign=top colspan=1 height="20">
+<input type=radio name=aok value="-1"> <b>Yes.</b>
+</td>
+<td colspan=7 height="20">
+Molecule A is modified.  For example, molecule A may be a maturated protein or otherwise post-translationally modified.You may make a note of any such modifications in the 'Description of Molecule A' text box above.
+</td>
+</tr>
+<tr>
+<td valign=top colspan=1 height="20">
+<input type=radio name=aok value="1"> <b>No.</b>
+</td>
+<td colspan=7 height="20">
+Molecule A is not modified.  The amino acid sequence in the sequence record selected above is an accurate description of Molecule A.</td>
+</tr>
+<tr><td colspan=8 height="20"><br></td></tr>
+</table><table width=95% border=0 cellspacing=2 cellpadding=2 cols=4>
+<tr bgcolor="lightsteelblue">
+<td colspan=4 height="20">
+<b>Step 3:</b> Review and edit the description for molecule B
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+<tr>
+<td bgcolor="lightgoldenrodyellow" colspan=4 height="20">
+<b>Enter a short label for molecule B:</b>
+</td>
+</tr>
+<tr>
+<td colspan=4 height="20">
+Choose the most appropriate name if more than one is presented<br><input type="text" name="namb" size=40 maxlength=40 value="Vph1p"> 
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+<tr>
+<td bgcolor="lightgoldenrodyellow" colspan=4 height="20">
+<b>Description of Molecule B:</b>
+</td>
+</tr>
+<tr>
+<td colspan=4 height="20">
+You may edit this text or leave it as is.<br><textarea name="bdesc" cols=40 rows=3 wrap=virtual>Vacuolar H-ATPase 100 kDa subunit of membrane (V0) sector, essential for vacuolar acidification and vacuolar H-ATPase activity</textarea>
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+<tr bgcolor="lightgoldenrodyellow">
+<td colspan=4 height="20">
+<b>Is Molecule B a protein or a DNA?</b>
+</td>
+</tr>
+<tr>
+<td colspan=4 height="20">
+Select one of the following:
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+</table><table width=95% border=0 cellspacing=2 cellpadding=2 cols=8><tr>
+<td width="15%" valign=top colspan=1 height="20">
+	<input type=radio checked name=btype value="2"> <b>Protein.</b>
+</td>
+<td colspan=7 height="20">
+Molecule B is a protein. 
+See the sequence in 
+<a href="javascript:void window.open('http://zaphod.mshri.on.ca/cgi-bin/seqhound/wwwseekgi?field=GI+identifier&GI=6324844&format=defline', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to SeqHound';return(true);" onmouseout="window.status=''">SeqHound</a>
+ or at the <a href="javascript:void window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Protein&dopt=DocSum&list_uids=6324844', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to Entrez';return(true);" onmouseout="window.status=''">NCBI</a>.
+The Gene Info number (gi) is 6324844.
+</td>
+</tr>
+<tr>
+<td width="15%" valign=top colspan=1 height="20">
+<input type=radio name=btype value="1"> <b>DNA.</b>
+</td>
+<td colspan=7 height="20">
+Molecule B is a DNA bound by Molecule A (a protein).  The binding site on Molecule B is somewhere in or around the sequence location: 828047 to 830569 in the following sequence: 
+View the sequence in 
+<a href="javascript:void window.open('http://zaphod.mshri.on.ca/cgi-bin/seqhound/wwwseekgi?field=GI+identifier&GI=6324406&format=defline', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to SeqHound';return(true);" onmouseout="window.status=''">SeqHound</a>
+ or at the <a href="javascript:void window.open('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=Nucleotide&list_uids=6324406', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go to Entrez';return(true);" onmouseout="window.status=''">NCBI</a>.
+The Gene Info number (gi) is 6324406.
+</td>
+</tr>
+<tr><td colspan=8 height="20"><br></td></tr>
+</table><table width="95%" border=0 cellspacing=2 cellpadding=2 cols=4><tr><td colspan=4 height="20"><br></td></tr>
+<tr bgcolor="lightgoldenrodyellow">
+<td colspan=4 height="20">
+<b>If Molecule B is a protein, is it post-translationally modified?</b>
+</td>
+</tr>
+<tr>
+<td colspan="4" height="20">
+Select one of the following:
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+</table><table width=95% border=0 cellspacing=2 cellpadding=2 cols=8><tr>
+<td width="15%" valign=top colspan=1 height="20">
+<input type=radio checked name=bok value="0"> <b>Unknown.</b>
+</td>
+<td colspan=7 height="20">
+Molecule B may or may not be a modified.
+</td>
+</tr>
+<tr>
+<td valign=top colspan=1 height="20">
+<input type=radio name=bok value="-1"> <b>Yes.</b>
+</td>
+<td colspan=7 height="20">
+Molecule B is modified.  For example, molecule B may be a maturated protein or may be otherwise post-translationally modified.You may make a note of any such modifications in the 'Description of Molecule B' text box above.
+</td>
+</tr>
+<tr>
+<td valign=top colspan=1 height="20">
+<input type=radio name=bok value="1"> <b>No.</b>
+</td>
+<td colspan=7 height="20">
+Molecule B is not modified.  The amino acid sequence in the sequence record selected above is an accurate description of Molecule B.</td>
+</tr>
+<tr><td colspan=8 height="20"><br></td></tr>
+</table><table width=95% border=0 cellspacing=2 cellpadding=2 cols=4>
+<tr bgcolor="lightsteelblue">
+<td colspan=4 height="20">
+<b>Step 4:</b> Enter your name and BIND user ID
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+<tr>
+<td colspan=4 height="20">
+First name:<br><input type="text" name="fname" size=40 maxlength=40> 
+</td>
+</tr>
+<tr>
+<td colspan=4 height="20">
+Last name:<br><input type="text" name="lname" size=40 maxlength=40> 
+</td>
+</tr>
+<tr>
+<td colspan=4 height="20">
+User ID:<br><input type="text" name="buid" size=40 maxlength=40> 
+</td>
+</tr>
+<tr>
+<td colspan=4 height="20">
+If you do not have a user id you must get one from
+<a href="javascript:void window.open('http://bioinfo.mshri.on.ca/cgi-bin/bind/dataentry?form=getuserid&rectype=4&change=0', 'giWin', 'toolbar=no,location=no,directories=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=550,height=400');" onmouseover="window.status='Go get a BIND User ID';return(true);" onmouseout="window.status=''">here</a>.
+<br>(After you enter your contact info and press 'submit', write down the User ID, close the window and continue here.)
+</td>
+</tr>
+<tr><td colspan=4 height="20"><br></td></tr>
+</table><table width="95%" border=0 cellspacing=2 cellpadding=2 cols="4">
+<tr bgcolor="lightsteelblue">
+<td width="100%" height="20">
+<b>Step 5:</b> Submit
+</td>
+</tr>
+<tr><td height="20"><br></td></tr>
+</table><table width="95%" border=0 cellspacing=2 cellpadding=2 cols="8">
+<input type=hidden name=search_type value="submit"> 
+<input type=hidden name=pmid value="10747882"> 
+<input type=hidden name=gia value="6320016"> 
+<input type=hidden name=gib value="6324844"> 
+<input type=hidden name=sgia value="6320016"> 
+<input type=hidden name=sgib value="6324844"> 
+	<tr valign="top">
+		<td colspan="1" height="20">
+			<input type=submit value=Submit> 
+		</td>
+		<td colspan="7" height="20">
+			<b>Submit your interaction.</b> <p>Your record will be reviewed by a curator and you will be notified when it has been submitted to BIND. You will be able to add more information to the record once it has been submitted to BIND.
+			Note that this interface only allows you to submit very simple BIND records.  Other information such as binding site location and experimental evidence cannot be entered here.
+			If you cannot describe the interaction using the above gene info ("gi") numbers or if you want to describe an interaction involving a molecular complex, small molecule or RNA then you must enter this
+			information directly at the
+			<a href="http://bioinfo.mshri.on.ca/cgi-bin/bind/dataman" target="new" onmouseover="window.status='BIND'">BIND site</a>.</p>
+</td>
+</tr>
+<tr><td colspan="8" height="20"><br></td></tr>
+</table></form>
+<p>
+<hr>  
+<address>Comments and suggestions to: 
+< <a href="mailto:ian.donaldson@utoronto.ca">ian.donaldson@utoronto.ca</a> >
+</address>
+<p>
+</html>

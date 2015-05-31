@@ -1,0 +1,69 @@
+1) get fast cgi module and compile it into your apache server; very often that involves reinstalling apache from scratch into default location /usr/local (e.g. the Red Hat default install of apache does not permit you to add GNU modules that easily)
+
+to run fcgi module add this to your httpd.conf
+<IfModule mod_fastcgi.c>
+
+    ScriptAlias /fcgi-bin/ "/usr/apache/bindist/fcgi-bin/"
+
+    <Directory "/usr/apache/bindist/fcgi-bin">
+       AllowOverride None
+       Options ExecCGI FollowSymLinks
+       SetHandler fastcgi-script
+       Order allow,deny
+       Allow from all
+    </Directory>
+
+ FastCgiConfig -idle-timeout 200
+
+</IfModule>
+
+
+2) get fast cgi development toolkit and compile it; add path to the library and includes into your *.mk files
+
+IMPORTANT: the fcgi toolkit (www.fastcgi.com) redefines FILE pointer so all libraries you are using to compile your server need to include the fcgi_stdio.h and fcgi_config.h
+one exeption is CodeBase - it uses lower level file operations; no need to recompile that one
+
+3) to compile NCBI toolkit with fast CGI development headers; add the following into 
+ncbi.h
+
+#define SLRI_FCGI
+#ifdef SLRI_FCGI
+#include <fcgi_stdio.h>
+#include <fcgi_config.h>
+#endif
+
+
+when compiling NCBI toolkit add -lfcgi to all makefiles (to make all applications; 
+otherwise the compile is a messs)
+
+this is a "grep lfcgi make*" command executed on make directory:
+makeall.unx:    $(CC) -o asntool $(LDFLAGS) asntool.c asncode.c $(NCBI_LIBDIR)/$(LIB1) 
+-lfcgi $(OTHERLIBS)
+makedemo.unx:OTHERLIBS = -lfcgi -lm
+makenet.unx:OTHERLIBS = -lfcgi -lm
+makenet.unx:    $(CC) -o netentcf $(LDFLAGS) netentcf.c $(LIB31) $(LIB20) $(LIB4) 
+$(LIB23) $(LIB3) $(LIB8) $(LIB7) $(NETCLILIB) $(LIB2) $(LIB1) $(VIBLIBS) -lfcgi 
+$(OTHERLIBS)
+makenet.unx:    $(VIBLIBS) -lfcgi $(OTHERLIBS)
+makenet.unx:    $(LIB1) $(VIBLIBS) -lfcgi $(OTHERLIBS)
+makenet.unx:    $(LIB22) $(LIB36) $(LIB23) $(LIB8) $(LIB7) $(NETCLILIB) $(LIB5) $(LIB4) 
+$(LIB3) $(LIB2) $(LIB1) $(VIBLIBS) -lfcgi $(OTHERLIBS)
+makenet.unx:    $(CC) -g -o idfetch $(LDFLAGS) idfetch.c $(LIB41) $(NETCLILIB) $(LIB2) 
+$(LIB1) -lfcgi $(OTHERLIBS)
+makenet.unx:    $(CC) -g -o blastcl3 $(LDFLAGS) -DBLAST_CS_API blastall.c $(LIB36) 
+$(LIB23) $(NETCLILIB) $(LIB2) $(LIB1) -lfcgi $(OTHERLIBS)
+makenet.unx:    $(LIB2) $(LIB1) $(VIBLIBS) -lfcgi $(OTHERLIBS)
+makenet.unx:    $(LIB2) $(LIB1) $(VIBLIBS) -lfcgi $(OTHERLIBS) $(THREAD_OTHERLIBS)
+makenet.unx:    $(ENTREZLIBS) $(LIB31) $(LIB4) $(LIB2) $(LIB1) $(VIBLIBS) -lfcgi 
+$(OTHERLIBS)makenet.unx:    $(CC) $(LDFLAGS) wwwblast.o salogif.o wwwbutl.o xmlblast.o 
+bxmlobj.o $(THREAD_OBJ) -o blast.REAL -lvibgif $(LIB20) $(LIB23) $(LIB2) $(LIB1) -lfcgi 
+$(OTHERLIBS) $(THREAD_OTHERLIBS)
+
+4)SLRI library have to be compiled with the fast cgi NCBI toolkit headers
+
+5) SeqHound library have to compiled with fast cgi NCBI toolkit
+
+6) add -lfcgi and headers into your own compile and define SHFCGI for SeqHound
+applications (seqrem and wwwseekgi)
+
+

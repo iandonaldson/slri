@@ -1,0 +1,32 @@
+<br><br>
+
+<table border=0 width=100%%  cellspacing=2 cellpadding=2 cols=4>
+
+	<tr bgcolor="lightsteelblue">
+
+		<td height = "20">
+
+			<h1><font color="black">Potential interactors and evidence</font></h1>
+
+		</td>
+
+	</tr>
+
+	<tr>
+
+		<td height = "20">
+
+			<p>This list expands on the previous section.  Each section beginning with a blue bar represents another 
+potential interactor. Each row in the table below the blue bar represents another paper where your query protein 
+co-occurs with the potential interactor.  Each potential co-occurence is rated as to its likelihood of representing a real
+interaction.  In addition, the likelihood that the paper itself contains interaction information is listed; this 
+likelihood is based on the svm score in the last column. Click on any one of the "GO" buttons to review that 
+particular abstract.
+			</p>
+		</td>
+
+	</tr>
+
+</table>
+
+<br><br>

@@ -1,0 +1,2 @@
+<table border="0" width="100%%"  cellspacing="2" cellpadding=2 cols="4">  <tr>        <td colspan=4 height="20">		The following table lists the name(s) used to find the above gene product in the literature.        </td>  </tr>  <tr bgcolor="lightsteelblue"><!--lightgoldenrodyellow--><!--lightsteelblue-->        <td colspan="1" height="20">		Search        </td>        <td width=colspan="1" height="20">		Date last searched        </td>        <td colspan="1" height="20">		Number of results found        </td>
+        <td colspan="1" height="20">		Notes        </td>  </tr>

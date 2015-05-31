@@ -1,0 +1,192 @@
+How to use the PreBIND parser
+
+prebind_parser
+--------------------------------------------------------------------------------
+
+purpose:
+---------
+This program retrieves names of proteins from RefSeq records and generates a
+lexicon of names for a non-redundant list of proteins (because RefSeq is 
+non-redundant).
+
+logic(ALGORITHM):
+---------
+prebind_parser traverses through all of the bioseq entries in the RefSeq
+collection.  
+
+For every protein that it finds, it collects 
+1) ACCESSION, GI, Definition line, Taxon id and preferred product name (protein
+name) and places these in the ACC table.
+2) database cross references (from the bioseqset or the bioseq) and places these
+in the DB table
+3) coding region data from the bioseqset and places this in the CDR table (this
+includes the nucleotide that encodes the protein and the location of the
+encoding loci on that nucleotide)
+
+For every nucleotide bioseq, it collects
+1) names and locations of encoding loci from the bioseq and stores it in the
+LOCUS table
+2) synonyms for and locations of encoding loci from the bioseq and stores them
+in the LOSYN table
+
+Then, names and synonyms of encoding loci are associated with a protein gi by
+matching loci location information found in the LOCUS and LOSYN data tables with
+coding region data found in the CDR table.
+This step fills in the protein gi fields in the LOCUS and LOSYN data tables. 
+The locus name is also added to the ACC table at this point.
+
+The yeast_names.txt file is then parsed.  Names in this file are matched to gi's
+(using the DB table) and stored in the YENA table.
+
+Finally, names for all protein gi's are collected from the ACC table, LOSYN 
+table, and YENA table and dded to the SRCH table.
+
+More details are available in the prebind_datatable_desc.doc file in this same 
+directory.
+
+
+input files:
+---------
+1) rscu.bna
+Download rscu.bna.Z available from ftp://ftp.ncbi.nih.gov/refseq/cumulative/.
+This is the cumulative RefSeq collection to date in binary ASN.1 format.
+Unzip this zipped file using gunzip or gzip:
+> gunzip rscu.bna.Z
+> gzip -d rscu.bna.Z
+
+2) yeast_names.txt
+This is an old list of names from SGD that correlates names of proteins to SGD
+identifiers.
+This list is no longer distributed by SGD and this part of prebind_parser could
+be re-written using another solution.
+This is located in the slri source code tree at 
+C:\ian_cvs\slri\prebind\parser\sgd_parser
+
+
+output files:
+---------
+
+1)tables created/altered:
+ACC, DB, CDR, LOCUS, LOSYN, YENA, SRCH
+2)parser_log.txt
+
+for example:
+> ls prebind/datafiles/
+ACC.cdx  CDR.cdx  DB.dbf     LOSYN.cdx  OGI.dbf    ONAME.fpt       SRCH.dbf
+ACC.dbf  CDR.dbf  LOCUS.cdx  LOSYN.dbf  ONAME.cdx  parser_log.txt  YENA.cdx
+ACC.fpt  DB.cdx   LOCUS.dbf  OGI.cdx    ONAME.dbf  SRCH.cdx        YENA.dbf
+
+config file dependencies:
+---------
+
+1.  \slri\prebind\config\.prebindrc or prebind.ini
+[databases]
+;enter the path to the directory for datafiles
+;this is where PreBIND parser will place created datafiles and where it will
+look for them later
+path = C:\prebind\datafiles\
+
+[parser_input_files]
+; enter the complete path to the RefSeq binary file to be parsed by 
+PreBIND_parser
+refseq_binary = C:\prebind\parser_input_files\rscu.bna
+;enter the complete path to the text file of yeast names created by 
+YeastNames.pl
+yeast_names = C:\prebind\parser_input_files\yeast_names.txt
+
+[log_files]
+;the error log file is also written to a file specified here 
+parser_path = C:\prebind\datafiles\parser_log.txt
+
+Make sure that the RefSeq binary file and the Yeast Names file are where you say 
+they are.
+
+
+source code location:
+---------
+\slri\prebind\parser\prebind_parser.c
+
+
+
+command line parameters:
+---------
+
+Typing "prebind_parser -" at the command line will give you a list of 
+parameters.
+
+pb_parser   arguments:
+
+  -c  Create databases if they do not already exist [T/F]  Optional
+    default = F
+
+
+example use:
+---------
+
+Note: I have never run this program with an existing set of data tables present. 
+ 
+The tables are always created new at the beginning of each run of this program.
+
+ 
+At a UNIX prompt type:
+
+> ./prebind_parser -c T
+
+The program is verbose and will ask the user for input at a couple of stages.  
+This should be removed in future so the program can be run in nohup mode.
+
+Example output of the program is listed below:
+(//indicates a comment about the output)
+
+==Log begins==
+Log entries will be printed to /seqhound/prebind/datafiles/parser_log.txt
+PreBIND parser has started
+PreBIND parser is finished opening databases and testing input files.
+PreBIND parser is building the SeaRCH database
+Finished building. Press return to continue with parsing RefSeq
+//the parser checks for the presence of names in the database and tries to 
+incorporate them into 
+//the SRCH table before proceeding
+//just press enter
+
+PreBIND parser is finished setting up for AsnRead
+Press return to continue to parse /seqhound/prebind/datafiles_new/rscu.bna
+//just press enter
+
+//the parser reports errors as it finds them and also writes them to a log file
+PreBIND parser is reading through Seq-entries
+ParseLocusInfo failed for gi = 17570783: function report= 1
+ParseLocusInfo failed for gi = 10956086: function report= 1
+ParseLocusInfo failed for gi = 11496571: function report= 1
+ParseLocusInfo failed for gi = 15187308: function report= 1
+//
+//output omitted here to save space
+//
+New gi for accession already in ACC database. gi = 34303926 replaces gi = 23097288 for accession = NP_689481
+New gi for accession already in ACC database. gi = 34303932 replaces gi = 22748959 for accession = NP_689666
+New gi for accession already in ACC database. gi = 34303939 replaces gi = 22749225 for accession = NP_689809
+New gi for accession already in ACC database. gi = 34303941 replaces gi = 22749239 for accession = NP_689816
+New gi for accession already in ACC database. gi = 34303944 replaces gi = 22749285 for accession = NP_689842
+New gi for accession already in ACC database. gi = 34303959 replaces gi = 22749531 for accession = NP_689995
+New gi for accession already in ACC database. gi = 34304115 replaces gi = 7706216 for accession = NP_056958
+PreBIND parser has finished reading through Seq_entries
+Number bioseqsets read =                113536
+Number bioseqs read =           699418
+Number proteins found =                 581429
+PreBIND parser is building the locus database
+
+Finished.
+
+
+
+
+
+
+
+***Bugs****
+---------
+If there is an ncbi.ini file with directions to the "data" folder then "parser" 
+will find the file "seqcode.val" when it runs the function SeqEntryLoad (line
+2624 in Main od parser).  This file will cause a crash (line 638 of asndebin) 
+for some unknown reason.  The only solution that I have right now is to hide 
+this file when running parser.

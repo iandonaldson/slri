@@ -1,0 +1,3565 @@
+<!-- ======================== -->
+<!-- NCBI DTD                 -->
+<!-- NCBI ASN.1 mapped to XML -->
+<!-- ======================== -->
+ 
+<!-- Entities used to give specificity to #PCDATA -->
+<!ENTITY % INTEGER '#PCDATA'>
+<!ENTITY % ENUM 'EMPTY'>
+<!ENTITY % BOOLEAN 'EMPTY'>
+<!ENTITY % NULL 'EMPTY'>
+<!ENTITY % REAL '#PCDATA'>
+<!ENTITY % OCTETS '#PCDATA'>
+<!-- ============================================ -->
+ 
+<!-- ============================================ -->
+<!-- This section mapped from ASN.1 module BIND -->
+ 
+<!-- Elements used by other modules:
+          BIND-Submit ,
+          BIND-Interaction ,
+          BIND-Interaction-set ,
+          BIND-Pathway ,
+          BIND-Pathway-set ,
+          BIND-Molecular-Complex ,
+          BIND-Complex-set ,
+          BIND-cellstage ,
+          BIND-object ,
+          BIND-object-type-id ,
+          BIND-place-set ,
+          BIND-condition-set ,
+          BIND-loc ,
+          BIND-action-set ,
+          BIND-state-set ,
+          RealVal-Units -->
+ 
+ 
+<!-- Elements referenced from other modules:
+          Date ,
+          Int-fuzz ,
+          User-object ,
+          Dbtag FROM NCBI-General
+          Author FROM NCBI-Biblio
+          Bioseq FROM NCBI-Sequence
+          Pub FROM NCBI-Pub
+          BioSource FROM NCBI-BioSource
+          Seq-loc ,
+          Seq-id FROM NCBI-Seqloc
+          Biostruc FROM MMDB
+          Biostruc-feature-set FROM MMDB-Features
+          BIND-profile FROM BIND-Profile -->
+ 
+ 
+<!-- ============================================ -->
+<!-- Definition of BIND-Submit -->
+ 
+ 
+<!--
+ $Id: bind.dtd,v 1.1.1.2 2002/02/20 09:25:14 root Exp $
+ ***************************************************************************
+ 
+  Biomolecular Interaction Network Database (BIND)
+  Data Specification
+ 
+  Interaction, Molecular Complex, Biological Pathway Data Structures
+ 
+ 
+  Authors: Gary D. Bader,       Christopher W.V. Hogue
+           bader@mshri.on.ca    hogue@mshri.on.ca
+ 
+           Ian Donaldson
+           ian.donaldson@utoronto.ca
+ 
+  Publication to cite:
+   Gary D. Bader and Christopher W. V. Hogue
+   BIND - a data specification for storing and describing biomolecular
+   interactions, molecular complexes and pathways
+   Bioinformatics May 2000 16: 465-477.
+ 
+  Thanks to SLRI staff, especially Ian Donaldson for invaluable discussion.
+ 
+  Hogue Lab - University of Toronto Biochemistry Department and the
+  Samuel Lunenfeld Research Institute, Mount Sinai Hospital
+  http://bioinfo.mshri.on.ca  hogue@mshri.on.ca
+ 
+  REVISIONS
+  Revision 0.1 - Oct. 21, 1998
+  Revision 0.5 - Feb. 2,  1999 (BIND web based data entry prototype)
+  Revision 0.6 - Feb. 26, 1999 (Feedback from Biophysical Soc. Conf.)
+  Revision 0.8 - May  3,  1999
+  Revision 0.9 - May  31, 1999
+  Revision 1.0 - June 7,  1999 (comments only added to 0.9)
+  Revision 1.1 - Dec. 23, 1999 Internal revision (not for public release)
+  Revision 2.0 - Jan. 31, 2000 (Minor changes from 1.1)
+  Revision 2.1 - Nov. 7,  2000 (Added genetic interactions)
+ 
+  ftp://bioinfo.mshri.on.ca/pub/BIND/Spec/bind.asn for the latest revision.
+ 
+ 
+  NOTE:  This specification is in a variant of ASN.1 1990 that may not
+         be compatible with newer ASN.1 tools.  This specification also
+         depends on public domain specifications available from the
+         U.S. National Center for Biotechnology Information (NCBI)
+         ftp://ncbi.nlm.nih.gov/toolbox/ncbi_tools/
+         http://www.ncbi.nlm.nih.gov/Toolbox/
+ 
+ 
+  Copyright Notice:
+ 
+  Copyright 2000 Mount Sinai Hospital (MSH)
+ 
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License as
+  published by the Free Software Foundation; either version 2 of
+  the License, or any later version.
+ 
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ 
+  See the GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the
+         Free Software Foundation, Inc.,
+         59 Temple Place, Suite 330, Boston, MA
+         02111-1307  USA
+  or visit http://www.gnu.org/copyleft/gpl.html
+ 
+  SPECIAL EXCEPTIONS
+ 
+  As a special exception, Mount Sinai Hospital gives permission to
+  link this program with the following non-GPL programs or libraries,
+  and distribute the resulting executable, without including the source
+  code for these in the source distribution:
+ 
+  a) CodeBase 6.5 or greater from Sequiter Software Inc.
+ 
+  b) The C or C++ interface to Oracle 8.x or greater, from
+     Oracle Corporation or IBM DB2 UDB.
+ 
+ ***************************************************************************
+ /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+ *****************************************
+ * Data Submission and Database exchange *
+ *****************************************
+ ***************************************************************************
+ General data exchange
+ 
+ This object is used to submit all information to BIND.
+ 
+ Field description for BIND-Submit
+ *********************************
+ date         = date of creation of this set
+ database     = description of database where this data originated
+ sub          = person who is responsible for this data submission
+ sub-id       = BIND submit ID for this submission
+ acc-nums     = list of BIND accession numbers that this submission contains
+ interactions = a collection of interaction records
+ complexes    = a collection of molecular complex records
+ pathways     = a collection of pathway records
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Submit ( 
+               BIND-Submit_date ,
+               BIND-Submit_database? ,
+               BIND-Submit_sub ,
+               BIND-Submit_sub-id? ,
+               BIND-Submit_acc-nums? ,
+               BIND-Submit_interactions? ,
+               BIND-Submit_complexes? ,
+               BIND-Submit_pathways? )>
+ 
+<!ELEMENT BIND-Submit_date ( Date )>
+<!ELEMENT BIND-Submit_database ( BIND-Database-site )>
+<!ELEMENT BIND-Submit_sub ( BIND-Submitter )>
+<!ELEMENT BIND-Submit_sub-id ( BIND-Submit-id )>
+<!ELEMENT BIND-Submit_acc-nums ( BIND-accession-number* )>
+<!ELEMENT BIND-Submit_interactions ( BIND-Interaction-set )>
+<!ELEMENT BIND-Submit_complexes ( BIND-Complex-set )>
+<!ELEMENT BIND-Submit_pathways ( BIND-Pathway-set )>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-Submit-id -->
+ 
+<!ELEMENT BIND-Submit-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-accession-number -->
+ 
+<!ELEMENT BIND-accession-number ( 
+               BIND-accession-number_interaction |
+               BIND-accession-number_complex |
+               BIND-accession-number_pathway )>
+ 
+<!ELEMENT BIND-accession-number_interaction ( Interaction-id )>
+<!ELEMENT BIND-accession-number_complex ( Molecular-Complex-id )>
+<!ELEMENT BIND-accession-number_pathway ( Pathway-id )>
+ 
+ 
+<!-- Definition of BIND-Database-site -->
+ 
+ 
+<!-- 
+ ************************
+ * Database description *
+ ************************
+ ***************************************************************************
+ Description of a database site
+ 
+ Field description for BIND-Database-site
+ ****************************************
+ descr        = text description of this database
+	          (e.g. C. elegans interaction database)
+ country      = country where this database is based
+ homepage-url = Internet Universal Resource Locator for the database web
+                site (e.g. http://bioinfo.mshri.on.ca)
+ reference    = a Medline reference for this database
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Database-site ( 
+               BIND-Database-site_descr ,
+               BIND-Database-site_country ,
+               BIND-Database-site_homepage-url? ,
+               BIND-Database-site_reference? )>
+ 
+<!ELEMENT BIND-Database-site_descr ( #PCDATA )>
+<!ELEMENT BIND-Database-site_country ( #PCDATA )>
+<!ELEMENT BIND-Database-site_homepage-url ( #PCDATA )>
+<!ELEMENT BIND-Database-site_reference ( BIND-pub-set )>
+ 
+ 
+ 
+<!-- Definition of BIND-Rec-coll-descr -->
+ 
+ 
+<!-- 
+ ************************
+ * Database description *
+ ************************
+ ***************************************************************************
+ Description of a record collection
+ 
+ Field description for BIND-Rec-coll-descr
+ *****************************************
+ descr = text description of this record collection
+         (e.g. BIND, Hogue Lab Interactions)
+ db    = database where this record originated (for use in a data warehouse)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Rec-coll-descr ( 
+               BIND-Rec-coll-descr_descr ,
+               BIND-Rec-coll-descr_db? )>
+ 
+<!ELEMENT BIND-Rec-coll-descr_descr ( #PCDATA )>
+<!ELEMENT BIND-Rec-coll-descr_db ( BIND-Database-site )>
+ 
+ 
+ 
+<!-- Definition of BIND-Submitter -->
+ 
+ 
+<!-- 
+ *************
+ * Submitter *
+ *************
+ ***************************************************************************
+ Description of a submitter (Adaptation of NCBI Submit-Block)
+ 
+ Field description for BIND-Submitter
+ ************************************
+ contact = submitter contact information
+ hup     = hold this submission until published
+ subtype = submission type
+ tool    = tool used to submit record (e.g. BIND Web Data Entry version 1.0)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Submitter ( 
+               BIND-Submitter_contact ,
+               BIND-Submitter_hup? ,
+               BIND-Submitter_subtype ,
+               BIND-Submitter_tool? )>
+ 
+<!ELEMENT BIND-Submitter_contact ( BIND-Contact-info )>
+<!ELEMENT BIND-Submitter_hup %BOOLEAN; >
+<!ATTLIST BIND-Submitter_hup value ( true | false ) "false" >
+<!ELEMENT BIND-Submitter_subtype %ENUM; >
+<!ATTLIST BIND-Submitter_subtype value ( 
+               not-specified |
+               new |
+               update |
+               revision |
+               import |
+               export |
+               other )  #REQUIRED >
+<!ELEMENT BIND-Submitter_tool ( BIND-Submission-tool )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-Submission-tool -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Structured submission tool description
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Submission-tool ( 
+               BIND-Submission-tool_name ,
+               BIND-Submission-tool_version ,
+               BIND-Submission-tool_descr? )>
+ 
+<!ELEMENT BIND-Submission-tool_name ( #PCDATA )>
+<!ELEMENT BIND-Submission-tool_version ( #PCDATA )>
+<!ELEMENT BIND-Submission-tool_descr ( #PCDATA )>
+ 
+ 
+<!-- Definition of BIND-Contact-info -->
+ 
+ 
+<!-- 
+ ***********************
+ * Contact Information *
+ ***********************
+ ***************************************************************************
+ Contact information (Adaptation of NCBI Contact-info)
+ 
+ Field description for BIND-Contact-info
+ ***************************************
+ first-name     = First name of submitter
+ middle-initial = Middle initial of submitter
+ last-name      = Last name of submitter
+ address        = Street address of submitter
+ room           = Room number
+ dept           = Department
+ institute      = Institute if this is different than organization
+                  (e.g. research institute)
+ organization   = Organization (e.g. University of Toronto)
+ city           = City
+ pcode          = Zip or postal code
+ country        = Country
+ phone          = Phone number (with area code)
+ fax            = Fax number (with area code)
+ email          = E-mail address
+ userid         = User ID number
+ password       = User password
+ other          = any other contact information
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Contact-info ( 
+               BIND-Contact-info_first-name? ,
+               BIND-Contact-info_middle-initial? ,
+               BIND-Contact-info_last-name? ,
+               BIND-Contact-info_address? ,
+               BIND-Contact-info_room? ,
+               BIND-Contact-info_dept? ,
+               BIND-Contact-info_institute? ,
+               BIND-Contact-info_organization? ,
+               BIND-Contact-info_city? ,
+               BIND-Contact-info_pcode? ,
+               BIND-Contact-info_country? ,
+               BIND-Contact-info_phone? ,
+               BIND-Contact-info_fax? ,
+               BIND-Contact-info_email? ,
+               BIND-Contact-info_userid? ,
+               BIND-Contact-info_other? ,
+               BIND-Contact-info_password? )>
+ 
+<!ELEMENT BIND-Contact-info_first-name ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_middle-initial ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_last-name ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_address ( BIND-Contact-info_address_E* )>
+<!ELEMENT BIND-Contact-info_room ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_dept ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_institute ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_organization ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_city ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_pcode ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_country ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_phone ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_fax ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_email ( #PCDATA )>
+<!ELEMENT BIND-Contact-info_userid ( %INTEGER; )>
+<!ELEMENT BIND-Contact-info_other ( Dbtag* )>
+<!ELEMENT BIND-Contact-info_password ( #PCDATA )>
+ 
+<!ELEMENT BIND-Contact-info_address_E ( #PCDATA )>
+ 
+ 
+ 
+<!-- Definition of BIND-pub-set -->
+ 
+ 
+<!-- 
+ ****************
+ * Publications *
+ ****************
+ ***************************************************************************
+ A set of publications
+ 
+ Field description for BIND-pub-set
+ **********************************
+ disputed = TRUE if a BIND-pub-object in this set contains a dispute flag
+ pubs     = a sequence of BIND-pub-objects
+ evidence = unpublished data/evidence for use in a private satellite
+            database
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-pub-set ( 
+               BIND-pub-set_disputed? ,
+               BIND-pub-set_pubs ,
+               BIND-pub-set_evidence? )>
+ 
+<!ELEMENT BIND-pub-set_disputed %BOOLEAN; >
+<!ATTLIST BIND-pub-set_disputed value ( true | false ) "false" >
+<!ELEMENT BIND-pub-set_pubs ( BIND-pub-object+ )>
+<!ELEMENT BIND-pub-set_evidence ( BIND-evidence-object* )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-pub-object -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A publication
+ 
+ Field description for BIND-pub-object
+ *************************************
+ descr   = text description of this object
+ opinion = does this publication support or dispute the data?
+ pub     = full NCBI publication reference
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-pub-object ( 
+               BIND-pub-object_descr? ,
+               BIND-pub-object_opinion ,
+               BIND-pub-object_pub )>
+ 
+<!ELEMENT BIND-pub-object_descr ( #PCDATA )>
+<!ELEMENT BIND-pub-object_opinion %ENUM; >
+<!ATTLIST BIND-pub-object_opinion value ( 
+               none |
+               support |
+               dispute )  #REQUIRED >
+<!ELEMENT BIND-pub-object_pub ( Pub )>
+ 
+ 
+ 
+<!-- Definition of BIND-evidence-object -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A piece of user defined evidence
+ 
+ Field description for BIND-evidence-object
+ ******************************************
+ descr         = text description of this object
+ opinion       = does this evidence support or dispute the data?
+ user-evidence = user defined evidence (e.g. gel picture)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-evidence-object ( 
+               BIND-evidence-object_descr? ,
+               BIND-evidence-object_opinion ,
+               BIND-evidence-object_user-evidence )>
+ 
+<!ELEMENT BIND-evidence-object_descr ( #PCDATA )>
+<!ELEMENT BIND-evidence-object_opinion %ENUM; >
+<!ATTLIST BIND-evidence-object_opinion value ( 
+               none |
+               support |
+               dispute )  #REQUIRED >
+<!ELEMENT BIND-evidence-object_user-evidence ( User-object )>
+ 
+ 
+ 
+<!-- Definition of BIND-update-object -->
+ 
+ 
+<!-- 
+ *****************
+ * Record Update *
+ *****************
+ ***************************************************************************
+ An update for a record
+ 
+ Field description for BIND-update
+ *********************************
+ date  = date of this update
+ descr = text description of update (this can store any update information
+         up to the entire previous version of the record in ASN.1)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-update-object ( 
+               BIND-update-object_date ,
+               BIND-update-object_descr )>
+ 
+<!ELEMENT BIND-update-object_date ( Date )>
+<!ELEMENT BIND-update-object_descr ( #PCDATA )>
+ 
+ 
+ 
+<!-- Definition of BIND-update-list -->
+ 
+<!ELEMENT BIND-update-list ( 
+               BIND-update-list_updates )>
+ 
+<!ELEMENT BIND-update-list_updates ( BIND-update-object+ )>
+ 
+ 
+ 
+<!-- Definition of BIND-cellstage -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Cell cycle stage
+ 
+ Field description for BIND-cellstage
+ ************************************
+ phase = phase of cell cycle
+ descr = text description of cell stage (e.g. if 'other' is specified)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-cellstage ( 
+               BIND-cellstage_phase ,
+               BIND-cellstage_descr? )>
+ 
+<!ELEMENT BIND-cellstage_phase ( %INTEGER; )>
+<!ATTLIST BIND-cellstage_phase value ( 
+               not-specified |
+               constitutive |
+               interphase |
+               division |
+               g1 |
+               s |
+               g2 |
+               mitosis |
+               prophase |
+               prometaphase |
+               metaphase |
+               anaphase |
+               telophase |
+               cytokinesis |
+               meiosis |
+               prophase1 |
+               leptotene |
+               zygotene |
+               pachytene |
+               diplotene |
+               diakinesis |
+               metaphase1 |
+               anaphase1 |
+               telophase1 |
+               meiotic-cytokinesis |
+               prophase2 |
+               metaphase2 |
+               anaphase2 |
+               telophase2 |
+               meiotic-cytokinesis2 |
+               other )  #IMPLIED >
+<!ELEMENT BIND-cellstage_descr ( #PCDATA )>
+ 
+ 
+<!-- Definition of RealVal-Units -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A Real Number
+ 
+ Field description for RealVal-Units
+ ***********************************
+ scaled-integer-value * 10^(scale-factor)
+ units = string value of the units involved (e.g. ml, M, etc.)
+ ***************************************************************************
+ -->
+<!ELEMENT RealVal-Units ( 
+               RealVal-Units_scale-factor ,
+               RealVal-Units_scaled-integer-value ,
+               RealVal-Units_units? )>
+ 
+<!ELEMENT RealVal-Units_scale-factor ( %INTEGER; )>
+<!ELEMENT RealVal-Units_scaled-integer-value ( %INTEGER; )>
+<!ELEMENT RealVal-Units_units ( #PCDATA )>
+ 
+ 
+<!-- Definition of RealFuzzVal-Units -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A Fuzzy Real Number
+ 
+ Modeled after NCBI Int-fuzz
+ 
+ Field description for RealFuzzVal-Units
+ ***************************************
+ p-m   = plus or minus a fixed amount
+ range = max to min
+ alt   = set of alternate numbers
+ ***************************************************************************
+ -->
+<!ELEMENT RealFuzzVal-Units ( 
+               RealFuzzVal-Units_p-m |
+               RealFuzzVal-Units_range |
+               RealFuzzVal-Units_alt )>
+ 
+<!ELEMENT RealFuzzVal-Units_p-m ( RealVal-Units )>
+<!ELEMENT RealFuzzVal-Units_range ( RealFuzzVal-Range )>
+<!ELEMENT RealFuzzVal-Units_alt ( RealVal-Units+ )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of RealFuzzVal-Range -->
+ 
+<!ELEMENT RealFuzzVal-Range ( 
+               RealFuzzVal-Range_max ,
+               RealFuzzVal-Range_min )>
+ 
+<!ELEMENT RealFuzzVal-Range_max ( RealVal-Units )>
+<!ELEMENT RealFuzzVal-Range_min ( RealVal-Units )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-int-fuzz -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A possibly fuzzy integer
+ 
+ Field description for BIND-int-fuzz
+ ***********************************
+ num      = an integer
+ num-fuzz = a fuzzy integer
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-int-fuzz ( 
+               BIND-int-fuzz_num |
+               BIND-int-fuzz_num-fuzz )>
+ 
+<!ELEMENT BIND-int-fuzz_num ( %INTEGER; )>
+<!ELEMENT BIND-int-fuzz_num-fuzz ( Int-fuzz )>
+ 
+ 
+ 
+<!-- Definition of BIND-param -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A generalized value
+ 
+ Field description for BIND-param
+ ********************************
+ descr = description of this parameter
+ value = the actual value
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-param ( 
+               BIND-param_descr ,
+               BIND-param_value )>
+ 
+<!ELEMENT BIND-param_descr ( #PCDATA )>
+<!ELEMENT BIND-param_value ( BIND-param-val )>
+ 
+ 
+ 
+<!-- Definition of BIND-param-val -->
+ 
+<!ELEMENT BIND-param-val ( 
+               BIND-param-val_string |
+               BIND-param-val_real |
+               BIND-param-val_realfuz )>
+ 
+<!ELEMENT BIND-param-val_string ( #PCDATA )>
+<!ELEMENT BIND-param-val_real ( RealVal-Units )>
+<!ELEMENT BIND-param-val_realfuz ( RealFuzzVal-Units )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-Interaction-set -->
+ 
+ 
+<!-- 
+ /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+ ***************
+ * Interaction *
+ ***************
+ ***************************************************************************
+ A set of interactions
+ 
+ Field description for BIND-Interaction-set
+ ******************************************
+ date         = date this set of records was collected
+ database     = name and description of database that this set originates
+ interactions = set of interaction records
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Interaction-set ( 
+               BIND-Interaction-set_date? ,
+               BIND-Interaction-set_database? ,
+               BIND-Interaction-set_interactions )>
+ 
+<!ELEMENT BIND-Interaction-set_date ( Date )>
+<!ELEMENT BIND-Interaction-set_database ( BIND-Database-site )>
+<!ELEMENT BIND-Interaction-set_interactions ( BIND-Interaction+ )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-Interaction -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A BIND-Interaction record can store all of the details of an interaction
+ between any two genes, molecules (or atoms).
+ 
+ Generally, BIND-Interaction stores a physical interaction between two
+ objects.  However, if gene is chosen for one of the BIND-object types,
+ the interaction will be less precise and will be considered a functional
+ relationship instead of a physical interaction.  Gene can represent the
+ actual genetic sequence as DNA (or RNA in e.g. some virii) or any
+ intermediate or final product of the gene such as mRNA, tRNA, protein or
+ post-translationally modified protein.
+ 
+ Field description for BIND-Interaction
+ **************************************
+ date       = date of record entry
+ updates    = a list of updates for this record
+ iid        = interaction accession number
+ a          = molecule A interacts with...
+ b          = molecule B
+ descr      = description of interaction
+ source     = empirical evidence references (publications)
+ authors    = person(s) who authored this record
+ collection = interaction is part of a record collection
+		(i.e. a satellite BIND database)
+ priv       = TRUE if this interaction is private
+ ***************************************************************************
+ NOTE: In the context of this data specification, the 'priv' flag means:
+	 -Do not export this record.
+	 -In a public database, this record is not available to be publicly
+	  retrieved.
+	 -In a private database, this record can be retrieved, but it will
+	  not be exported.
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Interaction ( 
+               BIND-Interaction_date ,
+               BIND-Interaction_updates? ,
+               BIND-Interaction_iid ,
+               BIND-Interaction_a ,
+               BIND-Interaction_b ,
+               BIND-Interaction_descr ,
+               BIND-Interaction_source ,
+               BIND-Interaction_authors? ,
+               BIND-Interaction_collection? ,
+               BIND-Interaction_priv? )>
+ 
+<!ELEMENT BIND-Interaction_date ( Date )>
+<!ELEMENT BIND-Interaction_updates ( BIND-update-object* )>
+<!ELEMENT BIND-Interaction_iid ( Interaction-id )>
+<!ELEMENT BIND-Interaction_a ( BIND-object )>
+<!ELEMENT BIND-Interaction_b ( BIND-object )>
+<!ELEMENT BIND-Interaction_descr ( BIND-descr )>
+<!ELEMENT BIND-Interaction_source ( BIND-pub-set )>
+<!ELEMENT BIND-Interaction_authors ( Author* )>
+<!ELEMENT BIND-Interaction_collection ( BIND-Rec-coll-descr )>
+<!ELEMENT BIND-Interaction_priv %BOOLEAN; >
+<!ATTLIST BIND-Interaction_priv value ( true | false ) "false" >
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of Interaction-id -->
+ 
+ 
+<!-- 
+ ***********************
+ * Biomolecular Object *
+ ***********************
+ ***************************************************************************
+ Any chemical object
+ 
+ Field description for BIND-object
+ *********************************
+ short-label = short label of this object (e.g. ATP, S4, HSP70)
+ other-names = list of short-label synonyms for this object
+ id = the type of chemical object and a pointer to a record in a database
+	of the object type (e.g. protein database)
+ origin = material source (biological or chemical origin)
+ cell-stage = description of cell cycle stages this object is specific to
+ place = the cellular location of this molecule
+ seq = space for sequence, if it is not in a public database
+	 ALSO, this can be a consensus sequence for binding of this object
+	 (e.g. transcription factor binding to DNA)
+ struc = space for complete structure, if not in public database
+	   (This should not be used to store a structure that is already in
+	   the MMDB)
+ descr = text description of this object
+ user-id = user defined use (e.g. can be used to reference records in an
+           optional relational BIND-object table)
+ ***************************************************************************
+ -->
+<!ELEMENT Interaction-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-object -->
+ 
+<!ELEMENT BIND-object ( 
+               BIND-object_short-label ,
+               BIND-object_other-names? ,
+               BIND-object_id ,
+               BIND-object_origin ,
+               BIND-object_cell-stage? ,
+               BIND-object_place? ,
+               BIND-object_seq? ,
+               BIND-object_struc? ,
+               BIND-object_descr? ,
+               BIND-object_user-id? )>
+ 
+<!ELEMENT BIND-object_short-label ( #PCDATA )>
+<!ELEMENT BIND-object_other-names ( BIND-object_other-names_E* )>
+<!ELEMENT BIND-object_id ( BIND-object-type-id )>
+<!ELEMENT BIND-object_origin ( BIND-object-origin )>
+<!ELEMENT BIND-object_cell-stage ( BIND-cellstage* )>
+<!ELEMENT BIND-object_place ( BIND-place-set )>
+<!ELEMENT BIND-object_seq ( Bioseq )>
+<!ELEMENT BIND-object_struc ( #PCDATA )>
+<!ELEMENT BIND-object_descr ( #PCDATA )>
+<!ELEMENT BIND-object_user-id ( %INTEGER; )>
+ 
+<!ELEMENT BIND-object_other-names_E ( #PCDATA )>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-object-type-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ An ID for a chemical object
+ 
+ Field description for BIND-object-type-id
+ *****************************************
+ not-specified  = the type of this object is not specified
+ protein        = the object is a protein - reference protein sequence
+ dna            = the object is DNA - reference DNA sequence
+ rna            = the object is RNA - reference RNA sequence
+ small-molecule = the object is a small molecule (e.g proton to penicillin)
+                  reference a small molecule database like LIGAND
+ complex        = the object is a molecular complex - reference molecular
+                  complex in BIND
+ gene           = the object is a gene - reference DNA sequence. While the
+                  DNA is referenced, this object can actually represent
+                  DNA, RNA, protein or other modified gene product. It is
+                  a 'fuzzy' representation.
+ photon         = the object is light - record properties of light
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-object-type-id ( 
+               BIND-object-type-id_not-specified |
+               BIND-object-type-id_protein |
+               BIND-object-type-id_dna |
+               BIND-object-type-id_rna |
+               BIND-object-type-id_small-molecule |
+               BIND-object-type-id_complex |
+               BIND-object-type-id_gene |
+               BIND-object-type-id_photon )>
+ 
+<!ELEMENT BIND-object-type-id_not-specified %NULL; >
+<!ELEMENT BIND-object-type-id_protein ( BIND-id )>
+<!ELEMENT BIND-object-type-id_dna ( BIND-id )>
+<!ELEMENT BIND-object-type-id_rna ( BIND-id )>
+<!ELEMENT BIND-object-type-id_small-molecule ( BIND-small-molecule-id )>
+<!ELEMENT BIND-object-type-id_complex ( Molecular-Complex-id )>
+<!ELEMENT BIND-object-type-id_gene ( BIND-id )>
+<!ELEMENT BIND-object-type-id_photon ( BIND-photon )>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-object-origin -->
+ 
+<!ELEMENT BIND-object-origin ( 
+               BIND-object-origin_not-specified |
+               BIND-object-origin_org |
+               BIND-object-origin_chem )>
+ 
+<!ELEMENT BIND-object-origin_not-specified %NULL; >
+<!ELEMENT BIND-object-origin_org ( BioSource )>
+<!ELEMENT BIND-object-origin_chem ( BIND-chemsource )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-chemsource -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Summary description of a chemical compound
+ 
+ Field description for BIND-chemsource
+ *************************************
+ names            = chemical compound name and any synonyms
+ smiles-string    = standard smiles-string for this compound
+   References for SMILES language:
+     D. Weininger, SMILES, a Chemical Language and Information System.
+     1. Introduction to Methodology and Encoding Rules,
+     J. Chem. Inf. Comput. Sci. 1988, 28, 31-36.
+   Web sites:
+     http://www.daylight.com/dayhtml/smiles/smiles-intro.html
+     http://www2.ccc.uni-erlangen.de/services/smiles.html
+ molecular-weight = molecular weight of this compound in g/mol
+ chemical-formula = chemical formula of the compound (e.g.C3H7NO2)
+ cas-number       = Chemical Abstracts Service (http://www.cas.org/)
+		      database number for this compound (e.g. 56-41-7)
+ nat-prod       = biological source information if this is a natural product
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-chemsource ( 
+               BIND-chemsource_names ,
+               BIND-chemsource_smiles-string? ,
+               BIND-chemsource_chemical-formula? ,
+               BIND-chemsource_molecular-weight? ,
+               BIND-chemsource_cas-number? ,
+               BIND-chemsource_nat-prod? )>
+ 
+<!ELEMENT BIND-chemsource_names ( BIND-chemsource_names_E+ )>
+<!ELEMENT BIND-chemsource_smiles-string ( #PCDATA )>
+<!ELEMENT BIND-chemsource_chemical-formula ( #PCDATA )>
+<!ELEMENT BIND-chemsource_molecular-weight ( RealVal-Units )>
+<!ELEMENT BIND-chemsource_cas-number ( #PCDATA )>
+<!ELEMENT BIND-chemsource_nat-prod ( BioSource )>
+ 
+<!ELEMENT BIND-chemsource_names_E ( #PCDATA )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-id -->
+ 
+ 
+<!-- 
+ ***************
+ * Identifiers *
+ ***************
+ ***************************************************************************
+ General sequence or domain identifier
+ 
+ Field description for BIND-id
+ *****************************
+ gi = NCBI integer accession number (optional only for sequence data with
+	no NCBI database identifier).
+	NOTE: gi is stored so that a BIND-object refers to a constant sequence
+	molecule.  This is necessary to maintain data integrity of Seq-loc's
+	also stored in the BIND database.
+ di    = domain accession number (from the domain split database)
+ other = open field for other possible NCBI defined pointers
+	   (if possible, equivalent GenBank accession number to this
+          gi should be stored here as well)
+         Any database pointer may be put in here. E.g. GO
+         (www.geneontology.org).
+ 
+ NOTE: There is a field for gi in a Seq-id, but it should not be used
+ in this object. Private databases should use the Seq-id.general field.
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-id ( 
+               BIND-id_gi? ,
+               BIND-id_di? ,
+               BIND-id_other? )>
+ 
+<!ELEMENT BIND-id_gi ( Geninfo-id )>
+<!ELEMENT BIND-id_di ( Domain-id )>
+<!ELEMENT BIND-id_other ( Seq-id* )>
+ 
+ 
+ 
+<!-- Definition of Geninfo-id -->
+ 
+<!ELEMENT Geninfo-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of Domain-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Pointer to a small molecule database
+ 
+ Field description for BIND-small-molecule-id
+ ********************************************
+ internal = id number of an internally kept record of a chemical compound
+            Primary key in the BIND small molecule database.
+ other-db = generic pointer to any other database (e.g. Japanese LIGAND db)
+	Contains the name of the database, an integer pointer and/or a string
+	pointer.
+ ***************************************************************************
+ -->
+<!ELEMENT Domain-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-small-molecule-id -->
+ 
+<!ELEMENT BIND-small-molecule-id ( 
+               BIND-small-molecule-id_internal |
+               BIND-small-molecule-id_other-db )>
+ 
+<!ELEMENT BIND-small-molecule-id_internal ( Internal-small-molecule-id )>
+<!ELEMENT BIND-small-molecule-id_other-db ( BIND-other-db )>
+ 
+ 
+ 
+<!-- Definition of Internal-small-molecule-id -->
+ 
+<!ELEMENT Internal-small-molecule-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-other-db -->
+ 
+<!ELEMENT BIND-other-db ( 
+               BIND-other-db_dbname ,
+               BIND-other-db_intp? ,
+               BIND-other-db_strp? )>
+ 
+<!ELEMENT BIND-other-db_dbname ( #PCDATA )>
+<!ELEMENT BIND-other-db_intp ( %INTEGER; )>
+<!ELEMENT BIND-other-db_strp ( #PCDATA )>
+ 
+ 
+<!-- Definition of BIND-photon -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of electro-magnetic radiation (light)
+ 
+ Field description for BIND-photon
+ *********************************
+ wavelength = wavelength for this light (can be fuzzy)
+ intensity  = intensity for this light (can be fuzzy)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-photon ( 
+               BIND-photon_wavelength ,
+               BIND-photon_intensity )>
+ 
+<!ELEMENT BIND-photon_wavelength ( RealFuzzVal-Units )>
+<!ELEMENT BIND-photon_intensity ( RealFuzzVal-Units )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-descr -->
+ 
+ 
+<!-- 
+ *************************************************
+ * Interaction Description (in BIND-Interaction) *
+ *************************************************
+ ***************************************************************************
+ Full description of an interaction
+ 
+ Field description for BIND-descr
+ ********************************
+ simple-descr   = text description of this interaction
+ place          = description of cellular place of interaction
+ cond           = binding conditions/experimental conditions
+ cons           = conserved sequence comment
+ binding-sites  = location of binding sites on molecule A and B
+ action = list of chemical actions that can occur in this interaction
+ state  = list of chemical states of molecule A and B as well as required
+	    state for interaction to occur
+ intramolecular = only relevant if molecule A and B refer to the same
+                  molecule. TRUE if the interaction is intramolecular
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-descr ( 
+               BIND-descr_simple-descr? ,
+               BIND-descr_place? ,
+               BIND-descr_cond? ,
+               BIND-descr_cons? ,
+               BIND-descr_binding-sites? ,
+               BIND-descr_action? ,
+               BIND-descr_state? ,
+               BIND-descr_intramolecular? )>
+ 
+<!ELEMENT BIND-descr_simple-descr ( #PCDATA )>
+<!ELEMENT BIND-descr_place ( BIND-place-set )>
+<!ELEMENT BIND-descr_cond ( BIND-condition-set )>
+<!ELEMENT BIND-descr_cons ( BIND-cons-seq-set )>
+<!ELEMENT BIND-descr_binding-sites ( BIND-loc )>
+<!ELEMENT BIND-descr_action ( BIND-action-set )>
+<!ELEMENT BIND-descr_state ( BIND-state-descr )>
+<!ELEMENT BIND-descr_intramolecular %BOOLEAN; >
+<!ATTLIST BIND-descr_intramolecular value ( true | false ) "false" >
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-place-set -->
+ 
+ 
+<!-- 
+ **********************************************
+ * Cellular Interaction Place (in BIND-descr) *
+ **********************************************
+ ***************************************************************************
+ A set of cellular locations.
+ 
+ It is assumed that adjacent cellular locations listed in this set
+ represents spanning across adjacent sub-cellular compartments
+ 
+ Field description for BIND-place-set
+ ************************************
+ max-bpid = the highest bpid used in this set
+ places   = set of BIND-place objects
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-place-set ( 
+               BIND-place-set_max-bpid ,
+               BIND-place-set_places )>
+ 
+<!ELEMENT BIND-place-set_max-bpid ( BIND-place-id )>
+<!ELEMENT BIND-place-set_places ( BIND-place+ )>
+ 
+ 
+ 
+<!-- Definition of BIND-place -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Location of interaction with respect to the cell
+ 
+ Field description for BIND-place
+ ********************************
+ bpid       = internal BIND place ID number (0..n within interaction record)
+ gen-place  = general cellular locations where this interaction takes place
+	        (computer readable)
+ spec-place = specific text locations of the interaction
+	        (human readable)
+ source     = empirical evidence references (publications)
+ descr      = text description (e.g. method of finding interaction place)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-place ( 
+               BIND-place_bpid ,
+               BIND-place_gen-place ,
+               BIND-place_spec-place? ,
+               BIND-place_source? ,
+               BIND-place_descr? )>
+ 
+<!ELEMENT BIND-place_bpid ( BIND-place-id )>
+<!ELEMENT BIND-place_gen-place ( BIND-gen-place-set )>
+<!ELEMENT BIND-place_spec-place ( BIND-spec-place-set )>
+<!ELEMENT BIND-place_source ( BIND-pub-set )>
+<!ELEMENT BIND-place_descr ( #PCDATA )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-place-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Unique reference to a cellular place
+ 
+ Field description for BIND-place-ref
+ ************************************
+ from-iid = interaction that contains the place
+ place    = BIND-place-id (bpid) of the place
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-place-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-place-ref -->
+ 
+<!ELEMENT BIND-place-ref ( 
+               BIND-place-ref_from-iid ,
+               BIND-place-ref_place )>
+ 
+<!ELEMENT BIND-place-ref_from-iid ( Interaction-id )>
+<!ELEMENT BIND-place-ref_place ( BIND-place-id )>
+ 
+ 
+<!-- Definition of BIND-gen-place-set -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ General start and end places for an interaction
+ 
+ Field description for BIND-gen-place-set
+ ****************************************
+ start = general place in the cell where this interaction takes place
+ end   = general place in the cell where this interaction ends
+	   (e.g. for translocation)
+ descr = text description (e.g. mechanism of translocation)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-gen-place-set ( 
+               BIND-gen-place-set_start ,
+               BIND-gen-place-set_end? ,
+               BIND-gen-place-set_descr? )>
+ 
+<!ELEMENT BIND-gen-place-set_start ( BIND-gen-place )>
+<!ELEMENT BIND-gen-place-set_end ( BIND-gen-place )>
+<!ELEMENT BIND-gen-place-set_descr ( #PCDATA )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-gen-place -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ General cellular place where this interaction takes place
+ 
+ This object is meant to be computer readable for e.g. a pathway
+ drawing program.  Further cell locations are not listed because
+ there are too many in biology.
+ 
+ Field description for BIND-gen-place
+ ************************************
+ A listing of general cell places
+ other = provide further description in BIND-spec-place
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-gen-place ( 
+               BIND-gen-place_not-specified |
+               BIND-gen-place_extracellular |
+               BIND-gen-place_cytoplasm |
+               BIND-gen-place_cell-wall |
+               BIND-gen-place_outer-membrane |
+               BIND-gen-place_cytoplasmic-membrane |
+               BIND-gen-place_organelle-unknown |
+               BIND-gen-place_organelle-other |
+               BIND-gen-place_nucleus |
+               BIND-gen-place_nuc-outer-membrane |
+               BIND-gen-place_nuc-inner-membrane |
+               BIND-gen-place_nuclear-pore |
+               BIND-gen-place_nucleolus |
+               BIND-gen-place_chromatin |
+               BIND-gen-place_er-general |
+               BIND-gen-place_er-smooth |
+               BIND-gen-place_er-rough |
+               BIND-gen-place_golgi |
+               BIND-gen-place_golgi-stack |
+               BIND-gen-place_cis-golgi |
+               BIND-gen-place_medial-golgi |
+               BIND-gen-place_trans-golgi |
+               BIND-gen-place_vacuole |
+               BIND-gen-place_vesicle |
+               BIND-gen-place_lysosome |
+               BIND-gen-place_peroxisome |
+               BIND-gen-place_endosome |
+               BIND-gen-place_mitochondrion |
+               BIND-gen-place_chloroplast |
+               BIND-gen-place_plastid |
+               BIND-gen-place_centrosome |
+               BIND-gen-place_centriole |
+               BIND-gen-place_cytoskeleton |
+               BIND-gen-place_ribosome |
+               BIND-gen-place_flagella |
+               BIND-gen-place_cilia |
+               BIND-gen-place_other )>
+ 
+<!ELEMENT BIND-gen-place_not-specified %NULL; >
+<!ELEMENT BIND-gen-place_extracellular %NULL; >
+<!ELEMENT BIND-gen-place_cytoplasm %NULL; >
+<!ELEMENT BIND-gen-place_cell-wall ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_outer-membrane ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_cytoplasmic-membrane ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_organelle-unknown ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_organelle-other ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_nucleus ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_nuc-outer-membrane ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_nuc-inner-membrane ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_nuclear-pore ( BIND-localize )>
+<!ELEMENT BIND-gen-place_nucleolus ( BIND-localize )>
+<!ELEMENT BIND-gen-place_chromatin ( BIND-localize )>
+<!ELEMENT BIND-gen-place_er-general ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_er-smooth ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_er-rough ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_golgi ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_golgi-stack ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_cis-golgi ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_medial-golgi ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_trans-golgi ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_vacuole ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_vesicle ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_lysosome ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_peroxisome ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_endosome ( BIND-membrane )>
+<!ELEMENT BIND-gen-place_mitochondrion ( BIND-dmo )>
+<!ELEMENT BIND-gen-place_chloroplast ( BIND-chlor )>
+<!ELEMENT BIND-gen-place_plastid ( BIND-dmo )>
+<!ELEMENT BIND-gen-place_centrosome ( BIND-localize )>
+<!ELEMENT BIND-gen-place_centriole ( BIND-localize )>
+<!ELEMENT BIND-gen-place_cytoskeleton ( BIND-localize )>
+<!ELEMENT BIND-gen-place_ribosome ( BIND-localize )>
+<!ELEMENT BIND-gen-place_flagella ( BIND-cilflag )>
+<!ELEMENT BIND-gen-place_cilia ( BIND-cilflag )>
+<!ELEMENT BIND-gen-place_other %NULL; >
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-membrane -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of a location in a lipid bilayer membrane
+ 
+ Field description for BIND-membrane
+ ***********************************
+ not-specified = somewhere in membrane
+ outer-surface = on the outer surface of the membrane
+ within        = within the bilayer
+ inner-surface = on the inner surface of the membrane
+ lumen         = in the lumen that the membrane surrounds
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-membrane %ENUM; >
+<!ATTLIST BIND-membrane value ( 
+               not-specified |
+               outer-surface |
+               within |
+               inner-surface |
+               lumen )  #REQUIRED >
+ 
+ 
+ 
+<!-- Definition of BIND-dmo -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of a location in a double membrane organelle
+ 
+ Field description for BIND-dmo
+ ******************************
+ general        = generally part of the organelle, outer or inner membrane
+                  localization not known
+ outer-membrane = found in the outer membrane
+ inner-membrane = found in the inner membrane
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-dmo ( 
+               BIND-dmo_general |
+               BIND-dmo_outer-membrane |
+               BIND-dmo_inner-membrane )>
+ 
+<!ELEMENT BIND-dmo_general %NULL; >
+<!ELEMENT BIND-dmo_outer-membrane ( BIND-membrane )>
+<!ELEMENT BIND-dmo_inner-membrane ( BIND-membrane )>
+ 
+ 
+<!-- Definition of BIND-chlor -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of a location in a chloroplast
+ 
+ Field description for BIND-chlor
+ ********************************
+ general        = generally part of the organelle, outer or inner membrane
+                  localization not known
+ outer-membrane = found in the outer membrane
+ inner-membrane = found in the inner membrane
+ grana          = found in the grana
+ thylakoid      = found in the thylakoid
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-chlor ( 
+               BIND-chlor_general |
+               BIND-chlor_outer-membrane |
+               BIND-chlor_inner-membrane |
+               BIND-chlor_grana |
+               BIND-chlor_thylakoid )>
+ 
+<!ELEMENT BIND-chlor_general %NULL; >
+<!ELEMENT BIND-chlor_outer-membrane ( BIND-membrane )>
+<!ELEMENT BIND-chlor_inner-membrane ( BIND-membrane )>
+<!ELEMENT BIND-chlor_grana ( BIND-membrane )>
+<!ELEMENT BIND-chlor_thylakoid ( BIND-membrane )>
+ 
+ 
+<!-- Definition of BIND-localize -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of a location in a non membrane surrounded cell component
+ 
+ Field description for BIND-localize
+ ***********************************
+ not-specified = somewhere in the component
+ component     = part of the component
+ peripherally-associated = associated with the surface of the component
+ other         = other (should have a description in BIND-gen-place-set2)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-localize %ENUM; >
+<!ATTLIST BIND-localize value ( 
+               not-specified |
+               component |
+               peripherally-associated |
+               other )  #REQUIRED >
+ 
+ 
+ 
+<!-- Definition of BIND-cilflag -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of a location in a cilium or flagellum
+ 
+ Field description for BIND-cilflag
+ **********************************
+ general  = generally part of the organelle
+ membrane = part of the membrane surrounding the cilium or flagellum
+ inside   = inside the plasma membrane
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-cilflag ( 
+               BIND-cilflag_general |
+               BIND-cilflag_membrane |
+               BIND-cilflag_inside )>
+ 
+<!ELEMENT BIND-cilflag_general %NULL; >
+<!ELEMENT BIND-cilflag_membrane ( BIND-membrane )>
+<!ELEMENT BIND-cilflag_inside ( BIND-localize )>
+ 
+ 
+<!-- Definition of BIND-spec-place-set -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Specific start and end places for an interaction
+ (Human readable)
+ 
+ Field description for BIND-spec-place-set
+ *****************************************
+ start  = specific location where this interaction takes place
+	   (e.g. trans golgi, basal membrane, inner mitochondrial space, etc.)
+ end    = specific location where this interaction ends
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-spec-place-set ( 
+               BIND-spec-place-set_start ,
+               BIND-spec-place-set_end? )>
+ 
+<!ELEMENT BIND-spec-place-set_start ( BIND-spec-place )>
+<!ELEMENT BIND-spec-place-set_end ( BIND-spec-place )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-spec-place -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Specific place of an interaction
+ (Human readable)
+ 
+ Field description for BIND-spec-place
+ *************************************
+ descr    = description of this place
+ other-db = reference in a cellular location database
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-spec-place ( 
+               BIND-spec-place_descr ,
+               BIND-spec-place_other-db? )>
+ 
+<!ELEMENT BIND-spec-place_descr ( #PCDATA )>
+<!ELEMENT BIND-spec-place_other-db ( BIND-other-db )>
+ 
+ 
+ 
+<!-- Definition of BIND-condition-set -->
+ 
+ 
+<!-- 
+ ******************************************
+ * Interaction conditions (in BIND-descr) *
+ ******************************************
+ ***************************************************************************
+ A set of experimental conditions.
+ 
+ Field description for BIND-conditions-set
+ *****************************************
+ max-icid   = the highest icid used in this set
+ conditions = set of BIND-condition objects
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-condition-set ( 
+               BIND-condition-set_max-icid ,
+               BIND-condition-set_conditions )>
+ 
+<!ELEMENT BIND-condition-set_max-icid ( Internal-conditions-id )>
+<!ELEMENT BIND-condition-set_conditions ( BIND-condition+ )>
+ 
+ 
+ 
+<!-- Definition of BIND-condition -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ An experimental condition that has been used to observe
+ this interaction.  Interaction conclusion must be reproducible
+ using this information.
+ 
+ Field description for BIND-conditions
+ *************************************
+ icid        = internal condition id (0..n within interaction record)
+ general     = list of possible general experimental conditions
+ system      = experimental system used
+ exp-form-a  = experimental form of biomolecule A used if different from
+               actual biomolecule. (e.g. HIS tagged sequence, ATP analogue)
+ exp-form-b  = experimental form of biomolecule B used if different from
+               actual biomolecule.
+ site        = site(s) on molecule A or B that this experiment detects or
+               are involved in this experiment
+ descr       = text description (e.g. if 'other' is specified
+               in conditions or system)
+ other-db    = reference to an experimental method database
+ source      = empirical evidence
+ genetic-exp = genetic experiment description
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-condition ( 
+               BIND-condition_icid ,
+               BIND-condition_general ,
+               BIND-condition_system ,
+               BIND-condition_exp-form-a? ,
+               BIND-condition_exp-form-b? ,
+               BIND-condition_site? ,
+               BIND-condition_descr? ,
+               BIND-condition_other-db? ,
+               BIND-condition_source? ,
+               BIND-condition_genetic-exp? )>
+ 
+<!ELEMENT BIND-condition_icid ( Internal-conditions-id )>
+<!ELEMENT BIND-condition_general %ENUM; >
+<!ATTLIST BIND-condition_general value ( 
+               in-vitro |
+               in-vivo |
+               in-situ |
+               in-silico |
+               other )  #REQUIRED >
+<!ELEMENT BIND-condition_system ( BIND-experimental-system )>
+<!ELEMENT BIND-condition_exp-form-a ( BIND-experimental-form )>
+<!ELEMENT BIND-condition_exp-form-b ( BIND-experimental-form )>
+<!ELEMENT BIND-condition_site ( BIND-loc-site-ref* )>
+<!ELEMENT BIND-condition_descr ( #PCDATA )>
+<!ELEMENT BIND-condition_other-db ( BIND-other-db )>
+<!ELEMENT BIND-condition_source ( BIND-pub-set )>
+<!ELEMENT BIND-condition_genetic-exp ( BIND-genetic-experiment )>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of Internal-conditions-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Unique reference to an experimental condition
+ 
+ Field description for BIND-condition-ref
+ ****************************************
+ from-iid  = interaction that contains the place
+ condition = Internal-conditions-id (icid) of the experimental condition
+ ***************************************************************************
+ -->
+<!ELEMENT Internal-conditions-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-condition-ref -->
+ 
+<!ELEMENT BIND-condition-ref ( 
+               BIND-condition-ref_from-iid ,
+               BIND-condition-ref_condition )>
+ 
+<!ELEMENT BIND-condition-ref_from-iid ( Interaction-id )>
+<!ELEMENT BIND-condition-ref_condition ( Internal-conditions-id )>
+ 
+ 
+<!-- Definition of BIND-experimental-system -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A list of experimental systems
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-experimental-system ( %INTEGER; )>
+<!ATTLIST BIND-experimental-system value ( 
+               not-specified |
+               alanine-scanning |
+               affinity-chromatography |
+               atomic-force-microscopy |
+               autoradiography |
+               competition-binding |
+               cross-linking |
+               deuterium-hydrogen-exchange |
+               electron-microscopy |
+               electron-spin-resonance |
+               elisa |
+               equilibrium-dialysis |
+               fluorescence-anisotropy |
+               footprinting |
+               gel-retardation-assays |
+               gel-filtration-chromatography |
+               hybridization |
+               immunoblotting |
+               immunoprecipitation |
+               immunostaining |
+               interaction-adhesion-assay |
+               light-scattering |
+               mass-spectrometry |
+               membrane-filtration |
+               monoclonal-antibody-blockade |
+               nuclear-translocation-assay |
+               phage-display |
+               reconstitution |
+               resonance-energy-transfer |
+               site-directed-mutagenesis |
+               sucrose-gradient-sedimentation |
+               surface-plasmon-resonance-chip |
+               transient-coexpression |
+               three-dimensional-structure |
+               two-hybrid-test |
+               allele-specific-complementation |
+               far-western |
+               other )  #IMPLIED >
+ 
+ 
+ 
+<!-- Definition of BIND-experimental-form -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of the experimental form of a biomolecule used.
+ 
+ Field description for BIND-experimental-form
+ ********************************************
+ object  = experimental form is a biomolecule 
+           (e.g. HIS tagged sequence, ATP analogue)
+ profile = experimental form is a profile (in silico experiments)
+ gene    = experimental form of a gene (if A or B is a gene)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-experimental-form ( 
+               BIND-experimental-form_object |
+               BIND-experimental-form_profile |
+               BIND-experimental-form_gene )>
+ 
+<!ELEMENT BIND-experimental-form_object ( BIND-object )>
+<!ELEMENT BIND-experimental-form_profile ( BIND-profile )>
+<!ELEMENT BIND-experimental-form_gene ( BIND-genotype )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-genotype -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of the experimental form of a gene.
+ 
+ A collection of all of the alleles of this gene that are present on
+ chromosomal and extra-chromosomal genetic elements. Genotype is the
+ allelic composition of the gene of interest.
+ 
+ Field description for BIND-genotype
+ ***********************************
+ tot-copy-num = the total copy number of all the alleles of this gene in
+                the organism used in this experiment
+ alleles      = the sequence of alleles of this gene in the organism used
+                in this experiment
+ expression   = the phenotype expression(s) of this collection of alleles
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-genotype ( 
+               BIND-genotype_tot-copy-num? ,
+               BIND-genotype_alleles ,
+               BIND-genotype_expression? )>
+ 
+<!ELEMENT BIND-genotype_tot-copy-num ( BIND-allele-copy-num )>
+<!ELEMENT BIND-genotype_alleles ( BIND-allele+ )>
+<!ELEMENT BIND-genotype_expression ( BIND-phenotype* )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-allele-copy-num -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of the copy number of an allele.
+ 
+ Field description for BIND-allele-copy-num
+ ******************************************
+ high         = high allele copy number
+ high-ex      = high, copy number is known
+ single       = single allele copy
+ wild-type    = wild-type allele copy number
+ wild-type-ex = wild-type, copy number is known
+ reduced      = reduced allele copy number
+ reduced-ex   = reduced, copy number is known
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-allele-copy-num ( 
+               BIND-allele-copy-num_high |
+               BIND-allele-copy-num_high-ex |
+               BIND-allele-copy-num_single |
+               BIND-allele-copy-num_wild-type |
+               BIND-allele-copy-num_wild-type-ex |
+               BIND-allele-copy-num_reduced |
+               BIND-allele-copy-num_reduced-ex )>
+ 
+<!ELEMENT BIND-allele-copy-num_high %NULL; >
+<!ELEMENT BIND-allele-copy-num_high-ex ( BIND-int-fuzz )>
+<!ELEMENT BIND-allele-copy-num_single %NULL; >
+<!ELEMENT BIND-allele-copy-num_wild-type %NULL; >
+<!ELEMENT BIND-allele-copy-num_wild-type-ex ( BIND-int-fuzz )>
+<!ELEMENT BIND-allele-copy-num_reduced %NULL; >
+<!ELEMENT BIND-allele-copy-num_reduced-ex ( BIND-int-fuzz )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-allele -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of an allele - a form of a gene.
+ 
+ Field description for BIND-allele
+ *********************************
+ genetic-elmt-idx = the index of the genetic element that contains this
+                    allele.  E.g. chrom 1A=1, chrom 1B=2, plasmid 1=3...
+ id               = a reference to the DNA genome sequence "gene"
+ names            = the name(s) of this allele
+ form             = what is the experimental form of this allele
+ copy-num         = how many copies of this experimental form are present
+ is-required      = is this allele required for the genetic interaction.
+                    An allele can be present and not functionally involved
+ biosource        = the type of genetic element that contains this allele
+                    and where it came from. E.g. from a chromosome or from
+                    a plasmid from a specific strain.
+ descr            = optional text description
+ source           = empirical evidence references 
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-allele ( 
+               BIND-allele_genetic-elmt-idx ,
+               BIND-allele_id ,
+               BIND-allele_names? ,
+               BIND-allele_form ,
+               BIND-allele_copy-num ,
+               BIND-allele_is-required? ,
+               BIND-allele_biosource ,
+               BIND-allele_descr? ,
+               BIND-allele_source? )>
+ 
+<!ELEMENT BIND-allele_genetic-elmt-idx ( %INTEGER; )>
+<!ELEMENT BIND-allele_id ( BIND-id )>
+<!ELEMENT BIND-allele_names ( BIND-allele_names_E* )>
+<!ELEMENT BIND-allele_form ( BIND-allele-exp-obj-choice )>
+<!ELEMENT BIND-allele_copy-num ( BIND-allele-copy-num )>
+<!ELEMENT BIND-allele_is-required %BOOLEAN; >
+<!ATTLIST BIND-allele_is-required value ( true | false ) "false" >
+<!ELEMENT BIND-allele_biosource ( BioSource )>
+<!ELEMENT BIND-allele_descr ( #PCDATA )>
+<!ELEMENT BIND-allele_source ( BIND-pub-set )>
+ 
+ 
+<!ELEMENT BIND-allele_names_E ( #PCDATA )>
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-allele-exp-obj-choice -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ The choice for experimental form of an allele
+ 
+ Field description for BIND-allele-exp-object-choice
+ ***************************************************
+ genomic  = the allele is not changed from the sequenced genome
+            (referred to by BioSource)
+ deletion = the allele has been deleted
+ mutation = the allele has been mutated from the genome sequence, explicit
+            description of new allele sequence is attached.
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-allele-exp-obj-choice ( 
+               BIND-allele-exp-obj-choice_not-specified |
+               BIND-allele-exp-obj-choice_genomic |
+               BIND-allele-exp-obj-choice_knock-out |
+               BIND-allele-exp-obj-choice_mutation )>
+ 
+<!ELEMENT BIND-allele-exp-obj-choice_not-specified %NULL; >
+<!ELEMENT BIND-allele-exp-obj-choice_genomic %NULL; >
+<!ELEMENT BIND-allele-exp-obj-choice_knock-out %NULL; >
+<!ELEMENT BIND-allele-exp-obj-choice_mutation ( BIND-object )>
+ 
+ 
+ 
+<!-- Definition of BIND-genetic-experiment -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Type and some results from a genetic experiment.
+ 
+ Field description for BIND-genetic-experiment
+ *********************************************
+ result-phenotype = the resulting phenotype
+ type             = the type of genetic interaction experiment
+ background       = the organism and strain that was used in the experiment
+ dep-changes      = this experimental result depends on these changes to the
+                    background (e.g. gene disruptions of A and B show a
+                    synthetic lethality only when C is knocked out)
+ descr            = optional text description
+ molecule-present = a molecule that was present during this experiment
+                    (e.g. a drug or aptamer)
+ environment      = description of the environmental conditions
+                    (e.g. temperature)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-genetic-experiment ( 
+               BIND-genetic-experiment_result ,
+               BIND-genetic-experiment_type ,
+               BIND-genetic-experiment_background ,
+               BIND-genetic-experiment_dep-changes? ,
+               BIND-genetic-experiment_descr? ,
+               BIND-genetic-experiment_molecule-present? ,
+               BIND-genetic-experiment_environment? )>
+ 
+<!ELEMENT BIND-genetic-experiment_result ( BIND-genetic-exp-result+ )>
+<!ELEMENT BIND-genetic-experiment_type ( BIND-genetic-exp-system )>
+<!ELEMENT BIND-genetic-experiment_background ( BIND-genetic-background )>
+<!ELEMENT BIND-genetic-experiment_dep-changes ( BIND-allele-change* )>
+<!ELEMENT BIND-genetic-experiment_descr ( #PCDATA )>
+<!ELEMENT BIND-genetic-experiment_molecule-present ( BIND-object* )>
+<!ELEMENT BIND-genetic-experiment_environment ( BIND-param* )>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-genetic-exp-result -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Result of a genetic experiment.
+ 
+ Field description for BIND-genetic-exp-result
+ *********************************************
+ phenotype = the resulting phenotype
+ relation  = the relation between A, B and AB in this experiment
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-genetic-exp-result ( 
+               BIND-genetic-exp-result_phenotype ,
+               BIND-genetic-exp-result_relation )>
+ 
+<!ELEMENT BIND-genetic-exp-result_phenotype ( BIND-phenotype )>
+<!ELEMENT BIND-genetic-exp-result_relation ( BIND-genetic-relation )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-genetic-relation -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A genetic relation.  The relation between experimental form of A, B and the
+ result of genetic experiment AB.
+ 
+ Field description for BIND-genetic-relation
+ *******************************************
+ a-wild-type  = TRUE if A is wild-type
+ b-wild-type  = TRUE if B is wild-type
+ a-eq-b       = TRUE if phenotype of A is the same as that of B
+ ab-phenotype = the phenotype of the result of the genetic experiment
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-genetic-relation ( 
+               BIND-genetic-relation_a-wild-type ,
+               BIND-genetic-relation_b-wild-type ,
+               BIND-genetic-relation_a-eq-b ,
+               BIND-genetic-relation_ab-phenotype )>
+ 
+<!ELEMENT BIND-genetic-relation_a-wild-type %BOOLEAN; >
+<!ATTLIST BIND-genetic-relation_a-wild-type value ( true | false )  #REQUIRED >
+<!ELEMENT BIND-genetic-relation_b-wild-type %BOOLEAN; >
+<!ATTLIST BIND-genetic-relation_b-wild-type value ( true | false )  #REQUIRED >
+<!ELEMENT BIND-genetic-relation_a-eq-b %BOOLEAN; >
+<!ATTLIST BIND-genetic-relation_a-eq-b value ( true | false )  #REQUIRED >
+<!ELEMENT BIND-genetic-relation_ab-phenotype ( BIND-genetic-ab-phenotype )>
+ 
+ 
+ 
+<!-- Definition of BIND-genetic-ab-phenotype -->
+ 
+<!ELEMENT BIND-genetic-ab-phenotype ( 
+               BIND-genetic-ab-phenotype_wild-type |
+               BIND-genetic-ab-phenotype_a-type |
+               BIND-genetic-ab-phenotype_b-type |
+               BIND-genetic-ab-phenotype_novel )>
+ 
+<!ELEMENT BIND-genetic-ab-phenotype_wild-type %NULL; >
+<!ELEMENT BIND-genetic-ab-phenotype_a-type %NULL; >
+<!ELEMENT BIND-genetic-ab-phenotype_b-type %NULL; >
+<!ELEMENT BIND-genetic-ab-phenotype_novel ( BIND-synthetic-phenotype )>
+ 
+ 
+ 
+<!-- Definition of BIND-synthetic-phenotype -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of a synthetic phenotype
+ 
+ Field description for BIND-synthetic-phenotype
+ **********************************************
+ modulation-pct-a = modulation percentage of phenotype for A
+ modulation-pct-b = modulation percentage of phenotype for B
+                    NOTE: 0% of phenotype is wild-type, above 100% is
+                    enhanced phenotype (away from wild-type)
+ mix              = a mix of A and B phenotypes
+ novel            = a completely new phenotype
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-synthetic-phenotype ( 
+               BIND-synthetic-phenotype_modulation-pct-a |
+               BIND-synthetic-phenotype_modulation-pct-b |
+               BIND-synthetic-phenotype_mix |
+               BIND-synthetic-phenotype_novel )>
+ 
+<!ELEMENT BIND-synthetic-phenotype_modulation-pct-a ( %INTEGER; )>
+<!ELEMENT BIND-synthetic-phenotype_modulation-pct-b ( %INTEGER; )>
+<!ELEMENT BIND-synthetic-phenotype_mix ( BIND-mixed-phenotype )>
+<!ELEMENT BIND-synthetic-phenotype_novel ( BIND-phenotype )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-mixed-phenotype -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of a mixed phenotype
+ 
+ Field description for BIND-mixed-phenotype
+ ******************************************
+ a-pct = percentage of phenotype for A
+ b-pct = percentage of phenotype for B
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-mixed-phenotype ( 
+               BIND-mixed-phenotype_a-pct ,
+               BIND-mixed-phenotype_b-pct )>
+ 
+<!ELEMENT BIND-mixed-phenotype_a-pct ( %INTEGER; )>
+<!ELEMENT BIND-mixed-phenotype_b-pct ( %INTEGER; )>
+ 
+ 
+<!-- Definition of BIND-genetic-exp-system -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Enumerated list of possible genetic experiments
+ 
+ These experiments involve a genetic cross between two parents, each
+ containing a set of alleles in their genotype.  The offspring have a
+ known mixture of alleles from the parents which can confer a phenotype
+ change.  Synthetic phenotypes occur e.g. when a double mutant phenotype
+ is more than the sum phenotypes of each single mutant.
+ 
+ Field description for BIND-genetic-exp-system
+ *********************************************
+ synthetic-lethal        = lethal phenotype observed in synthetic experiment
+ synthetic-growth-defect = negative phenotype change observed
+ synthetic-enhancement   = positive phenotype change observed
+ suppression             = a phenotype is suppressed when an allele is added
+ epistasis               = mutant gene causing phenotype is acting upstream
+                           in the genetic network
+ non-complementation     = two mutations fail to complement but are in
+                           different genes.
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-genetic-exp-system ( %INTEGER; )>
+<!ATTLIST BIND-genetic-exp-system value ( 
+               not-specified |
+               synthetic-lethal |
+               synthetic-growth-defect |
+               synthetic-enhancement |
+               suppression |
+               epistasis |
+               non-complementation |
+               other )  #IMPLIED >
+ 
+ 
+ 
+<!-- Definition of BIND-genetic-background -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ The background of a genetic experiment. E.g. organism and strain info.
+ 
+ Field description for BIND-genetic-background
+ *********************************************
+ org     = the organism and strain of this background
+ ploidy  = the ploidy number of the organism (haploid=1, diploid=2, etc.)
+ ploidy-diff = records if certain chromosomes are present in different
+               copy numbers than the organism ploidy (e.g. trisomy 21)
+ changes = the changes in this background from the genome referenced by
+           'org BioSource' in this object (e.g. his-)
+           NOTE: these changes are not required for the genetic interaction,
+           they merely document changes from a common background.
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-genetic-background ( 
+               BIND-genetic-background_org ,
+               BIND-genetic-background_ploidy ,
+               BIND-genetic-background_ploidy-diff? ,
+               BIND-genetic-background_changes )>
+ 
+<!ELEMENT BIND-genetic-background_org ( BioSource )>
+<!ELEMENT BIND-genetic-background_ploidy ( BIND-int-fuzz )>
+<!ELEMENT BIND-genetic-background_ploidy-diff ( BIND-ploidy-diff )>
+<!ELEMENT BIND-genetic-background_changes ( BIND-allele-change+ )>
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-ploidy-diff -->
+ 
+<!ELEMENT BIND-ploidy-diff ( 
+               BIND-ploidy-diff_chromosome ,
+               BIND-ploidy-diff_copy-num )>
+ 
+<!ELEMENT BIND-ploidy-diff_chromosome ( %INTEGER; )>
+<!ELEMENT BIND-ploidy-diff_copy-num ( BIND-int-fuzz )>
+ 
+ 
+ 
+<!-- Definition of BIND-allele-change -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Description of an allele change from wild-type (the genome form)
+ 
+ Field description for BIND-allele-change
+ ****************************************
+ old-form = a reference to the allele in the BioSource that is changed
+ new-form = a description of the changed allele
+ descr    = optional text description
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-allele-change ( 
+               BIND-allele-change_old-form ,
+               BIND-allele-change_new-form ,
+               BIND-allele-change_descr? )>
+ 
+<!ELEMENT BIND-allele-change_old-form ( BIND-allele )>
+<!ELEMENT BIND-allele-change_new-form ( BIND-allele )>
+<!ELEMENT BIND-allele-change_descr ( #PCDATA )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-cons-seq-set -->
+ 
+ 
+<!-- 
+ **********************************************************
+ * Interaction conserved sequence comment (in BIND-descr) *
+ **********************************************************
+ ***************************************************************************
+ Conserved sequence comment set
+ 
+ Only relevant for biological sequences.
+ (e.g. Derived from multiple alignment information)
+ 
+ Field description for BIND-cons-seq-set
+ ***************************************
+ a = conserved sequence comment for molecule A
+ b = conserved sequence comment for molecule B
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-cons-seq-set ( 
+               BIND-cons-seq-set_a? ,
+               BIND-cons-seq-set_b? )>
+ 
+<!ELEMENT BIND-cons-seq-set_a ( BIND-conserved-seq )>
+<!ELEMENT BIND-cons-seq-set_b ( BIND-conserved-seq )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-conserved-seq -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Conserved sequence comment
+ 
+ Alignment data is not stored here, only the conclusion from it.
+ 
+ Field description for BIND-conserved-seq
+ ****************************************
+ seq-el   = sequence elements that have been shown to be conserved
+ descr    = text description (e.g. method of determining conserved sequence)
+ other-db = reference to a conserved sequence database (e.g. BLOCKS)
+ source   = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-conserved-seq ( 
+               BIND-conserved-seq_seq-el ,
+               BIND-conserved-seq_descr? ,
+               BIND-conserved-seq_other-db? ,
+               BIND-conserved-seq_source? )>
+ 
+<!ELEMENT BIND-conserved-seq_seq-el ( Seq-loc )>
+<!ELEMENT BIND-conserved-seq_descr ( #PCDATA )>
+<!ELEMENT BIND-conserved-seq_other-db ( BIND-other-db* )>
+<!ELEMENT BIND-conserved-seq_source ( BIND-pub-set )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-loc -->
+ 
+ 
+<!-- 
+ *******************************************************************
+ * Binding location on molecules in an interaction (in BIND-descr) *
+ *******************************************************************
+ ***************************************************************************
+ Binding location on a BIND-object
+ 
+ Field description for BIND-loc
+ ******************************
+ detailed = atomic level detail of interaction sites
+ general  = sequence element level description of interaction sites
+ source   = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-loc ( 
+               BIND-loc_detailed? ,
+               BIND-loc_general? ,
+               BIND-loc_source? )>
+ 
+<!ELEMENT BIND-loc_detailed ( #PCDATA )>
+<!ELEMENT BIND-loc_general ( BIND-loc-gen )>
+<!ELEMENT BIND-loc_source ( BIND-pub-set )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-loc-gen -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ General binding location on a BIND-object
+ 
+ Field description for BIND-loc-gen
+ **********************************
+ a-sites = list of binding sites on molecule A
+ b-sites = list of binding sites on molecule B
+ bound   = list of sequence elements from A and B that are bound together
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-loc-gen ( 
+               BIND-loc-gen_a-sites? ,
+               BIND-loc-gen_b-sites? ,
+               BIND-loc-gen_bound? )>
+ 
+<!ELEMENT BIND-loc-gen_a-sites ( BIND-loc-site-set )>
+<!ELEMENT BIND-loc-gen_b-sites ( BIND-loc-site-set )>
+<!ELEMENT BIND-loc-gen_bound ( BIND-loc-pair* )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-loc-site-set -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A set of BIND-loc-site objects
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-loc-site-set ( 
+               BIND-loc-site-set_max-slid ,
+               BIND-loc-site-set_sites )>
+ 
+<!ELEMENT BIND-loc-site-set_max-slid ( BIND-Seq-loc-id )>
+<!ELEMENT BIND-loc-site-set_sites ( BIND-loc-site+ )>
+ 
+ 
+ 
+<!-- Definition of BIND-loc-site -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A graph describing which sites on A bind to which sites on B
+ 	BIND-loc-site objects are nodes (verteces) in the graph
+ 	BIND-loc-pair objects are edges in the graph
+ 
+ Field description for BIND-loc-site
+ ***********************************
+ slid     = internal ID of this sequence element
+            (0..n within interaction record)
+ site     = a sequence element (point or interval)
+ sub-unit = if molecule A or B is a molecular complex, specifies which
+            sub-unit the site is on.
+ descr    = description of this binding site
+ source   = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-loc-site ( 
+               BIND-loc-site_slid ,
+               BIND-loc-site_site ,
+               BIND-loc-site_sub-unit? ,
+               BIND-loc-site_descr? ,
+               BIND-loc-site_source? )>
+ 
+<!ELEMENT BIND-loc-site_slid ( BIND-Seq-loc-id )>
+<!ELEMENT BIND-loc-site_site ( Seq-loc )>
+<!ELEMENT BIND-loc-site_sub-unit ( BIND-complex-subunit )>
+<!ELEMENT BIND-loc-site_descr ( #PCDATA )>
+<!ELEMENT BIND-loc-site_source ( BIND-pub-set )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-loc-pair -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A pair of binding sites that are bound to each other
+ 
+ Field description for BIND-loc-pair
+ ***********************************
+ a-slid = the Seq-loc pointed to by this ID is connected to...
+ b-slid = the Seq-loc pointed to by this ID
+ source = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-loc-pair ( 
+               BIND-loc-pair_a-slid ,
+               BIND-loc-pair_b-slid ,
+               BIND-loc-pair_source? )>
+ 
+<!ELEMENT BIND-loc-pair_a-slid ( BIND-Seq-loc-id )>
+<!ELEMENT BIND-loc-pair_b-slid ( BIND-Seq-loc-id )>
+<!ELEMENT BIND-loc-pair_source ( BIND-pub-set )>
+ 
+ 
+ 
+<!-- Definition of BIND-Seq-loc-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Unique reference to a site on a biomolecule
+ 
+ Field description for BIND-loc-site-ref
+ ***************************************
+ from-iid = interaction that contains the binding site
+ molecule = the molecule in the interaction (from-iid) that this site is on
+            (A or B)
+ site     = BIND-Seq-loc-id (slid) of the binding site
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Seq-loc-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-loc-site-ref -->
+ 
+<!ELEMENT BIND-loc-site-ref ( 
+               BIND-loc-site-ref_from-iid ,
+               BIND-loc-site-ref_molecule ,
+               BIND-loc-site-ref_site )>
+ 
+<!ELEMENT BIND-loc-site-ref_from-iid ( Interaction-id )>
+<!ELEMENT BIND-loc-site-ref_molecule %ENUM; >
+<!ATTLIST BIND-loc-site-ref_molecule value ( 
+               a |
+               b )  #REQUIRED >
+<!ELEMENT BIND-loc-site-ref_site ( BIND-Seq-loc-id )>
+ 
+ 
+<!-- Definition of BIND-action-set -->
+ 
+ 
+<!-- 
+ ***********************************************
+ * Interaction chemical action (in BIND-descr) *
+ ***********************************************
+ ***************************************************************************
+ A set of chemical actions
+ 
+ Chemical actions mediated by a molecule (A or B) in the 
+ interaction (a set because a kinase may phosphorylate a protein multiple 
+ times)
+ 
+ Field description for BIND-action-set
+ *************************************
+ max-iaid = the highest iaid used in this set
+ actions  = set of BIND-action objects
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-action-set ( 
+               BIND-action-set_max-iaid ,
+               BIND-action-set_actions )>
+ 
+<!ELEMENT BIND-action-set_max-iaid ( Internal-action-id )>
+<!ELEMENT BIND-action-set_actions ( BIND-action+ )>
+ 
+ 
+ 
+<!-- Definition of BIND-action -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A chemical action
+ 
+ Field description for BIND-action
+ *********************************
+ iaid      = internal action id (unique identifier for this action in a set)
+             (0..n within interaction record)
+ descr     = text description (e.g. if 'other' is specified for type)
+ direction = direction of chemical action
+ type      = type of chemical action
+ result    = the product(s) of this chemical action 
+  NOTE    this field holds the exact chemical form that is produced, and is
+          used by reference by the next interaction acting on the "product".
+          For a biopolymer this holds the atoms&bonds representation of the 
+          molecule.
+ diff       = the atomic level detail of differences created by this action
+ signal     = more general kinetics, signal transduction
+ kinetics   = chemical action kinetics
+ conditions = link to experimental conditions used to observe this action,
+		e.g. if there were multiple experimental conditions stored in 
+              this interaction record and this action was only seen using
+              some of them.
+ sub-unit-a  = if molecule A is a molecular complex, specifies the sub-unit
+               to which this chemical action applies
+ sub-unit-b  = if molecule B is a molecular complex, specifies the sub-unit
+               to which this chemical action applies
+ action-site = sites on molecule A and B that are involved in the action
+ other-db    = reference to a database of chemical actions
+ source      = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-action ( 
+               BIND-action_iaid ,
+               BIND-action_descr? ,
+               BIND-action_direction ,
+               BIND-action_type ,
+               BIND-action_result? ,
+               BIND-action_diff? ,
+               BIND-action_signal? ,
+               BIND-action_kinetics? ,
+               BIND-action_conditions? ,
+               BIND-action_sub-unit-a? ,
+               BIND-action_sub-unit-b? ,
+               BIND-action_action-sites? ,
+               BIND-action_other-db? ,
+               BIND-action_source? )>
+ 
+<!ELEMENT BIND-action_iaid ( Internal-action-id )>
+<!ELEMENT BIND-action_descr ( #PCDATA )>
+<!ELEMENT BIND-action_direction ( BIND-direction )>
+<!ELEMENT BIND-action_type ( BIND-action-type )>
+<!ELEMENT BIND-action_result ( BIND-result-object* )>
+<!ELEMENT BIND-action_diff ( #PCDATA )>
+<!ELEMENT BIND-action_signal ( BIND-signal )>
+<!ELEMENT BIND-action_kinetics ( BIND-kinetics )>
+<!ELEMENT BIND-action_conditions ( BIND-condition-ref* )>
+<!ELEMENT BIND-action_sub-unit-a ( BIND-complex-subunit )>
+<!ELEMENT BIND-action_sub-unit-b ( BIND-complex-subunit )>
+<!ELEMENT BIND-action_action-sites ( BIND-action-site )>
+<!ELEMENT BIND-action_other-db ( BIND-other-db )>
+<!ELEMENT BIND-action_source ( BIND-pub-set )>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of Internal-action-id -->
+ 
+<!ELEMENT Internal-action-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-result-object -->
+ 
+<!ELEMENT BIND-result-object ( 
+               BIND-result-object_irid ,
+               BIND-result-object_object )>
+ 
+<!ELEMENT BIND-result-object_irid ( Internal-result-id )>
+<!ELEMENT BIND-result-object_object ( BIND-object )>
+ 
+ 
+ 
+<!-- Definition of Internal-result-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Unique reference to a chemical action or a chemical action result object
+ 
+ Field description for BIND-action-ref
+ *************************************
+ from-iid = interaction that contains the chemical action
+ action   = internal action ID number of the chemical action
+ irid     = reference to chemical result from action
+            (0..n within interaction record)
+ ***************************************************************************
+ -->
+<!ELEMENT Internal-result-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-action-ref -->
+ 
+<!ELEMENT BIND-action-ref ( 
+               BIND-action-ref_from-iid ,
+               BIND-action-ref_action ,
+               BIND-action-ref_irid? )>
+ 
+<!ELEMENT BIND-action-ref_from-iid ( Interaction-id )>
+<!ELEMENT BIND-action-ref_action ( Internal-action-id )>
+<!ELEMENT BIND-action-ref_irid ( Internal-result-id )>
+ 
+ 
+<!-- Definition of BIND-direction -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A direction
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-direction %ENUM; >
+<!ATTLIST BIND-direction value ( 
+               none |
+               a-to-a |
+               a-to-b |
+               b-to-b |
+               b-to-a |
+               other )  #REQUIRED >
+ 
+ 
+ 
+<!-- Definition of BIND-action-type -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ The type of action and object of that action
+ 
+ Action type		object of that action
+ add			BIND-object or NULL
+ remove		BIND-object or NULL
+ cut-seq		Seq-loc or NULL
+ 
+ Field description for BIND-action-type
+ **************************************
+ -not-specified = action is not-specified (unknown)
+ -none = no chemical action, but e.g. kinetics information needs to be
+	   stored (action is known to be nothing)
+ -add = add an object (e.g. phosphate) to an object
+ -remove = remove an object (e.g. phosphate) from an object
+ -bond-break = non-sequence cut action - e.g. small molecule hydrolysis
+ -cut-seq = cut a sequence, location may be specified
+         (e.g. restriction enzyme)
+ -change-conformation = a change in conformation of a molecule
+         (e.g. hck protein -> phosphorylation causes conformational change)
+ -change-configuration = a change in configuration of a molecule
+         (e.g. by an epimerase or isomerase)
+ -change-other = another type of change (e.g. metal ion exchange)
+ -other = another action
+ 
+ Field description for BIND-action-object
+ ****************************************
+ none     = no action object
+ object   = any BIND-object that is added or removed (e.g. phosphate)
+ location = location where a sequence was cut
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-action-type ( 
+               BIND-action-type_not-specified |
+               BIND-action-type_none |
+               BIND-action-type_add |
+               BIND-action-type_remove |
+               BIND-action-type_bond-break |
+               BIND-action-type_cut-seq |
+               BIND-action-type_change-conformation |
+               BIND-action-type_change-configuration |
+               BIND-action-type_change-other |
+               BIND-action-type_other )>
+ 
+<!ELEMENT BIND-action-type_not-specified %NULL; >
+<!ELEMENT BIND-action-type_none %NULL; >
+<!ELEMENT BIND-action-type_add ( BIND-action-object )>
+<!ELEMENT BIND-action-type_remove ( BIND-action-object )>
+<!ELEMENT BIND-action-type_bond-break %NULL; >
+<!ELEMENT BIND-action-type_cut-seq ( BIND-action-object )>
+<!ELEMENT BIND-action-type_change-conformation %NULL; >
+<!ELEMENT BIND-action-type_change-configuration %NULL; >
+<!ELEMENT BIND-action-type_change-other %NULL; >
+<!ELEMENT BIND-action-type_other %NULL; >
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-action-object -->
+ 
+<!ELEMENT BIND-action-object ( 
+               BIND-action-object_none |
+               BIND-action-object_object |
+               BIND-action-object_location )>
+ 
+<!ELEMENT BIND-action-object_none %NULL; >
+<!ELEMENT BIND-action-object_object ( BIND-object )>
+<!ELEMENT BIND-action-object_location ( Seq-loc )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-signal -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A chemical signal description
+ 
+ A more general notion of kinetics describing signal transduction.
+ 
+ Field description for BIND-signal
+ *********************************
+ action    = signal modification
+ direction = direction of signal
+ factor    = the factor of the amplification or the repression
+ descr     = text description (e.g. if 'other' is specified)
+ source    = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-signal ( 
+               BIND-signal_action ,
+               BIND-signal_direction ,
+               BIND-signal_factor? ,
+               BIND-signal_descr? ,
+               BIND-signal_source? )>
+ 
+<!ELEMENT BIND-signal_action %ENUM; >
+<!ATTLIST BIND-signal_action value ( 
+               none |
+               amplify |
+               repress |
+               other )  #REQUIRED >
+<!ELEMENT BIND-signal_direction ( BIND-direction )>
+<!ELEMENT BIND-signal_factor ( RealVal-Units )>
+<!ELEMENT BIND-signal_descr ( #PCDATA )>
+<!ELEMENT BIND-signal_source ( BIND-pub-set )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-kinetics -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Chemical kinetics and thermodynamics data
+ 
+ Field description for BIND-kinetics
+ ***********************************
+ descr           = optional text description of this object
+ kf              = forward reaction rate
+ kr              = reverse reaction rate 
+ kd              = dissociation constant of interaction
+ ka              = association constant of interaction
+ keq             = equilibrium constant of interaction
+ km              = Michaelis-Menten constant
+ vmax            = max. velocity of reaction
+ rxn-order       = reaction order
+ conc-a          = concentration of molecule A
+ conc-b          = concentration of molecule B
+ conc-a-bound    = concentration of molecule A that is bound
+ conc-b-bound    = concentration of molecule B that is bound
+ conc-a-unbound  = concentration of molecule A that is not bound
+ conc-b-unbound  = concentration of molecule B that is not bound
+ enz-activity-amp-factor = amplification factor for enzyme kinetic activity
+                           (What factor is enzyme activity changed?)
+ temp            = temperature of the interaction system (observed)
+ ph              = pH of the interaction system
+ half-life-a     = 1/2 life for molecule A
+ half-life-b     = 1/2 life for molecule B
+ buffer          = buffer text description
+ delta-g         = delta G (delta Gibbs free energy)
+ delta-s         = delta S (delta entropy)
+ delta-h         = delta H (delta enthalpy)
+ heat-capacity-a = heat capacity of molecule A
+ heat-capacity-b = heat capacity of molecule B
+ other           = any other related values (e.g. k1, k2...)
+ source          = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-kinetics ( 
+               BIND-kinetics_descr? ,
+               BIND-kinetics_kf? ,
+               BIND-kinetics_kr? ,
+               BIND-kinetics_kd? ,
+               BIND-kinetics_ka? ,
+               BIND-kinetics_keq? ,
+               BIND-kinetics_km? ,
+               BIND-kinetics_vmax? ,
+               BIND-kinetics_rxn-order? ,
+               BIND-kinetics_conc-a? ,
+               BIND-kinetics_conc-b? ,
+               BIND-kinetics_conc-a-bound? ,
+               BIND-kinetics_conc-b-bound? ,
+               BIND-kinetics_conc-a-unbound? ,
+               BIND-kinetics_conc-b-unbound? ,
+               BIND-kinetics_enz-activity-amp-factor? ,
+               BIND-kinetics_temp? ,
+               BIND-kinetics_ph? ,
+               BIND-kinetics_half-life-a? ,
+               BIND-kinetics_half-life-b? ,
+               BIND-kinetics_buffer? ,
+               BIND-kinetics_delta-g? ,
+               BIND-kinetics_delta-s? ,
+               BIND-kinetics_delta-h? ,
+               BIND-kinetics_heat-capacity-a? ,
+               BIND-kinetics_heat-capacity-b? ,
+               BIND-kinetics_other? ,
+               BIND-kinetics_source? )>
+ 
+<!ELEMENT BIND-kinetics_descr ( #PCDATA )>
+<!ELEMENT BIND-kinetics_kf ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_kr ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_kd ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_ka ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_keq ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_km ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_vmax ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_rxn-order ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_conc-a ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_conc-b ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_conc-a-bound ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_conc-b-bound ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_conc-a-unbound ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_conc-b-unbound ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_enz-activity-amp-factor ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_temp ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_ph ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_half-life-a ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_half-life-b ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_buffer ( #PCDATA )>
+<!ELEMENT BIND-kinetics_delta-g ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_delta-s ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_delta-h ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_heat-capacity-a ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_heat-capacity-b ( RealVal-Units )>
+<!ELEMENT BIND-kinetics_other ( BIND-kinetics-other* )>
+<!ELEMENT BIND-kinetics_source ( BIND-pub-set )>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-kinetics-other -->
+ 
+<!ELEMENT BIND-kinetics-other ( 
+               BIND-kinetics-other_descr ,
+               BIND-kinetics-other_value )>
+ 
+<!ELEMENT BIND-kinetics-other_descr ( #PCDATA )>
+<!ELEMENT BIND-kinetics-other_value ( RealVal-Units )>
+ 
+ 
+ 
+<!-- Definition of BIND-action-site -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Sites on molecule A and B that are involved in the action.
+ 
+ The action may be 'performed' by the site or be affected by the action.
+ 
+ Field description for BIND-action-site
+ **************************************
+ a = site on molecule A 
+ b = site on molecule B
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-action-site ( 
+               BIND-action-site_a ,
+               BIND-action-site_b )>
+ 
+<!ELEMENT BIND-action-site_a ( BIND-action-site-ref )>
+<!ELEMENT BIND-action-site_b ( BIND-action-site-ref )>
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-action-site-ref -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A site on a molecule, by reference or by value
+ 
+ Field description for BIND-action-site-ref
+ ******************************************
+ slid = A reference to a predefined binding site stored in the BIND-loc-gen
+        object for this interaction
+ site = A description of a site on a molecule if one can not be referenced
+        from the BIND-loc-gen object
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-action-site-ref ( 
+               BIND-action-site-ref_slid |
+               BIND-action-site-ref_site )>
+ 
+<!ELEMENT BIND-action-site-ref_slid ( BIND-Seq-loc-id )>
+<!ELEMENT BIND-action-site-ref_site ( BIND-loc-site-set )>
+ 
+ 
+ 
+<!-- Definition of BIND-state-descr -->
+ 
+ 
+<!-- 
+ ************************************************************************
+ * Interaction - chemical state for molecule A and/or B (in BIND-descr) *
+ ************************************************************************
+ ***************************************************************************
+ Chemical state and required chemical state for molecules A and B
+ 
+ The chemical state in the BIND-state-descr is "the chemistry" of A or B
+ in this particular molecular interaction.  The chemistry is referred to by
+ reference, typically to another interaction record's 
+ interaction:action:result which encodes a BIND-object that is the
+ "bio-processed" form of A or B used in this interaction.
+ 
+ Field description for BIND-state-descr
+ **************************************
+ a = list of possible chemical states for A that can undergo this 
+     interaction
+ a-required-state = the state that A in the above list of possible states
+                    is required to assume before interaction takes place.
+ b = list of possible chemical states for B that can undergo this 
+     interaction
+ b-required-state = the state that B in the above list of possible states
+                    is required to assume before interaction takes place.
+ NOTE: multiple required states are only used if molecule A or B is a
+       molecular complex and the state of more than one sub-unit needs
+       to be denoted as required.
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-state-descr ( 
+               BIND-state-descr_a? ,
+               BIND-state-descr_a-required-state? ,
+               BIND-state-descr_b? ,
+               BIND-state-descr_b-required-state? )>
+ 
+<!ELEMENT BIND-state-descr_a ( BIND-state-set )>
+<!ELEMENT BIND-state-descr_a-required-state ( BIND-required-state* )>
+<!ELEMENT BIND-state-descr_b ( BIND-state-set )>
+<!ELEMENT BIND-state-descr_b-required-state ( BIND-required-state* )>
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-state-set -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A set of chemical states
+ 
+ e.g. multiple phosphorylations on a protein; all of which may be active
+      in this interaction record.
+ 
+ Field description for BIND-state-set
+ ************************************
+ max-isid = highest Internal-state-id used in this set
+ states   = list of possible chemical states
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-state-set ( 
+               BIND-state-set_max-isid ,
+               BIND-state-set_states )>
+ 
+<!ELEMENT BIND-state-set_max-isid ( Internal-state-id )>
+<!ELEMENT BIND-state-set_states ( BIND-state+ )>
+ 
+ 
+ 
+<!-- Definition of Internal-state-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Unique reference to a chemical state
+ 
+ Field description for BIND-state-ref
+ ************************************
+ from-iid = interaction that contains the chemical state
+ molecule = the molecule in the interaction (from-iid) that is in this state
+            (A, B)
+ state    = Internal-state-id (isid) of the chemical state
+ ***************************************************************************
+ -->
+<!ELEMENT Internal-state-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-state-ref -->
+ 
+<!ELEMENT BIND-state-ref ( 
+               BIND-state-ref_from-iid ,
+               BIND-state-ref_molecule ,
+               BIND-state-ref_state )>
+ 
+<!ELEMENT BIND-state-ref_from-iid ( Interaction-id )>
+<!ELEMENT BIND-state-ref_molecule %ENUM; >
+<!ATTLIST BIND-state-ref_molecule value ( 
+               a |
+               b |
+               other )  #REQUIRED >
+<!ELEMENT BIND-state-ref_state ( Internal-state-id )>
+ 
+ 
+<!-- Definition of BIND-state -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A chemical state 
+ 
+ Points to the chemistry of a molecule, if known, by reference to an
+ interaction:action with an explicit 'result' field.  
+ This allows conversion of a sequence to chemistry with modifications - 
+ can describe a protein that has been phosphorylated at a certain residue,
+ 
+ Here we can exactly state the chemistry of a molecule as it is found in 
+ the cell, even though the top BIND-object may only refer to the GI.
+ 
+ Field description for BIND-state
+ ********************************
+ isid = Internal-state-id (unique for each state in a BIND-state-set)
+        (0..n within interaction record)
+ activity-level = general activity of molecule
+ cause = sequence of actions from this or other Interactions that bring
+	   about this state (and the resulting object that is this state, if
+         result objects have been specified in chemical-action, via an
+         optional IRID in the BIND-action-ref).
+         References an external interaction:action uniquely.   
+         The "cause" is really the Interaction:action pair elsewhere 
+         in the database that is the most recent step in the biochemical 
+         conversion that forms the biochemical entity in A or B.
+         Action and state are peer BIND-descr tags, this allows
+         a reference to causal 'action' within the chemical state.
+ descr    = text description (e.g. method used to determine this state)
+ source   = empirical evidence for this state
+ sub-unit = if molecule A or B is a molecular complex, specifies the
+            sub-unit to which this state applies
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-state ( 
+               BIND-state_isid ,
+               BIND-state_activity-level ,
+               BIND-state_cause? ,
+               BIND-state_descr? ,
+               BIND-state_source? ,
+               BIND-state_sub-unit? )>
+ 
+<!ELEMENT BIND-state_isid ( Internal-state-id )>
+<!ELEMENT BIND-state_activity-level %ENUM; >
+<!ATTLIST BIND-state_activity-level value ( 
+               not-specified |
+               inactive |
+               very-low |
+               low |
+               medium |
+               medium-high |
+               high |
+               very-high |
+               extreme |
+               active |
+               other )  #REQUIRED >
+<!ELEMENT BIND-state_cause ( BIND-action-ref* )>
+<!ELEMENT BIND-state_descr ( #PCDATA )>
+<!ELEMENT BIND-state_source ( BIND-pub-set )>
+<!ELEMENT BIND-state_sub-unit ( BIND-complex-subunit )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-required-state -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A required chemical state for interaction to take place
+ 
+ The state in the state set that is required for the interaction to take
+ place. Uniquely locates a chemical state within this interaction record
+ by Internal-state-id.
+ 
+ Field description for BIND-required-state
+ *****************************************
+ isid   = Internal-state-id of the required state.  Points to
+	    one chemical state in the BIND-state-set in the same record
+ descr  = description of state requirement
+ source = empirical evidence
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-required-state ( 
+               BIND-required-state_isid ,
+               BIND-required-state_descr? ,
+               BIND-required-state_source? )>
+ 
+<!ELEMENT BIND-required-state_isid ( Internal-state-id )>
+<!ELEMENT BIND-required-state_descr ( #PCDATA )>
+<!ELEMENT BIND-required-state_source ( BIND-pub-set )>
+ 
+ 
+ 
+<!-- Definition of BIND-Complex-set -->
+ 
+ 
+<!-- 
+ /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+ *********************
+ * Molecular-Complex *
+ *********************
+ ***************************************************************************
+ A set of Molecular Complexes
+ 
+ Field description for BIND-Complex-set
+ **************************************
+ date      = date this set of records was collected
+ database  = name and description of database that this set comes from
+ complexes = set of molecular complex records
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Complex-set ( 
+               BIND-Complex-set_date? ,
+               BIND-Complex-set_database? ,
+               BIND-Complex-set_complexes )>
+ 
+<!ELEMENT BIND-Complex-set_date ( Date )>
+<!ELEMENT BIND-Complex-set_database ( BIND-Database-site )>
+<!ELEMENT BIND-Complex-set_complexes ( BIND-Molecular-Complex+ )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-Molecular-Complex -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A molecular complex record
+ 
+ A collection of one or more interactions that form a complex.
+ i.e. two or more BIND-objects that operate as a unit.  It is a
+ useful shorthand when defining BIND pathways.
+ 
+ A molecular complex can also be defined if the interactions in it are not
+ completely known. Create interactions with molecule A as the sub-unit of
+ the complex and molecule B as 'not-specified' for all of the known 
+ sub-units.
+ 
+ Field description for BIND-Molecular-Complex
+ ********************************************
+ date             = date of record entry
+ updates          = a list of updates for the record
+ mcid             = molecular complex accession number.
+ descr            = text description of complex (e.g. ribosome)
+ sub-num          = total number of sub-units in this complex
+ sub-units        = collection of BIND-objects in the complex (meant to be
+                    a non-redundant list)
+ interaction-list = list of interactions in this complex
+ ordered          = TRUE if order of interactions is known and
+ 	              interaction-list is ordered in this way
+ complex-topology = a connectivity graph of the complex topology
+ 		      with BIND-objects as nodes
+ source           = empirical evidence references
+ authors          = person(s) who authored this record
+ collection       = interaction is part of a record collection
+                    (i.e. a satellite BIND database)
+ priv             = TRUE if this complex is private
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Molecular-Complex ( 
+               BIND-Molecular-Complex_date ,
+               BIND-Molecular-Complex_updates? ,
+               BIND-Molecular-Complex_mcid ,
+               BIND-Molecular-Complex_descr? ,
+               BIND-Molecular-Complex_sub-num ,
+               BIND-Molecular-Complex_sub-units ,
+               BIND-Molecular-Complex_interaction-list ,
+               BIND-Molecular-Complex_ordered? ,
+               BIND-Molecular-Complex_complex-topology? ,
+               BIND-Molecular-Complex_source ,
+               BIND-Molecular-Complex_authors? ,
+               BIND-Molecular-Complex_collection? ,
+               BIND-Molecular-Complex_priv? )>
+ 
+<!ELEMENT BIND-Molecular-Complex_date ( Date )>
+<!ELEMENT BIND-Molecular-Complex_updates ( BIND-update-object* )>
+<!ELEMENT BIND-Molecular-Complex_mcid ( Molecular-Complex-id )>
+<!ELEMENT BIND-Molecular-Complex_descr ( #PCDATA )>
+<!ELEMENT BIND-Molecular-Complex_sub-num ( BIND-mol-sub-num )>
+<!ELEMENT BIND-Molecular-Complex_sub-units ( BIND-mol-object+ )>
+<!ELEMENT BIND-Molecular-Complex_interaction-list ( Interaction-id+ )>
+<!ELEMENT BIND-Molecular-Complex_ordered %BOOLEAN; >
+<!ATTLIST BIND-Molecular-Complex_ordered value ( true | false ) "false" >
+<!ELEMENT BIND-Molecular-Complex_complex-topology ( BIND-mol-object-pair* )>
+<!ELEMENT BIND-Molecular-Complex_source ( BIND-pub-set )>
+<!ELEMENT BIND-Molecular-Complex_authors ( Author* )>
+<!ELEMENT BIND-Molecular-Complex_collection ( BIND-Rec-coll-descr )>
+<!ELEMENT BIND-Molecular-Complex_priv %BOOLEAN; >
+<!ATTLIST BIND-Molecular-Complex_priv value ( true | false ) "false" >
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of Molecular-Complex-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Uniquely specify a molecule within a complex (a sub-unit)
+ 
+ Field description for BIND-complex-subunit
+ ******************************************
+ mcid  = molecular complex ID of the complex that contains the sub-unit
+ bmoid = BIND molecular complex object ID of the sub-unit
+ ***************************************************************************
+ -->
+<!ELEMENT Molecular-Complex-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-complex-subunit -->
+ 
+<!ELEMENT BIND-complex-subunit ( 
+               BIND-complex-subunit_mcid ,
+               BIND-complex-subunit_bmoid )>
+ 
+<!ELEMENT BIND-complex-subunit_mcid ( Molecular-Complex-id )>
+<!ELEMENT BIND-complex-subunit_bmoid ( BIND-mol-object-id )>
+ 
+ 
+<!-- Definition of BIND-mol-sub-num -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Copy number of a sub unit in a Molecular Complex
+ 
+ This number can be an integer or a fuzzy integer.
+ 
+ Field description for BIND-mol-sub-num
+ **************************************
+ num      = integer number of sub-units
+ num-fuzz = fuzzy integer number of sub-units (e.g. microtubule, virus)
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-mol-sub-num ( 
+               BIND-mol-sub-num_num |
+               BIND-mol-sub-num_num-fuzz )>
+ 
+<!ELEMENT BIND-mol-sub-num_num ( %INTEGER; )>
+<!ELEMENT BIND-mol-sub-num_num-fuzz ( Int-fuzz )>
+ 
+ 
+ 
+<!-- Definition of BIND-mol-object -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A subunit of a molecular complex.
+ 
+ Field description for BIND-mol-object
+ *************************************
+ bmoid    = internal ID BIND-object
+            (0..n within complex record)
+ sub-unit = a sub-unit in a molecular complex
+ num      = stoichiometry of this sub-unit
+ state    = which BIND-object in BIND is this sub-unit
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-mol-object ( 
+               BIND-mol-object_bmoid ,
+               BIND-mol-object_sub-unit ,
+               BIND-mol-object_num? ,
+               BIND-mol-object_state? )>
+ 
+<!ELEMENT BIND-mol-object_bmoid ( BIND-mol-object-id )>
+<!ELEMENT BIND-mol-object_sub-unit ( BIND-object )>
+<!ELEMENT BIND-mol-object_num ( BIND-mol-sub-num )>
+<!ELEMENT BIND-mol-object_state ( BIND-mol-object-source )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-mol-object-source -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ The source of a molecular complex sub-unit within BIND
+ 
+ Field description for BIND-mol-object-source
+ ********************************************
+ a      = if this molecular complex is from object A of the given IID
+ b      = if this molecular complex is from object B of the given IID
+ result = if this molecular complex is from a chemical action result
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-mol-object-source ( 
+               BIND-mol-object-source_a |
+               BIND-mol-object-source_b |
+               BIND-mol-object-source_result )>
+ 
+<!ELEMENT BIND-mol-object-source_a ( Interaction-id )>
+<!ELEMENT BIND-mol-object-source_b ( Interaction-id )>
+<!ELEMENT BIND-mol-object-source_result ( BIND-action-ref )>
+ 
+ 
+ 
+<!-- Definition of BIND-mol-object-pair -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ The connections in a molecular complex topology map between molecular
+ complex subunits.  BIND-mol-object-id's are used to reference
+ BIND-mol-object subunits.
+ 
+ Field description for BIND-mol-object-pair
+ ******************************************
+ a-bmoid    = the sub-unit pointed to by this ID is connected to...
+ b-bmoid    = the sub-unit pointed to by this ID
+ a-instance = a unique sub-identifier specifying an instance of an a-bmoid
+              if the a-bmoid sub-unit has multiple copies in the complex
+ b-instance = a unique sub-identifier specifying an instance of a b-bmoid
+              if the b-bmoid sub-unit has multiple copies in the complex
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-mol-object-pair ( 
+               BIND-mol-object-pair_a-bmoid ,
+               BIND-mol-object-pair_b-bmoid ,
+               BIND-mol-object-pair_a-instance? ,
+               BIND-mol-object-pair_b-instance? )>
+ 
+<!ELEMENT BIND-mol-object-pair_a-bmoid ( BIND-mol-object-id )>
+<!ELEMENT BIND-mol-object-pair_b-bmoid ( BIND-mol-object-id )>
+<!ELEMENT BIND-mol-object-pair_a-instance ( %INTEGER; )>
+<!ELEMENT BIND-mol-object-pair_b-instance ( %INTEGER; )>
+ 
+ 
+<!-- Definition of BIND-mol-object-id -->
+ 
+ 
+<!-- 
+ /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+ *********************************
+ * Biomolecular chemical pathway *
+ *********************************
+ ***************************************************************************
+ A set of Pathways
+ 
+ Field description for BIND-Pathway-set
+ **************************************
+ date     = date this set of records was collected
+ database = name and description of database that this set comes from
+ pathways = set of pathway records
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-mol-object-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-Pathway-set -->
+ 
+<!ELEMENT BIND-Pathway-set ( 
+               BIND-Pathway-set_date? ,
+               BIND-Pathway-set_database? ,
+               BIND-Pathway-set_pathways )>
+ 
+<!ELEMENT BIND-Pathway-set_date ( Date )>
+<!ELEMENT BIND-Pathway-set_database ( BIND-Database-site )>
+<!ELEMENT BIND-Pathway-set_pathways ( BIND-Pathway+ )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-Pathway -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ A pathway record.
+ 
+ A collection of one or more interactions that form a pathway.
+ i.e. Two or more BIND-objects that are generally free from each
+ other, but form a network of interactions.
+ 
+ Field description for BIND-pathway
+ **********************************
+ date       = date of record entry
+ updates    = a list of updates for the record
+ pid        = pathway accession number
+ pathway    = a collection of interactions and signal modification objects
+ descr      = description of a pathway
+ source     = empirical evidence references
+ authors    = person(s) who authored this record
+ collection = interaction is part of a record collection
+              (i.e. a satellite BIND database)
+ priv       = TRUE if this pathway is private
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-Pathway ( 
+               BIND-Pathway_date ,
+               BIND-Pathway_updates? ,
+               BIND-Pathway_pid ,
+               BIND-Pathway_pathway ,
+               BIND-Pathway_descr ,
+               BIND-Pathway_source ,
+               BIND-Pathway_authors? ,
+               BIND-Pathway_collection? ,
+               BIND-Pathway_priv? )>
+ 
+<!ELEMENT BIND-Pathway_date ( Date )>
+<!ELEMENT BIND-Pathway_updates ( BIND-update-object* )>
+<!ELEMENT BIND-Pathway_pid ( Pathway-id )>
+<!ELEMENT BIND-Pathway_pathway ( Interaction-id+ )>
+<!ELEMENT BIND-Pathway_descr ( BIND-path-descr )>
+<!ELEMENT BIND-Pathway_source ( BIND-pub-set )>
+<!ELEMENT BIND-Pathway_authors ( Author* )>
+<!ELEMENT BIND-Pathway_collection ( BIND-Rec-coll-descr )>
+<!ELEMENT BIND-Pathway_priv %BOOLEAN; >
+<!ATTLIST BIND-Pathway_priv value ( true | false ) "false" >
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of Pathway-id -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Pathway description
+ 
+ Field description for BIND-path-descr
+ *************************************
+ descr              = text description of pathway
+	   (e.g. lipid biosynthesis, bacterial chemotaxis, Ras pathway, etc.)
+ cell-cycle         = stage of a cell cycle that this pathway is in effect
+ pathological-state = disease manifestation if this pathway is present
+ pathway-actions    = list of chemical actions that occur in the pathway.
+                      Specified actions can only come from interactions in
+                      this pathway.
+ phenotype          = the normal phenotype of this pathway
+ ***************************************************************************
+ -->
+<!ELEMENT Pathway-id ( %INTEGER; )>
+ 
+ 
+ 
+<!-- Definition of BIND-path-descr -->
+ 
+<!ELEMENT BIND-path-descr ( 
+               BIND-path-descr_descr? ,
+               BIND-path-descr_cell-cycle? ,
+               BIND-path-descr_pathological-state? ,
+               BIND-path-descr_pathway-actions? ,
+               BIND-path-descr_phenotype? )>
+ 
+<!ELEMENT BIND-path-descr_descr ( #PCDATA )>
+<!ELEMENT BIND-path-descr_cell-cycle ( BIND-cellstage* )>
+<!ELEMENT BIND-path-descr_pathological-state ( BIND-pathol-state* )>
+<!ELEMENT BIND-path-descr_pathway-actions ( BIND-action-ref* )>
+<!ELEMENT BIND-path-descr_phenotype ( BIND-phenotype* )>
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-pathol-state -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Pathological state
+ 
+ Description of a disease that is caused by a change in an interaction in a
+ 'physiologically normal' pathway.
+ 
+ Field description for BIND-pathol-state
+ ***************************************
+ pathway-iid  = interaction in the physiologically normal pathway
+ cause        = change to the interaction that cause the pathological state
+                Choice of interaction was ablated or replaced by another
+                interaction
+ pathol-state = names(s) of the pathological state
+ database     = database(s) that contain information about this disease
+                (e.g. OMIM at http://www.ncbi.nlm.nih.gov/Omim/)
+ phenotype    = phenotype of this disease state
+ descr        = description of the pathological state
+ source       = empirical evidence references
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-pathol-state ( 
+               BIND-pathol-state_pathway-iid ,
+               BIND-pathol-state_cause ,
+               BIND-pathol-state_pathol-state ,
+               BIND-pathol-state_database? ,
+               BIND-pathol-state_phenotype? ,
+               BIND-pathol-state_descr? ,
+               BIND-pathol-state_source? )>
+ 
+<!ELEMENT BIND-pathol-state_pathway-iid ( Interaction-id )>
+<!ELEMENT BIND-pathol-state_cause ( BIND-pathol-state-cause )>
+<!ELEMENT BIND-pathol-state_pathol-state ( BIND-pathol-state_pathol-state_E+ )>
+<!ELEMENT BIND-pathol-state_database ( BIND-other-db* )>
+<!ELEMENT BIND-pathol-state_phenotype ( BIND-phenotype* )>
+<!ELEMENT BIND-pathol-state_descr ( #PCDATA )>
+<!ELEMENT BIND-pathol-state_source ( BIND-pub-set )>
+ 
+ 
+<!ELEMENT BIND-pathol-state_pathol-state_E ( #PCDATA )>
+ 
+ 
+ 
+ 
+ 
+<!-- Definition of BIND-pathol-state-cause -->
+ 
+<!ELEMENT BIND-pathol-state-cause ( 
+               BIND-pathol-state-cause_destroyed |
+               BIND-pathol-state-cause_replaced-by )>
+ 
+<!ELEMENT BIND-pathol-state-cause_destroyed %NULL; >
+<!ELEMENT BIND-pathol-state-cause_replaced-by ( Interaction-id )>
+ 
+ 
+<!-- Definition of BIND-phenotype -->
+ 
+ 
+<!-- 
+ ***************************************************************************
+ Phenotype
+ 
+ Field description for BIND-phenotype
+ ************************************
+ trait     = trait (e.g. colour)
+ name      = name of phenotype (e.g. red)
+ wild-type = TRUE if this phenotype is wild-type with respect to the genome
+ descr     = optional text description
+ db-links  = links to other databases
+             E.g.
+             GO - (http://www.geneontology.org) can be referenced in the
+                  form GO:0003684 damaged DNA binding
+             DGAP - (http://dgap.harvard.edu)
+ 
+             E.g. GO can be referenced using a BIND-other-db object like so:
+             BIND-other-db ::= SEQUENCE {
+                dbname "GO",
+                intp 0003684	(use INTEGER field wherever possible)
+             }
+ 
+ source    = empirical evidence references
+ ***************************************************************************
+ -->
+<!ELEMENT BIND-phenotype ( 
+               BIND-phenotype_trait? ,
+               BIND-phenotype_name ,
+               BIND-phenotype_wild-type ,
+               BIND-phenotype_descr? ,
+               BIND-phenotype_db-links? ,
+               BIND-phenotype_source? )>
+ 
+<!ELEMENT BIND-phenotype_trait ( #PCDATA )>
+<!ELEMENT BIND-phenotype_name ( #PCDATA )>
+<!ELEMENT BIND-phenotype_wild-type %ENUM; >
+<!ATTLIST BIND-phenotype_wild-type value ( 
+               not-specified |
+               true |
+               false )  #REQUIRED >
+<!ELEMENT BIND-phenotype_descr ( #PCDATA )>
+<!ELEMENT BIND-phenotype_db-links ( BIND-other-db* )>
+<!ELEMENT BIND-phenotype_source ( BIND-pub-set )>
+ 
+ 
+ 
+ 
+ 
+ 

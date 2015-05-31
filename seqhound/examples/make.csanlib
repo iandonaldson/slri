@@ -1,0 +1,30 @@
+#######################################################################
+#
+# Clustal secondary structure mask libary makefile
+#
+#######################################################################
+include ../seqhound.mk
+
+DEF =
+SRC = csan.c
+OBJ = csan.o
+LIB = libcsan.a  
+
+#####################################################################
+##
+## Database Specific Targets
+##
+#####################################################################
+
+all : $(LIB)
+
+$(LIB): $(OBJ)
+	ar $(ARFLAGS) r $(LIB) $(OBJ)
+	ranlib $(LIB) || true
+	-mkdir -p $(SEQH_LIB)
+	cp $(LIB) $(SEQH_LIB)/$(LIB)
+	
+clean:	
+	rm  -f $(OBJ)
+	rm  -f $(LIB)
+	rm  -f $(SEQH_LIB)/$(LIB)

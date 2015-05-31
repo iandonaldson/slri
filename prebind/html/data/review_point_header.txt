@@ -1,0 +1,9 @@
+<html>
+<head>
+	<title> review a potential interaction </title><!--review_point_header.txt-->
+	<meta NAME="keywords"CONTENT="SLRI, PreBIND, BIND, Interaction database, PubMed, MEDLINE,Bioinformatics, data mining">
+	<meta NAME="description" CONTENT="PreBIND is an information mining tool designed for BIND to locate biomolecular interaction information in the scientific literature.  BIND is the Biomolecular Interaction Network Database">
+</head>
+
+<basefont face="arial, verdana">
+

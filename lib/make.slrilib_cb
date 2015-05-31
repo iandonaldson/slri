@@ -1,0 +1,20 @@
+########################################################################
+# SLRI CODEBASE library makefile
+#######################################################################
+include slri.mk
+
+#LIB_CB  = libslri_cb.a
+
+all : cb
+
+cb  : $(LIB_CB)
+
+$(LIB_CB): $(SLRILIB_OBJ_OCB)
+	ar $(ARFLAGS) r $(LIB_CB) $(SLRILIB_OBJ_OCB)
+	ranlib $(LIB_CB) || true
+
+clean:
+	rm -f $(SLRILIB_OBJ_OCB)
+	rm -f $(LIB_CB)
+
+

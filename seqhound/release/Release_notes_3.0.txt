@@ -1,0 +1,566 @@
+SeqHound Release 3.0 summary notes
+
+These notes summarize important changes that are inclusive to
+SeqHound code version 3.0 (August 27, 2004) since version
+2.5 (April 26, 2004).  Complete comments for this version
+are listed after the summary comments.
+
+These summary notes are divided into the following sections:
+ 1. Global changes
+ 2. Known issues/bugs
+ 3. Web interface
+ 4. Perl remote API
+ 5. Bioperl remote API
+ 6. Java remote API
+ 7. C++ remote API
+ 8. C remote API
+ 9. C local API
+ 10. Parsers and scripts
+
+
+**************************************************************
+1. Global changes
+**************************************************************
+
+Website 
+**************************************************************
+
+The function tracker webpage provides a summary of the
+status of the remote API functions, function documentation and
+availability in the appropriate test driver at the time of the
+release.  It includes C, C++, Java, Perl and Bioperl languages.
+The page replaces the "Language support for API functions section" of the 
+SeqHound manual.
+http://www.blueprint.org/seqhound/api_help/apifunctsstatus.html
+
+Th daily results of the test drivers are available at 
+http://seqhound.blueprint.org/testresult.html
+
+The daily update status of SeqHound data is available at
+http://seqhound.blueprint.org/report.html
+
+ODBC
+**************************************************************
+The SeqHound database engine has changed from CodeBase to ODBC
+compliant MySQL.
+
+Due to the change in the backend database, almost the entire
+database layer functions of SeqHound have been rewritten to be
+compliant with ODBC. The header files and sources files are
+named as *_odbc.h and *_odbc.c respectively.
+The changes in the database layer do not affect the code of
+the parsers.
+The parsers will insert records into ODBC compliant databases
+after they are recompiled with the library of ODBC SeqHound.
+
+There are significant changes in the configuration file and
+the scripts used to update the databases.  The configuration
+file, .intrezrc, now has variables specifying how to connect
+to the target database.  There is an extra configuration file
+in the ODBC version - .odbc.ini - which should be put in the
+home directory of the user who runs the program.  File
+.odbc.ini has variables specifying which odbc library to use,
+the host and port number of the database, and other important
+information.
+
+There is a new group of .sql files which contains SQL "CREATE
+TABLE " statements  to create tables for each module.
+
+The scripts used to update the database have changed in many
+places. Please see section 9 for details.
+
+
+Locus Link Module
+**************************************************************
+[bug 2093]
+There has been a major refactor of the Locus Link module. The
+Locus ID is now the'primary' key for the module instead of GI.
+A number of new API's have been added:
+SHoundGOIDFromLLID
+SHoundOMIMFromLLID
+SHoundCDDIDFromLLID
+SHoundLLIDFromGOIDAndECode
+SHoundLLIDFromOMIM
+ShoundLLIDFromCDDID
+
+
+src/rpsdbapi.c
+**************************************************************
+[bug 1847]
+ShoundGetDomainsFromGi
+SHoundGetDomainsFromGiWithEvalue
+SHoundGetDomainsFromGiListWithEvalue
+Filtering of low coverage domains.
+In previous releases, after retrieving the list of results for
+the given GI found in the rpsdb, which is identical to the
+list of hits which would be returned by the NCBI web or
+standalone rpsblast clients,RemoveLowCoverageDomains was
+called by these functions to filter out those hits for which
+(len of align)/(len of domain)was below a threshold value.
+This filtering has been eliminated.
+
+[bug 1162]
+ShoundGetGenBankff
+ShoundGetGenBankffList
+When generating  a GenBank flat-file from a seq-entry for PDB
+records, the LOCUS and ACCESSION fields were filled with a GI
+instead of the the expected accession number.
+The bug was fixed by changing NCBI function SeqEntryToFlatEx()
+to more recent NCBI function SeqEntryToGnbk().
+
+src/nbr_odbc.c
+**************************************************************
+[bug 768] [bug 2522]
+ShoundNumNeighboursInDB optimized to prevent timeout errors.
+The old algorithm did not take advantage of the feature
+"Select sum(column1)" in a relational database.
+
+**************************************************************
+2. Known issues/bugs
+**************************************************************
+[bug 2912]
+For solaris UNIX only, SeqHound API SHoundGetGenBankff and
+SHoundGetGenBankffList breaks due to a bug in the NCBI library
+file ncbistr.c (in directory ncbi/corelib and ncbi/build).
+To fix the problem, replace all the code inside the function
+Nlm_TrimSpacesAroundString()in the file ncbistr.c with the
+following text:
+
+    char *ptr, *dst, *revPtr;
+    int spaceCounter = 0;
+                                                                               
+                                             
+    ptr = dst = revPtr = str;
+                                                                               
+                                             
+    if ( !str || str[0] == '\0' )
+        return str;
+                                                                               
+                                             
+    while ( *revPtr != '\0' )
+        if ( *revPtr++ <= ' ' )
+            spaceCounter++;
+                                                                               
+                                             
+    if ( (revPtr - str) <= spaceCounter )
+    {
+        *str = '\0';
+        return str;
+    }
+                                                                               
+                                             
+    while ( revPtr > str && *revPtr <= ' ' ) revPtr--;
+    while ( ptr < revPtr && *ptr <= ' ' ) ptr++;
+    while ( ptr <= revPtr ) *dst++ = *ptr++;
+    *dst = '\0';
+                                                                               
+                                             
+    return str;
+
+[bug 3087]
+SHoundGetGenBankff
+SHoundGetGenBankffList
+Return extraneous GenBank flatfile entries in addition
+to the correct ones. They may be returning the genbank flat
+files for the entire bioseq set rather than for the
+requested GI within the set. 
+
+[bug 2632]
+ShoundGetFasta
+ShoundGetFastaList
+Functions hang when given a virtual sequence identifier
+
+[bug 2905]
+SHound3DListFromTaxID
+For remote APIs, function times out for taxids which return
+lots of data such
+as
+10090:  Mus musculus
+ 9606:  Homo sapiens
+ 7227:  Drosophila melanogaster
+ 6239:  Caenorhabditis elegans
+ 3702:  Arabidopsis thaliana
+
+[bug 2522]
+Shound3DNeighboursFromTaxID
+SHoundGetGisByNumberOfDomains
+Time out on remote calls due to voluminous return results.
+
+[bug 2926]
+SHoundGetAllTaxProgeny
+A taxid located at the top of the NCBI tree like
+131567:cellularorganisms times out but a taxid which returns
+less data such as 37357:Plasmodiophorida does not.
+
+
+**************************************************************
+3. Web interface
+**************************************************************
+
+cgi/wwwseekgi.c
+**************************************************************
+[bug 2713]
+Fixed NULL pointer bugs.
+
+No ontoglyph related html generation as there is no procedure
+to generate/update them in this release.
+
+**************************************************************
+4. Perl remote API
+**************************************************************
+
+SeqHound.pm
+
+The following functions have been added in the Perl module:
+[bug 2093]
+SHoundGOIDFromLLID
+SHoundOMIMFromLLID
+SHoundCDDIDFromLLID
+SHoundLLIDFromGOIDAndECode
+SHoundLLIDFromOMIM
+ShoundLLIDFromCDDID
+
+[bug 2565]
+The following bugs have been fixed
+Modified SHoundGetFastaFromRedundantGroupID, this function now
+returns a standard Fasta formatted sequence instead of a SLRI
+structure.
+
+[bug 2161]
+Fixed bug in SHoundGetDomainLabelFromDomainId
+
+[bug 2515].
+Modified a few ASN list functions in order to fix unexpected
+comma  when merge values
+
+[bug 1867]
+Modified list functions with a query size limit. This resolves
+the  problem when oversized queries are sent to Apache
+server.
+
+
+test.pl
+[bug 2353]
+Time stamp added for API log file and test log file
+
+New functions added.  See list under SeqHound.pm
+
+Documentation
+Documentation has been updated in all files.  README is
+available in POD format as README.pod and the README_API has
+been updated in POD format and renamed README_API.pod.
+
+**************************************************************
+5. Bioperl remote API
+**************************************************************
+This is the first official release of the SeqHound Bioperl
+module. Note that this package is distributed and maintained
+by the Blueprint Initiative. It is not an official part of the
+Bioperl release. In future, functionality contained in this
+package could be included as part of Bioperl.
+
+[bug 2533]
+Major refactor to be consistant with BioPerl modules
+removed Bio::SeqHound::_SeqHoundParser;
+removed Bio::SeqHound::SeqHoundFasta;
+removed Bio::SeqHound::SeqHoundASN;
+removed Bio::SeqHound::GB2Seq;
+removed Bio::SeqHound::SeqHoundOb;
+removed objects for Fasta, ASN, GB2Seq, replaced with Bio::Seq
+objects
+
+
+SeqHound.pm
+**************************************************************
+parse_FastaHash
+in order to parse Keyed list into hash table, this function
+was originally located in Bio::SeqHound::SeqHoundFasta
+
+The following functions have been added in the Bioperl module:
+[bug 2093]
+SHoundGOIDFromLLID
+SHoundOMIMFromLLID
+SHoundCDDIDFromLLID
+SHoundLLIDFromGOIDAndECode
+SHoundLLIDFromOMIM
+ShoundLLIDFromCDDID
+
+[bug 1773]
+SHoundGetFastaFromRedundantGroupID
+SHoundGetFastaFromRedundantGroupIDKeyedList
+
+ShoundAllGODBGetHierarchyLevel disabled as logic incorrect
+
+
+test.pl
+**************************************************************
+[bug 2353]
+The functions added to SeqHound.pm added to test.pl
+added time stamp
+
+Documentation
+**************************************************************
+[bug 2533]
+Updated all documentation
+POD documentation for all API functions in SeqHound.pm
+Removed README_API file as no longer required
+README.pod - README text file now generated from POD file
+
+**************************************************************
+6. Java remote API
+**************************************************************
+Timeout factor added for function SHoundInit, to prevent
+SeqHound from hanging when there is no server on the other
+end.
+
+Refactored configuration file setup. There are 3 SeqHound
+constructors, 2 of which take a string variable to the
+configuration file. SeqHound now checks if the input path to
+the file (and the file) exists. If it does, SeqHound will use
+the provided path. If no such file exists, then SeqHound will
+look in the current working directory, and then the home
+directory for '.shoundremrc', and finally throw an exception
+if not found.
+
+The default constructor will look in the cwd and then home
+directory for .shoundremrc before throwing an exception.
+
+SeqHound distributed as a jar file
+
+Javadoc html output files included
+
+Repackaged SeqHound java to be more user friendly.
+
+Ported to ant scripts.
+
+SeqHound.java
+**************************************************************
+The following functions have been added:
+
+[bug 2988]
+SHoundTitleFromGi
+
+[bug 2093]
+SHoundGOIDFromLLID
+SHoundOMIMFromLLID
+SHoundCDDIDFromLLID
+SHoundLLIDFromGOIDAndECode
+SHoundLLIDFromOMIM
+ShoundLLIDFromCDDID
+
+The following functions have been modified:
+
+SHoundGetGisByDomainIdAndEvalue - minor typo fix
+SHoundGetTaxLineageFromTaxID -    check if input parameter is
+empty
+                                  string
+SHoundTaxIDFromGiList        -    check if input parameter is
+empty
+                                  list
+
+**************************************************************
+7. C++ remote API
+**************************************************************
+changed configuration file to be compatible with the NCBICXX
+toolkit
+
+The following functions have been added:
+[bug 2093]
+SHoundGOIDFromLLID
+SHoundOMIMFromLLID
+SHoundCDDIDFromLLID
+SHoundLLIDFromGOIDAndECode
+SHoundLLIDFromOMIM
+ShoundLLIDFromCDDID
+
+[bug 1996]
+SHoundGetFastaFromRedundantGroupID
+ShoundGetFastaFromRedundantGroupIDKeyedList
+
+minor bug fix in ShoundFindNameList
+
+**************************************************************
+8. C remote API
+**************************************************************
+
+seqhoundapi.c
+**************************************************************
+The following functions have been added:
+[bug 2093]
+SHoundGOIDFromLLID
+SHoundOMIMFromLLID
+SHoundCDDIDFromLLID
+SHoundLLIDFromGOIDAndECode
+SHoundLLIDFromOMIM
+ShoundLLIDFromCDDID
+
+
+**************************************************************
+9. C local API
+**************************************************************
+
+intrez.c
+**************************************************************
+
+Modified SHoundGetFastaFromRedundantGroupID to retrieve fasta
+structure even if the first in the redundant group is missing.
+
+seqrem.c
+**************************************************************
+The following functions have been added:
+[bug 2093]
+SHoundGOIDFromLLID
+SHoundOMIMFromLLID
+SHoundCDDIDFromLLID
+SHoundLLIDFromGOIDAndECode
+SHoundLLIDFromOMIM
+ShoundLLIDFromCDDID
+
+SeqHoundGetFastaFromRedundantGroupIDPL retreives a fasta
+structure in plain text (includes defline and sequence)For
+corresponding Perl function.  Bug 2565
+
+SeqHoundAllGenomesWithScientificNamesPL
+SeqHoundAllGenomesWithNumProteinsPL
+In order to allow corresponding Perl and Bioperl remote API
+functions to get return value instead of reading from binary
+structure. Functions should be available in Perl and Bioperl
+in the next release. Bug 2785
+
+Modified 3 keyed list functions to keep it the same order as
+it was queried.[bug 1773]
+
+**************************************************************
+10. Parsers and scripts
+**************************************************************
+
+Structural databases (strucdb) module
+**************************************************************
+[bug 3070]
+domains/vastblst.c
+The vastblst parser to build table DOMDB was crashing due to
+errorneous NULL pointer checking. The bug has been fixed.
+
+locus link
+**************************************************************
+
+locuslink/ll_parser.c
+There has been a major refactor of the Locus Link module. The
+Locus ID is now the'primary' key for the module instead of GI.
+
+rps
+**************************************************************
+
+rps/domname.c
+Fixed Parse error causing crash. Details:
+Altered parsing of name field from seqalign to handle case
+where there is no comma to use as a reference point to
+parsing, as the program was segfaulting, when there was not
+one. Domname table's namefield left blank(null) when it is
+unable to parse the name from the seqalign.
+
+
+**************************************************************
+Scripts
+**************************************************************
+Because of the database engine change, the scripts used to
+update database have changed.  The following is a list of
+scripts that are deprecated or replaced.
+Each of the *cron_odbc.pl script reads the file .intrezrc
+using module shconfig.pm to determine the paths required by
+the cron jobs.
+
+
+deprecated           replacement
+--------------------------------------------------
+dupdcron.pl          dupdcron_odbc.pl
+taxdbcron.pl         taxdbcron_odbc.pl
+gocron.pl            gocron_odbc.pl
+comgencron.pl        comgencron_odbc.pl
+locuslinkcron.pl     locuslinkcron_odbc.pl
+mmdb_build.pl        mmdbcron_odbc.pl
+mmdbcron.pl          mmdbcron_odbc.pl
+redundcron.pl        redundcron_odbc.pl
+precomcron.pl        precomcron_odbc.pl
+isshoundoncron.pl    isshoundoncron_odbc.pl
+mybackup.pl          none
+seqsync.pl           none
+seqsync_ftp.pl       none
+
+sql/*.sql
+**************************************************************
+Files that have SQL "create table" statements for each module
+
+scripts/all_update.sh
+**************************************************************
+Changed parameters to be ODBC compliant.
+
+scripts/all_update_rs.sh
+**************************************************************
+Changed parameters to be ODBC compliant.
+
+scripts/comgencron_odbc.pl
+**************************************************************
+Script to update the complete genome module of ODBC SeqHound.
+
+scripts/dupdcron_odbc.pl
+**************************************************************
+Script to update the core module of SeqHound.
+
+scripts/humouse_build.sh
+**************************************************************
+Change parameter to be ODBC compliant. Do not zip input files
+at
+the end.
+
+scripts/isshoundoncron_odbc.pl
+**************************************************************
+Checks if the database is alive.
+
+scripts/iterateparti.c
+**************************************************************
+Explicitly delete records from ASNDB and SENDB in ODBC.
+
+scripts/locuslinkcron_odbc.pl
+**************************************************************
+Script to update the locus link module of ODBC SeqHound.
+
+scripts/mmdbcron_odbc.pl
+**************************************************************
+Script to update the structure module of ODBC SeqHound.
+
+scripts/precomcron_odbc.pl
+**************************************************************
+Script to update precomputed information.
+
+scripts/redundcron_odbc.pl
+**************************************************************
+Script to update redund module of ODBC SeqHound.
+Download and run parser only if a new version of nr.gz on FTP
+site
+
+scripts/seqhound_build.sh
+**************************************************************
+Changed parameters to be ODBC compliant.
+
+scripts/shconfig.pm
+**************************************************************
+Initial revision. Module to read parameters from .intrezrc and
+.odbc.ini.
+
+scripts/shunittest.c
+**************************************************************
+added testing for new locus link functions.
+Free KeyedList functions use slri library calls.
+Update test parameters for odbc fcgi seqrem
+Change the value of myargs parameters: TaxID and ChromID.
+Use different taxid for API 3dListFromTaxID
+Update test parameters for odbc fcgi seqrem
+Use a valid gi for ShoundLocusFromGi
+Use valid gis for ShoundGetBlastResult and
+ShoundGetBlastSeqAlign
+
+scripts/taxdbcron_odbc.pl
+**************************************************************
+Script to update taxonomy module of ODBC SeqHound.
+

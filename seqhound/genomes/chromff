@@ -1,0 +1,213 @@
+56636	142	1	Aeropyrum pernix
+181661	189	1	Agrobacterium tumefaciens C58 Cereon chromosome linear
+181661	190	1	Agrobacterium tumefaciens C58 Cereon chromosome circular
+181661	191	8	Agrobacterium tumefaciens C58 Cereon plasmid AT
+181661	192	8	Agrobacterium tumefaciens C58 Cereon plasmid Ti
+180835	220	1	Agrobacterium tumefaciens C58 UWash chromosome linear
+180835	221	1	Agrobacterium tumefaciens C58 UWash chromosome circular
+180835	222	8	Agrobacterium tumefaciens C58 UWash plasmid AT
+180835	223	8	Agrobacterium tumefaciens C58 UWash plasmid Ti
+63363	133	1	Aquifex aeolicus
+2234	131	1	Archaeoglobus fulgidus
+86665	167	1	Bacillus halodurans
+1423	27	1	Bacillus subtilis
+139	132	1	Borrelia burgdorferi chromosome
+139	13578	8	Borrelia burgdorferi plasmid cp26
+139	13579	8	Borrelia burgdorferi plasmid cp9
+139	15144	8	Borrelia burgdorferi plasmid cp32-1
+139	15145	8	Borrelia burgdorferi plasmid cp32-3
+139	15146	8	Borrelia burgdorferi plasmid cp32-4
+139	15147	8	Borrelia burgdorferi plasmid cp32-6
+139	15148	8	Borrelia burgdorferi plasmid cp32-7
+139	15149	8	Borrelia burgdorferi plasmid cp32-8
+139	15150	8	Borrelia burgdorferi plasmid cp32-9
+139	15153	8	Borrelia burgdorferi plasmid lp5
+139	13165	8	Borrelia burgdorferi plasmid lp17
+139	15151	8	Borrelia burgdorferi plasmid lp21
+139	13166	8	Borrelia burgdorferi plasmid lp25
+139	13167	8	Borrelia burgdorferi plasmid lp28-1
+139	13168	8	Borrelia burgdorferi plasmid lp28-2
+139	13169	8	Borrelia burgdorferi plasmid lp28-3
+139	13170	8	Borrelia burgdorferi plasmid lp28-4
+139	13171	8	Borrelia burgdorferi plasmid lp36
+139	13172	8	Borrelia burgdorferi plasmid lp38
+139	13173	8	Borrelia burgdorferi plasmid lp54
+139	15152	8	Borrelia burgdorferi plasmid lp56
+29459	224	1	Brucella melitensis chromosome I
+29459	225	1	Brucella melitensis chromosome II
+198804	248	1	Buchnera aphidicola Sg
+107806	164	1	Buchnera sp
+197	152	1	Campylobacter jejuni
+190650	177	1	Caulobacter crescentus
+83560	153	1	Chlamydia muridarum chromosome
+83560	153	8	Chlamydia muridarum plasmid pMoPa
+813	137	1	Chlamydia trachomatis
+115711	154	1	Chlamydophila pneumoniae AR39
+83558	140	1	Chlamydophila pneumoniae CWL029
+138677	160	1	Chlamydophila pneumoniae J138
+194439	247	1	Chlorobium tepidum TLS
+1488	185	1	Clostridium acetobutylicum
+1502	226	1	Clostridium perfringens
+1718	232	1	Corynebacterium glutamicum
+1299	144	1	Deinococcus radiodurans chromosome 1
+1299	145	1	Deinococcus radiodurans chromosome 2
+1299	15154	8	Deinococcus radiodurans megaplasmid MP1
+1299	15155	8	Deinococcus radiodurans plasmid CP1
+562	115	1	Escherichia coli K12
+83334	176	1	Escherichia coli O157H7
+155864	169	1	Escherichia coli O157H7 EDL933
+190304	233	1	Fusobacterium nucleatum
+727	25	1	Haemophilus influenzae
+64091	165	1	Halobacterium sp chromosome
+64091	10927	16	Halobacterium sp large extrachromosomal element
+64091	10928	16	Halobacterium sp small extrachromosomal element
+85962	128	1	Helicobacter pylori 26695
+85963	139	1	Helicobacter pylori J99
+1360	171	1	Lactococcus lactis
+1642	205	1	Listeria innocua
+169963	204	1	Listeria monocytogenes
+381	173	1	Mesorhizobium loti
+381	174	8	Mesorhizobium loti plasmid pMLa
+381	15607	8	Mesorhizobium loti plasmid pMLb
+145262	130	1	Methanobacterium thermoautotrophicum
+2190	28	1	Methanococcus jannaschii chromosome
+2190	10928	16	Methanococcus jannaschii small extrachromosomal element
+2190	10927	16	Methanococcus jannaschii large extrachromosomal element
+190192	235	1	Methanopyrus kandleri
+188937	236	1	Methanosarcina acetivorans
+192952	239	1	Methanosarcina mazei
+1769	172	1	Mycobacterium leprae
+83331	181	1	Mycobacterium tuberculosis CDC1551
+1773	135	1	Mycobacterium tuberculosis H37Rv
+2097	26	1	Mycoplasma genitalium
+2104	113	1	Mycoplasma pneumoniae
+2107	183	1	Mycoplasma pulmonis
+122586	155	1	Neisseria meningitidis MC58
+487	156	1	Neisseria meningitidis Z2491
+103690	217	1	Nostoc sp chromosome
+103690	218	8	Nostoc sp plasmid pCC7120alpha
+103690	15863	8	Nostoc sp plasmid pCC7120beta
+103690	15869	8	Nostoc sp plasmid pCC7120gamma
+103690	15871	8	Nostoc sp plasmid pCC7120delta
+103690	15870	8	Nostoc sp plasmid pCC7120epsilon
+103690	15864	8	Nostoc sp plasmid pCC7120zeta
+747	170	1	Pasteurella multocida
+287	163	1	Pseudomonas aeruginosa
+13773	227	1	Pyrobaculum aerophilum
+29292	143	1	Pyrococcus abyssi
+186497	228	1	Pyrococcus furiosus 
+53953	134	1	Pyrococcus horikoshii
+305	218	1	Ralstonia solanacearum chromosome
+305	219	8	Ralstonia solanacearum megaplasmid
+781	199	1	Rickettsia conorii
+782	138	1	Rickettsia prowazekii
+90370	203	1	Salmonella typhi
+99287	202	1	Salmonella typhimurium LT2
+382	188	1	Sinorhizobium meliloti
+158878	182	1	Staphylococcus aureus Mu50
+158879	179	1	Staphylococcus aureus N315
+171101	198	1	Streptococcus pneumoniae R6
+160490	178	1	Streptococcus pneumoniae TIGR4
+160490	178	1	Streptococcus pyogenes
+198466	249	1	Streptococcus pyogenes MGAS315
+186103	234	1	Streptococcus pyogenes MGAS8232
+100226	238	1	Streptomyces coelicolor chromosome
+100226	241	8	Streptomyces coelicolor plasmid SCP1
+100226	16388	8	Streptomyces coelicolor plasmid SCP2
+2287	180	1	Sulfolobus solfataricus
+111955	200	1	Sulfolobus tokodaii
+1148	112	1	Synechocystis PCC6803
+119072	237	1	Thermoanaerobacter tengcongensis
+160	136	1	Treponema pallidum
+2303	168	1	Thermoplasma acidophilum
+50339	175	1	Thermoplasma volcanium
+2336	141	1	Thermotoga maritima
+2130	151	1	Ureaplasma urealyticum
+666	161	1	Vibrio cholerae chromosome 1
+666	162	1	Vibrio cholerae chromosome 2
+190485	240	1	Xanthomonas campestris
+190486	242	1	Xanthomonas citri
+2371	159	1	Xylella fastidiosa chromosome
+2371	15461	8	Xylella fastidiosa plasmid pXF51
+2371	15760	8	Xylella fastidiosa plasmid pXF1.3
+632	201	1	Yersinia pestis
+6239	62	1	Caenorhabditis elegans chromosome I
+6239	63	1	Caenorhabditis elegans chromosome II
+6239	64	1	Caenorhabditis elegans chromosome III
+6239	65	1	Caenorhabditis elegans chromosome IV
+6239	66	1	Caenorhabditis elegans chromosome V
+6239	67	1	Caenorhabditis elegans chromosome X
+6035	216	1	Encephalitozoon cuniculi chromosome I
+6035	206	1	Encephalitozoon cuniculi chromosome II
+6035	207	1	Encephalitozoon cuniculi chromosome III
+6035	208	1	Encephalitozoon cuniculi chromosome IV
+6035	209	1	Encephalitozoon cuniculi chromosome V
+6035	210	1	Encephalitozoon cuniculi chromosome VI
+6035	211	1	Encephalitozoon cuniculi chromosome VII
+6035	212	1	Encephalitozoon cuniculi chromosome VIII
+6035	213	1	Encephalitozoon cuniculi chromosome IX
+6035	214	1	Encephalitozoon cuniculi chromosome X
+6035	215	1	Encephalitozoon cuniculi chromosome XI
+9606	1	1	Homo sapiens chromosome 1
+9606	2	1	Homo sapiens chromosome 2
+9606	3	1	Homo sapiens chromosome 3
+9606	4	1	Homo sapiens chromosome 4
+9606	5	1	Homo sapiens chromosome 5
+9606	6	1	Homo sapiens chromosome 6
+9606	7	1	Homo sapiens chromosome 7
+9606	8	1	Homo sapiens chromosome 8
+9606	9	1	Homo sapiens chromosome 9
+9606	10	1	Homo sapiens chromosome 10
+9606	11	1	Homo sapiens chromosome 11
+9606	12	1	Homo sapiens chromosome 12
+9606	13	1	Homo sapiens chromosome 13
+9606	14	1	Homo sapiens chromosome 14
+9606	15	1	Homo sapiens chromosome 15
+9606	16	1	Homo sapiens chromosome 16
+9606	17	1	Homo sapiens chromosome 17
+9606	18	1	Homo sapiens chromosome 18
+9606	19	1	Homo sapiens chromosome 19
+9606	20	1	Homo sapiens chromosome 20
+9606	21	1	Homo sapiens chromosome 21
+9606	22	1	Homo sapiens chromosome 22
+9606	23	1	Homo sapiens chromosome X
+10090	69	1	Mus musculus chromosome 1
+10090	70	1	Mus musculus chromosome 2
+10090	71	1	Mus musculus chromosome 3
+10090	72	1	Mus musculus chromosome 4
+10090	73	1	Mus musculus chromosome 5
+10090	74	1	Mus musculus chromosome 6
+10090	75	1	Mus musculus chromosome 7
+10090	76	1	Mus musculus chromosome 8
+10090	77	1	Mus musculus chromosome 9
+10090	78	1	Mus musculus chromosome 10
+10090	79	1	Mus musculus chromosome 11
+10090	80	1	Mus musculus chromosome 12
+10090	81	1	Mus musculus chromosome 13
+10090	82	1	Mus musculus chromosome 14
+10090	83	1	Mus musculus chromosome 15
+10090	84	1	Mus musculus chromosome 16
+10090	85	1	Mus musculus chromosome 17
+10090	86	1	Mus musculus chromosome 18
+10090	87	1	Mus musculus chromosome 19
+10090	88	1	Mus musculus chromosome X
+10090	89	1	Mus musculus chromosome Y
+5664	13580	1	Leishmania major chromosome 1
+5833	92	1	Plasmodium falciparum chromosome 2
+5833	93	1	Plasmodium falciparum chromosome 3
+4932	29	1	Saccharomyces cerevisiae chromosome I
+4932	30	1	Saccharomyces cerevisiae chromosome II
+4932	31	1	Saccharomyces cerevisiae chromosome III
+4932	32	1	Saccharomyces cerevisiae chromosome IV
+4932	33	1	Saccharomyces cerevisiae chromosome V
+4932	34	1	Saccharomyces cerevisiae chromosome VI
+4932	35	1	Saccharomyces cerevisiae chromosome VII
+4932	36	1	Saccharomyces cerevisiae chromosome VIII
+4932	37	1	Saccharomyces cerevisiae chromosome IX
+4932	38	1	Saccharomyces cerevisiae chromosome X
+4932	39	1	Saccharomyces cerevisiae chromosome XI
+4932	40	1	Saccharomyces cerevisiae chromosome XII
+4932	41	1	Saccharomyces cerevisiae chromosome XIII
+4932	42	1	Saccharomyces cerevisiae chromosome XIV
+4932	43	1	Saccharomyces cerevisiae chromosome XV
+4932	44	1	Saccharomyces cerevisiae chromosome XVI

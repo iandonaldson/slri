@@ -1,0 +1,57 @@
+/*
+$Id: polymerfix.h,v 1.2 2004/11/24 16:14:54 hfeldman Exp $
+***************************************************************************
+Copyright (C) 2004,
+  Mount Sinai Hospital (MSH). All Rights Reserved.
+
+  WARNING - THIS FILE CONTAINS TRADE SECRET INFORMATION
+            YOU MAY NOT USE OR POSESS THIS SOURCE CODE
+            OUTSIDE OF MSH WITHOUT PERMISSION GRANTED BY
+            DR. C.W.V. HOGUE and MSH.
+
+  PROGRAM:  Function to convert MMDB non-polymers to polymers
+
+
+  AUTHORS:
+            Howard J. Feldman           (feldman@mshri.on.ca)
+            Kevin A. Snyder             (ksnyder@blueprint.org)
+            John J. Salama              (jjsalama@blueprint.org)
+            and Christopher W.V. Hogue  (hogue@mshri.on.ca)
+
+
+  PUBLICATION TO CITE:
+
+  NO LICENSE TO USE, DISTRIBUTE OR COPY THIS FILE IS GRANTED.
+  YOU MAY NOT USE THIS FILE OUTSIDE OF THE HOGUE LABORATORY AT MSH.
+                        
+  ANY USE, REPRODUCTION OR DISTRIBUTION OF THE PROGRAM OUTSIDE OF
+  MOUNT SINAI HOSPITAL IS IN VIOLATION OF COPYRIGHT LAW
+  AND CONSTITUTES THEFT OF INTELLECTUAL PROPERTY AND IS SUBJECT TO
+  CRIMINAL PROSECUTION.
+
+  IN NO EVENT SHALL MOUNT SINAI HOSPITAL OR THE UNIVERSITY OF TORONTO BE
+  LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR
+  CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF THE USE
+  OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF MOUNT SINAI HOSPITAL OR
+  THE UNIVERSITY OF TORONTO HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  MOUNT SINAI HOSPITAL AND THE UNIVERSITY OF TORONTO SPECIFICALLY DISCLAIMS
+  ANY IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED
+  HEREUNDER IS PROVIDED "AS IS" WITHOUT WARANTY OF ANY KIND, EXPRESSED OR
+  IMPLIED. MOUNT SINAI HOSPITAL AND THE UNIVERSITY OF TORONTO HAVE NO
+  OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
+  MODIFICATIONS.
+*************************************************************************** */
+
+BiostrucPtr BiostrucPolymerFix(BiostrucPtr bsp,Int4 quiet);
+PMSD FixBiostrucPolymers (PMSD pmsd,Int4 quiet);
+
+/*
+$Log: polymerfix.h,v $
+Revision 1.2  2004/11/24 16:14:54  hfeldman
+added second f'n header
+
+Revision 1.1  2004/11/18 19:03:46  mmatan
+header file for seqhound/src/polymerfix.c  See bug 3930
+
+*/

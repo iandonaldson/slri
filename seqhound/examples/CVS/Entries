@@ -1,0 +1,22 @@
+/clustmask.c/1.2/Tue Jan  6 22:32:11 2004//
+/clustmasklist.c/1.2/Tue Jan  6 22:32:11 2004//
+/csan.c/1.2/Tue Jan  6 22:32:11 2004//
+/csan.h/1.1.1.2/Mon Mar 25 09:27:20 2002//
+/cxx_ex.cpp/1.1.1.1/Sat Aug 24 08:29:29 2002//
+/fastadom.c/1.2/Tue Jan  6 22:32:11 2004//
+/gen2fasta.c/1.2/Tue Jan  6 22:32:12 2004//
+/gen2fasta.cpp/1.1.1.2/Sat Aug 24 08:29:29 2002//
+/gen2struc.c/1.2/Tue Jan  6 22:32:12 2004//
+/getpage.pl/1.1.1.1/Sat Sep 21 08:44:46 2002//
+/make.clustmask/1.3/Fri Jan 23 16:54:51 2004//
+/make.clustmasklist/1.3/Fri Jan 23 16:54:51 2004//
+/make.csanlib/1.4/Fri Jan 23 16:56:08 2004//
+/make.fastadom/1.2/Wed Jan 21 22:01:29 2004//
+/make.gen2fasta/1.3/Fri Jan 23 16:55:27 2004//
+/make.gen2struc/1.2/Wed Jan 21 22:01:30 2004//
+/make.readseqslib/1.3/Fri Jan 23 16:56:08 2004//
+/makefile.cxx_ex/1.1.1.1/Sat Sep 21 08:44:46 2002//
+/makefile.gen/1.1.1.1/Fri Aug 23 08:30:34 2002//
+/readseqs.c/1.2/Tue Jan  6 22:32:12 2004//
+/readseqs.h/1.1.1.2/Wed Feb 13 09:25:24 2002//
+D

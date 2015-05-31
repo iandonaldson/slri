@@ -1,0 +1,50 @@
+[gis]
+gi1 = 555
+gi2 = 230779
+gi3 = 2463028
+
+[taxid]
+taxid1 = 56636
+taxid2 = 555
+taxid3 = 129
+
+[chromid]
+chromid1 = 142 
+chromid2 = 13578
+chromid3 =  1
+
+[goid]
+gi1 = 4557225
+gi2 = 4501841
+goid1 = 7612
+goid2 = 5381
+goid3 = 7625
+goid4 = 7627
+goid5 = 5935
+
+[ll]
+ll1 =  1
+ll2 = 2
+ll3 = 13
+
+[omim] 
+omim1 = 137150
+omim2 = 103950
+omim3 = 108345
+
+[parts]
+;Define the modules that you want to test the output for. (0=ignore, 1 = test)
+;The main functionality of seqhound
+corefunc = 1
+;The MMDB functions
+strucdb = 0
+;genome functions
+gendb = 0
+;Redundant database functions
+redundb = 0
+;Go database functions
+godb = 0
+;Locus link functions
+lldb = 0
+
+
